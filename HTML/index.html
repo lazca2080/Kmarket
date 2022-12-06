@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Kmarket::main layout</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"/>
     <link rel="stylesheet" href="./css/common.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <!--
         날짜 : 2022/12/06
         이름 : 박종협
@@ -26,8 +34,84 @@
             box-sizing: border-box;
         }
 
+        main > aside > .category {
+            position: relative;
+            width: 100%;
+            height: 425px;
+            background: #333949;
+        }
+
+        main > aside > .category > li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            color: #ccc;
+            font-size: 13px;
+            font-weight: bold;
+            border-bottom: 1px solid #2b313f;
+            box-sizing: border-box;
+        }
+
         main > aside > .category > li:nth-child(1){
-            
+            padding: 0 20px;
+            color: #fff;
+            line-height: 40px;
+        }
+
+        main > aside > .category > li > a {
+            display: block;
+            padding: 0 20px;
+            line-height: 40px;
+            color: #ccc;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        main > aside > .category > li > a:hover {
+            background: #2b313f;
+            color: #fff;
+        }
+
+        main > aside > .category > li > a:hover + ol {
+            display: block;
+        }
+        
+        main > aside > .category ol:hover {
+            display: block;
+        }   
+
+        main > aside > .category > li i.fa-angle-right{
+            float: right;
+            width: auto;
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        main > aside > .category i {
+            width: 22px;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+
+        main > aside > .category ol {
+            position: absolute;
+            left: 215px;
+            top: 0;
+            display: none;
+            width: 215px;
+            height: 100%;
+            border: 1px solid #787f89;
+            background: #fff;
+            box-sizing: border-box;
+            z-index: 10000;
+        }
+
+        main > aside > .category ol > li {
+            width: 100%;
+            height: 24px;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         main > section {
@@ -95,7 +179,7 @@
                     <a href="">회원가입</a>
                     <a href="">마이페이지</a>
                     <a href="">
-                        <i class="fa fa-shopping-cart" aria-hidden="true">...</i>
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         "&nbsp;장바구니"
                     </a>
                 </div>
@@ -108,7 +192,7 @@
                     <form action="#">
                         <input type="text" name="search">
                         <button>
-                            <i class="fa fa-search" aria-hidden="true">.</i>
+                            <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
@@ -140,10 +224,9 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true">.</i>
+                            <i class="fas fa-tshirt" aria-hidden="true"></i>
                             패션·의류·뷰티
                             <i class="fas fa-angle-right" aria-hidden="true">
-                                ::before
                             </i>
                         </a>
                         <ol>
@@ -163,10 +246,9 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true">.</i>
+                            <i class="fas fa-laptop" aria-hidden="true"></i>
                             가전·디지털
-                            <i class="fas fa-angle-rihgt" aria-hidden="ture">
-                                ::before
+                            <i class="fas fa-angle-right" aria-hidden="ture">
                             </i>
                         </a>
                         <ol>
@@ -186,10 +268,9 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-utensils" aria-hidden="true">.</i>
+                            <i class="fas fa-utensils" aria-hidden="true"></i>
                             식품·생필품
-                            <i class="fas fa-angle-rihgt" aria-hidden="ture">
-                                ::before
+                            <i class="fas fa-angle-right" aria-hidden="ture">
                             </i>
                         </a>
                         <ol>
@@ -209,10 +290,9 @@
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-home" aria-hidden="true">.</i>
+                            <i class="fas fa-home" aria-hidden="true"></i>
                             홈·문구·취미
-                            <i class="fas fa-angle-rihgt" aria-hidden="ture">
-                                ::before
+                            <i class="fas fa-angle-right" aria-hidden="ture">
                             </i>
                         </a>
                         <ol>
@@ -234,7 +314,7 @@
             </aside>
             <section>
                 <section class="slider">
-                    <div class="bx-wrapper" style="max-width: 100%">.</div>
+                    <div class="bx-wrapper" style="max-width: 100%"></div>
                 </section>
                 <section class="hit">
                     <h3></h3>
