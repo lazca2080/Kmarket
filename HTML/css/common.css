@@ -237,7 +237,11 @@ main > aside > .category ol > li {
 }
 
 main > aside > .category ol > li > a:hover {
+<<<<<<< HEAD
+    color: #41ab47;
+=======
     color: #41ab41;
+>>>>>>> 6b28bc55f5b427a2db00311ed530850534da92cf
     text-decoration: underline;
 }
 
