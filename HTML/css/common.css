@@ -225,6 +225,7 @@ main > aside > .category ol {
     display: none;
     width: 215px;
     height: 100%;
+    border: 1px solid #787f89;
     background: #fff;
     box-sizing: border-box;
     z-index: 10000;
@@ -237,11 +238,15 @@ main > aside > .category ol > li {
     box-sizing: border-box;
 }
 
+main > aside > .category ol > li > a:hover {
+    color: #41ab47;
+    text-decoration: underline;
+}
+
 main > section {
     float: right;
-    width: 958px;
+    width: 985px;
     height: auto;
-    border: 1px solid blue;
     box-sizing: border-box;
 }
 
