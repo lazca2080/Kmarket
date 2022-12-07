@@ -92,6 +92,7 @@ input,textarea {outline: none;}
 }
 #member > .login > form > span > label > input[type="checkbox"] {
     margin-right: 4px;
+    vertical-align: middle;
 }
 #member > .login > form > span a {
     display: inline-block;
