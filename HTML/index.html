@@ -13,6 +13,12 @@
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $(".slider > ul").bxSlider({
+                easing: "linear",
+            });
+        });
+
         $(function () {
             var best = $("aside > .best");
 
@@ -525,61 +531,33 @@
             <section>
                 <!-- 슬라이더 영역 -->
                 <section class="slider">
-                    <div class="bx-wrapper">
-                        <div class="bx-viewport" aria-live="polite">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item1"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item2"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item3"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item4"/>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://via.placeholder.com/985x447" alt="item5"/>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="bx-contorls bx-has-controls-direction bx-has-pager">
-                            <div class="bx-controls-direction">
-                                <a href="bx-prev">Prev</a>
-                                <a href="bx-next">Next</a>
-                            </div>
-                        </div>
-                        <div class="bx-pager bx-default-pager">
-                            <div class="bx-pager-item">
-                                <a href data-slide-index="0" class="bx-pager-link">1</a>
-                            </div>
-                            <div class="bx-pager-item">
-                                <a href data-slide-index="0" class="bx-pager-link">2</a>
-                            </div>
-                            <div class="bx-pager-item">
-                                <a href data-slide-index="0" class="bx-pager-link">3</a>
-                            </div>
-                            <div class="bx-pager-item">
-                                <a href data-slide-index="0" class="bx-pager-link">4</a>
-                            </div>
-                            <div class="bx-pager-item">
-                                <a href data-slide-index="0" class="bx-pager-link active">5</a>
-                            </div>
-                        </div>
-                    </div>
-                    
+                    <ul>
+                        <li>
+                        <a href="#"
+                            ><img src="https://via.placeholder.com/985x447" alt="item1"
+                        /></a>
+                        </li>
+                        <li>
+                        <a href="#"
+                            ><img src="https://via.placeholder.com/985x447" alt="item2"
+                        /></a>
+                        </li>
+                        <li>
+                        <a href="#"
+                            ><img src="https://via.placeholder.com/985x447" alt="item3"
+                        /></a>
+                        </li>
+                        <li>
+                        <a href="#"
+                            ><img src="https://via.placeholder.com/985x447" alt="item4"
+                        /></a>
+                        </li>
+                        <li>
+                        <a href="#"
+                            ><img src="https://via.placeholder.com/985x447" alt="item5"
+                        /></a>
+                        </li>
+                    </ul>
                 </section>
                 <!-- 히트상품 영역 -->
                 <section class="hit">
