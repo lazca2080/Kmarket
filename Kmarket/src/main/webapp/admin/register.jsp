@@ -62,7 +62,7 @@
                     </p>
                 </nav>
                 <article>
-                    <form action="#">
+                    <form action="/Kmarket/product/regist.do" method="post">
                         <section>
                             <h4>상품분류</h4>
                             <p>
@@ -104,7 +104,7 @@
                             <table>
                                 <tr>
                                     <td>상품명</td>
-                                    <td><input type="text" name="#"></td>
+                                    <td><input type="text" name="name"></td>
                                 </tr>
                                 <tr>
                                     <td>기본설명</td>
@@ -113,51 +113,51 @@
                                             상품명 하단에 상품에 대한 추가적인 설명이 
                                             필요한 경우에 입력
                                         </span>
-                                        <input type="text" name="#">
+                                        <input type="text" name="text">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>제조사</td>
-                                    <td><input type="text" name="#"></td>
+                                    <td><input type="text" name="company"></td>
                                 </tr>
                                 <tr>
                                     <td>판매가격</td>
-                                    <td><input type="text" name="#">원</td>
+                                    <td><input type="text" name="price">원</td>
                                 </tr>
                                 <tr>
                                     <td>할인율</td>
                                     <td>
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text" name="#">원
+                                        <input type="text" name="dis">원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>포인트</td>
                                     <td>
                                         <span>0을 입력하면 포인트 없음</span>
-                                        <input type="text" name="#">점
+                                        <input type="text" name="point">점
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>재고수량</td>
-                                    <td><input type="text" name="#">개</td>
+                                    <td><input type="text" name="stock">개</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
                                     <td>
                                         <span>0을 입력하면 배송비 무료</span>
-                                        <input type="text" name="#">원
+                                        <input type="text" name="deil">원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상품 썸네일</td>
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다.</span>
-                                        <input type="file" name="#">
+                                        <input type="file" name="fname1">
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다.</span>
-                                        <input type="file" name="#">
+                                        <input type="file" name="fname2">
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다.</span>
-                                        <input type="file" name="#">
+                                        <input type="file" name="fname3">
                                     </td>
                                 </tr>
                                 <tr>
@@ -168,7 +168,7 @@
                                             크기 최대 1MB, 상세페이지 상품정보에 
                                             출력될 이미지 입니다.
                                         </span>
-                                        <input type="file" name="#">
+                                        <input type="file" name="fname4">
                                     </td>
                                 </tr>
                             </table>
@@ -184,31 +184,31 @@
                                 <tr>
                                     <td>상품상태</td>
                                     <td>
-                                        <input type="text" value="새상품">
+                                        <input type="text" name="quality" value="새상품">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
                                     <td>
-                                        <input type="text" value="과세상품">
+                                        <input type="text" name="vat" value="과세상품">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
                                     <td>
-                                        <input type="text" value="발행가능 - 신용카드 전표, 온라인 현금영수증">
+                                        <input type="text" name="receipt" value="발행가능 - 신용카드 전표, 온라인 현금영수증">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
                                     <td>
-                                        <input type="text" value="사업자 판매자">
+                                        <input type="text" name="business" value="사업자 판매자">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>원산지</td>
                                     <td>
-                                        <input type="text" value="국내산">
+                                        <input type="text" name="origin" value="국내산">
                                     </td>
                                 </tr>
                             </table>
