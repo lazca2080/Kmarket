@@ -9,7 +9,7 @@
                 <strong>로그인</strong>
             </p>
         </nav>
-        <form action="#">
+        <form action="/Kmarket/member/login.do" method="post">
             <table border="0">
                 <tr>
                     <td>아이디<td>
@@ -27,7 +27,7 @@
             <input type="submit" value="로그인">
             <span>
                 <label>
-                    <input type="checkbox" name="auto">자동 로그인
+                    <input type="checkbox" name="auto" value="remember">자동 로그인
                 </label>
                 <a href="#">아이디찾기</a>
                 <a href="#">비밀번호찾기</a>
