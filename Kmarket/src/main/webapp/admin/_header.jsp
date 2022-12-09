@@ -1,4 +1,4 @@
-<%@  page contentType="text/html; charset=utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,7 @@
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="./index.html" class="logo">
+                <a href="/admin/index.do" class="logo">
                     <img src="./img/admin_logo.png" alt="admin_logo">
                 </a>
                 <p>
