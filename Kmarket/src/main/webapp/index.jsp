@@ -4,7 +4,7 @@
             <aside>
                 <ul class="category">
                     <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>카테고리
+                        <i class="fa fa-bars" aria-hidden="true"></i>${c1Name}
                     </li>
                         <li>
                         <a href="#">
