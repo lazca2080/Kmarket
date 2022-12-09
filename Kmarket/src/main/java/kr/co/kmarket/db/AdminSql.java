@@ -1,5 +1,5 @@
 package kr.co.kmarket.db;
 
-public class test {
+public class AdminSql {
 
 }
