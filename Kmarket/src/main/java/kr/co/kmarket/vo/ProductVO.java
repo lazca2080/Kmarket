@@ -2,58 +2,67 @@ package kr.co.kmarket.vo;
 
 public class ProductVO {
 
-	private String cate1;
-	private String cate2;
-	private String name;
-	private String text;
+	private String prodCate1;
+	private String prodCate2;
+	private String prodName;
+	private String descript;
 	private String company;
+	private String seller;
 	private int price;
-	private int dis;
+	private int discount;
 	private int point;
 	private int stock;
-	private int deli;
-	private String quality;
-	private String vat;
+	private int delivery;
+	private String thumb1;
+	private String thumb2;
+	private String thumb3;
+	private String detail;
+	private String status;
+	private String duty;
 	private String receipt;
-	private String business;
+	private String bizType;
 	private String origin;
-	private String fname1;
-	private String fname2;
-	private String fname3;
-	private String fname4;
-	
 	private String regip;
+	
+	public String getSeller() {
+		return seller;
+	}
+	
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
 	
 	public String getRegip() {
 		return regip;
 	}
+	
 	public void setRegip(String regip) {
 		this.regip = regip;
 	}
 	
-	public String getCate1() {
-		return cate1;
+	public String getProdCate1() {
+		return prodCate1;
 	}
-	public void setCate1(String cate1) {
-		this.cate1 = cate1;
+	public void setProdCate1(String prodCate1) {
+		this.prodCate1 = prodCate1;
 	}
-	public String getCate2() {
-		return cate2;
+	public String getProdCate2() {
+		return prodCate2;
 	}
-	public void setCate2(String cate2) {
-		this.cate2 = cate2;
+	public void setProdCate2(String prodCate2) {
+		this.prodCate2 = prodCate2;
 	}
-	public String getName() {
-		return name;
+	public String getProdName() {
+		return prodName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
 	}
-	public String getText() {
-		return text;
+	public String getDescript() {
+		return descript;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setDescript(String descript) {
+		this.descript = descript;
 	}
 	public String getCompany() {
 		return company;
@@ -70,14 +79,14 @@ public class ProductVO {
 	public void setPrice(String price) {
 		this.price = Integer.parseInt(price);
 	}
-	public int getDis() {
-		return dis;
+	public int getDiscount() {
+		return discount;
 	}
-	public void setDis(int dis) {
-		this.dis = dis;
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
-	public void setDis(String dis) {
-		this.dis = Integer.parseInt(dis);
+	public void setDiscount(String discount) {
+		this.discount = Integer.parseInt(discount);
 	}
 	public int getPoint() {
 		return point;
@@ -97,26 +106,50 @@ public class ProductVO {
 	public void setStock(String stock) {
 		this.stock = Integer.parseInt(stock);
 	}
-	public int getDeli() {
-		return deli;
+	public int getDeilvery() {
+		return delivery;
 	}
-	public void setDeli(int deli) {
-		this.deli = deli;
+	public void setDeilvery(int delivery) {
+		this.delivery = delivery;
 	}
-	public void setDeli(String deli) {
-		this.deli = Integer.parseInt(deli);
+	public void setDeilvery(String delivery) {
+		this.delivery = Integer.parseInt(delivery);
 	}
-	public String getQuality() {
-		return quality;
+	public String getThumb1() {
+		return thumb1;
 	}
-	public void setQuality(String quality) {
-		this.quality = quality;
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
 	}
-	public String getVat() {
-		return vat;
+	public String getThumb2() {
+		return thumb2;
 	}
-	public void setVat(String vat) {
-		this.vat = vat;
+	public void setThumb2(String thumb2) {
+		this.thumb2 = thumb2;
+	}
+	public String getThumb3() {
+		return thumb3;
+	}
+	public void setThumb3(String thumb3) {
+		this.thumb3 = thumb3;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getDuty() {
+		return duty;
+	}
+	public void setDuty(String duty) {
+		this.duty = duty;
 	}
 	public String getReceipt() {
 		return receipt;
@@ -124,11 +157,11 @@ public class ProductVO {
 	public void setReceipt(String receipt) {
 		this.receipt = receipt;
 	}
-	public String getBusiness() {
-		return business;
+	public String getBizType() {
+		return bizType;
 	}
-	public void setBusiness(String business) {
-		this.business = business;
+	public void setBizType(String bizType) {
+		this.bizType = bizType;
 	}
 	public String getOrigin() {
 		return origin;
@@ -136,32 +169,6 @@ public class ProductVO {
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
-	public String getFname1() {
-		return fname1;
-	}
-	public void setFname1(String fname1) {
-		this.fname1 = fname1;
-	}
-	public String getFname2() {
-		return fname2;
-	}
-	public void setFname2(String fname2) {
-		this.fname2 = fname2;
-	}
-	public String getFname3() {
-		return fname3;
-	}
-	public void setFname3(String fname3) {
-		this.fname3 = fname3;
-	}
-	public String getFname4() {
-		return fname4;
-	}
-	public void setFname4(String fname4) {
-		this.fname4 = fname4;
-	}
-	
-	
 	
 	
 	
