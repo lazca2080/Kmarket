@@ -87,9 +87,9 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="./img/sample_thumb.jpg" class="thumb"></td>
+                            <td><img src="#" class="thumb"></td>
                             <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
+                            <td>sdfsdf</td>
                             <td>36,000</td>
                             <td>10</td>
                             <td>360</td>
