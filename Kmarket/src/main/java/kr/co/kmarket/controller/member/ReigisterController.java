@@ -46,9 +46,9 @@ public class ReigisterController extends HttpServlet{
 		String gender = req.getParameter("km_gentder");
 		String email = req.getParameter("km_email");
 		String hp = req.getParameter("km_hp");
-		String zip = req.getParameter("zip");
-		String addr1 = req.getParameter("addr1");
-		String addr2 = req.getParameter("addr2");
+		String zip = req.getParameter("km_zip");
+		String addr1 = req.getParameter("km_addr1");
+		String addr2 = req.getParameter("km_addr2");
 		String regip = req.getRemoteAddr();
 		
 		// VO 데이터 생성
@@ -57,8 +57,8 @@ public class ReigisterController extends HttpServlet{
 		vo.setPass(pass);
 		vo.setName(name);
 		vo.setGender(gender);
-		vo.setEmail(email);
 		vo.setHp(hp);
+		vo.setEmail(email);
 		vo.setZip(zip);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);

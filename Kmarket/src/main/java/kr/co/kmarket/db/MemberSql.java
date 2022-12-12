@@ -32,8 +32,18 @@ public class MemberSql {
 											 + " `email`=?, "
 											 + " `zip`=?, "
 											 + " `addr1`=?, "
-											 + " `addr1`=?, "
+											 + " `addr2`=?, "
 											 + " `regip`=?, "
-											 + " `rdate`=NOW() ";
-											 
+											 + " `rdate`=NOW(), "
+											 + " `type`= '1'";
+				
+	// 아이디 중복확인
+	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member` WHERE `uid`=?";
+	
+	
+	
+	
+	
+	
+	
 }
