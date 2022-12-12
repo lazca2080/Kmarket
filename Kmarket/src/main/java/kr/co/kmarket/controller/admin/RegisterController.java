@@ -70,6 +70,18 @@ public class RegisterController extends HttpServlet{
 		String detail    = mr.getFilesystemName("detail");
 		String regip     = req.getRemoteAddr();
 		
+		int i = thumb1.lastIndexOf(".");
+		String ext = thumb1.substring(i);
+		
+		int i1 = thumb2.lastIndexOf(".");
+		String ext1 = thumb2.substring(i);
+		
+		int i2 = thumb3.lastIndexOf(".");
+		String ext2 = thumb3.substring(i);
+		
+		int i3 = detail.lastIndexOf(".");
+		String ext3 = detail.substring(i);
+		
 		UUID uThumb1 = UUID.randomUUID();
 		UUID uThumb2 = UUID.randomUUID();
 		UUID uThumb3 = UUID.randomUUID();
@@ -93,10 +105,10 @@ public class RegisterController extends HttpServlet{
 		vo.setOrigin(origin);
 		vo.setRegip(regip);
 		vo.setSeller("admin");
-		vo.setThumb1(uThumb1.toString());
-		vo.setThumb2(uThumb2.toString());
-		vo.setThumb3(uThumb3.toString());
-		vo.setDetail(uDetail.toString());
+		vo.setThumb1(uThumb1.toString()+ext);
+		vo.setThumb2(uThumb2.toString()+ext1);
+		vo.setThumb3(uThumb3.toString()+ext2);
+		vo.setDetail(uDetail.toString()+ext3);
 		
 		int prodNo = service.insertProduct(vo);
 		
