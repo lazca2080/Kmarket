@@ -62,7 +62,7 @@
 				$.ajax({
 					url : '/Kmarket/member/checkSellerUid.do',
 					method : 'get',
-					data : "uid" = uid,
+					data : { "uid":uid },
 					dataType: 'json',
 					success : function(data){
 						if(data.result == 0){
@@ -76,8 +76,6 @@
 				});
 				
 			},1000);
-			
-			
 		});
 		
 		//비밀번호 체크
