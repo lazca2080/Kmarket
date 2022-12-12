@@ -30,7 +30,8 @@
                         </th>
                         <td>
                             <input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
-                            <span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                            <span class="msgPass1">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                            <span class="passResult1"></span>
                         </td>
                     </tr>
                     <tr>
@@ -40,8 +41,8 @@
                         </th>
                         <td>
                             <input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
-                            <span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span>
-                            <span class="passResult"></span>
+                            <span class="msgPass2">&nbsp;&nbsp;비밀번호 재입력</span>
+                            <span class="passResult2"></span>
                         </td>
                     </tr>
                 </table>
@@ -82,6 +83,7 @@
                         </th>
                         <td>
                             <input type="email" name="km_email" placeholder="이메일 입력" required>
+                            <span class="emailResult"></span>    
                         </td>
                     </tr>
                     <tr>

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.LoggerFactory;
 
@@ -69,5 +71,44 @@ public class ProductDAO {
 		
 		return prodNo;
 		
+	}
+
+	public List<ProductVO> selectProduct(String cate1, String cate2) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.debug("selectProduct...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getString(8));
+				vo.setDiscount(rs.getString(9));
+				vo.setPoint(rs.getString(10));
+				vo.setDeilvery(rs.getString(13));
+				vo.setThumb1(rs.getString(17));
+				
+				products.add(vo);
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return products;
 	}
 }
