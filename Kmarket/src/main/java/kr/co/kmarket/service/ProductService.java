@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,10 @@ public enum ProductService {
 	
 	public int insertProduct(ProductVO vo) {
 		return dao.insertProduct(vo);
+	}
+	
+	public List<ProductVO> selectProduct(String cate1, String cate2) {
+		return dao.selectProduct(cate1, cate2);
 	}
 	
 	// 서비스 로직
