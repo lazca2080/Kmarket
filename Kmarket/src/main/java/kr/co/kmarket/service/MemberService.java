@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dao.MemberDAO;
 import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.TermsVO;
 
 public enum MemberService {
 	
@@ -35,8 +36,18 @@ public enum MemberService {
 	public void insertMember(MemberVO vo) {
 		dao.insertMember(vo);
 	}
-	// 아이디 중복 확인
+  // 아이디 중복 확인
 	public int selectCountUid(String uid) {
 		return dao.selectCountUid(uid);
 	}
+	
+	/*** terms ***/
+	// 약관(일반회원)
+	public TermsVO selectTerms() {
+		return dao.selectTerms();
+	}
+	
+	// 약관(판매자회원)
+	public TermsVO selectTax() {
+		return dao.selectTax();
 }
