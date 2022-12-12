@@ -61,4 +61,5 @@ public enum MemberService {
 	// 약관(판매자회원)
 	public TermsVO selectTax() {
 		return dao.selectTax();
+	}
 }

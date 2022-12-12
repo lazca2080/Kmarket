@@ -61,7 +61,7 @@
 			setTimeout(function(){
 				$.ajax({
 					url : '/Kmarket/member/checkSellerUid.do',
-					mathod : 'get',
+					method : 'get',
 					data : "uid" = uid,
 					dataType: 'json',
 					success : function(data){
