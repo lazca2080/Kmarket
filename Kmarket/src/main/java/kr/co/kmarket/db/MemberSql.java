@@ -36,7 +36,7 @@ public class MemberSql {
 											 + " `regip`=?, "
 											 + " `rdate`=NOW(), "
 											 + " `type`= 1";
-	
+                       
 	// 아이디 중복확인
 	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member` WHERE `uid`=?";
   

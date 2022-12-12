@@ -22,7 +22,7 @@
             <div class="top">
                 <div>
                     <a href="/Kmarket/member/login.do">로그인</a>
-                    <a href="/Kmarket/member/register.do">회원가입</a>
+                    <a href="/Kmarket/member/join.do">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="/Kmarket/product/cart.do">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
