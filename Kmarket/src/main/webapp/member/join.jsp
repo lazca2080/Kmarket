@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"></jsp:include>
+
+
 <main id="member">
     <div class="join">
         <img src="./img/member_join_tit_welcome.gif" class="welcome" alt="케이마켓에 오신 것을 환영합니다">

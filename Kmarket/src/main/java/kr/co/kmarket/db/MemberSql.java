@@ -17,8 +17,23 @@ public class MemberSql {
 	
 	// 비밀번호 변경
 	
-	// 로그아웃
+	/*** logout ***/
 	public static final String UPDATE_MEMBER_FOR_SESSION_OUT = "UPDATE `km_member` SET `sessId`=NULL, `sessLimitDate`=NULL WHERE `uid`=?";
 
 
+	/*** register ***/
+	// 회원가입
+	public static final String INSERT_MEMBER = "INSERT INTO `km_member` SET "
+											 + " `uid`=?, "
+											 + " `pass`=SHA2(?, 256), "
+											 + " `name`=?, "
+											 + " `gender`=?, "
+											 + " `hp`=?, "
+											 + " `email`=?, "
+											 + " `zip`=?, "
+											 + " `addr1`=?, "
+											 + " `addr1`=?, "
+											 + " `regip`=?, "
+											 + " `rdate`=NOW() ";
+											 
 }

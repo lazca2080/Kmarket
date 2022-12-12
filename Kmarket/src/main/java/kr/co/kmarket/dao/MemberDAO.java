@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.cj.protocol.a.SqlDateValueEncoder;
+
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.db.MemberSql;
 import kr.co.kmarket.vo.MemberVO;
@@ -67,10 +69,7 @@ public class MemberDAO {
 		}
 		return mv;
 	}
-	// 자동 로그인 (auto) 체크
-	
-	// 자동 로그인 세션 만료 연장
-	
+
 	// 자동 로그인 (sessID) DB 저장
 	public void updateMemberForSession(String sessId, String uid) {
 		try {
@@ -90,5 +89,67 @@ public class MemberDAO {
 	}
 	
 	
+	/*** logout - LogoutContrller  ***/
+	public void updateUserForSessionOut(String uid) {
+		try {
+			logger.info("updateUserForSessionOut...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(MemberSql.UPDATE_MEMBER_FOR_SESSION_OUT);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
 	
+	/*** register - RegisterController ***/
+	// 회원가입
+	public void insertMember(MemberVO vo) {
+		try {
+			logger.info("insertMember...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(MemberSql.INSERT_MEMBER);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getPass());
+			psmt.setString(3, vo.getName());
+			psmt.setInt(4, vo.getGender());
+			psmt.setString(5, vo.getHp());
+			psmt.setString(6, vo.getEmail());
+			psmt.setString(7, vo.getZip());
+			psmt.setString(8, vo.getAddr1());
+			psmt.setString(9, vo.getAddr2());
+			psmt.setString(10, vo.getRegip());
+			psmt.setString(11, vo.getRdate());
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"></jsp:include> 
+<script src="/Kmarket/member/js/validation.js"></script>
+<script src="/Kmarket/member/js/zipcode.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호 찾기 오픈 API -->
 <main id="member">
     <div class="register">
         <nav>
             <h1>일반 회원가입</h1>
         </nav>
-        <form action="#" method="post">
+        <form action="/Kmarket/member/register.do" method="post">
             <section>
                 <table>
                     <caption>필수 정보입력</caption>
@@ -17,6 +20,7 @@
                         <td>
                             <input type="text" name="km_uid" placeholder="아이디를 입력" required>
                             <span class="msgId">&nbsp;&nbsp;영문, 숫자로 4~12자까지 설정해 주세요.</span>
+                            <span class="uidResult"></span>
                         </td>
                     </tr>
                     <tr>
@@ -25,7 +29,7 @@
                             비밀번호
                         </th>
                         <td>
-                            <input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
+                            <input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
                             <span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                         </td>
                     </tr>
@@ -35,8 +39,9 @@
                             비밀번호확인
                         </th>
                         <td>
-                            <input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
+                            <input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
                             <span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span>
+                            <span class="passResult"></span>
                         </td>
                     </tr>
                 </table>
@@ -51,6 +56,7 @@
                         </th>
                         <td>
                             <input type="text" name="km_name" placeholder="이름을 입력" required>
+                            <span class="nameResult"></span>          
                         </td>
                     </tr>
                     <tr>
@@ -86,13 +92,14 @@
                         <td>
                             <input type="text" name="km_hp" placeholder="휴대폰번호 입력" required>
                             <span class="msgHp"> &nbsp;&nbsp;-포함 13자리를 입력하세요.</span>
+                            <span class="hpResult"></span>
                         </td>
                     </tr>
                     <tr class="addr">
                         <th>주소</th>
                         <td>
                             <div>
-                                <input type="text" name="km_zip" id="zip" placeholder="우편번호 입력 클릭" readonly>
+                                <input type="text" name="km_zip" id="zip" onclick="zipcode()" placeholder="우편번호 입력 클릭" readonly>
                             </div> 
                             <div>
                                 <input type="text" name="km_addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly>

@@ -30,6 +30,11 @@ public class MemberVO {
 	private String etc4;
 	private String etc5;
 	
+	// (추가) Gender : int -> String
+	public void setGender(String gender) {
+		this.gender = Integer.parseInt(gender);
+	}
+	
 	public String getUid() {
 		return uid;
 	}

@@ -15,18 +15,24 @@ public enum MemberService {
 		dao = new MemberDAO();
 	}
 	
-	/*** login ***/
+	/*** login - LoginController ***/
 	// 아이디 패스워드 확인
 	public MemberVO selectMember(String uid, String pass) {
 		return dao.selectMember(uid, pass);
 	}
-	// 자동 로그인 (auto) 체크
-	
-	// 자동 로그인 세션 만료 연장
-	
 	// 자동 로그인 (sessID) DB 저장
 	public void updateMemberForSession(String uid, String sessId) {
 		dao.updateMemberForSession(uid, sessId);
 	}
 	
+	/*** logout - LogoutContrller ***/
+	public void updateUserForSessionOut(String uid) {
+		dao.updateUserForSessionOut(uid);
+	}
+	
+	/*** register - RegisterController ***/
+	// 회원가입
+	public void insertMember(MemberVO vo) {
+		dao.insertMember(vo);
+	}
 }
