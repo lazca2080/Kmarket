@@ -231,13 +231,69 @@ public class MemberDAO {
 
 
 
+	/*** register - RegisterSellerController 
+	 * @return ***/
+	public void insertSellerMember(MemberVO vo) {
+		try {
+			logger.info("insertSellerMember...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(MemberSql.INSERT_SELLER_MEMBER);
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getPass());
+			psmt.setString(3, vo.getCompany());
+			psmt.setString(4, vo.getCeo());
+			psmt.setString(5, vo.getBizRegNum());
+			psmt.setString(6, vo.getCornRegNum());
+			psmt.setString(7, vo.getTel());
+			psmt.setString(8, vo.getFax());
+			psmt.setString(9, vo.getEmail());
+			psmt.setString(10, vo.getZip());
+			psmt.setString(11, vo.getAddr1());
+			psmt.setString(12, vo.getAddr2());
+			psmt.setString(13, vo.getMananger());
+			psmt.setString(14, vo.getManagerHp());
+			psmt.setString(15, vo.getRegip());
+			psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 
+	public int selectCountSellerUid(String uid) {
+		int result = 0;
+		
+		try {
+			logger.info("selectCountSellerUid...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(MemberSql.SELECT_COUNT_SELLER_UID);
+			psmt.setString(1, uid);
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return result;
+	}
 
-
-
-
-
-
+	
+	
 
 
 

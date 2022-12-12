@@ -34,20 +34,41 @@ public class MemberSql {
 											 + " `addr1`=?, "
 											 + " `addr2`=?, "
 											 + " `regip`=?, "
-                       + " `rdate`=NOW(), "
+											 + " `rdate`=NOW() ";
                        + " `type`= '1'";
-                       
+	
 	// 아이디 중복확인
 	public static final String SELECT_COUNT_UID = "SELECT COUNT(`uid`) FROM `km_member` WHERE `uid`=?";
   
-  
+	/*** registerSeller ***/
+	//회원가입
+	public static final String INSERT_SELLER_MEMBER = "INSERT INTO `km_member` SET "
+			 + " `uid`=?, "
+			 + " `pass`=SHA2(?, 256), "
+			 + " `company`=?, "
+			 + " `ceo`=?, "
+			 + " `gender`=3, "
+			 + " `type`=2, "
+			 + " `bizRegNum`=?, "
+			 + " `comRegNum`=?, "
+			 + " `tel`=?, "
+			 + " `fax`=?, "
+			 + " `email`=?, "
+			 + " `zip`=?, "
+			 + " `addr1`=?, "
+			 + " `addr2`=?, "
+			 + " `manager`=?, "
+			 + " `managerHp`=?, "
+			 + " `regip`=?, "
+			 + " `rdate`=NOW() ";
+       
+  //회원가입 시 아이디 조회
+	public static final String SELECT_COUNT_SELLER_UID = "select count('uid') from `km_member` where `uid`=?";
+	
 	/*** terms ***/
 	// 약관(일반회원)
 	public static final String SELECT_TERMS = "SELECT `terms`,`finance`,`privacy`,`location` FROM `km_member_terms`";
 	// 약관(판매자회원)
 	public static final String SELECT_TAX =  "SELECT `tax`,`finance`,`privacy` FROM `km_member_terms`;";
-	
-	
-	
 	
 }

@@ -1,12 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="./_header.jsp"></jsp:include> 
+<jsp:include page="./_header.jsp"></jsp:include>
+<script src="/Kmarket/member/js/memberSeller.js"></script>
+<script src="/Kmarket/member/js/zipcode.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호 찾기 오픈 API --> 
+<script>
+	/*$(function(){
+		
+		let zip = $('input[name=kms_zip]').val();
+		let zip1 = $('input[name=kms_addr1]').val();
+		let zip2 = $('input[name=kms_addr2]').val();
+		
+		if(zip == '' && zip1 == '' && zip2 == ''){
+			console.log('test');
+		}
+	});*/
+</script>
 <main id="member">
     <div class="registerSeller">
         <nav>
             <h1>판매자 회원가입</h1>
         </nav>
+        <form action="/Kmarket/member/registerSeller.do" method="post">
     </div>
-        <form action="#" method="post">
             <section>
                 <table>
                     <caption>필수 정보입력</caption>
@@ -26,7 +41,7 @@
                             비밀번호
                         </th>
                         <td>
-                            <input type="password" name="km_pass" placeholder="비밀번호를 입력" required>
+                            <input type="password" name="km_pass1" placeholder="비밀번호를 입력" required>
                             <span class="msgPass">&nbsp;&nbsp;영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                         </td>
                     </tr>
@@ -36,7 +51,7 @@
                             비밀번호확인
                         </th>
                         <td>
-                            <input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
+                            <input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
                             <span class="msgPass">&nbsp;&nbsp;비밀번호 재입력</span>
                         </td>
                     </tr>
@@ -62,6 +77,7 @@
                         </th>
                         <td>
                             <input type="text" name="kms_ceo" placeholder="대표자 입력" required>
+                            <span class="msgCeo"></span>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +133,7 @@
                         <th>회사주소</th>
                         <td>
                             <div>
-                                <input type="text" name="kms_zip" id="zip" placeholder="우편번호 입력 클릭" readonly>
+                                <input type="text" name="kms_zip" id="zip" placeholder="우편번호 입력 클릭" onclick="zipcode()">
                             </div> 
                             <div>
                                 <input type="text" name="kms_addr1" id="addr1" size="50" placeholder="주소를 검색하세요." readonly>
@@ -139,6 +155,7 @@
                         </th>
                         <td>
                             <input type="text" name="km_name" placeholder="아이디를 입력" required>
+							<span class="msgName"></span>                        
                         </td>
                     </tr>
                     <tr>
