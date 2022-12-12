@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.protocol.a.SqlDateValueEncoder;
 
 import kr.co.kmarket.db.DBCP;
@@ -126,7 +127,8 @@ public class MemberDAO {
 			psmt.setString(8, vo.getAddr1());
 			psmt.setString(9, vo.getAddr2());
 			psmt.setString(10, vo.getRegip());
-			psmt.setString(11, vo.getRdate());
+			
+			psmt.executeUpdate();
 			
 			psmt.close();
 			con.close();
@@ -135,7 +137,32 @@ public class MemberDAO {
 			logger.error(e.getMessage());
 		}
 	}
-
+	// 아이디 중복확인
+	public int selectCountUid(String uid) {
+		int result = 0;
+		
+		try {
+			logger.info("selectCountUid...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(MemberSql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 
 
 

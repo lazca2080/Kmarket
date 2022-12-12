@@ -10,7 +10,7 @@
                 <img src="./img/member_join_tit_normal.gif" alt="구매회원 가입">
                 <div class="txt">
                     <img src="./img/member_join_txt_normal.gif" alt="개인 구매회원">
-                    <a href="./register.html">
+                    <a href="/Kmarket/member/register.do">
                         <img src="./img/member_join_btn1.gif" alt="회원가입">
                     </a>
                 </div>
@@ -19,7 +19,7 @@
                 <img src="./img/member_join_tit_seller.gif" alt="판매회원 가입">
                 <div class="txt">
                     <img src="./img/member_join_txt_seller.gif" alt="사업자 판매회원">
-                    <a href="./registerSeller.html">
+                    <a href="/Kmarket/member/registerSeller.do">
                         <img src="./img/member_join_btn2.gif" alt="회원가입">
                     </a>
                 </div>

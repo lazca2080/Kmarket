@@ -35,4 +35,8 @@ public enum MemberService {
 	public void insertMember(MemberVO vo) {
 		dao.insertMember(vo);
 	}
+	// 아이디 중복 확인
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
 }

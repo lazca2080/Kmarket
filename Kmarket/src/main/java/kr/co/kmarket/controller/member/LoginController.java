@@ -56,9 +56,10 @@ public class LoginController extends HttpServlet{
 			// 회원이 맞을 경우
 			HttpSession sess = req.getSession();
 			sess.setAttribute("sessUser", vo);
+			
 			System.out.println("*** 로그인 성공 ***");
 			
-			// '자동 로그인' 체크 시
+			/*'자동 로그인' 체크 시
 			if(auto != null) {
 				String sessId = sess.getId();
 				// 쿠키 생성
@@ -70,7 +71,8 @@ public class LoginController extends HttpServlet{
 				
 				// sessId 데이터베이스 저장
 				service.updateMemberForSession(uid, sessId);
-			}
+			} 
+			*/
 			resp.sendRedirect("/Kmarket/index.do");
 		}else {
 			// 회원이 아닐 경우
