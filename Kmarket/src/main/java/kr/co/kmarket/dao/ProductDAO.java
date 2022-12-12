@@ -2,6 +2,8 @@ package kr.co.kmarket.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +15,18 @@ public class ProductDAO {
 	
 	org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertProduct(ProductVO vo) {
+	public int insertProduct(ProductVO vo) {
+		
+		int prodNo = 0;
 		
 		try {
 			logger.debug("insertProduct...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(ProductSql.insertProduct2);
+			
+			// 트랙잭션 시작
+			conn.setAutoCommit(false);
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.insertProduct);
+			Statement stmt = conn.createStatement();
 			psmt.setString(1, vo.getProdCate1());
 			psmt.setString(2, vo.getProdCate2());
 			psmt.setString(3, vo.getProdName());
@@ -41,14 +49,25 @@ public class ProductDAO {
 			psmt.setString(20, vo.getDetail());
 			psmt.setString(21, vo.getSeller());
 			
-			psmt.executeUpdate();
+			psmt.executeUpdate();                                         // INSERT 이후
+			ResultSet rs = stmt.executeQuery(ProductSql.selectProdNo);    // SELECT 해야 INSERT한 prodNo 찾기 가능 반대로하면 틀린 prodNO
+			conn.commit();
+			// 트랜잭션 종료
+			
+			if(rs.next()) {
+				prodNo = rs.getInt(1);
+			}
 			
 			conn.close();
 			psmt.close();
+			stmt.close();
+			rs.close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return prodNo;
 		
 	}
 }
