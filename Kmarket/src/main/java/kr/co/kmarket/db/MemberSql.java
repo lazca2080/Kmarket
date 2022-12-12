@@ -35,5 +35,11 @@ public class MemberSql {
 											 + " `addr1`=?, "
 											 + " `regip`=?, "
 											 + " `rdate`=NOW() ";
+	
+	/*** terms ***/
+	// 약관(일반회원)
+	public static final String SELECT_TERMS = "SELECT `terms`,`finance`,`privacy`,`location` FROM `km_member_terms`";
+	// 약관(판매자회원)
+	public static final String SELECT_TAX =  "SELECT `tax`,`finance`,`privacy` FROM `km_member_terms`;";
 											 
 }

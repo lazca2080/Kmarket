@@ -3,6 +3,7 @@ package kr.co.kmarket.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import com.mysql.cj.protocol.a.SqlDateValueEncoder;
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.db.MemberSql;
 import kr.co.kmarket.vo.MemberVO;
+import kr.co.kmarket.vo.TermsVO;
 
 public class MemberDAO {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -135,6 +137,61 @@ public class MemberDAO {
 			logger.error(e.getMessage());
 		}
 	}
+	
+	/*** terms ***/
+	// 약관(일반회원)
+	public TermsVO selectTerms() {
+		
+		TermsVO vo = null;
+		
+		try {
+			Connection con = DBCP.getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(MemberSql.SELECT_TERMS);
+			
+			if(rs.next()) {
+				vo = new TermsVO();
+				vo.setTerms(rs.getString(1));
+				vo.setFinance(rs.getString(2));
+				vo.setPrivacy(rs.getString(3));
+				vo.setLocation(rs.getString(4));
+			}
+			con.close();
+			stmt.close();
+			rs.close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+	/*** terms ***/
+	// 약관(판매자회원)
+	public TermsVO selectTax() {
+		
+		TermsVO vo = null;
+		
+		try {
+			Connection con = DBCP.getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(MemberSql.SELECT_TAX);
+			
+			if(rs.next()) {
+				vo = new TermsVO();
+				vo.setTax(rs.getString(1));
+				vo.setFinance(rs.getString(2));
+				vo.setPrivacy(rs.getString(3));
+			}
+			con.close();
+			stmt.close();
+			rs.close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+	
 
 
 

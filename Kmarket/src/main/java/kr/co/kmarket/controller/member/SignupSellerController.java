@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.vo.TermsVO;
 
-@WebServlet("/member/signup.do")
-public class SignupController extends HttpServlet{
+@WebServlet("/member/signupSeller.do")
+public class SignupSellerController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -28,13 +28,13 @@ public class SignupController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		TermsVO vo = service.selectTerms();
+		TermsVO vo = service.selectTax();
 		req.setAttribute("vo",vo);
 		
 		
-		logger.info("SignupController doGet...");
+		logger.info("SignupSellerController doGet...");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signupSeller.jsp");
 		dispatcher.forward(req, resp);
 	
 		
@@ -42,7 +42,7 @@ public class SignupController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		logger.info("SignupController doPost...");
+		logger.info("SignupSellerController doPost...");
 		
 	}
 	

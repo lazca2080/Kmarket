@@ -5,6 +5,7 @@
         <nav>
             <h1>판매자 회원가입</h1>
         </nav>
+    </div>
         <form action="#" method="post">
             <section>
                 <table>
@@ -156,6 +157,5 @@
                 <input type="submit" class="join" value="회원가입">
             </div>
         </form>
-    </div>
 </main>
 <jsp:include page="./_footer.jsp"></jsp:include> 
