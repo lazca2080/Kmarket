@@ -31,6 +31,7 @@ public class LoginController extends HttpServlet{
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		logger.info("LoginController doGet...");
 		
 //		String success = req.getParameter("success");
@@ -42,6 +43,7 @@ public class LoginController extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		logger.info("LoginController doPost...");
 		
 		String uid = req.getParameter("uid");
