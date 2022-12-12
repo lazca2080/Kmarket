@@ -19,10 +19,9 @@ public enum ProductService {
 	private ProductDAO dao;
 	private ProductService() { dao = new ProductDAO(); }
 	
-	public void insertProduct(ProductVO vo) {
-		dao.insertProduct(vo);
+	public int insertProduct(ProductVO vo) {
+		return dao.insertProduct(vo);
 	}
-	
 	
 	// 서비스 로직
 	
@@ -31,40 +30,23 @@ public enum ProductService {
 		return new MultipartRequest(req, path, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 	}
 	
-	public void renameFile(ProductVO vo, String savePath) {
+	public void renameFile(String name, String path, String fname) {
 		
-		// 확장자까지 길이
-		int th1 = vo.getThumb1().lastIndexOf(".");
-		int th2 = vo.getThumb2().lastIndexOf(".");
-		int th3 = vo.getThumb3().lastIndexOf(".");
-		int det = vo.getDetail().lastIndexOf(".");
-		// 파일 이름까지 자르기
-		String thumb1Ext = vo.getThumb1().substring(th1);
-		String thumb2Ext = vo.getThumb2().substring(th2);
-		String thumb3Ext = vo.getThumb3().substring(th3);
-		String detailExt = vo.getDetail().substring(det);
+		// 확장자까지 길이 구하기
+		int i = name.lastIndexOf(".");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String now = sdf.format(new Date());
-		String newThumb1Name  = "admin"+thumb1Ext;
-		String newThumb2Name  = "admin"+thumb2Ext;
-		String newThumb3Name  = "admin"+thumb3Ext;
-		String newDetailName = "admin"+detailExt;
+		// 파일 이름까지 자르기 => ex) a.jpg -> .jpg
+		String ext = name.substring(i);
 		
-		File fth1 = new File(savePath+"/"+vo.getThumb1());
-		File fth2 = new File(savePath+"/"+vo.getThumb2());
-		File fth3 = new File(savePath+"/"+vo.getThumb3());
-		File dth  = new File(savePath+"/"+vo.getDetail());
+		String newName  = fname+ext; // 뒤에 +ext 확장자가 없으면 확장자 없이 파일이 저장됩니다 따라서 붙여줍니다.
+		// 해결?
+		// prodNo를 넣은 이유는 유일한 PrimaryKey이여서 입니다. 이게 없어도 파일명이 중복되는일은 절대로 없지만... 깔끔해보이기 위해 넣었습니다.
+		// name같은경우 첨부파일 삽입시 이름이 중복되면 ex) a.jpg, a.jpg, a.jpg, a.jpg => a.jpg, a1.jpg, a2.jpg, a3.jpg 로 자동변경됩니다.
+		// 따라서 리스트 불러올때 경로가 중복되어 같은 사진 or 다른 사진이 불러와지는 일은 없습니다.
 		
-		File newfth1 = new File(savePath+"/"+newThumb1Name);
-		File newfth2 = new File(savePath+"/"+newThumb2Name);
-		File newfth3 = new File(savePath+"/"+newThumb3Name);
-		File newdth = new File(savePath+"/"+newDetailName);
-		
-		fth1.renameTo(newfth1);
-		fth2.renameTo(newfth2);
-		fth3.renameTo(newfth3);
-		dth.renameTo(newdth);
+		File file1 = new File(path+"/"+name);
+		File file2 = new File(path+"/"+newName);
+		file1.renameTo(file2);
 	}
 }
 

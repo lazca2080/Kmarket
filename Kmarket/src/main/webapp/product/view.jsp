@@ -100,7 +100,7 @@
                 </nav>
                 <article class="info">
                     <div class="image">
-                        <img src="	https://via.placeholder.com/460x460" alt="상품이미지">
+                        <img src="	https://via.placeholder.com/460x460" alt="상품이미지thumb2">
                     </div>
                     <div class="summary">
                         <nav>
@@ -160,9 +160,9 @@
                 </article>
                 <article class="detail">
                     <nav><h1>상품정보</h1></nav>
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+                    <img src="https://via.placeholder.com/860x460" alt="thumb3">
+                    <img src="https://via.placeholder.com/860x460" alt="detail">
+                    <img src="https://via.placeholder.com/860x460" alt="detail">
                 </article>
                 <article class="notice">
                     <nav>
