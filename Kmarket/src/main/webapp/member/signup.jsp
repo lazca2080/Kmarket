@@ -60,7 +60,7 @@
                 </label>
         </section>
         <div>
-            <a href="/member/register.do">
+            <a href="/Kmarket/member/register.do">
             	<input type="button" class="agree" value="동의하기">
             </a>
         </div>
