@@ -7,7 +7,7 @@
 			
 			let isCheck1 = $('input[name=agree1]').is(':checked');
 			let isCheck2 = $('input[name=agree2]').is(':checked');
-			let isCheck4 = $('input[name=agree3]').is(':checked');
+			let isCheck3 = $('input[name=agree3]').is(':checked');
 			
 			if(isCheck1 && isCheck2 && isCheck3){
 				return true;
@@ -17,7 +17,7 @@
 			}
 		});
 	});
-</script> 
+</script>  
 <main id="member">
     <div class="signup">
         <nav>
@@ -28,7 +28,7 @@
                 <span class="essential">(필수)</span>
                 케이마켓 이용약관
             </h3>
-            <textarea class="terms" readonly>${vo.terms}</textarea>
+            <textarea class="terms" readonly>${vo.tax}</textarea>
             <label>
                 <input type="checkbox" name="agree1">동의합니다.
             </label>
@@ -49,18 +49,18 @@
                 <input type="checkbox" name="agree3">동의합니다.
             </label>
         </section>
-        <section>
+        <section style="display:none;">
             <h3>
                 <span class="optional">(선택)</span>
                 위치정보 이용약관
             </h3>    
-                <textarea class="location" readonly>${vo.location}</textarea>
+                <textarea class="location" readonly></textarea>
                 <label>
                     <input type="checkbox" name="agree4">동의합니다.
                 </label>
         </section>
         <div>
-            <a href="/member/register.do">
+            <a href="/member/registerSeller.do">
             	<input type="button" class="agree" value="동의하기">
             </a>
         </div>

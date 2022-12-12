@@ -21,6 +21,7 @@
             <h1>판매자 회원가입</h1>
         </nav>
         <form action="/Kmarket/member/registerSeller.do" method="post">
+    </div>
             <section>
                 <table>
                     <caption>필수 정보입력</caption>
@@ -173,6 +174,5 @@
                 <input type="submit" class="join" value="회원가입">
             </div>
         </form>
-    </div>
 </main>
 <jsp:include page="./_footer.jsp"></jsp:include> 

@@ -2,7 +2,7 @@ package kr.co.kmarket.db;
 
 public class ProductSql {
 
-	/* AWS mariaDB 버전이 낮아서 insert into `테이블명` set 사용불가
+	/* 오타 찾아내서 고치면 됨!
 	public static final String insertProduct1 = "INSERT INTO `km_product` SET"
 			+ "`prodCate1`=? "
 			+ "`prodCate2`=? "
@@ -31,4 +31,5 @@ public class ProductSql {
 
 	public static final String selectProdNo = "SELECT MAX(`prodNo`) FROM `km_product`";
 	
+	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` WHERE `prodCate1`=?, `prodCate2`=?";
 }

@@ -39,9 +39,18 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		// 로컬 경로 저장
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/prodImg");
 		File Dir = new File(path);
+		
+		/* 톰캣 프로젝트 외부에 img 폴더 생성
+		 * 프로젝트 내부에 img 폴더가 있을 시 매번 war로 내보낼때 번거로움 
+		 * 이렇게 외부로 만들고 난 뒤 외부에서 이미지 파일을 불러오는 설정을 해줘야하는데
+		 * AWS 톰캣 설치 폴더 - conf - server.xml 설정을 만줘줘야함.
+		String path = "/home/prodImg";
+		File Dir = new File(path);
+		*/
 		
 		if(!Dir.exists()) {
 			Dir.mkdirs();
@@ -147,7 +156,7 @@ public class RegisterController extends HttpServlet{
 		다 올린 이미지 파일 압축해서 각자 로컬서버에 압축을 풀면 될지.. 이것도 한번 얘기 나눠보면 좋을 것 같습니다.
 		*/
 		
-		resp.sendRedirect("/Kmarket/admin/index.do");
+		resp.sendRedirect("/Kmarket/admin/register.do");
 		
 	}
 }

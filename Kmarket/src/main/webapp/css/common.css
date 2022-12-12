@@ -49,6 +49,9 @@ header > .top > div > a {
     padding: 0 10px;
     color: #646464;
 }
+header > .tip > div > span {
+	
+}
 
 header > .top > div > a:hover {
     color: #333;
