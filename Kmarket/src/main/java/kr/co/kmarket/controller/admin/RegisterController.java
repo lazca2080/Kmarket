@@ -51,7 +51,7 @@ public class RegisterController extends HttpServlet{
 		String path = "/home/prodImg";
 		File Dir = new File(path);
 		*/
-		
+		// 폴더가 없으면~ 생성 이게 없으면 직접 생성하고 서버리스트에서 빼고 다시 서버 재시작 해야함.
 		if(!Dir.exists()) {
 			Dir.mkdirs();
 		}
@@ -65,6 +65,7 @@ public class RegisterController extends HttpServlet{
 		String company   = mr.getParameter("company");
 		String price     = mr.getParameter("price");
 		String discount  = mr.getParameter("discount");
+		String sellPrice = mr.getParameter("sellPrice");
 		String point     = mr.getParameter("point");
 		String stock     = mr.getParameter("stock");
 		String delivery  = mr.getParameter("delivery");
@@ -77,6 +78,7 @@ public class RegisterController extends HttpServlet{
 		String thumb2    = mr.getFilesystemName("thumb2");
 		String thumb3    = mr.getFilesystemName("thumb3");
 		String detail    = mr.getFilesystemName("detail");
+		String seller    = mr.getParameter("seller");
 		String regip     = req.getRemoteAddr();
 		
 		int i = thumb1.lastIndexOf(".");
@@ -104,6 +106,7 @@ public class RegisterController extends HttpServlet{
 		vo.setCompany(company);
 		vo.setPrice(price);
 		vo.setDiscount(discount);
+		vo.setSellPrice(sellPrice);
 		vo.setPoint(point);
 		vo.setStock(stock);
 		vo.setDeilvery(delivery);

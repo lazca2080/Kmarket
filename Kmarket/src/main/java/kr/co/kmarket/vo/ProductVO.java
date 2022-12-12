@@ -23,6 +23,19 @@ public class ProductVO {
 	private String bizType;
 	private String origin;
 	private String regip;
+	private int sellPrice;
+	
+	public int getSellPrice() {
+		return sellPrice;
+	}
+	
+	public void setSellPrice(int sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+	
+	public void setSellPrice(String sellPrice) {
+		this.sellPrice = Integer.parseInt(sellPrice);
+	}
 	
 	public String getSeller() {
 		return seller;
