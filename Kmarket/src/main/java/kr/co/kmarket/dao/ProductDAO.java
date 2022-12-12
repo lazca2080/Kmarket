@@ -50,6 +50,7 @@ public class ProductDAO {
 			psmt.setString(19, vo.getThumb3());
 			psmt.setString(20, vo.getDetail());
 			psmt.setString(21, vo.getSeller());
+			psmt.setInt(22, vo.getSellPrice());
 			
 			psmt.executeUpdate();                                         // INSERT 이후
 			ResultSet rs = stmt.executeQuery(ProductSql.selectProdNo);    // SELECT 해야 INSERT한 prodNo 찾기 가능 반대로하면 틀린 prodNO
