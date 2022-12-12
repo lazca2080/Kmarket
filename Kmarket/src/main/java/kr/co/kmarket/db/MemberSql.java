@@ -35,5 +35,30 @@ public class MemberSql {
 											 + " `addr1`=?, "
 											 + " `regip`=?, "
 											 + " `rdate`=NOW() ";
-											 
+	
+	/*** registerSeller ***/
+	//회원가입
+	public static final String INSERT_SELLER_MEMBER = "INSERT INTO `km_member` SET "
+			 + " `uid`=?, "
+			 + " `pass`=SHA2(?, 256), "
+			 + " `company`=?, "
+			 + " `ceo`=?, "
+			 + " `gender`=3, "
+			 + " `type`=2, "
+			 + " `bizRegNum`=?, "
+			 + " `comRegNum`=?, "
+			 + " `tel`=?, "
+			 + " `fax`=?, "
+			 + " `email`=?, "
+			 + " `zip`=?, "
+			 + " `addr1`=?, "
+			 + " `addr2`=?, "
+			 + " `manager`=?, "
+			 + " `managerHp`=?, "
+			 + " `regip`=?, "
+			 + " `rdate`=NOW() ";
+	
+	//회원가입 시 아이디 조회
+	public static final String SELECT_COUNT_SELLER_UID = "select count('uid') from `km_member` where `uid`=?";
+	
 }

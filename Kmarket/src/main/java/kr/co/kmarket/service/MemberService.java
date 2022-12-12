@@ -35,4 +35,17 @@ public enum MemberService {
 	public void insertMember(MemberVO vo) {
 		dao.insertMember(vo);
 	}
+	
+	
+	/*** register - RegisterSellerController ***/
+	
+	public void insertSellerMember(MemberVO vo) {
+		dao.insertSellerMember(vo);
+	}
+	
+	
+	//아이디 중복확인
+	public int selectCountSellerUid(String uid) {
+		return dao.selectCountSellerUid(uid);
+	}
 }
