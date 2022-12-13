@@ -58,6 +58,7 @@ public class LoginController extends HttpServlet{
 			
 			System.out.println("--- 로그인 성공 ---");
 			
+			
 			resp.sendRedirect("/Kmarket/index.do");
 		}else {
 			// 회원이 아닐 경우

@@ -47,26 +47,29 @@
             <div class="top">
                 <div>
                 <c:choose>
-	                <c:when test="${sessUser eq null}">
-	                    <a href="/Kmarket/member/login.do">로그인</a>
+                	<c:when test="${not empty sessUser}">
+	                	<c:if test="${sessUser.type eq '1'}">
+	                		<a><span>${sessUser.name}</span> 님, 반갑습니다</a>
+	                	</c:if>
+	                	<c:if test="${sessUser.type eq '2'}">
+	                		<a><span>${sessUser.manager}</span> 님, 반갑습니다</a>
+	                	</c:if>
+	                	<a href="/Kmarket/member/logout.do">로그아웃</a>
+		                <a href="#">마이페이지</a>
+		                <a href="/Kmarket/product/cart.do">
+		                	<i class="fa fa-shopping-cart" aria-hidden="true"></i>장바구니
+		                </a>
+	                </c:when>
+	                <c:otherwise>
+	                	<a href="/Kmarket/member/login.do">로그인</a>
 	                    <a href="/Kmarket/member/join.do">회원가입</a>
 	                    <a href="#">마이페이지</a>
 	                    <a href="/Kmarket/product/cart.do">
 	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
 	                        장바구니
 	                    </a>
-	                </c:when>
-	                <c:otherwise>
-	                	<a><span>${sessUser.name}</span> 님, 반갑습니다</a>
-	                	<a href="/Kmarket/member/logout.do">
-	                		 로그아웃</a>
-	                    <a href="#">마이페이지</a>
-	                    <a href="/Kmarket/product/cart.do">
-	                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-	                        장바구니
-	                    </a>
 	                </c:otherwise>
-	            </c:choose>    
+                </c:choose>
 	            </div>
                 
             </div>

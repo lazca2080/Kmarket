@@ -30,8 +30,8 @@
                     <li>
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
-                            <li><a href="#">상품현황</a></li>
-                            <li><a href="#">상품등록</a></li>
+                            <li><a href="/Kmarket/admin/list.do">상품현황</a></li>
+                            <li><a href="/Kmarket/admin/register.do">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
                     </li>
@@ -87,7 +87,7 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="#" class="thumb"></td>
+                            <td><img src="./img/sample_thumb.jpg" class="thumb"></td>
                             <td>201603292</td>
                             <td>sdfsdf</td>
                             <td>36,000</td>
