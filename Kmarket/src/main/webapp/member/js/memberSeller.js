@@ -11,9 +11,10 @@
 	let reEmail 	= /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	let reHp    	= /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
 	let reAuth  	= /^[0-9]+$/;
-	let reCorp		= /^([0-9]{6})\-([0-9]{5})$/;
+	let reCorp		= /^(\d{3,3})+[-]+(\d{2,2})+[-]+(\d{5,5})$/;
 	let reTel 		= /^\d{2,3}-\d{3,4}-\d{4}$/;
 	let reCeo  		= /^[a-zA-Zㄱ-힣0-9][a-zA-Zㄱ-힣0-9]*$/;
+	let reOnline 	= /^([ㄱ-힣]{2,2})-(\d{5,5})$/;
 	
 	
 	// 폼 데이터 검증 결과 상태변수
@@ -31,6 +32,7 @@
 	let isZipok	= false;
 	let isaddr1ok = false;
 	let isaddr2ok = false;
+	let isOnlineok = false;
 	
 	
 	$(function(){
@@ -160,8 +162,8 @@
 		$('input[name=kms_online_reg]').focusout(function(){
 			let online = $('input[name=kms_online_reg]').val();
 			
-			if(online.match(reCorp)){
-				isCorpok = true;
+			if(online.match(reOnline)){
+				isOnlineok = true;
 				$('.msgOnline').text('');
 			}else{
 				isCorpok = false;
@@ -263,7 +265,7 @@
 			}
 			
 			//통신판매업신고
-			if(!isCorpok){
+			if(!isOnlineok){
 				alert('통신판매업신고를 확인하십시오');
 				return false;
 			}
