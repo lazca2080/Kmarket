@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
-    <div id="admin-wrapper">
+    <div id="wrapper">
         <header>
             <div>
                 <a href="/Kmarket/admin/index.do" class="logo">
