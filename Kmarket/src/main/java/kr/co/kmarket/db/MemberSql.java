@@ -47,8 +47,6 @@ public class MemberSql {
 			 + " `pass`=SHA2(?, 256), "
 			 + " `company`=?, "
 			 + " `ceo`=?, "
-			 + " `name`='관리자', "
-			 + " `hp`='000-0000-0000', "
 			 + " `gender`=3, "
 			 + " `type`=2, "
 			 + " `bizRegNum`=?, "
