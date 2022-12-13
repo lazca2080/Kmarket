@@ -39,18 +39,20 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		/*
 		// 로컬 경로 저장
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/home/prodImg");
 		File Dir = new File(path);
-		
+		*/
 		/* 톰캣 프로젝트 외부에 img 폴더 생성
 		 * 프로젝트 내부에 img 폴더가 있을 시 매번 war로 내보낼때 번거로움 
 		 * 이렇게 외부로 만들고 난 뒤 외부에서 이미지 파일을 불러오는 설정을 해줘야하는데
 		 * AWS 톰캣 설치 폴더 - conf - server.xml 설정을 만져줘야함.
+		 */
 		String path = "/home/prodImg";
 		File Dir = new File(path);
-		 */
+		
 		// 폴더가 없으면~ 생성 이게 없으면 직접 생성하고 서버리스트에서 빼고 다시 서버 재시작 해야함.
 		if(!Dir.exists()) {
 			Dir.mkdirs();
@@ -116,11 +118,11 @@ public class RegisterController extends HttpServlet{
 		vo.setBizType(bizType);
 		vo.setOrigin(origin);
 		vo.setRegip(regip);
-		vo.setSeller("admin");
-		vo.setThumb1(uThumb1.toString()+ext);
-		vo.setThumb2(uThumb2.toString()+ext1);
-		vo.setThumb3(uThumb3.toString()+ext2);
-		vo.setDetail(uDetail.toString()+ext3);
+		vo.setSeller(seller);
+		vo.setThumb1(prodCate1+"-"+prodCate2+"-"+uThumb1.toString()+ext);
+		vo.setThumb2(prodCate1+"-"+prodCate2+"-"+uThumb2.toString()+ext1);
+		vo.setThumb3(prodCate1+"-"+prodCate2+"-"+uThumb3.toString()+ext2);
+		vo.setDetail(prodCate1+"-"+prodCate2+"-"+uDetail.toString()+ext3);
 		
 		int prodNo = service.insertProduct(vo);
 		
@@ -137,13 +139,13 @@ public class RegisterController extends HttpServlet{
 		4줄로 적은 이유는 do페이지 불러올때 최초 한번 실행인데... 한줄로 깔끔하게 4번 실행할 방법이 생각이 나지않습니다.. 좋은 의견 있으시면 주세요
 		*/
 		
-		service.renameFile(thumb1, path, uThumb1.toString());
+		service.renameFile(thumb1, path, uThumb1.toString(), prodCate1, prodCate2);
 		
-		service.renameFile(thumb2, path, uThumb2.toString());
+		service.renameFile(thumb2, path, uThumb2.toString(), prodCate1, prodCate2);
 		
-		service.renameFile(thumb3, path, uThumb3.toString());
+		service.renameFile(thumb3, path, uThumb3.toString(), prodCate1, prodCate2);
 		
-		service.renameFile(detail, path, uDetail.toString());
+		service.renameFile(detail, path, uDetail.toString(), prodCate1, prodCate2);
 		
 		/* 해결?
 		문제는... list에서 이미지 파일을 불러오는 문제입니다.
