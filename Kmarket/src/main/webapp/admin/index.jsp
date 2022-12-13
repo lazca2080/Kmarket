@@ -31,7 +31,7 @@
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
                             <li><a href="/Kmarket/admin/list.do">상품현황</a></li>
-                            <li><a href="/Kmarket//admin/register.do">상품등록</a></li>
+                            <li><a href="/Kmarket/admin/register.do">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
                     </li>
