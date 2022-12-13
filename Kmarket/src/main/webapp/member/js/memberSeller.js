@@ -49,14 +49,16 @@
 				return;
 			}
 			
+			console.log('1');
 			
-			if(!km_uid.match(reUid)){
-				$('.msgId').css('color','red').text('유효한아이디가 아닙니다');
+			if(!uid.match(reUid)){
+				$('.msgId').hide();
+				$('.uidResult').css('color','red').text('유효한아이디가 아닙니다');
 				isUidok = false;
 				return;
 			}
 			
-			$('.msgId').css('color','black').text('....');
+			console.log('2');
 			
 			setTimeout(function(){
 				$.ajax({
@@ -66,37 +68,48 @@
 					dataType: 'json',
 					success : function(data){
 						if(data.result == 0){
-							$('.msgId').css('color','green').text('사용 가능한 아이디 입니다.');
 							isUidok = true;
+							$('.msgId').hide();
+							$('.uidResult').css('color','green').text('사용 가능한 아이디 입니다.');
+
 						}else{
-							$('.msgId').css('color','red').text('이미 사용중인 아이디 입니다.');
 							isUidok = false;
+							$('.msgId').hide();
+							$('.uidResult').css('color','red').text('이미 사용중인 아이디 입니다.');
+							
 						}
 					}
 				});
 				
-			},1000);
+			},100);
 		});
 		
 		//비밀번호 체크
-		$('input[name=pass2]').focusout(function(){
+		$('input[name=km_pass1], input[name=km_pass2]').focusout(function(){
 			
-			let pass1 = $('input[name=pass1]').val();
-			let pass2 = $('input[name=pass2]').val();
+			let pass1 = $('input[name=km_pass1]').val();
+			let pass2 = $('input[name=km_pass2]').val();
 			 
-			if(pass2.match(rePass)){
+			 console.log('pass1: ' +pass1);
+			 console.log('pass2: ' +pass2);
+			 
+			if(pass1.match(rePass)){
+				
+				$('.msgPass1').hide();
 				
 				if(pass1 == pass2){
 					isPassok = true;
-					$('.msgPass').css('color', 'green').text('사용할 수 있는 비밀번호입니다.');
+					$('.msgPass1').css('color','black');
+					$('.msgPass2').hide();
+					$('.passResult2').css('color', 'green').text('사용할 수 있는 비밀번호입니다.');
 				
 				}else{
 					isPassok = false;
-					$('.msgPass').css('color', 'red').text('비밀번호가 일치하지 않습니다.');	
+					$('.passResult2').css('color', 'red').text('비밀번호가 일치하지 않습니다.');	
 				}
 			}else{
 				isPassok = false;
-				$('.msgPass').css('color', 'red').text('비밀번호를 다시 확인해주십시오.');
+				$('.msgPass1').css('color', 'red');
 			}
 			
 		});
