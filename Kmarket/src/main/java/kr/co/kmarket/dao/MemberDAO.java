@@ -55,7 +55,7 @@ public class MemberDAO {
 				mv.setBizRegNum(rs.getString(15));
 				mv.setCornRegNum(rs.getString(16));
 				mv.setTel(rs.getString(17));
-				mv.setMananger(rs.getString(18));
+				mv.setManager(rs.getString(18));
 				mv.setManagerHp(rs.getString(19));
 				mv.setFax(rs.getString(20));
 				mv.setRegip(rs.getString(21));
@@ -251,7 +251,7 @@ public class MemberDAO {
 			psmt.setString(10, vo.getZip());
 			psmt.setString(11, vo.getAddr1());
 			psmt.setString(12, vo.getAddr2());
-			psmt.setString(13, vo.getMananger());
+			psmt.setString(13, vo.getManager());
 			psmt.setString(14, vo.getManagerHp());
 			psmt.setString(15, vo.getRegip());
 			psmt.executeUpdate();

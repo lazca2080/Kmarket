@@ -68,7 +68,7 @@ public class RegisterSellerController extends HttpServlet{
 		vo.setZip(zip);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
-		vo.setMananger(manager);
+		vo.setManager(manager);
 		vo.setManagerHp(managerHp);
 		vo.setRegip(regip);
 		
