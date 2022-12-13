@@ -51,8 +51,8 @@ public class RegisterSellerController extends HttpServlet{
 		String zip = req.getParameter("kms_zip");
 		String addr1 = req.getParameter("kms_addr1");
 		String addr2 = req.getParameter("kms_addr2");
-		String name = req.getParameter("km_name");
-		String hp = req.getParameter("km_hp");
+		String manager = req.getParameter("km_name");
+		String managerHp = req.getParameter("km_hp");
 		String regip = req.getRemoteAddr();
 		
 		MemberVO vo = new MemberVO();
@@ -68,8 +68,8 @@ public class RegisterSellerController extends HttpServlet{
 		vo.setZip(zip);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
-		vo.setName(name);
-		vo.setHp(hp);
+		vo.setMananger(manager);
+		vo.setManagerHp(managerHp);
 		vo.setRegip(regip);
 		
 		//데이터 처리
