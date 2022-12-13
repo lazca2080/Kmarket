@@ -5,10 +5,9 @@ public class CsVO {
 	private int no;				// 글 고유 번호 
 	private String uid;			// 문의하기 글 작성 시 아이디 
 	private int parent;			// 문의 답변 시 
-	private String cate;		// 공지사항, 자주하는 질문, 문의하기...
-	private int cateNo;			// cate 내 세부 카테고리 (ex. 공지사항 -> 전체, 고객서비스, 안전거래...)
-	private String cateType1;	// 문의하기 -[가입], [탈퇴], [로그인]...
-	private String cateType2;	// 가입문의내용, 탈퇴문의내용, 회원정보문의내용...
+	private String cate;		// 공지사항, 자주하는 질문, 문의하기
+	private String cateType1;	// cate 내 세부 카테고리 (ex. 공지사항 -> 전체, 고객서비스, 안전거래...)
+	private String cateType2;	// 문의하기 -[가입], [탈퇴], [로그인]...
 	private String title;		// 제목 
 	private String content;		// 내용
 	private String regip;		// IP
@@ -38,12 +37,6 @@ public class CsVO {
 	}
 	public void setCate(String cate) {
 		this.cate = cate;
-	}
-	public int getCateNo() {
-		return cateNo;
-	}
-	public void setCateNo(int cateNo) {
-		this.cateNo = cateNo;
 	}
 	public String getCateType1() {
 		return cateType1;

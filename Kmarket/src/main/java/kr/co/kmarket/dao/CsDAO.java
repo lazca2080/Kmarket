@@ -32,10 +32,12 @@ public class CsDAO {
 			while(rs.next()) {
 				CsVO cv = new CsVO();
 				cv.setNo(rs.getInt(1));
-				cv.setCateType1(rs.getString(2));
-				cv.setTitle(rs.getString(3));
-				cv.setUid(rs.getString(4));
-				cv.setRdate(rs.getString(5));
+				cv.setCate(rs.getString(2));
+				cv.setCateType1(rs.getString(3));
+				cv.setCateType2(rs.getString(4));
+				cv.setTitle(rs.getString(5));
+				cv.setUid(rs.getString(6));
+				cv.setRdate(rs.getString(7));
 				
 				latests.add(cv);
 			}
