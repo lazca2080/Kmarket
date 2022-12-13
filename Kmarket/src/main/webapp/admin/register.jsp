@@ -91,7 +91,7 @@
                 </nav>
                 <article>
                     <form action="/Kmarket/admin/register.do" method="post" enctype="multipart/form-data">
-                    	<input type="hidden" name="seller" value="${sessUser.seller}">
+                    	<input type="hidden" name="seller" value="${sessUser.uid}">
                         <section>
                             <h4>상품분류</h4>
                             <p>
