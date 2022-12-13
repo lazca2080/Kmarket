@@ -35,8 +35,7 @@ public class IndexController extends HttpServlet{
 		
 		logger.info("IndexController...");
 		
-		// notice 최신글 리스트 5건 출력하기
-		// qna 최신글 리스트 5건 출력하기 (문의유형1, 제목, 아이디, 날짜 출력)
+		// 최신글 리스트 5건 출력하기
 		String notice = "notice";
 		String faq = "faq";
 		String qna = "qna";

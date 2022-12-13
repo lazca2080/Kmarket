@@ -18,7 +18,7 @@ public class MemberVO {
 	private String bizRegNum;
 	private String cornRegNum;
 	private String tel;
-	private String mananger;
+	private String manager;
 	private String managerHp;
 	private String fax;
 	private String regip;
@@ -137,11 +137,11 @@ public class MemberVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getMananger() {
-		return mananger;
+	public String getManager() {
+		return manager;
 	}
-	public void setMananger(String mananger) {
-		this.mananger = mananger;
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 	public String getManagerHp() {
 		return managerHp;
