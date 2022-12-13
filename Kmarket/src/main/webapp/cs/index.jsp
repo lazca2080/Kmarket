@@ -1,4 +1,5 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./_header.jsp"></jsp:include>
         <section id="cs">
             <div class="main">
@@ -8,35 +9,21 @@
                 <section class="notice">
                     <h1>
                         공지사항
-                        <a href="#">전체보기</a>
+                        <a href="/Kmarket/cs/notice/list.do">전체보기</a>
                     </h1>
                     <ul>
+                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
                         <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
+                            <a href="#" class="title">${latest.title}</a>
+                            <span class="date">${latest.rdate}</span>
                         </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
-                        <li>
-                            <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                            <span class="date">22.10.31</span>
-                        </li>
+                        </c:forEach>
                     </ul>
                 </section>
                 <section class="faq">
                     <h1>
                         자주 묻는 질문
-                        <a href="#">
+                        <a href="/Kmarket/cs/faq/list.do">
                             전체보기
                         </a>
                     </h1>
@@ -81,53 +68,23 @@
                 <section class="qna">
                     <h1>
                         문의하기
-                        <a href="#">
+                        <a href="/Kmarket/cs/qna/list.do">
                             전체보기
                         </a>
                     </h1>
                     <ul>
+                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
                         <li>
                             <a href="#" class="title">
-                                [회원] 개인회원과 법인회원에 차이가 있나요</a>
+                                ${latest.cateType1} ${latest.title}</a>
                                 <p>
-                                    <span class="uid">chh**</span>
-                                    <span class="date">222.10.31</span>
+                                    <span class="uid">${latest.uid}</span>
+                                    <span class="date">${latest.rdate}</span>
                                 </p>
                         </li>
-                        <li>
-                            <a href="#" class="title">
-                                [쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                                <p>
-                                    <span class="uid">chh**</span>
-                                    <span class="date">222.10.31</span>
-                                </p>
-                        </li>
-                        <li>  
-                            <a href="#" class="title">
-                            [주문/결제] 신용카드 결제 중 오류가 난 경우는 어떻게 하나요?</a>
-                            <p>
-                                <span class="uid">chh**</span>
-                                <span class="date">222.10.31</span>
-                            </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">
-                                [배송] 주문한 상품은 언제 배송되나요?</a>
-                                <p>
-                                    <span class="uid">chh**</span>
-                                    <span class="date">222.10.31</span>
-                                </p>
-                        </li>
-                        <li>
-                            <a href="#" class="title">
-                                [취소/반품/교환] 주문을 취소하고 싶어요</a>
-                                <p>
-                                    <span class="uid">chh**</span>
-                                    <span class="date">222.10.31</span>
-                                </p>
-                        </li>
+                        </c:forEach>
                     </ul>
-                    <a href="#" class="ask">문의글 작성 ></a>
+                    <a href="/Kmarket/cs/qna/write.do" class="ask">문의글 작성 ></a>
                 </section>
                 <section class="tel">
                     <h1>1:1 상담이 필요하신가요?</h1>
