@@ -1,6 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"></jsp:include>
-<script src="/Kmarket/admin/js/selectCate.js"></script>
+<script>
+	$(function(){
+		$('select[name=prodCate1]').change(function(){
+			
+			let cate1 = $(this).val();
+			
+			let jsonData = { "cate1":cate1 };
+			
+			$.ajax({
+				url:'/Kmarket/admin/select.do',
+				method:'get',
+				data:jsonData,
+				dataType:'json',
+				success: function(data){
+					if(data != ""){
+						$('select[name=prodCate2]').empty();
+						let tags = "<option value='0'>2차 분류 선택</option>";
+						$(data).each(function(){
+						    tags += "<option value='"+this.cate2+"'>"+this.c2Name+"</option>";
+						});
+						$('select[name=prodCate2]').append(tags);
+					}
+				}
+			});	
+		});
+	});
+</script>
         <main>
             <aside>
                  <!-- Global Navigation Bar -->
@@ -76,16 +103,11 @@
                                     <td>1차 분류</td>
                                     <td>
                                         <select name="prodCate1">
-                                            <option value="0">1차 분류 선택</option>
-                                            <option value="10">브랜드패션</option>
-                                            <option value="11">패션의류·잡화·뷰티</option>
-                                            <option value="12">유아동</option>
-                                            <option value="13">식품ㆍ생필품</option>
-                                            <option value="14">홈데코·문구·취미·반려</option>
-                                            <option value="15">컴퓨터·디지털·가전</option>
-                                            <option value="16">스포츠·건강·렌탈</option>
-                                            <option value="17">자동차·공구</option>
-                                            <option value="18">여행·도서·티켓·e쿠폰</option>
+                                        	<option value="0">1차 분류 선택</option>
+                                        <c:forEach var="cate" items="${cate}">
+                                        <c:set var="i" value="${i+1}"/>
+                                            <option value="${i+9}">${cate.c1Name}</option>
+                                        </c:forEach>
                                         </select>
                                     </td>
                                 </tr>
@@ -93,7 +115,7 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="prodCate2">
-                                            <option value="0">2차 분류 선택</option>
+                                         <option value="0">2차 분류 선택</option>
                                         </select>
                                     </td>
                                 </tr>
