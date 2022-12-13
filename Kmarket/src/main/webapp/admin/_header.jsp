@@ -23,13 +23,13 @@
                 <p>
                 <c:choose>
                 	<c:when test="${sessUser eq null}">
-                	<a href="/Kmarket/admin/login.do">로그인 |</a>
-                	<a href="/Kmarket/member/join.do">  회원가입</a>
+	                	<a href="/Kmarket/admin/login.do">로그인 |</a>
+	                	<a href="/Kmarket/member/join.do">  회원가입</a>
                 	</c:when>
                 	<c:otherwise>
                 		<a><span>${sessUser.manager}</span>님, 반갑습니다  |</a>
                 		<a href="/Kmarket/admin/index.do">HOME |</a>
-                		<a href="/Kmarket/member/logout.do">  로그아웃</a>
+                		<a href="/Kmarket/admin/logout.do">  로그아웃  |</a>
                 		<a href="#">고객센터</a>
                 	</c:otherwise>
                 </c:choose>

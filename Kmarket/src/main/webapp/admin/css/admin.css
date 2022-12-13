@@ -179,6 +179,59 @@ main table span {
     display: block;
 }
 
+/*** admin::login (member::login css 그대로 사용) ***/
+#member {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#member > .login {
+    width: 900px;
+    height: auto;
+    margin: 100px auto;
+}
+#member > .login > nav {
+    border-bottom: 2px solid #0e6ad3;
+}
+#member > .login > nav > h1 {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+#member > .login > nav > p > strong {
+    font-weight: bold;
+}
+#member > .login > nav > p {
+    float: right;
+    font-size: 11px;
+    margin-top: -21px;
+    color: #888;
+}
+#member > .login > form > input[type="submit"] {
+    width: 97px;
+    height: 71px;
+    font-size: 0;
+    border: none;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    background-image: url(../img/member_btn_login.gif);
+}
+#member > .login > form > table tr > td:nth-child(1) {
+    font-size: 14px;
+    font-weight: bold;
+}
+#member > .login > form > table input {
+    width: 200px;
+    height: 31px;
+    padding: 0 13px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #0075d4;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+}
+
 /*  푸터 */
 footer {
     width: 100%;
