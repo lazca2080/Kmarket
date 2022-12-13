@@ -62,7 +62,7 @@ public class MemberSql {
 			 + " `regip`=?, "
 			 + " `rdate`=NOW() ";
        
-  //회원가입 시 아이디 조회
+	//회원가입 시 아이디 조회
 	public static final String SELECT_COUNT_SELLER_UID = "select count('uid') from `km_member` where `uid`=?";
 	
 	/*** terms ***/
