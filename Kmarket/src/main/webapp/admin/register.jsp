@@ -17,10 +17,15 @@
 				success: function(data){
 					if(data != ""){
 						$('select[name=prodCate2]').empty();
+						
 						let tags = "<option value='0'>2차 분류 선택</option>";
+						
 						$(data).each(function(){
+							
 						    tags += "<option value='"+this.cate2+"'>"+this.c2Name+"</option>";
+						    
 						});
+						
 						$('select[name=prodCate2]').append(tags);
 					}
 				}
