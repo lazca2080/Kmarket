@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"></jsp:include>
-<jsp:include page="./_${cate1}.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <main id="product">
             <aside>
@@ -136,7 +135,7 @@
                                 <li><ins class="dis-price">${products.sellPrice}</ins></li>
                                 <li>
                                     <del class="org-price">${products.price}</del>
-                                    <span class="discount">${products.discunt}</span>
+                                    <span class="discount">${products.discount}</span>
                                 </li>
                                 <li><span class="free-delivery">무료배송</span></li>
                             </ul>
