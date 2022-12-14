@@ -60,13 +60,13 @@ public class AdminDAO {
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
-			logger.debug("selectProducts...");
+			logger.debug("selectProductss...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductss);
 			psmt.setString(1, uid);
 			ResultSet rs = psmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				ProductVO product = new ProductVO();
 				product.setProdnum(rs.getInt(1));
 				product.setProdName(rs.getString(1));
