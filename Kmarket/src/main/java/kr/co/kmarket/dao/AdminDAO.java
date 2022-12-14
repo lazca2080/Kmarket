@@ -55,7 +55,7 @@ public class AdminDAO {
 		return vo;
 	}
 	
-	public ProductVO selectProductss(String uid) {
+	public List<ProductVO> selectProductss(String uid) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
@@ -85,7 +85,7 @@ public class AdminDAO {
 			logger.error(e.getMessage());
 		}
 		
-		return pro;
+		return products;
 	}
 	
 	
