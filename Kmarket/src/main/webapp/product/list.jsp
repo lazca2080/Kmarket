@@ -137,7 +137,7 @@
                                     <del class="org-price">${products.price}</del>
                                     <span class="discount">${products.discount}</span>
                                 </li>
-                                <li><span class="free-delivery">무료배송</span></li>
+                                <li><span class="free-delivery">무료배송입니다</span></li>
                             </ul>
                         </td>
                          </c:forEach>
