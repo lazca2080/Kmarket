@@ -17,7 +17,7 @@ public enum AdminService {
 		return dao.selectProducts();
 	}
 	
-	public ProductVO selectProductss(String uid) {
+	public List<ProductVO> selectProductss(String uid) {
 		return dao.selectProductss(uid);
 	}
 }
