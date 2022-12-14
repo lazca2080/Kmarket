@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.db.Indexsql;
 import kr.co.kmarket.vo.CategoryVO;
+import kr.co.kmarket.vo.ProductVO;
 
 public class IndexDAO {
 	
@@ -50,6 +51,37 @@ public class IndexDAO {
 		return category;
 	}
 	
+	public List<CategoryVO> selectCategory() {
+		
+		List<CategoryVO> category = new ArrayList<>();
+		
+		try {
+			logger.debug("selectCategory...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Indexsql.SELECT_CATEGORY);
+			
+			while(rs.next()) {
+				CategoryVO vo = new CategoryVO();
+				vo.setCate1(rs.getInt(1));
+				vo.setC1Name(rs.getString(2));
+				vo.setCate2(rs.getInt(4));
+				vo.setC2Name(rs.getString(5));
+				
+				category.add(vo);
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return category;
+	}
+	
 	public List<CategoryVO> selectCate1() {
 		
 		List<CategoryVO> category = new ArrayList<>();
@@ -78,4 +110,72 @@ public class IndexDAO {
 		
 		return category;
 	}
+	
+	public List<ProductVO> selectBest() {
+		
+		List<ProductVO> best = new ArrayList<>();
+		
+		try {
+			logger.debug("selectBest...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Indexsql.SELECT_BEST);
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdCate1(rs.getString(2));
+				vo.setProdCate2(rs.getString(3));
+				vo.setProdName(rs.getString(4));
+				vo.setPrice(rs.getString(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setThumb1(rs.getString(17));
+				vo.setSellPrice(rs.getInt(33));
+				
+				best.add(vo);
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return best;
+	}
+	
+	public List<ProductVO> selectBest1() {
+	
+	List<ProductVO> best = new ArrayList<>();
+	
+	try {
+		logger.debug("selectBest...");
+		Connection conn = DBCP.getConnection();
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(Indexsql.SELECT_BEST);
+		
+		while(rs.next()) {
+			ProductVO vo = new ProductVO();
+			vo.setProdCate1(rs.getString(2));
+			vo.setProdCate2(rs.getString(3));
+			vo.setProdName(rs.getString(4));
+			vo.setPrice(rs.getString(8));
+			vo.setDiscount(rs.getInt(9));
+			vo.setThumb1(rs.getString(17));
+			vo.setSellPrice(rs.getInt(33));
+			
+			best.add(vo);
+		}
+		
+		conn.close();
+		stmt.close();
+		rs.close();
+		
+	} catch (Exception e) {
+		logger.error(e.getMessage());
+	}
+	
+	return best;
+}
 }

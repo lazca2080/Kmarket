@@ -257,27 +257,27 @@
                     <ul>
                         <li>
                         <a href="#"
-                            ><img src="https://via.placeholder.com/985x447" alt="item1"
+                            ><img src="/Kmarket/img/slider_item1.jpg" alt="item1"
                         /></a>
                         </li>
                         <li>
                         <a href="#"
-                            ><img src="https://via.placeholder.com/985x447" alt="item2"
+                            ><img src="/Kmarket/img/slider_item2.jpg" alt="item2"
                         /></a>
                         </li>
                         <li>
                         <a href="#"
-                            ><img src="https://via.placeholder.com/985x447" alt="item3"
+                            ><img src="/Kmarket/img/slider_item3.jpg" alt="item3"
                         /></a>
                         </li>
                         <li>
                         <a href="#"
-                            ><img src="https://via.placeholder.com/985x447" alt="item4"
+                            ><img src="/Kmarket/img/slider_item4.jpg" alt="item4"
                         /></a>
                         </li>
                         <li>
                         <a href="#"
-                            ><img src="https://via.placeholder.com/985x447" alt="item5"
+                            ><img src="/Kmarket/img/slider_item5.jpg" alt="item5"
                         /></a>
                         </li>
                     </ul>

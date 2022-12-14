@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,9 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.service.IndexService;
+import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CategoryVO;
+import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/index.do")
 public class IndexController extends HttpServlet{
@@ -42,6 +45,12 @@ public class IndexController extends HttpServlet{
 			List<CategoryVO> category = service.selectCate(i);
 			session.setAttribute("cate"+i, category);
 		};
+		
+		List<ProductVO> best1 = service.selectBest();
+		
+		List<ProductVO> best = service.selectBest();
+		req.setAttribute("best", best);
+		req.setAttribute("best1", best1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);
