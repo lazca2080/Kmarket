@@ -50,6 +50,19 @@ public class IndexDAO {
 		return category;
 	}
 	
+	public void selectCategory() {
+		try {
+			logger.debug("selectCategory...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Indexsql.SELECT_CATEGORY);
+			
+			
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public List<CategoryVO> selectCate1() {
 		
 		List<CategoryVO> category = new ArrayList<>();

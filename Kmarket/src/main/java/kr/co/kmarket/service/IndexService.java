@@ -15,6 +15,10 @@ public enum IndexService {
 		return dao.selectCate(cate);
 	}
 	
+	public void selectCategory() {
+		dao.selectCategory();
+	}
+	
 	public List<CategoryVO> selectCate1() {
 		return dao.selectCate1();
 	}
