@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"></jsp:include>
         <main>
             <aside>
@@ -87,47 +88,15 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="./img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>sdfsdf</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="./img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="./img/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
+                            <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
+                            <td>${Product.prodnum}</td>
+                            <td>${Product.prodName}</td>
+                            <td>${Product.price}</td>
+                            <td>${Product.discount}</td>
+                            <td>${Product.point}</td>
+                            <td>${Product.stock}</td>
+                            <td>${sessUser.uid}</td>
+                            <td>${Product.hit}</td>
                             <td>
                                 <a href="#">[삭제]</a>
                                 <a href="#">[수정]</a>
