@@ -6,7 +6,6 @@
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="/Kmarket/cs/css/csstyle.css">
-
 </head>
 <body>
     <div id="wrapper">
