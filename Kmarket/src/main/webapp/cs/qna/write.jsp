@@ -18,30 +18,34 @@
                         <h2>문의하기</h2>
                         <ul>
                             <li class="on">
-                                <a href="#">회원</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='회원'">회원</a>
                             </li>
                             <li>
-                                <a href="#">쿠폰/이벤트</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='쿠폰/이벤트'">쿠폰/이벤트</a>
                             </li>
                             <li>
-                                <a href="#">주문/결제</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='주문/결제'">주문/결제</a>
                             </li>
                             <li>
-                                <a href="#">배송</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='배송'">배송</a>
                             </li>
                             <li>
-                                <a href="#">취소/반품/교환</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='취소/반품/교환'">취소/반품/교환</a>
                             </li>
                             <li>
-                                <a href="#">여행/숙박/항공</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='여행/숙박/항공'">여행/숙박/항공</a>
                             </li>
                             <li>
-                                <a href="#">안전거래</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='안전거래'">안전거래</a>
                             </li>
                         </ul>
                     </aside>
                     <article>
-                        <form action="#">
+                        <form action="/Kmarket//cs/qna/write.do" method="post" enctype="multipart/form-data">
+                        <input type="text" name="uid" value="${sessUser.uid}"/>
+                        <input type="text" name="cate" value="${vo.cate}"/>
+                        <input type="text" name="cateType1" value="${cateType1}">
+                        <input type="text" name="cateType2" value="${cateType2}">
                             <table>
                                 <tbody>
                                     <tr>
@@ -54,7 +58,7 @@
                                     <tr>
                                         <td>문의제목</td>
                                         <td>
-                                            <input type="text" name="title" placeholder="제목을 입력하세요.">
+                                            <input type="text" name="title" placeholder="제목을 입력하세요."/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,8 +70,8 @@
                                 </tbody>
                             </table>
                              <div>
-                                <a href="./list.html" class="btnList">취소하기</a>
-                                <input type="submit" class="btnSubmit" value="등록하기">
+                                <a href="/Kmarket/cs/qna/list.do?cate=${cate}" class="btnList">취소하기</a>
+                                <input type="submit" class="btnSubmit" value="등록하기"/>
                             </div>
                         </form>
                     </article>

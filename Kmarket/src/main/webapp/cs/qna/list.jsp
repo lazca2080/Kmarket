@@ -16,25 +16,25 @@
                         <h2>문의하기</h2>
                         <ul>
                             <li class="on">
-                                <a href="#">회원</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='회원'">회원</a>
                             </li>
                             <li>
-                                <a href="#">쿠폰/이벤트</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='쿠폰/이벤트'">쿠폰/이벤트</a>
                             </li>
                             <li>
-                                <a href="#">주문/결제</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='주문/결제'">주문/결제</a>
                             </li>
                             <li>
-                                <a href="#">배송</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='배송'">배송</a>
                             </li>
                             <li>
-                                <a href="#">취소/반품/교환</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='취소/반품/교환'">취소/반품/교환</a>
                             </li>
                             <li>
-                                <a href="#">여행/숙박/항공</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='여행/숙박/항공'">여행/숙박/항공</a>
                             </li>
                             <li>
-                                <a href="#">안전거래</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='안전거래'">안전거래</a>
                             </li>
                         </ul>
                     </aside>
@@ -124,7 +124,7 @@
                             <a href="#" class="num">3</a>
                             <a href="#" class="next">다음</a>
                         </div>
-                        <a href="/Kmarket/cs/qna/write.do" class="btnWrite">문의하기</a>
+                        <a href="/Kmarket/cs/qna/write.do?" class="btnWrite">문의하기</a>
                     </article>
                 </section>
             </div>

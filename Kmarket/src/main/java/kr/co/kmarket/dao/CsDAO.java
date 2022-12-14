@@ -3,6 +3,7 @@ package kr.co.kmarket.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,50 @@ public class CsDAO {
 		return latests;
 	}
 	
-	
+	/*** cs - qna ***/
+	// 문의글 작성하기
+	public int insertArticle(CsVO article) {
+		
+		int result = 0;
+		
+		try {
+			
+			logger.info("insertArticle...");
+			
+			Connection con = DBCP.getConnection();
+			
+			// 트랜잭션
+			con.setAutoCommit(false);
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.INSERT_ARTICLE);
+			Statement stmt = con.createStatement();
+			
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getCateType1());
+			psmt.setString(3, article.getCateType2());
+			psmt.setString(4, article.getTitle());
+			psmt.setString(5, article.getContent());
+			psmt.setString(6, article.getUid());
+			psmt.setString(7, article.getRegip());
+
+			psmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery(CsSql.SELECT_MAX_NO);
+
+			con.commit();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	
 	
