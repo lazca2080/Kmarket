@@ -19,7 +19,7 @@ var areaSelectMaker = function(target){
            "회원정보" : [  ],
             "로그인" : [  ]		
         },
-        "쿠폰/혜택/이벤트" :{
+        "쿠폰/이벤트" :{
             "쿠폰/할인혜택" : [  ],
             "포인트" : [  ],	
             "제휴" : [  ],	
@@ -83,6 +83,8 @@ var areaSelectMaker = function(target){
                 keys.forEach(function(Do){
                     a2.append("<option value="+Do+">"+Do+"</option>");    
                 });
+                console.log("Region: " + Region);
+                
             });
 
             
