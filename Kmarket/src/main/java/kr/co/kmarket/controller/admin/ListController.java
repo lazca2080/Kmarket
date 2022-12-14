@@ -32,7 +32,7 @@ public class ListController extends HttpServlet{
 		
 		String uid = req.getParameter("uid");
 		
-		ProductVO list = service.selectProductss(uid);
+		List<ProductVO> list = service.selectProductss(uid);
 		req.setAttribute("Product", list);
 		
 		
