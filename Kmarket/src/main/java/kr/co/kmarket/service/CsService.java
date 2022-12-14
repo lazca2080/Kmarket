@@ -23,6 +23,12 @@ public enum CsService {
 		return dao.selectLatests(cate1, cate2, cate3);
 	}
 	
+	/*** cs - qna ***/
+	// 문의글 작성하기
+	public int insertArticle(CsVO article) {
+		return dao.insertArticle(article);
+	}
+	
 	
 	
 	

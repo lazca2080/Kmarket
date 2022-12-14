@@ -85,7 +85,7 @@
                         </c:if>
                         </c:forEach>
                     </ul>
-                    <a href="/Kmarket/cs/qna/write.do" class="ask">문의글 작성 ></a>
+                    <a href="/Kmarket/cs/qna/write.do?cate=qna&cateType1='회원'" class="ask">문의글 작성 ></a>
                 </section>
                 <section class="tel">
                     <h1>1:1 상담이 필요하신가요?</h1>
