@@ -1,6 +1,7 @@
 package kr.co.kmarket.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -53,5 +54,40 @@ public class AdminDAO {
 		
 		return vo;
 	}
+	
+	public ProductVO selectProductss(String uid) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.debug("selectProducts...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductss);
+			psmt.setString(1, uid);
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdnum(rs.getInt(1));
+				product.setProdName(rs.getString(1));
+				product.setPrice(rs.getString(1));
+				product.setDiscount(rs.getInt(1));
+				product.setPoint(rs.getInt(1));
+				product.setStock(rs.getInt(1));
+				product.setHit(rs.getInt(1));
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return pro;
+	}
+	
+	
 	
 }

@@ -25,6 +25,24 @@ public class ProductVO {
 	private String regip;
 	private int sellPrice;
 	
+	
+	// 추가
+	private int prodnum;
+	public int getProdnum() {
+		return prodnum;
+	}
+	public void setProdnum(int prodnum) {
+		this.prodnum = prodnum;
+	}
+	
+	private int hit;
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	
 	public int getSellPrice() {
 		return sellPrice;
 	}

@@ -30,6 +30,12 @@ public class ListController extends HttpServlet{
 		ProductVO products = service.selectProducts();
 		req.setAttribute("products", products);
 		
+		String uid = req.getParameter("uid");
+		
+		ProductVO list = service.selectProductss(uid);
+		req.setAttribute("Product", list);
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/list.jsp");
 		dispatcher.forward(req, resp);
 	}
