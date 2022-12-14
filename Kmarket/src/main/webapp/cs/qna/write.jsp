@@ -1,4 +1,6 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/Kmarket/cs/qna/selectOption.js"></script>
 <jsp:include page="../_header.jsp"></jsp:include>
         <section id="cs">
             <div class="qna">
@@ -6,7 +8,7 @@
                     <div>
                         <p>
                             홈
-                            <span>></span>
+                            <span>></spans>
                             문의하기
                         </p>
                     </div>
@@ -45,13 +47,8 @@
                                     <tr>
                                         <td>문의유형</td>
                                         <td>
-                                            <select name="type">
-                                                <option value="0">선택</option>
-                                                <option>가입</option>
-                                                <option>탈퇴</option>
-                                                <option>회원정보</option>
-                                                <option>로그인</option>
-                                            </select>
+                                            <select name="type"></select>
+    										<select name="cateType2"></select>
                                         </td>
                                     </tr>
                                     <tr>

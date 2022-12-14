@@ -124,7 +124,7 @@
                             <a href="#" class="num">3</a>
                             <a href="#" class="next">다음</a>
                         </div>
-                        <a href="#" class="btnWrite">문의하기</a>
+                        <a href="/Kmarket/cs/qna/write.do" class="btnWrite">문의하기</a>
                     </article>
                 </section>
             </div>
