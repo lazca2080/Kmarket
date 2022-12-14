@@ -86,6 +86,7 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
+                        <c:forEach var="Product" items="${Product}">
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
@@ -102,6 +103,7 @@
                                 <a href="#">[수정]</a>
                             </td>
                         </tr>
+                        </c:forEach>
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
