@@ -7,16 +7,15 @@
                     <strong>케이마켓</strong>이 도와드릴께요!
                 </h1>
                 <section class="notice">
-                    <h1>
-                        공지사항
-                        <a href="/Kmarket/cs/notice/list.do">전체보기</a>
-                    </h1>
+                    <h1>공지사항<a href="/Kmarket/cs/notice/list.do">전체보기</a></h1>
                     <ul>
                     	<c:forEach var="latest" begin="0" end="4" items="${latests}">
-                        <li>
-                            <a href="#" class="title">${latest.title}</a>
-                            <span class="date">${latest.rdate}</span>
-                        </li>
+                    		<c:if test="${latest.cate eq 'notice'}">
+	                    		<li>
+	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <span class="date">${latest.rdate}</span>
+	                        	</li>
+                    		</c:if>
                         </c:forEach>
                     </ul>
                 </section>
@@ -73,15 +72,17 @@
                         </a>
                     </h1>
                     <ul>
-                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
+                    	<c:forEach var="latest" end="4" items="${latests}">
+                    	<c:if test="${latest.cate eq 'qna'}">
                         <li>
                             <a href="#" class="title">
-                                ${latest.cateType1} ${latest.title}</a>
+                                [${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
                                 <p>
                                     <span class="uid">${latest.uid}</span>
                                     <span class="date">${latest.rdate}</span>
                                 </p>
                         </li>
+                        </c:if>
                         </c:forEach>
                     </ul>
                     <a href="/Kmarket/cs/qna/write.do" class="ask">문의글 작성 ></a>

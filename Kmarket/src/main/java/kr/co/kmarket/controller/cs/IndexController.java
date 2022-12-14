@@ -33,7 +33,7 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("IndexController...");
+		logger.info("IndexController doGet");
 		
 		// 최신글 리스트 5건 출력하기
 		String notice = "notice";
@@ -42,11 +42,13 @@ public class IndexController extends HttpServlet{
 		
 		List<CsVO> latests = service.selectLatests(notice, faq, qna);
 		
-		if(latests.size() < 15) {
+		if(latests.size() < 10) {
 			CsVO vo = new CsVO();
 			vo.setNo(0);
-			vo.setCateType1("[문의유형1]");
-			vo.setTitle("무제");
+			vo.setCate("카테고리");
+			vo.setCateType1("cateType1");
+			vo.setCateType2("cateType2");
+			vo.setTitle("test");
 			vo.setUid("circle");
 			vo.setRdate("00-00-00");
 			
