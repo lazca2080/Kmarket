@@ -46,6 +46,7 @@ public class WriteController extends HttpServlet{
 		
 		logger.info("WriteController doPost...");
 		
+		// 데이터 수신
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
@@ -54,6 +55,7 @@ public class WriteController extends HttpServlet{
 		String uid = req.getParameter("uid");
 		String regip = req.getParameter("regip");
 		
+		// VO 데이터 생성
 		CsVO vo =  new CsVO();
 		vo.setCate(cate);
 		vo.setCateType1(cateType1);
@@ -63,8 +65,10 @@ public class WriteController extends HttpServlet{
 		vo.setUid(uid);
 		vo.setRegip(regip);
 		
-		int parent = service.insertArticle(vo);
+		// 데이터베이스 처리
+		service.insertArticle(vo);
 				
-		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate="+cate+"&cateType1="+cateType1+"&catetType2="+cateType2);
+		// 리다이렉트
+		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate="+cate+"&cateType1="+cateType1);
 	}
 }

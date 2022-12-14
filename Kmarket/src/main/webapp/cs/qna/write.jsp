@@ -3,7 +3,7 @@
 <script src="/Kmarket/cs/qna/selectOption.js"></script>
 <script>
 $(function(){
-	let cateType1 = "${cateType1}"; // 페이지의 cateType1을 가져온다.
+	let cateType1 = "${cateType1}"; // 페이지의 cateType1을 가져온다. (js 코드 엄격 쌍따옴표 쓰기!)
 	console.log("cateType1 : " + cateType1);
 	
 	$('select[name=type]').val(cateType1).prop("selected", true);	//1차 카테고리 셀렉트 박스를 cateType1과 동일한 값으로 선택시킨다.
@@ -16,6 +16,15 @@ $(function(){
 		console.log("cateType2: " + cateType2);
 	});
 	
+	$('input[name=title]').focusout(function(){
+		let title = $('input[name=title]').val();
+		console.log("title: " + title);
+	});
+	$('textarea[name=content]').focusout(function(){
+		let content = $('textarea[name=content]').val();
+		console.log("content: " + content);
+	});
+	
 });
 </script>
 <jsp:include page="../_header.jsp"></jsp:include>
@@ -25,7 +34,7 @@ $(function(){
                     <div>
                         <p>
                             홈
-                            <span>></spans>
+                            <span>></span>
                             문의하기
                         </p>
                     </div>
@@ -41,27 +50,27 @@ $(function(){
                                 <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=쿠폰/이벤트">쿠폰/이벤트</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='주문/결제'">주문/결제</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=주문/결제">주문/결제</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='배송'">배송</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=배송">배송</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='취소/반품/교환'">취소/반품/교환</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=취소/반품/교환">취소/반품/교환</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='여행/숙박/항공'">여행/숙박/항공</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=여행/숙박/항공">여행/숙박/항공</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='안전거래'">안전거래</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=안전거래">안전거래</a>
                             </li>
                         </ul>
                     </aside>
                     <article>
-                        <form action="/Kmarket//cs/qna/write.do" method="post" enctype="multipart/form-data">
+                        <form action="/Kmarket/cs/qna/write.do" method="post" enctype="multipart/form-data">
                         <input type="text" name="uid" value="${sessUser.uid}"/>
                         <input type="text" name="cate" value="${cate}"/>
-                        <input type="text" name="cateType1" value="${cateType1}">
+                        <input type="text" name="cateType1" value="${cateType1}"/>
                             <table>
                                 <tbody>
                                     <tr>

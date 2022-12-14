@@ -26,6 +26,7 @@ public enum CsService {
 	/*** cs - qna ***/
 	// 문의글 작성하기
 	public int insertArticle(CsVO article) {
+		logger.info("service::insertArticle...");
 		return dao.insertArticle(article);
 	}
 	
