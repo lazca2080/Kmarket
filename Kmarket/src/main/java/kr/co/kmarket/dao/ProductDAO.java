@@ -85,6 +85,9 @@ public class ProductDAO {
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
 			
+			logger.info("selctCate1 : "+cate1);
+			logger.info("selctCate2 : "+cate2);
+			
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -93,10 +96,10 @@ public class ProductDAO {
 				vo.setDescript(rs.getString(5));
 				vo.setCompany(rs.getString(6));
 				vo.setSeller(rs.getString(7));
-				vo.setPrice(rs.getString(8));
-				vo.setDiscount(rs.getString(9));
-				vo.setPoint(rs.getString(10));
-				vo.setDeilvery(rs.getString(13));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setDeilvery(rs.getInt(13));
 				vo.setThumb1(rs.getString(17));
 				
 				products.add(vo);
@@ -109,7 +112,7 @@ public class ProductDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		
+		logger.debug("products size : " +products.size());
 		return products;
 	}
 }
