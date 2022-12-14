@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="./_${cate1}.jsp"></jsp:include>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <main id="product">
             <aside>
                 <ul class="category">
@@ -13,7 +15,7 @@
                         </a>
                         <ol>
                             <li>
-                                <a href="#">남성의류</a>
+                                <a href="/Kmarket/product/list.do?cate1=10&cate2=11">남성의류</a>
                             </li>
                             <li>
                                 <a href="#">여성의류</a>
@@ -119,24 +121,27 @@
                     </li>
                 </ul>
                 <table>
+                	
                     <tr>
                         <td><a href="#" class="thumb">
                             <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
                         </a></td>
+                        <c:forEach var="products" items="${products}">
                         <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
+                            <h3 class="name">${products.prodName}</h3>
+                            <a href="#" class="desc">${products.descript}</a>
                         </td>
                         <td>
                             <ul>
-                                <li><ins class="dis-price">27,000</ins></li>
+                                <li><ins class="dis-price">${products.sellPrice}</ins></li>
                                 <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
+                                    <del class="org-price">${products.price}</del>
+                                    <span class="discount">${products.discunt}</span>
                                 </li>
                                 <li><span class="free-delivery">무료배송</span></li>
                             </ul>
                         </td>
+                         </c:forEach>
                         <td>
                             <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
                             </h4>
@@ -144,6 +149,7 @@
                             <h6 class="rating star1">상품평</h6>
                         </td>
                     </tr>
+                   
                     <tr>
                         <td><a href="#" class="thumb">
                             <img src="	https://via.placeholder.com/120x120" alt="상품이미지">

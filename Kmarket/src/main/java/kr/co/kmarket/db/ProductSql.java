@@ -31,5 +31,5 @@ public class ProductSql {
 
 	public static final String selectProdNo = "SELECT MAX(`prodNo`) FROM `km_product`";
 	
-	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` WHERE `prodCate1`=?, `prodCate2`=?";
+	public static final String SELECT_PRODUCTS = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=?";
 }
