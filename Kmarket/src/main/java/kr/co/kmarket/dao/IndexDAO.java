@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,7 +115,7 @@ public class IndexDAO {
 	
 	public List<ProductVO> selectBest() {
 		
-		List<ProductVO> best = new ArrayList<>();
+		List<ProductVO> index = new ArrayList<>();
 		
 		try {
 			logger.debug("selectBest...");
@@ -126,12 +128,15 @@ public class IndexDAO {
 				vo.setProdCate1(rs.getString(2));
 				vo.setProdCate2(rs.getString(3));
 				vo.setProdName(rs.getString(4));
-				vo.setPrice(rs.getString(8));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getInt(8));
 				vo.setDiscount(rs.getInt(9));
+				vo.setDelivery(rs.getInt(13));
 				vo.setThumb1(rs.getString(17));
-				vo.setSellPrice(rs.getInt(33));
+				vo.setThumb2(rs.getString(18));
+				vo.setSellPrice(rs.getString(33));
 				
-				best.add(vo);
+				index.add(vo);
 			}
 			
 			conn.close();
@@ -142,40 +147,6 @@ public class IndexDAO {
 			logger.error(e.getMessage());
 		}
 		
-		return best;
+		return index;
 	}
-	
-	public List<ProductVO> selectBest1() {
-	
-	List<ProductVO> best = new ArrayList<>();
-	
-	try {
-		logger.debug("selectBest...");
-		Connection conn = DBCP.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(Indexsql.SELECT_BEST);
-		
-		while(rs.next()) {
-			ProductVO vo = new ProductVO();
-			vo.setProdCate1(rs.getString(2));
-			vo.setProdCate2(rs.getString(3));
-			vo.setProdName(rs.getString(4));
-			vo.setPrice(rs.getString(8));
-			vo.setDiscount(rs.getInt(9));
-			vo.setThumb1(rs.getString(17));
-			vo.setSellPrice(rs.getInt(33));
-			
-			best.add(vo);
-		}
-		
-		conn.close();
-		stmt.close();
-		rs.close();
-		
-	} catch (Exception e) {
-		logger.error(e.getMessage());
-	}
-	
-	return best;
-}
 }
