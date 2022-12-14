@@ -16,10 +16,10 @@
                         <h2>문의하기</h2>
                         <ul>
                             <li class="on">
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='회원'">회원</a>
+                                <a href="/Kmarket/cs/qna/list.do?cateType1=회원">회원</a>
                             </li>
                             <li>
-                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='쿠폰/이벤트'">쿠폰/이벤트</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=쿠폰/이벤트">쿠폰/이벤트</a>
                             </li>
                             <li>
                                 <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1='주문/결제'">주문/결제</a>
@@ -124,7 +124,7 @@
                             <a href="#" class="num">3</a>
                             <a href="#" class="next">다음</a>
                         </div>
-                        <a href="/Kmarket/cs/qna/write.do?" class="btnWrite">문의하기</a>
+                        <a href="/Kmarket/cs/qna/write.do?cate=${cate}&cateType1=${cateType1}" class="btnWrite">문의하기</a>
                     </article>
                 </section>
             </div>

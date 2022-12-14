@@ -29,6 +29,14 @@ public class ListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("ListController doGet");
+		
+		String cate = req.getParameter("cate");
+		String cateType1 = req.getParameter("cateType1");
+		
+		req.setAttribute("cate", cate);
+		req.setAttribute("cateType1", cateType1);
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
