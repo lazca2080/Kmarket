@@ -299,7 +299,7 @@
                     <h3>
                         <span>할인상품</span>
                     </h3>
-                    <c:forEach var="discount" items="${index}" begin="21" end="28">
+                    <c:forEach var="discount" items="${index}" begin="21" end="29">
                     <c:choose>
                     <c:when test="${not empty discount}">
                     <article>
