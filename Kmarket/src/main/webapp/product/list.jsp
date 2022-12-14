@@ -14,7 +14,7 @@
                         </a>
                         <ol>
                             <li>
-                                <a href="/Kmarket/product/list.do?cate1=10&cate2=11">남성의류</a>
+                                <a href="#">남성의류</a>
                             </li>
                             <li>
                                 <a href="#">여성의류</a>
@@ -94,9 +94,9 @@
                     <h1>상품목록</h1>
                     <p>
                         HOME > 
-                        <span>패션·의류·뷰티</span>
+                        <span>${cate1}</span>
                          > 
-                        <strong>남성의류</strong>
+                        <strong>${cate2}</strong>
                     </p>
                 </nav>
                 <ul class="sort">
@@ -120,12 +120,11 @@
                     </li>
                 </ul>
                 <table>
-                	
+                	<c:forEach var="products" items="${products}">
                     <tr>
                         <td><a href="#" class="thumb">
-                            <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
+                            <img src="/Kmarket/home/prodImg/${products.thumb1}" alt="상품이미지">
                         </a></td>
-                        <c:forEach var="products" items="${products}">
                         <td>
                             <h3 class="name">${products.prodName}</h3>
                             <a href="#" class="desc">${products.descript}</a>
@@ -137,134 +136,42 @@
                                     <del class="org-price">${products.price}</del>
                                     <span class="discount">${products.discount}</span>
                                 </li>
-                                <li><span class="free-delivery">무료배송입니다</span></li>
+                                <c:if test="${products.delivery eq 0 }">
+                                <li><span class="free-delivery">배달비무료</span></li>
+                                </c:if>
+                                <c:if test="${products.delivery ne 0 }">
+                                <li><span>${products.delivery}원</span></li>
+                                </c:if>
                             </ul>
                         </td>
-                         </c:forEach>
+                         
                         <td>
-                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
+                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> ${products.seller}
                             </h4>
                             <h5 class="badge power">판매자등급</h5>
                             <h6 class="rating star1">상품평</h6>
                         </td>
                     </tr>
-                   
-                    <tr>
-                        <td><a href="#" class="thumb">
-                            <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
-                        </a></td>
-                        <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
-                        </td>
-                        <td>
-                            <ul>
-                                <li><ins class="dis-price">27,000</ins></li>
-                                <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
-                                </li>
-                                <li><span class="free-delivery">무료배송</span></li>
-                            </ul>
-                        </td>
-                        <td>
-                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
-                            </h4>
-                            <h5 class="badge power">판매자등급</h5>
-                            <h6 class="rating star2">상품평</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="thumb">
-                            <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
-                        </a></td>
-                        <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
-                        </td>
-                        <td>
-                            <ul>
-                                <li><ins class="dis-price">27,000</ins></li>
-                                <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
-                                </li>
-                                <li><span class="free-delivery">무료배송</span></li>
-                            </ul>
-                        </td>
-                        <td>
-                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
-                            </h4>
-                            <h5 class="badge power">판매자등급</h5>
-                            <h6 class="rating star3">상품평</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="thumb">
-                            <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
-                        </a></td>
-                        <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
-                        </td>
-                        <td>
-                            <ul>
-                                <li><ins class="dis-price">27,000</ins></li>
-                                <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
-                                </li>
-                                <li><span class="free-delivery">무료배송</span></li>
-                            </ul>
-                        </td>
-                        <td>
-                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
-                            </h4>
-                            <h5 class="badge power">판매자등급</h5>
-                            <h6 class="rating star4">상품평</h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="thumb">
-                            <img src="	https://via.placeholder.com/120x120" alt="상품이미지">
-                        </a></td>
-                        <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
-                        </td>
-                        <td>
-                            <ul>
-                                <li><ins class="dis-price">27,000</ins></li>
-                                <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
-                                </li>
-                                <li><span>배송비 2500</span></li>
-                            </ul>
-                        </td>
-                        <td>
-                            <h4 class="seller"><i class="fas fa-home" aria-hidden="true"></i> 판매자
-                            </h4>
-                            <h5 class="badge power">판매자등급</h5>
-                            <h6 class="rating star5">상품평</h6>
-                        </td>
-                    </tr>
+                   </c:forEach>
+                    
                 </table>
                 <div class="paging">
+                	
                     <span class="prev">
-                        <a href="#">< 이전</a>
+                        <c:if test="">
+                        	<a href="./list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupStart -1}">< 이전</a>
+                    	</c:if>
                     </span>
+                    
                     <span class="num">
-                        <a href="#" class="on">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
+                    	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                        	<a href="./list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupEnd + 1}" class="on${currentPage == i?'current':'off'}">${i}</a>
+                     	</c:forEach>
                     </span>
                     <span class="next">
-                        <a href="#">다음 ></a>
+                    	<c:if test="${pageGroupEnd < lastPageNum}">
+                        <a href="./list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupEnd + 1}">다음 ></a>
+                        </c:if>
                     </span>
                 </div>
             </section>

@@ -24,8 +24,13 @@ public enum ProductService {
 		return dao.insertProduct(vo);
 	}
 	
-	public List<ProductVO> selectProduct(String cate1, String cate2) {
-		return dao.selectProduct(cate1, cate2);
+	//list 목록 불러오기
+	public List<ProductVO> selectProduct(int limiteStart, String cate1, String cate2) {
+		return dao.selectProduct(limiteStart, cate1, cate2);
+	}
+	
+	public int selectCountTotal(String cate1, String cate2) {
+		return dao.selectCountTotal(cate1, cate2);
 	}
 	
 	// 서비스 로직
@@ -52,6 +57,56 @@ public enum ProductService {
 		File file1 = new File(path+"/"+name);
 		File file2 = new File(path+"/"+newName);
 		file1.renameTo(file2);
+	}
+	
+	//마지막 페이지 값
+	public int getLastPageNum(int total) {
+		int lastPageNum = 0;
+		
+		if(total % 10 == 0){
+   			lastPageNum = total / 10;
+   		}else{
+   			lastPageNum = total / 10 + 1;
+   		}
+		
+		return lastPageNum;
+	}
+		
+	//페이지 그룹 계산
+	public int[] getpageGroupNum(int currentPage, int lastPageNum) {
+		int pageGroupCurrent = (int)Math.ceil(currentPage / 10.0);
+   		int pageGroupStart = (pageGroupCurrent - 1) * 10 + 1;
+   		int pageGroupEnd = pageGroupCurrent * 10;
+   		
+   		if(pageGroupEnd > lastPageNum){
+   			pageGroupEnd = lastPageNum;
+   		}
+   		
+   		int[] result = {pageGroupStart, pageGroupEnd};
+   		
+   		return result;
+	}
+	
+	//시작되는 페이지 그룹 번호
+	public int getPageStartNum(int total, int currentPage) {
+		int start = (currentPage - 1) * 10;
+		return total - start;
+	}
+	
+	//현재 페이지의 값 (첫화면 표시를 위해 1)
+	public int getCurrentPage(String pg) {
+		
+		int currentPage = 1;
+		
+		if(pg != null){
+   			currentPage = Integer.parseInt(pg);
+		}
+		return currentPage;
+	}
+	
+	//시작값
+	public int getStartNum(int currentPage) {
+		return(currentPage -1 ) * 10;
 	}
 }
 
