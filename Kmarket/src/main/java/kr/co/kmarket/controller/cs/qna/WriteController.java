@@ -33,11 +33,9 @@ public class WriteController extends HttpServlet{
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
-		String cateType2 = req.getParameter("cateType2");
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
-		req.setAttribute("cateType2", cateType2);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);
