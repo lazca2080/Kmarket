@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,11 +36,6 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		/*
-		List<CategoryVO> cate1 = service.selectCate1();
-		req.setAttribute("cate1", cate1);
-		*/
-		
 		HttpSession session = req.getSession();
 		
 		for(int i=10; i<=18; i++) {
@@ -46,11 +43,8 @@ public class IndexController extends HttpServlet{
 			session.setAttribute("cate"+i, category);
 		};
 		
-		List<ProductVO> best1 = service.selectBest();
-		
-		List<ProductVO> best = service.selectBest();
-		req.setAttribute("best", best);
-		req.setAttribute("best1", best1);
+		List<ProductVO> index = service.selectBest();
+		req.setAttribute("index", index);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);

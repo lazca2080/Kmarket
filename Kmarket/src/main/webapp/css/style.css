@@ -177,6 +177,11 @@
             padding: 10px;
             box-sizing: border-box;
         }
+        
+        main > section > section > article > a > div > img{
+        	width: 230px;
+        	height: 230px;
+        }
         main > section > section > article h2 {
             font-size: 15px;
             font-weight: bold;
@@ -221,9 +226,8 @@
         }
         main > section > section > article .dis_price > .free {
             display: inline-block;
-            font-size: 0;
             vertical-align: text-bottom;
             width: 55px;
-            height: 13px;
+            height: 16px;
             background-image: url(./img/ico_freeshipping.gif);
         }

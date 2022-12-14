@@ -119,13 +119,13 @@ public class ProductVO {
 	public void setStock(String stock) {
 		this.stock = Integer.parseInt(stock);
 	}
-	public int getDeilvery() {
+	public int getDelivery() {
 		return delivery;
 	}
-	public void setDeilvery(int delivery) {
+	public void setDelivery(int delivery) {
 		this.delivery = delivery;
 	}
-	public void setDeilvery(String delivery) {
+	public void setDelivery(String delivery) {
 		this.delivery = Integer.parseInt(delivery);
 	}
 	public String getThumb1() {
