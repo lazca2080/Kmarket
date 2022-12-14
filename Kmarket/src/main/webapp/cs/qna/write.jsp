@@ -1,6 +1,23 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/Kmarket/cs/qna/selectOption.js"></script>
+<script>
+$(function(){
+	let cateType1 = "${cateType1}"; // 페이지의 cateType1을 가져온다.
+	console.log("cateType1 : " + cateType1);
+	
+	$('select[name=type]').val(cateType1).prop("selected", true);	//1차 카테고리 셀렉트 박스를 cateType1과 동일한 값으로 선택시킨다.
+	$('select[name=type]').attr('disabled', 'disabled');			//선택된 셀렉트 박스의 값을 고정시킨다.
+	$('select[name=type]').trigger('change');						//고정된 셀렉트 박스의 값을 실행시킨 것처럼 trigger(이벤트 강제실행)한다. 
+
+	
+	$('select[name=cateType2]').change(function(){
+		let cateType2 = $('select[name=cateType2] option:selected').text();
+		console.log("cateType2: " + cateType2);
+	});
+	
+});
+</script>
 <jsp:include page="../_header.jsp"></jsp:include>
         <section id="cs">
             <div class="qna">
@@ -16,7 +33,7 @@
                 <section class="write">
                     <aside>
                         <h2>문의하기</h2>
-                        <ul>
+                        <ul class="list">
                             <li class="on">
                                 <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=회원">회원</a>
                             </li>
@@ -45,7 +62,6 @@
                         <input type="text" name="uid" value="${sessUser.uid}"/>
                         <input type="text" name="cate" value="${cate}"/>
                         <input type="text" name="cateType1" value="${cateType1}">
-                        <input type="text" name="cateType2" value="${cateType2}">
                             <table>
                                 <tbody>
                                     <tr>
