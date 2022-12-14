@@ -38,7 +38,7 @@ public class ProductDAO {
 			psmt.setInt(7, vo.getDiscount());
 			psmt.setInt(8, vo.getPoint());
 			psmt.setInt(9, vo.getStock());
-			psmt.setInt(10, vo.getDeilvery());
+			psmt.setInt(10, vo.getDelivery());
 			psmt.setString(11, vo.getStatus());
 			psmt.setString(12, vo.getDuty());
 			psmt.setString(13, vo.getReceipt());
@@ -74,7 +74,7 @@ public class ProductDAO {
 		
 	}
 
-	public List<ProductVO> selectProduct(String cate1, String cate2) {
+	public List<ProductVO> selectProduct(int limiteStart, String cate1, String cate2) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
@@ -84,9 +84,11 @@ public class ProductDAO {
 			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS);
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
+			psmt.setInt(3, limiteStart);
 			
 			logger.info("selctCate1 : "+cate1);
 			logger.info("selctCate2 : "+cate2);
+			logger.info("selectlimit : "+limiteStart);
 			
 			ResultSet rs = psmt.executeQuery();
 			
@@ -99,8 +101,9 @@ public class ProductDAO {
 				vo.setPrice(rs.getInt(8));
 				vo.setDiscount(rs.getInt(9));
 				vo.setPoint(rs.getInt(10));
-				vo.setDeilvery(rs.getInt(13));
+				vo.setDelivery(rs.getString(13));
 				vo.setThumb1(rs.getString(17));
+				vo.setSellPrice(rs.getInt(33));
 				
 				products.add(vo);
 			}
@@ -114,5 +117,33 @@ public class ProductDAO {
 		}
 		logger.debug("products size : " +products.size());
 		return products;
+	}
+	
+	public int selectCountTotal(String cate1, String cate2) {
+		
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return total;
 	}
 }

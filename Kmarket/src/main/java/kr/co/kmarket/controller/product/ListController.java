@@ -34,12 +34,38 @@ public class ListController extends HttpServlet{
 		
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		String pg = req.getParameter("pg");
 		
-	 	List<ProductVO> products = service.selectProduct(cate1, cate2);
+		//현재 페이지 번호
+		int currentPage = service.getCurrentPage(pg);
+		
+		//전체 게시물 갯수 구하기
+		int total = service.selectCountTotal(cate1, cate2);
+		
+		//페이지 마지막 번호 계산
+		int lastPageNum = service.getLastPageNum(total);
+		
+		//페이지 그룹 start, end 계산
+		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
+		
+		//페이지 시작번호
+		int pageStartNum = service.getPageStartNum(total, currentPage);
+		
+		//시작 인덱스
+		int start = service.getStartNum(currentPage);
+		
+		// 상품목록 출력
+	 	List<ProductVO> products = service.selectProduct(start, cate1, cate2);
 		
 	 	req.setAttribute("products", products);
 	 	req.setAttribute("cate1", cate1);
 	 	req.setAttribute("cate2", cate2);
+	 	req.setAttribute("pg", pg);
+	 	req.setAttribute("currentPage", currentPage);
+	 	req.setAttribute("lastPageNum", lastPageNum);
+	 	req.setAttribute("pageGroupStart", result[0]);
+	 	req.setAttribute("pageGroupEnd", result[1]);
+	 	req.setAttribute("pageStartNum", pageStartNum+1);
 	 	
 	 	logger.info("produtcts : " +products);
 	 	logger.info("cate1 : " +cate1);

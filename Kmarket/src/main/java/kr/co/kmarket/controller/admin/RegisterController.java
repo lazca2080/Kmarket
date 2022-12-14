@@ -120,7 +120,7 @@ public class RegisterController extends HttpServlet{
 		vo.setSellPrice(sellPrice);
 		vo.setPoint(point);
 		vo.setStock(stock);
-		vo.setDeilvery(delivery);
+		vo.setDelivery(delivery);
 		vo.setStatus(status);
 		vo.setDuty(duty);
 		vo.setReceipt(receipt);
