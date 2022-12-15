@@ -70,9 +70,9 @@ $(function(){
                     </aside>
                     <article>
                         <form action="/Kmarket/cs/qna/write.do" method="post">
-                        <input type="text" name="uid" value="${sessUser.uid}"/>
-                        <input type="text" name="cate" value="${cate}"/>
-                        <input type="text" name="cateType1" value="${cateType1}"/>
+                        <input type="text" name="uid" value="${sessUser.uid}"/>		<!-- 삭제 or hidden  -->
+                        <input type="text" name="cate" value="${cate}"/>			<!-- 삭제 or hidden  -->
+                        <input type="text" name="cateType1" value="${cateType1}"/>	<!-- 삭제 or hidden  -->
                             <table>
                                 <tbody>
                                     <tr>
@@ -97,7 +97,7 @@ $(function(){
                                 </tbody>
                             </table>
                              <div>
-                                <a href="/Kmarket/cs/qna/list.do?cate=${cate}" class="btnList">취소하기</a>
+                                <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}" class="btnList">취소하기</a>
                                 <input type="submit" class="btnSubmit" value="등록하기"/>
                             </div>
                         </form>
