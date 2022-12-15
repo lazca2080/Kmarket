@@ -12,8 +12,8 @@
                     	<c:forEach var="latest" begin="0" end="4" items="${latests}">
                     		<c:if test="${latest.cate eq 'notice'}">
 	                    		<li>
-	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
-	                            <span class="date">${latest.rdate}</span>
+		                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+		                            <span class="date">${latest.rdate}</span> 
 	                        	</li>
                     		</c:if>
                         </c:forEach>
