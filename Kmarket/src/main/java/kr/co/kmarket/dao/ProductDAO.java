@@ -181,9 +181,9 @@ public class ProductDAO {
 	}
 
 	//상품 네비게이션
-	public List<CategoryVO> selectCate(String cate1, String cate2) {
+	public CategoryVO selectCate(String cate1, String cate2) {
 		
-		List<CategoryVO> category = new ArrayList<>();
+		CategoryVO vo = null;
 		
 		try {
 			logger.debug("seleceCate...");
@@ -194,23 +194,21 @@ public class ProductDAO {
 			
 			ResultSet rs = psmt.executeQuery();
 			
-			while(rs.next()) {
-				CategoryVO vo = new CategoryVO();
+			if(rs.next()) {
+				vo = new CategoryVO();
 				vo.setCate1(rs.getInt(1));
 				vo.setC1Name(rs.getString(2));
 				vo.setCate2(rs.getInt(4));
 				vo.setC2Name(rs.getString(5));
-				
-				category.add(vo);
 			}
 			
+			psmt.close();
 			conn.close();
 			rs.close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("category size : " +category.size());
-		return category;
+		return vo;
 	}
 }

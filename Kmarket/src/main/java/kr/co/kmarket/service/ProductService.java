@@ -39,7 +39,7 @@ public enum ProductService {
 	}
 	
   //상품 네비게이션
-	public List<CategoryVO> selectCate(String cate1, String cate2) {
+	public CategoryVO selectCate(String cate1, String cate2) {
 		return dao.selectCate(cate1, cate2);
 	}
 	

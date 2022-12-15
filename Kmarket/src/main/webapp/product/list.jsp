@@ -1,6 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script>
+	$(function(){
+		
+		let cate1 = ${category.c1Name};
+		console.log(cate1);
+		
+	});
+</script>
         <main id="product">
             <aside>
             	 <ul class="category">
@@ -94,8 +102,7 @@
                     <h1>상품목록</h1>
                     <p>
                         HOME > 
-                        
-                        <span>${cate1}</span>
+                        <span>${category.cate1}</span>
                          > 
                         <strong>${cate2}</strong>
                     </p>
