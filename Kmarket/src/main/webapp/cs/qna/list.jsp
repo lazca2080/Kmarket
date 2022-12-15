@@ -1,5 +1,6 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../_header.jsp"></jsp:include>
         <section id="cs">
             <div class="qna">
@@ -52,7 +53,10 @@
                             				<a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a>
                             			</td>
                             			<td>${article.uid}</td>
-                                    	<td>${article.rdate}</td>
+                                    	<td>
+                                    		<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+		                            		<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
+                                    	</td>
                             		</tr>
                             	</c:forEach>
                             </tbody>

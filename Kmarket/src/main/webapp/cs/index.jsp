@@ -1,5 +1,6 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp"></jsp:include>
         <section id="cs">
             <div class="main">
@@ -13,7 +14,11 @@
                     		<c:if test="${latest.cate eq 'notice'}">
 	                    		<li>
 		                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
-		                            <span class="date">${latest.rdate}</span> 
+		                            <%-- <span class="date">${latest.rdate}</span>  --%>
+		                            <span>
+		                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+		                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
+	                            	</span>
 	                        	</li>
                     		</c:if>
                         </c:forEach>
@@ -78,7 +83,10 @@
                             <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
                                 <p>
                                     <span class="uid">${latest.uid}</span>
-                                    <span class="date">${latest.rdate}</span>
+                                    <span class="date">
+                                    	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+		                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
+                                    </span>
                                 </p>
                         </li>
                         </c:if>

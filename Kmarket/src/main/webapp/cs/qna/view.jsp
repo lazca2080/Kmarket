@@ -44,7 +44,7 @@
                             <h2 class="title">[${vo.cateType2}] ${vo.title}</h2>
                             <p>
                                 <span>${vo.uid}</span>
-                                <span>${vo.rdate}</span>
+                                <span>${vo.rdate.substring(2,10)}</span>
                             </p>
                         </nav>
                         <div class="content">
