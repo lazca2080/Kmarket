@@ -113,7 +113,7 @@ public class IndexDAO {
 		return category;
 	}
 	
-	public List<ProductVO> selectBest() {
+	public List<ProductVO> selectIndex() {
 		
 		List<ProductVO> index = new ArrayList<>();
 		

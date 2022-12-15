@@ -43,7 +43,7 @@ public class IndexController extends HttpServlet{
 			session.setAttribute("cate"+i, category);
 		};
 		
-		List<ProductVO> index = service.selectBest();
+		List<ProductVO> index = service.selectIndex();
 		req.setAttribute("index", index);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
