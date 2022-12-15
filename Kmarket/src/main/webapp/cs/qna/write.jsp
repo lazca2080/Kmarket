@@ -16,10 +16,12 @@ $(function(){
 		console.log("cateType2: " + cateType2);
 	});
 	
+	// title 확인용 콘솔 로그 창 (삭제 가능)
 	$('input[name=title]').focusout(function(){
 		let title = $('input[name=title]').val();
 		console.log("title: " + title);
 	});
+	// content 확인용 콘솔 로그 창 (삭제 가능)
 	$('textarea[name=content]').focusout(function(){
 		let content = $('textarea[name=content]').val();
 		console.log("content: " + content);
@@ -83,13 +85,13 @@ $(function(){
                                     <tr>
                                         <td>문의제목</td>
                                         <td>
-                                            <input type="text" name="title" placeholder="제목을 입력하세요."/>
+                                            <input type="text" name="title" placeholder="제목을 입력하세요." required/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>문의내용</td>
                                         <td>
-                                            <textarea name="content" placeholder="내용을 입력하세요."></textarea>
+                                            <textarea name="content" placeholder="내용을 입력하세요." required></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
