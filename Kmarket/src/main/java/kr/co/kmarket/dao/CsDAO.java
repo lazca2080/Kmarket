@@ -96,8 +96,70 @@ public class CsDAO {
 		}
 		return result;
 	}
-	
-	
+
+	/*** cs - list ***/
+	// 전체 게시물 개수
+	public int selectCountTotal(String cate) {
+		int total = 0;
+		try {
+			logger.info("CsDAO-selectCountTotal...");
+			
+			Connection con = DBCP.getConnection();
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	// 페이지 글 가져오기
+	public List<CsVO> selectArticles(String cate, String cateType1, int start){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("CsDAO-selectArticles...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
+			psmt.setString(1, cate);
+			psmt.setString(2, cateType1);
+			psmt.setInt(3, start);
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				
+				articles.add(article);
+				
+				rs.close();
+				psmt.close();
+				con.close();
+			}
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
 	
 	
 	

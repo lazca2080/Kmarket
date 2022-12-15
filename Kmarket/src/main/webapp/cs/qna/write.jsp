@@ -70,9 +70,9 @@ $(function(){
                     </aside>
                     <article>
                         <form action="/Kmarket/cs/qna/write.do" method="post">
-                        <input type="text" name="uid" value="${sessUser.uid}"/>
-                        <input type="text" name="cate" value="${cate}"/>
-                        <input type="text" name="cateType1" value="${cateType1}"/>
+                        <input type="text" name="uid" value="${sessUser.uid}"/>		<!-- 삭제 or hidden  -->
+                        <input type="text" name="cate" value="${cate}"/>			<!-- 삭제 or hidden  -->
+                        <input type="text" name="cateType1" value="${cateType1}"/>	<!-- 삭제 or hidden  -->
                             <table>
                                 <tbody>
                                     <tr>
