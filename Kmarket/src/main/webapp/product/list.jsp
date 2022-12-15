@@ -94,6 +94,7 @@
                     <h1>상품목록</h1>
                     <p>
                         HOME > 
+                        
                         <span>${cate1}</span>
                          > 
                         <strong>${cate2}</strong>

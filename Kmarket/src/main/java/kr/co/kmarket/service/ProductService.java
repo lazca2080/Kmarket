@@ -12,6 +12,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.kmarket.dao.ProductDAO;
+import kr.co.kmarket.vo.CategoryVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public enum ProductService {
@@ -31,6 +32,11 @@ public enum ProductService {
 	
 	public int selectCountTotal(String cate1, String cate2) {
 		return dao.selectCountTotal(cate1, cate2);
+	}
+	
+	//상품 네비게이션
+	public List<CategoryVO> selectCate(String cate1, String cate2) {
+		return dao.selectCate(cate1, cate2);
 	}
 	
 	// 서비스 로직

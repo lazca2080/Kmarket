@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.service.ProductService;
+import kr.co.kmarket.vo.CategoryVO;
 import kr.co.kmarket.vo.ProductVO;
 
 @WebServlet("/product/list.do")
@@ -35,6 +37,11 @@ public class ListController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
+
+		//상품 네비게이션
+		List<CategoryVO> category = service.selectCate(cate1, cate2);
+		
+		
 		
 		//현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -66,10 +73,13 @@ public class ListController extends HttpServlet{
 	 	req.setAttribute("pageGroupStart", result[0]);
 	 	req.setAttribute("pageGroupEnd", result[1]);
 	 	req.setAttribute("pageStartNum", pageStartNum+1);
+	 	req.setAttribute("category", category);
+	 	
 	 	
 	 	logger.info("produtcts : " +products);
 	 	logger.info("cate1 : " +cate1);
 	 	logger.info("cate2 : " +cate2);
+	 	logger.info("category : "+category);
 	 	
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp");
 		dispatcher.forward(req, resp);

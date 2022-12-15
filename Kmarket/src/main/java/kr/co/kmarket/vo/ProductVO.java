@@ -28,6 +28,7 @@ public class ProductVO {
 	
 	// 추가
 	private int prodnum;
+	
 	public int getProdnum() {
 		return prodnum;
 	}

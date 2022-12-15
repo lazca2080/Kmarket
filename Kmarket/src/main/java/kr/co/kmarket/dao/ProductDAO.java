@@ -10,7 +10,9 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.DBCP;
+import kr.co.kmarket.db.Indexsql;
 import kr.co.kmarket.db.ProductSql;
+import kr.co.kmarket.vo.CategoryVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public class ProductDAO {
@@ -81,7 +83,7 @@ public class ProductDAO {
 		try {
 			logger.debug("selectProduct...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS);
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SOLD);
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
 			psmt.setInt(3, limiteStart);
@@ -145,5 +147,39 @@ public class ProductDAO {
 		}
 		
 		return total;
+	}
+
+	//상품 네비게이션
+	public List<CategoryVO> selectCate(String cate1, String cate2) {
+		
+		List<CategoryVO> category = new ArrayList<>();
+		
+		try {
+			logger.debug("seleceCate...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_CATE);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CategoryVO vo = new CategoryVO();
+				vo.setCate1(rs.getInt(1));
+				vo.setC1Name(rs.getString(2));
+				vo.setCate2(rs.getInt(4));
+				vo.setC2Name(rs.getString(5));
+				
+				category.add(vo);
+			}
+			
+			conn.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("category size : " +category.size());
+		return category;
 	}
 }
