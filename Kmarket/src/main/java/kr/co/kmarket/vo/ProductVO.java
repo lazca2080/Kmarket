@@ -24,9 +24,22 @@ public class ProductVO {
 	private String origin;
 	private String regip;
 	private int sellPrice;
-	
+	private int prodNo;
 	
 	// 추가
+	
+	public int getProdNo() {
+		return prodNo;
+	}
+	
+	public void setProdNo(int prodNo) {
+		this.prodNo = prodNo;
+	}
+	
+	public void setProdNo(String prodNo) {
+		this.prodNo = Integer.parseInt(prodNo);
+	}
+	
 	private int prodnum;
 	
 	public int getProdnum() {

@@ -102,9 +102,9 @@
                     <h1>상품목록</h1>
                     <p>
                         HOME > 
-                        <span>${category.cate1}</span>
+                        <span>${category.c1Name}</span>
                          > 
-                        <strong>${cate2}</strong>
+                        <strong>${category.c2Name}</strong>
                     </p>
                 </nav>
                 <ul class="sort">
@@ -130,7 +130,7 @@
                 <table>
                 	<c:forEach var="products" items="${products}">
                     <tr>
-                        <td><a href="#" class="thumb">
+                        <td><a href="/Kmarket/product/view.do?prodNo=${products.prodNo}" class="thumb">
                             <img src="/Kmarket/home/prodImg/${products.thumb1}" alt="상품이미지">
                         </a></td>
                         <td>

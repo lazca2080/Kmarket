@@ -76,7 +76,7 @@ public class ProductDAO {
 		
 	}
 
-	public List<ProductVO> selectProduct(int limiteStart, String cate1, String cate2) {
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
@@ -96,6 +96,7 @@ public class ProductDAO {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
 				vo.setProdName(rs.getString(4));
 				vo.setDescript(rs.getString(5));
 				vo.setCompany(rs.getString(6));
@@ -119,6 +120,50 @@ public class ProductDAO {
 		}
 		logger.debug("products size : " +products.size());
 		return products;
+	}
+	
+	public ProductVO selectProduct(String prodNo) {
+		
+		ProductVO vo = null;
+		
+		try {
+			logger.debug("selectProduct...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setProdCate1(rs.getString(2));
+				vo.setProdCate2(rs.getString(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setPrice(rs.getString(8));
+				vo.setDiscount(rs.getString(9));
+				vo.setPoint(rs.getString(10));
+				vo.setThumb2(rs.getString(18));
+				vo.setDetail(rs.getString(19));
+				vo.setStatus(rs.getString(20));
+				vo.setDuty(rs.getString(21));
+				vo.setReceipt(rs.getString(22));
+				vo.setBizType(rs.getString(23));
+				vo.setOrigin(rs.getString(24));
+				vo.setSellPrice(rs.getString(33));
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
 	}
 	
 	public List<CategoryVO> selectCategory() {

@@ -25,9 +25,14 @@ public enum ProductService {
 		return dao.insertProduct(vo);
 	}
 	
-	//list 목록 불러오기
-	public List<ProductVO> selectProduct(int limiteStart, String cate1, String cate2) {
-		return dao.selectProduct(limiteStart, cate1, cate2);
+	//Product list 목록 불러오기
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
+		return dao.selectProducts(limiteStart, cate1, cate2);
+	}
+	
+	//Product 상품 하나 불러오기
+	public ProductVO selectProduct(String prodNo) {
+		return dao.selectProduct(prodNo);
 	}
 	
 	public int selectCountTotal(String cate1, String cate2) {
