@@ -1,6 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script>
+	/*
+	$(function() {
+		let totalPrice = '${cart.sellPrice + cart.delivery}';
+		totalPrice = Math.floor(totalPoint);
+		$('.total_td').text(totalPrice);
+	});
+	*/
+</script>
         <main id="product">
             <aside>
  				 <ul class="category">
@@ -130,7 +139,7 @@
                             <td>5%</td>
                             <td>270</td>
                             <td>무료배송</td>
-                            <td>27,000</td>
+                            <td class="total_td"></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" name="1"></td>

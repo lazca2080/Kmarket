@@ -27,4 +27,22 @@ public class CsSql {
 											  + " `regip`=?, "
 											  + " `rdate`=NOW()";
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `cs_article`";
+	
+	/*** cs - list ***/
+	// 전체 게시물 개수
+	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `cs_article` WHERE `parent`=0 AND `cate`=?";
+	// 페이지 글 가져오기
+	public static final String SELECT_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
+	
+	/*** cs - view ***/
+	public static final String SELECT_ARTICLE = "SELECT * FROM `cs_article` WHERE `no`=?";
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

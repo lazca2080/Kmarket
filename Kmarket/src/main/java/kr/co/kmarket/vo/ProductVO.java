@@ -25,6 +25,10 @@ public class ProductVO {
 	private String regip;
 	private int sellPrice;
 	private int prodNo;
+  private int prodnum;
+	private int count;
+	private int total;
+  private int hit;
 	
 	// 추가
 	
@@ -40,9 +44,19 @@ public class ProductVO {
 		this.prodNo = Integer.parseInt(prodNo);
 	}
 	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	
-	
-	private int hit;
 	public int getHit() {
 		return hit;
 	}
