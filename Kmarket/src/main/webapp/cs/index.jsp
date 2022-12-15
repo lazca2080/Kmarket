@@ -72,11 +72,10 @@
                         </a>
                     </h1>
                     <ul>
-                    	<c:forEach var="latest" end="4" items="${latests}">
+                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
                     	<c:if test="${latest.cate eq 'qna'}">
                         <li>
-                            <a href="#" class="title">
-                                [${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
                                 <p>
                                     <span class="uid">${latest.uid}</span>
                                     <span class="date">${latest.rdate}</span>
