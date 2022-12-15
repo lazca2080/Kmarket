@@ -38,10 +38,16 @@ public enum ProductService {
 		return dao.selectCategory();
 	}
 	
-  //상품 네비게이션
+	//상품 네비게이션
 	public CategoryVO selectCate(String cate1, String cate2) {
 		return dao.selectCate(cate1, cate2);
 	}
+	
+	//장바구니 목록
+	public List<ProductVO> selectProductCart(String uid) {
+		return dao.selectProductCart(uid);
+	}
+	
 	
 	// 서비스 로직
 	

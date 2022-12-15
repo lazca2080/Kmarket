@@ -211,4 +211,43 @@ public class ProductDAO {
 		}
 		return vo;
 	}
+	
+	//장바구니 목록
+	public List<ProductVO> selectProductCart(String uid) {
+		
+		List<ProductVO> carts = new ArrayList<>();
+		
+		try {
+			logger.debug("selectProductCart...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_CART);
+			psmt.setString(1, uid);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setThumb1(rs.getString(1));
+				vo.setProdName(rs.getString(2));
+				vo.setDescript(rs.getString(3));
+				vo.setCount(rs.getInt(4));
+				vo.setPrice(rs.getString(5));
+				vo.setDiscount(rs.getString(6));
+				vo.setPoint(rs.getString(7));
+				vo.setDelivery(rs.getString(8));
+				vo.setSellPrice(rs.getString(9));
+				
+				carts.add(vo);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return carts;
+	}
 }

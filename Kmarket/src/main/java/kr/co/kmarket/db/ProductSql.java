@@ -66,4 +66,12 @@ public class ProductSql {
 	
 	//상품 네비게이션
 	public static final String SELECT_CATE = "SELECT * FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b ON a.cate1 = b.cate1 WHERE a.`cate1`=? and b.cate2=?";
+	
+	//장바구니 목록
+	public static final String SELECT_PRODUCTS_CART = "SELECT a.thumb1, a.prodName, a.descript, b.`count`, a.price, b.discount, b.`point`, b.delivery, a.sellPrice "
+													+ "FROM `km_product` AS a "
+													+ "JOIN `km_product_cart` AS b "
+													+ "ON a.prodNo=b.prodNo "
+													+ "WHERE `uid`=?";
+	
 }
