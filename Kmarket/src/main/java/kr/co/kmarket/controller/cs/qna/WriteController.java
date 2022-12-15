@@ -63,7 +63,7 @@ public class WriteController extends HttpServlet{
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String uid = req.getParameter("uid");
-		String regip = req.getParameter("regip");
+		String regip = req.getRemoteAddr();	//ip는 getRemoteAddr
 		
 		logger.info("WriteController doPost...data received");
 		logger.info("title: " + title);

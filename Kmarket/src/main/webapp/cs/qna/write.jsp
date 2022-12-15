@@ -69,7 +69,7 @@ $(function(){
                         </ul>
                     </aside>
                     <article>
-                        <form action="/Kmarket/cs/qna/write.do" method="post" enctype="multipart/form-data">
+                        <form action="/Kmarket/cs/qna/write.do" method="post">
                         <input type="text" name="uid" value="${sessUser.uid}"/>
                         <input type="text" name="cate" value="${cate}"/>
                         <input type="text" name="cateType1" value="${cateType1}"/>
