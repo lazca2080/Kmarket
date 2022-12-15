@@ -25,7 +25,7 @@ public enum IndexService {
 		return dao.selectCate1();
 	}
 	
-	public List<ProductVO> selectBest() {
-		return dao.selectBest();
+	public List<ProductVO> selectIndex() {
+		return dao.selectIndex();
 	}
 }
