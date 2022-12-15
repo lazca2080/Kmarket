@@ -46,30 +46,15 @@
                         </nav>
                         <table>
                             <tbody>
-                            	<!-- 방법1: cateType1이 구분되지 않은 리스트 출력-->
                             	<c:forEach var="article" items="${articles}">
                             		<tr id="articleList">
                             			<td>
-                            				<a href="#">[${article.cateType1}] ${article.title}</a>
+                            				<a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a>
                             			</td>
                             			<td>${article.uid}</td>
                                     	<td>${article.rdate}</td>
                             		</tr>
                             	</c:forEach>
-                            	<!-- 방법2: 리스트 출력 안 됨 (타산지석...)-->
-                            	<%-- 
-                            	<c:forEach var="article" items="${articles}">
-                            		<tr id="articleList">
-                            			<c:choose>
-                            				<c:when test="${article.cateType1} eq 회원">
-                            					<td>
-                            						<a href="#">${article.cate} [${article.cateType1}] ${article.title}</a>
-                            					</td>
-                            				</c:when>
-                            			</c:choose>
-                            		</tr>
-                            	</c:forEach>
-                            	--%>
                             </tbody>
                         </table>
                         <div class="page">

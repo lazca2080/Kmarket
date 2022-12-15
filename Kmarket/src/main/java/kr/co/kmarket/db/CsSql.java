@@ -34,7 +34,8 @@ public class CsSql {
 	// 페이지 글 가져오기
 	public static final String SELECT_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
 	
-	
+	/*** cs - view ***/
+	public static final String SELECT_ARTICLE = "SELECT * FROM `cs_article` WHERE `no`=?";
 	
 	
 	

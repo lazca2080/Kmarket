@@ -91,7 +91,11 @@ public enum CsService {
 	}
 	
 	
-	
+	/*** cs - view ***/
+	public CsVO selectArticle(String no) {
+		logger.info("csService-selectArticle...");
+		return dao.selectArticle(no);
+	}
 	
 	
 	
