@@ -41,7 +41,8 @@ public enum ProductService {
   //상품 네비게이션
 	public List<CategoryVO> selectCate(String cate1, String cate2) {
 		return dao.selectCate(cate1, cate2);
-  
+	}
+	
 	// 서비스 로직
 	
 	public MultipartRequest fileUpload(HttpServletRequest req, String path) throws IOException {
