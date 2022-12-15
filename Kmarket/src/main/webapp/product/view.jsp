@@ -101,7 +101,7 @@
                 </nav>
                 <article class="info">
                     <div class="image">
-                        <img src="/Kmarket/home/prodImg/${product.thumb2}" alt="상품이미지thumb2">
+                        <img src="/home/prodImg/${product.thumb2}" alt="상품이미지thumb2">
                     </div>
                     <div class="summary">
                         <nav>
@@ -119,6 +119,8 @@
                             </h5>
                         </nav>
                         <nav>
+                        	<c:choose>
+                        	<c:when test="${product.discount ne 0}">
                             <div class="org_price">
                                 <del>${product.price}</del>
                                 <span>${product.discount}%</span>
@@ -126,9 +128,24 @@
                             <div class="dis_price">
                                 <ins>${product.sellPrice}</ins>
                             </div>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="dis_price">
+                                <ins>${product.sellPrice}</ins>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
                         </nav>
                         <nav>
-                            <span class="delivery">무료배송</span>
+                        	<c:choose>
+                        	<c:when test="${product.delivery eq 0}">
+                            <span class="freeDelivery">무료배송</span>
+                            </c:when>
+                            <c:otherwise>
+                            <span class="delivery">배송비 ${product.delivery}원</span>
+                            </c:otherwise>
+                            </c:choose>
+                            
                             <span class="arrival">모레(금) 7/8 도착예정</span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
@@ -161,9 +178,9 @@
                 </article>
                 <article class="detail">
                     <nav><h1>상품정보</h1></nav>
-                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="thumb3">
-                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="detail">
-                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="detail">
+                    <img src="/home/prodImg/${product.detail}" alt="thumb3">
+                    <img src="/home/prodImg/${product.detail}" alt="detail">
+                    <img src="/home/prodImg/${product.detail}" alt="detail">
                 </article>
                 <article class="notice">
                     <nav>
@@ -173,31 +190,31 @@
                     <table>
                         <tr>
                             <td>상품번호</td>
-                            <td>11111111111</td>
+                            <td>${product.prodNo}</td>
                         </tr>
                         <tr>
                             <td>상품상태</td>
-                            <td>새상품</td>
+                            <td>${product.status}</td>
                         </tr>
                         <tr>
                             <td>부가세 면세여부</td>
-                            <td>과세상품</td>
+                            <td>${product.duty}</td>
                         </tr>
                         <tr>
                             <td>영수증발행</td>
-                            <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                            <td>${product.receipt}</td>
                         </tr>
                         <tr>
                             <td>사업자구분</td>
-                            <td>사업자 판매자</td>
+                            <td>${product.bizType}</td>
                         </tr>
                         <tr>
                             <td>브랜드</td>
-                            <td>블루포스</td>
+                            <td>${product.company}</td>
                         </tr>
                         <tr>
                             <td>원산지</td>
-                            <td>국내생산</td>
+                            <td>${product.origin}</td>
                         </tr>
                     </table>
                     <table>
