@@ -40,14 +40,7 @@ public class ProductVO {
 		this.prodNo = Integer.parseInt(prodNo);
 	}
 	
-	private int prodnum;
 	
-	public int getProdnum() {
-		return prodnum;
-	}
-	public void setProdnum(int prodnum) {
-		this.prodnum = prodnum;
-	}
 	
 	private int hit;
 	public int getHit() {

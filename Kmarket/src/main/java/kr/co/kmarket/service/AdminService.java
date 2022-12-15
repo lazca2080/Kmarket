@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.kmarket.dao.AdminDAO;
 import kr.co.kmarket.dao.ProductDAO;
+import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public enum AdminService {
@@ -17,7 +18,17 @@ public enum AdminService {
 		return dao.selectProducts();
 	}
 	
+	
+	
 	public List<ProductVO> selectProductss(String uid) {
 		return dao.selectProductss(uid);
 	}
+
+	
+	
+	/*
+	 * public List<ProductVO> selectProductKeyword(String uid,String keyword){
+		return dao.selectProductKeyword(uid, keyword);
+	}
+	*/
 }

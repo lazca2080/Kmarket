@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="./_header.jsp"></jsp:include>
+<jsp:include page="../_header.jsp"></jsp:include>
         <main>
             <aside>
                  <!-- Global Navigation Bar -->
@@ -70,7 +70,7 @@
                             <option value="search1">제조사</option>
                             <option value="search1">판매자</option>
                         </select>
-                        <input type="text" name="search">
+                        <input type="text" name="search" placeholder="검색할 단어">
                     </div>
                     <table>
                         <tr>
@@ -90,7 +90,7 @@
                         <tr>
                             <td><input type="checkbox" name="상품코드"></td>
                             <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
-                            <td>${Product.prodnum}</td>
+                            <td>${Product.prodNo}</td>
                             <td>${Product.prodName}</td>
                             <td>${Product.price}</td>
                             <td>${Product.discount}</td>
@@ -132,4 +132,4 @@
                 </p>
             </section>
         </main>
-<jsp:include page="./_footer.jsp"></jsp:include>
+<jsp:include page="../_footer.jsp"></jsp:include>

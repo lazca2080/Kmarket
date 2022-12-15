@@ -26,6 +26,7 @@ public class AdminDAO {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
 			Statement stmt = conn.createStatement();
+			
 			ResultSet rs = stmt.executeQuery(AdminSql.selectProduct);
 			
 			if(rs.next()) {
@@ -68,13 +69,16 @@ public class AdminDAO {
 			
 			while(rs.next()) {
 				ProductVO product = new ProductVO();
-				product.setProdnum(rs.getInt(1));
-				product.setProdName(rs.getString(1));
-				product.setPrice(rs.getString(1));
-				product.setDiscount(rs.getInt(1));
-				product.setPoint(rs.getInt(1));
-				product.setStock(rs.getInt(1));
-				product.setHit(rs.getInt(1));
+				product.setThumb1(rs.getString(17));
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(4));
+				product.setPrice(rs.getString(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setHit(rs.getInt(14));
+				
+				products.add(product);
 			}
 			
 			conn.close();
@@ -88,6 +92,48 @@ public class AdminDAO {
 		return products;
 	}
 	
+	/*public List<ProductVO> selectProductKeyword(String uid,String keyword) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.debug("selectProductKeyword...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductKeyword);
+			psmt.setString(1, "%"+keyword+"%");
+			psmt.setString(1, "%"+keyword+"%");
+			psmt.setString(3, uid);
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(4));
+				product.setCompany(rs.getString(6));
+				product.setDescript(rs.getString(5));
+				product.setSeller(rs.getString(7));
+				product.setPrice(rs.getString(8));
+				product.setDiscount(rs.getString(9));
+				product.setPoint(rs.getString(10));
+				product.setStock(rs.getString(11));
+				product.setDelivery(rs.getString(13));
+				product.setThumb1(rs.getString(17));
+				product.setThumb2(rs.getString(18));
+				product.setThumb3(rs.getString(19));
+				product.setDetail(rs.getString(20));
+				
+				products.add(product);
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return products;
+	}
+	*/
 	
 	
 }
