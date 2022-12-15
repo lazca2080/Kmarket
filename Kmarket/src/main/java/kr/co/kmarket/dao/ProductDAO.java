@@ -121,6 +121,37 @@ public class ProductDAO {
 		return products;
 	}
 	
+	public List<CategoryVO> selectCategory() {
+		
+		List<CategoryVO> category = new ArrayList<>();
+		
+		try {
+			logger.debug("selectCategory...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Indexsql.SELECT_CATEGORY);
+			
+			while(rs.next()) {
+				CategoryVO vo = new CategoryVO();
+				vo.setCate1(rs.getInt(1));
+				vo.setC1Name(rs.getString(2));
+				vo.setCate2(rs.getInt(4));
+				vo.setC2Name(rs.getString(5));
+				
+				category.add(vo);
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return category;
+	}
+	
 	public int selectCountTotal(String cate1, String cate2) {
 		
 		int total = 0;
