@@ -145,9 +145,10 @@ public class ProductDAO {
 				vo.setPrice(rs.getString(8));
 				vo.setDiscount(rs.getString(9));
 				vo.setPoint(rs.getString(10));
+				vo.setDelivery(rs.getString(13));
 				vo.setThumb2(rs.getString(18));
 				vo.setDetail(rs.getString(19));
-				vo.setStatus(rs.getString(20));
+				vo.setStatus(rs.getString(21));
 				vo.setDuty(rs.getString(21));
 				vo.setReceipt(rs.getString(22));
 				vo.setBizType(rs.getString(23));

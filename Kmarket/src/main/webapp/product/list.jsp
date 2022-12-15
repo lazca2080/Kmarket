@@ -131,7 +131,7 @@
                 	<c:forEach var="products" items="${products}">
                     <tr>
                         <td><a href="/Kmarket/product/view.do?prodNo=${products.prodNo}" class="thumb">
-                            <img src="/Kmarket/home/prodImg/${products.thumb1}" alt="상품이미지">
+                            <img src="/home/prodImg/${products.thumb1}" alt="상품이미지">
                         </a></td>
                         <td>
                             <h3 class="name">${products.prodName}</h3>
@@ -140,15 +140,19 @@
                         <td>
                             <ul>
                                 <li><ins class="dis-price">${products.sellPrice}</ins></li>
+                                <c:choose>
+                                <c:when test="${products.discount ne 0}">
                                 <li>
                                     <del class="org-price">${products.price}</del>
-                                    <span class="discount">${products.discount}</span>
+                                    <span class="discount">${products.discount}%</span>
                                 </li>
-                                <c:if test="${products.delivery eq 0 }">
+                                </c:when>
+                                </c:choose>
+                                <c:if test="${products.delivery eq 0}">
                                 <li><span class="free-delivery">배달비무료</span></li>
                                 </c:if>
-                                <c:if test="${products.delivery ne 0 }">
-                                <li><span>${products.delivery}원</span></li>
+                                <c:if test="${products.delivery ne 0}">
+                                <li><span>배송비 ${products.delivery}원</span></li>
                                 </c:if>
                             </ul>
                         </td>

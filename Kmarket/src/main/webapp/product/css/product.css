@@ -271,9 +271,14 @@
 }
 
 #product > .view > .info > .summary .dis_price > ins::after { content: "원"; }
-#product > .view > .info > .summary .delivery {
+#product > .view > .info > .summary .freeDelivery {
     font-size: 16px;
     color: #2e8de5;
+}
+
+#product > .view > .info > .summary .delivery {
+    font-size: 16px;
+    color: black;
 }
 
 #product > .view > .info > .summary .origin {

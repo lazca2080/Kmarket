@@ -125,6 +125,7 @@ public class IndexDAO {
 			
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
 				vo.setProdCate1(rs.getString(2));
 				vo.setProdCate2(rs.getString(3));
 				vo.setProdName(rs.getString(4));

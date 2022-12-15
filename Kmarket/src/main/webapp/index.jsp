@@ -142,7 +142,7 @@
                     <ol>
                     	<c:forEach var="best" items="${index}" begin="0" end="4">
                         <li>
-                            <a href="/Kmarket/product/view?cate1=${best.prodCate1}&cate2=${best.prodCate2}">
+                            <a href="/Kmarket/product/view.do?cate1=${best.prodCate1}&cate2=${best.prodCate2}&prodNo=${best.prodNo}">
                                 <div class="thumb">
                                     <i>1</i>
                                     <img src="/Kmarket/home/prodImg/${best.thumb1}" alt="item1">
@@ -164,9 +164,9 @@
 	                                </div>
 	                                </c:when>
 	                                <c:otherwise>
-	                                <div class="dis_price">
+									<div class="dis_price">
 	                                    <ins>
-	                                    	${best.price}
+	                                    	${best.sellPrice}
 	                                    </ins>
 	                                </div>
 	                                </c:otherwise>
@@ -216,12 +216,14 @@
                     </h3>
                     <c:forEach var="hit" items="${index}" begin="5" end="12">
                     <article>
-                        <a href="/Kmarket/product/view?cate1=${hit.prodCate1}&cate2=${hit.prodCate2}">
+                        <a href="/Kmarket/product/view.do?cate1=${hit.prodCate1}&cate2=${hit.prodCate2}&prodNo=${hit.prodNo}">
                             <div class="thumb">
-                                <img src="/Kmarket/home/prodImg/${hit.thumb1}" alt="t1">
+                                <img src="/home/prodImg/${hit.thumb1}" alt="t1">
                             </div>
                             <h2>${hit.prodName}</h2>
                             <p>${hit.descript}</p>
+                            <c:choose>
+                            <c:when test="${hit.discount ne 0}">
                             <div class="org_price">
                                 <del>${hit.price}</del>
                                 <span>
@@ -232,8 +234,32 @@
                                 <ins>
                                     ${hit.sellPrice}
                                 </ins>
+								<c:choose>
+                                <c:when test="${hit.delivery ne 0}">
+                                <span>배송비 ${hit.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
                                 <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
+                            </c:when>
+                            <c:otherwise>
+							<div class="dis_price">
+                                <ins>
+                                    ${hit.sellPrice}
+                                </ins>
+								<c:choose>
+                                <c:when test="${hit.delivery ne 0}">
+                                <span>배송비 ${hit.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
                         </a>
                     </article>
                     </c:forEach>
@@ -245,12 +271,14 @@
                     </h3>
                     <c:forEach var="score" items="${index}" begin="13" end="20">
                     <article>
-                        <a href="/Kmarket/product/view?cate1=${score.prodCate1}&cate2=${score.prodCate2}">
+                        <a href="/Kmarket/product/view.do?cate1=${score.prodCate1}&cate2=${score.prodCate2}&prodNo=${score.prodNo}">
                             <div class="thumb">
-                                <img src="/Kmarket/home/prodImg/${score.thumb1}" alt="t1">
+                                <img src="/home/prodImg/${score.thumb1}" alt="t1">
                             </div>
                             <h2>${score.prodName}</h2>
                             <p>${score.descript }</p>
+                            <c:choose>
+                            <c:when test="${score.discount ne 0}">
                             <div class="org_price">
                                 <del>${score.price}</del>
                                 <span>
@@ -261,8 +289,32 @@
                                 <ins>
                                     ${score.sellPrice}
                                 </ins>
-                                <span>배송비 2500</span>
+                                <c:choose>
+                                <c:when test="${score.delivery ne 0}">
+                                <span>배송비 ${score.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
+							</c:when>
+							<c:otherwise>
+							<div class="dis_price">
+                                <ins>
+                                    ${score.sellPrice}
+                                </ins>
+                                <c:choose>
+                                <c:when test="${score.delivery ne 0}">
+                                <span>배송비 ${score.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
+                            </div>
+							</c:otherwise>
+                            </c:choose>
                         </a>
                     </article>
                     </c:forEach>
@@ -273,12 +325,14 @@
                     </h3>
                     <c:forEach var="newProd" items="${index}" begin="21" end="28">
                     <article>
-                        <a href="/Kmarket/product/view?cate1=${newProd.prodCate1}&cate2=${newProd.prodCate2}">
+                        <a href="/Kmarket/product/view.do?cate1=${newProd.prodCate1}&cate2=${newProd.prodCate2}&prodNo=${newProd.prodNo}">
                             <div class="thumb">
-                                <img src="/Kmarket/home/prodImg/${newProd.thumb1}" alt="t1">
+                                <img src="/home/prodImg/${newProd.thumb1}" alt="t1">
                             </div>
                             <h2>${newProd.prodName}</h2>
                             <p>${newProd.descript }</p>
+							<c:choose>
+                            <c:when test="${newProd.discount ne 0}">
                             <div class="org_price">
                                 <del>${newProd.price}</del>
                                 <span>
@@ -289,8 +343,32 @@
                                 <ins>
                                     ${newProd.sellPrice}
                                 </ins>
-                                <span>배송비 2500</span>
+								<c:choose>
+                                <c:when test="${newProd.delivery ne 0}">
+                                <span>배송비 ${newProd.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
+							</c:when>
+							<c:otherwise>
+							<div class="dis_price">
+                                <ins>
+                                    ${newProd.sellPrice}
+                                </ins>
+								<c:choose>
+                                <c:when test="${newProd.delivery ne 0}">
+                                <span>배송비 ${newProd.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
+                            </div>
+							</c:otherwise>
+                            </c:choose>
                         </a>
                     </article>
                     </c:forEach>
@@ -303,14 +381,14 @@
                     <c:choose>
                     <c:when test="${not empty discount}">
                     <article>
-                        <a href="/Kmarket/product/view?cate1=${discount.prodCate1}&cate2=${discount.prodCate2}">
+                        <a href="/Kmarket/product/view.do?cate1=${discount.prodCate1}&cate2=${discount.prodCate2}&prodNo=${discount.prodNo}">
                             <div class="thumb">
-                                <img src="/Kmarket/home/prodImg/${discount.thumb1}" alt="t1">
+                                <img src="/home/prodImg/${discount.thumb1}" alt="t1">
                             </div>
                             <h2>${discount.prodName}</h2>
                             <p>${discount.descript}</p>
                             <c:choose>
-                            <c:when test="${discount.discount == '0'}">
+                            <c:when test="${discount.discount ne 0}">
                             <div class="org_price">
                                 <del>${discount.price}</del>
                                 <span>
@@ -321,19 +399,29 @@
                                 <ins>
                                     ${discount.sellPrice}
                                 </ins>
-                                <span>배송비 ${discount.delivery}</span>
+								<c:choose>
+                                <c:when test="${discount.delivery ne 0}">
+                                <span>배송비 ${discount.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
                             </c:when>
                             <c:otherwise>
-								<div class="org_price">
-                                <del>${discount.price}</del>
-                                <span>
-                                </span>
-                            </div>
-                            <div class="dis_price">
+							<div class="dis_price">
                                 <ins>
+                                    ${discount.sellPrice}
                                 </ins>
-                                <span>배송비 2500</span>
+								<c:choose>
+                                <c:when test="${discount.delivery ne 0}">
+                                <span>배송비 ${discount.delivery}원</span>
+                                </c:when>
+                                <c:otherwise>
+                                <span class="free">무료배송</span>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
                             </c:otherwise>
                             </c:choose>
