@@ -101,30 +101,30 @@
                 </nav>
                 <article class="info">
                     <div class="image">
-                        <img src="	https://via.placeholder.com/460x460" alt="상품이미지thumb2">
+                        <img src="/Kmarket/home/prodImg/${product.thumb2}" alt="상품이미지thumb2">
                     </div>
                     <div class="summary">
                         <nav>
-                            <h1>(주)판매자명</h1>
+                            <h1>${product.company}</h1>
                             <h2>
                                 상품번호 : 
-                                <span>11111111111</span>
+                                <span>${product.prodNo}</span>
                             </h2>
                         </nav>
                         <nav>
-                            <h3>상품명</h3>
-                            <p>상품설명 출력</p>
+                            <h3>${product.prodName}</h3>
+                            <p>${product.descript}</p>
                             <h5 class="rating star4">
                                 <a href="#">상품평보기</a>
                             </h5>
                         </nav>
                         <nav>
                             <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
+                                <del>${product.price}</del>
+                                <span>${product.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>27,000</ins>
+                                <ins>${product.sellPrice}</ins>
                             </div>
                         </nav>
                         <nav>
@@ -150,7 +150,7 @@
                             <button class="increase">+</button>
                         </div>
                         <div class="total">
-                            <span>35,000</span>
+                            <span>${product.sellPrice+product.delivery}</span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
@@ -161,9 +161,9 @@
                 </article>
                 <article class="detail">
                     <nav><h1>상품정보</h1></nav>
-                    <img src="https://via.placeholder.com/860x460" alt="thumb3">
-                    <img src="https://via.placeholder.com/860x460" alt="detail">
-                    <img src="https://via.placeholder.com/860x460" alt="detail">
+                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="thumb3">
+                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="detail">
+                    <img src="/Kmarket/home/prodImg/${product.detail}" alt="detail">
                 </article>
                 <article class="notice">
                     <nav>

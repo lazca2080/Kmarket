@@ -96,13 +96,13 @@ public class RegisterController extends HttpServlet{
 		String ext = thumb1.substring(i);
 		
 		int i1 = thumb2.lastIndexOf(".");
-		String ext1 = thumb2.substring(i);
+		String ext1 = thumb2.substring(i1);
 		
 		int i2 = thumb3.lastIndexOf(".");
-		String ext2 = thumb3.substring(i);
+		String ext2 = thumb3.substring(i2);
 		
 		int i3 = detail.lastIndexOf(".");
-		String ext3 = detail.substring(i);
+		String ext3 = detail.substring(i3);
 		
 		UUID uThumb1 = UUID.randomUUID();
 		UUID uThumb2 = UUID.randomUUID();
