@@ -39,9 +39,8 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 
 		//상품 네비게이션
-		List<CategoryVO> category = service.selectCate(cate1, cate2);
-		
-		
+		CategoryVO category = service.selectCate(cate1, cate2);
+		req.setAttribute("category", category);
 		
 		//현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -73,7 +72,6 @@ public class ListController extends HttpServlet{
 	 	req.setAttribute("pageGroupStart", result[0]);
 	 	req.setAttribute("pageGroupEnd", result[1]);
 	 	req.setAttribute("pageStartNum", pageStartNum+1);
-	 	req.setAttribute("category", category);
 	 	
 	 	
 	 	logger.info("produtcts : " +products);
