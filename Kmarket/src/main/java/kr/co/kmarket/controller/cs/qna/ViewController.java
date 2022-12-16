@@ -31,7 +31,7 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("ViewController doGet...");
+		logger.info("cs::qna-ViewController doGet...");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
