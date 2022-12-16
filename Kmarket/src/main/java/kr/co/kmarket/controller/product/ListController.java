@@ -2,6 +2,7 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +38,7 @@ public class ListController extends HttpServlet{
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String pg = req.getParameter("pg");
+		String sort  = req.getParameter("sort");
 
 		//상품 네비게이션
 		CategoryVO category = service.selectCate(cate1, cate2);
@@ -61,7 +63,8 @@ public class ListController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 		
 		// 상품목록 출력
-	 	List<ProductVO> products = service.selectProducts(start, cate1, cate2);
+	 	List<ProductVO> products = service.selectProducts(start, cate1, cate2, sort);
+	 	Map<String, Object> cate = service.selectCategory();
 		
 	 	req.setAttribute("products", products);
 	 	req.setAttribute("cate1", cate1);
@@ -72,7 +75,8 @@ public class ListController extends HttpServlet{
 	 	req.setAttribute("pageGroupStart", result[0]);
 	 	req.setAttribute("pageGroupEnd", result[1]);
 	 	req.setAttribute("pageStartNum", pageStartNum+1);
-	 	
+	 	req.setAttribute("sort", sort);
+	 	req.setAttribute("cate", cate);
 	 	
 	 	logger.info("produtcts : " +products);
 	 	logger.info("cate1 : " +cate1);
