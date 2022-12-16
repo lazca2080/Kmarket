@@ -1,6 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script>
+	$(function(){
+		
+		let num = 1;
+		
+		$('button[class=increase]').click(function(){
+			num++;
+			$('input[name=num]').val(num);
+			console.log(num);
+		});
+		
+		$('button[class=decrease]').click(function(){
+			if(num == 1){
+				return;
+			}
+			num--;
+			$('input[name=num]').val(num);
+		});
+		
+		$('.order').click(function(){
+			
+			let prodNo = $(this).data('no');
+			let count  = $('input[name=num]').val();
+			
+			location.href = "/Kmarket/product/order.do?prodNo="+prodNo+"&order=order&count="+count;
+		});
+	});
+</script>
 <script >
 /*
 	$(function() {
@@ -231,7 +259,7 @@
                         </div>
                         <div class="button">
                             <input type="button" class="cart" value="장바구니">
-                            <input type="button" class="order" value="구매하기">
+                            <input type="button" class="order" data-order="order" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="구매하기">
                         </div>
                     </div>
                 </article>

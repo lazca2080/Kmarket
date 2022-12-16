@@ -28,6 +28,10 @@
     margin-top: 10px;
 }
 
+#product > section > nav > p > strong {
+	font-weight: bold;
+}
+
 #product > .list > .sort {
     margin: 0 0 20px 0;
     border-top: 2px solid #111;
@@ -141,10 +145,6 @@
     width: 80px;
     height: 19px;
     background-repeat: no-repeat;
-}
-
-#product .badge.power {
-    background-image: url(../img/ico_power_dealer.gif);
 }
 
 #product > .list > table .rating {

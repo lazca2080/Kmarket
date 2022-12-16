@@ -27,8 +27,8 @@ public enum ProductService {
 	}
 	
 	//Product list 목록 불러오기
-	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
-		return dao.selectProducts(limiteStart, cate1, cate2);
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
+		return dao.selectProducts(limiteStart, cate1, cate2, sort);
 	}
 	
 	//Product 상품 하나 불러오기
