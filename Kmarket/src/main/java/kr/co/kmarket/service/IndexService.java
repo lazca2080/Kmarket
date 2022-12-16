@@ -17,7 +17,7 @@ public enum IndexService {
 		return dao.selectCate(cate);
 	}
 	
-	public List<CategoryVO> selectCategory() {
+	public Map<String, Object> selectCategory() {
 		return dao.selectCategory();
 	}
 	

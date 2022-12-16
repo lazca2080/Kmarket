@@ -29,8 +29,26 @@ public class ProductVO {
 	private int count;
 	private int total;
 	private int hit;
+  private String c1Name;
+	private String c2Name;
 	
 	// 추가
+	
+	public String getC1Name() {
+		return c1Name;
+	}
+	
+	public void setC1Name(String c1Name) {
+		this.c1Name = c1Name;
+	}
+	
+	public String getC2Name() {
+		return c2Name;
+	}
+	
+	public void setC2Name(String c2Name) {
+		this.c2Name = c2Name;
+	}
   
   public int getProdnum() {
 		return prodnum;
@@ -39,8 +57,7 @@ public class ProductVO {
 	public void setProdnum(int prodnum) {
 		this.prodnum = prodnum;
 	}
-  
-  
+	
 	public int getProdNo() {
 		return prodNo;
 	}

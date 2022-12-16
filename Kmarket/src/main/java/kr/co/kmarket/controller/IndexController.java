@@ -36,12 +36,8 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
-		
-		for(int i=10; i<=18; i++) {
-			List<CategoryVO> category = service.selectCate(i);
-			session.setAttribute("cate"+i, category);
-		};
+		Map<String, Object> cate = service.selectCategory();
+		req.setAttribute("cate", cate);
 		
 		List<ProductVO> index = service.selectIndex();
 		req.setAttribute("index", index);
