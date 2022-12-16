@@ -25,7 +25,7 @@ public class CsDAO {
 	public List<CsVO> selectLatests(String cate1, String cate2, String cate3){
 		List<CsVO> latests = new ArrayList<>();
 		try {
-			logger.info("selectLatests...");
+			logger.info("selectLatests");
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_LATESTS);
 			psmt.setString(1, cate1);
@@ -172,27 +172,21 @@ public class CsDAO {
 	}
 
 	/*** cs::faq list ***/
-	public Map<String, Object> selectFaqArticles(String cateType1, int num) {
-		
-		
-			Map<String, Object> map = new HashMap<>();
-			
-			List<CsVO> cate1 = null;
-			num = 1;
-			
+	// cate - cateType1
+	public List<CsVO> selectFaqArticles(String cate, String cateType1){
+		List<CsVO> articles = new ArrayList<>();
 		try {
-			logger.info("CsDAO-selectFaqArticles...");
+			
+			logger.info("selectFaqArticles");
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_FAQ_ARTICLES);
-			psmt.setString(1, cateType1);
+			psmt.setString(1, cate);
+			psmt.setString(2, cateType1);
 			
 			ResultSet rs = psmt.executeQuery();
 			
-			String type = null;
-			
 			while(rs.next()) {
-					
 				CsVO article = new CsVO();
 				article.setNo(rs.getInt(1));
 				article.setParent(rs.getInt(2));
@@ -205,53 +199,8 @@ public class CsDAO {
 				article.setRegip(rs.getString(9));
 				article.setRdate(rs.getString(10));
 				
-				if(num != 1) {
-					if(!type.equals(article.getCateType1())) {
-						type = rs.getString(4);
-						map.put("cate" + num++, type);
-						cate1 = new ArrayList<>();
-					}
-				}else {
-					type = rs.getString(4);
-					cate1 = new ArrayList<>();
-				}
-				
-				cate1.add(article);
-			}	
-				
-//				List<CsVO> vos = new ArrayList<>();
-//				
-//				String currentType2 = rs.getString(5);
-//				rs.next();
-//				
-//				String nextType2 = rs.getString(5);
-//				rs.previous();
-//				
-//				if(nextType2 != null) {
-//				
-//					while(currentType2.equals(nextType2)) {
-//						
-//						CsVO article = new CsVO();
-//						article.setNo(rs.getInt(1));
-//						article.setParent(rs.getInt(2));
-//						article.setCate(rs.getString(3));
-//						article.setCateType1(rs.getString(4));
-//						article.setCateType2(rs.getString(5));
-//						article.setTitle(rs.getString(6));
-//						article.setContent(rs.getString(7));
-//						article.setUid(rs.getString(8));
-//						article.setRegip(rs.getString(9));
-//						article.setRdate(rs.getString(10));
-//						
-//						latests.add(article);
-//						
-//						
-//					}
-//					
-//				}else {
-//					
-//				}
-				
+				articles.add(article);
+			}
 			
 			rs.close();
 			psmt.close();
@@ -260,9 +209,9 @@ public class CsDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		return map;
-
+		return articles;
 	}
+	
 	
 	
 	/*** cs - view ***/
@@ -270,7 +219,7 @@ public class CsDAO {
 		CsVO vo = null;
 		
 		try {
-			logger.info("CsDAO-selectArticle...");
+			logger.info("CsDAO-selectArticle");
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);

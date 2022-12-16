@@ -92,9 +92,16 @@ public enum CsService {
 	}
 	
 	/*** cs::faq list ***/
-	public Map<String, Object> selectFaqArticles(String cateType1, int num){
-		return dao.selectFaqArticles(cateType1, num);
+	// cate - cateType1
+	public List<CsVO> selectFaqArticles(String cate, String cateType1){
+		logger.info("selectFaqArticles");
+		return dao.selectFaqArticles(cate, cateType1);
 	}
+	
+	
+//	public Map<String, Object> selectFaqArticles(String cateType1, int num){
+//	return dao.selectFaqArticles(cateType1, num);
+//}
 	
 	
 	/*** cs - view ***/

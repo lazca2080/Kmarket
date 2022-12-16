@@ -38,69 +38,145 @@
                             <h2>자주묻는 질문</h2>
                             <ul>
                             <li class="${cateType1 == '회원' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=회원">회원</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">회원</a>
                             </li>
                             <li class="${cateType1 == '쿠폰/이벤트' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=쿠폰/이벤트">쿠폰/이벤트</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=쿠폰/이벤트">쿠폰/이벤트</a>
                             </li>
                             <li class="${cateType1 == '주문/결제' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=주문/결제">주문/결제</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=주문/결제">주문/결제</a>
                             </li>
                             <li class="${cateType1 == '배송' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=배송">배송</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=배송">배송</a>
                             </li>
                             <li class="${cateType1 == '취소/반품/교환' ? 'on' : 'off'}"> 
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=취소/반품/교환">취소/반품/교환</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=취소/반품/교환">취소/반품/교환</a>
                             </li>
                             <li class="${cateType1 == '여행/숙박/항공' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=여행/숙박/항공">여행/숙박/항공</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=여행/숙박/항공">여행/숙박/항공</a>
                             </li>
                             <li class="${cateType1 == '안전거래' ? 'on' : 'off'}">
-                                <a href="/Kmarket/cs/faq/list.do?cate=qna&cateType1=안전거래">안전거래</a>
+                                <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=안전거래">안전거래</a>
                             </li>
                         </ul>
                         </aside>
+                        
                         <article>
-                            <nav>
-                                <h1>${cateType1}</h1>
+                        	<nav>
+                                <h1>cateType1: ${cateType1}</h1>
                                 <h2>가장 자주 묻는 질문입니다.</h2>
                             </nav>
-                             <c:forEach var="article" items="${articles.cate1}">
-                            <div>
-                                <h3>${cateType2}</h3>
-                                <ul>
-	                                    <li>
-	                                        <a href="#">
-	                                            <span>Q.</span>
-	                                             ${article.title}
-	                                        </a>
-	                                    </li>
-                                    <li class="more">
-                                        <a href="#">더보기</a>
-                                    </li>
-                                </ul>
-                            </div>
+	                         <c:set var="i" value="0"/>
+                             <c:forEach var="article" items="${articles}" begin="${i}" step="${i+3}" varStatus="status" >
+	                            <div>
+	                                <h3>${article.cateType2}</h3>
+	                                <c:choose>
+	                                	<c:when test="${status.index eq 0}">
+                                			<ul>
+                                				<c:forEach var="article" items="${articles}" begin="0" end="2">
+                                				<li>
+                                					<a href="#"><span>Q.</span>
+                                						${article.title}
+                                					</a>
+                                				</li>
+                                				</c:forEach>
+                                				<li class="more">
+                                					<a href="#">더보기</a>
+                                				</li>
+                                			</ul>
+	                                	</c:when>
+	                                	<c:when test="${status.index eq 3}">
+                                			<ul>
+                                				<c:forEach var="article" items="${articles}" begin="3" end="5">
+                                				<li>
+                                					<a href="#"><span>Q.</span>
+                                						${article.title}
+                                					</a>
+                                				</li>
+                                				</c:forEach>
+                                				<li class="more">
+                                					<a href="#">더보기</a>
+                                				</li>
+                                			</ul>
+	                                	</c:when>
+	                                	<c:when test="${status.index eq 6}">
+                                			<ul>
+                                				<c:forEach var="article" items="${articles}" begin="6" end="8">
+                                				<li>
+                                					<a href="#"><span>Q.</span>
+                                						${article.title}
+                                					</a>
+                                				</li>
+                                				</c:forEach>
+                                				<li class="more">
+                                					<a href="#">더보기</a>
+                                				</li>
+                                			</ul>
+	                                	</c:when>
+	                                	<c:when test="${status.index eq 9}">
+                                			<ul>
+                                				<c:forEach var="article" items="${articles}" begin="9" end="11">
+                                				<li>
+                                					<a href="#"><span>Q.</span>
+                                						${article.title}
+                                					</a>
+                                				</li>
+                                				</c:forEach>
+                                				<li class="more">
+                                					<a href="#">더보기</a>
+                                				</li>
+                                			</ul>
+	                                	</c:when>
+	                                </c:choose>
+	                            </div>
                             </c:forEach>
-                           <%--  <c:forEach var="article" items="${articles}">
-                            <div>
-                                <h3>${cateType2}</h3>
-                                <ul>
-                                	<c:forEach var="article" items="${articles}">
-	                                    <li>
-	                                        <a href="#">
-	                                            <span>Q.</span>
-	                                             ${article.title}
-	                                        </a>
+                        
+                            <%-- <nav>
+                                <h1>cateType1: ${cateType1}</h1>
+                                <h2>가장 자주 묻는 질문입니다.</h2>
+                            </nav>
+                            <c:set var="i" value="0"/>
+                             <c:forEach var="article" items="${articles}" begin="0" step="3">	<!-- 나중에 step="3" 고칠 것 -->
+	                            <div>
+	                                <h3>${article.cateType2}</h3>
+	                                <ul>
+	                                	<c:forEach var="article" items="${articles}" varStatus="status" begin="0">
+                               				<li>
+		                                        <a href="#">
+		                                            <span>Q.</span>
+		                                          	[${status.index}] ${article.title}  (${article.cateType1}, ${article.cateType2}) 
+		                                        </a>
+		                                    </li>
+		                                    <c:set var="i" value="${i+1}"/>
+	                                    </c:forEach>
+	                                    <li class="more">
+	                                        <a href="#">더보기</a>
 	                                    </li>
-                                    </c:forEach>
-                                    
-                                    <li class="more">
-                                        <a href="#">더보기</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            </c:forEach> --%>
-                                                        
+	                                </ul>
+	                            </div>
+                            </c:forEach>   --%>
+                           
+                          <%-- <c:forEach var="article" items="${articles}" begin="0" step="10">
+	                            <div>
+	                                <h3>${article.cateType2}</h3>
+	                                <ul>
+	                                	<c:forEach var="article" items="${articles}" begin="0" end="9">
+		                                    <li>
+		                                        <a href="#">
+		                                            <span>Q.</span>
+		                                             ${article.cate} , ${article.cateType1}, ${article.cateType2} //${article.title} 
+		                                        </a>
+		                                    </li>
+	                                    </c:forEach>
+	                                    <li class="more">
+	                                        <a href="#">더보기</a>
+	                                    </li>
+	                                </ul>
+	                            </div>
+                            </c:forEach>   --%>
+                           
+                             
+                                                
                         </article>
                     </section>
                 </div>

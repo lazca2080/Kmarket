@@ -27,7 +27,7 @@
                 <section class="faq">
                     <h1>
                         자주 묻는 질문
-                        <a href="/Kmarket/cs/faq/list.do">
+                        <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">
                             전체보기
                         </a>
                     </h1>
@@ -38,32 +38,32 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span>쿠폰이벤트</span>
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=쿠폰/이벤트">
+                                <span>쿠폰/이벤트</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=주문/결제">
                                 <span>주문/결제</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=배송">
                                 <span>배송</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=취소/반품/교환">
                                 <span>취소/반품/교환</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=여행/숙박/항공">
                                 <span>여행/숙박/항공</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=안전거래">
                                 <span>안전거래</span>
                             </a>
                         </li>
