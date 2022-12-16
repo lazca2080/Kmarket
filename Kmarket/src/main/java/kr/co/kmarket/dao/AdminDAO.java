@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.db.AdminSql;
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.db.ProductSql;
-import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public class AdminDAO {

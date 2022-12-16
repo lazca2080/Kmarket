@@ -53,12 +53,13 @@ public class ListController extends HttpServlet{
 		int pageStartNum = service.getPageStartNum(total, currentPage);
 		int start = service.getStartNum(currentPage);
 		
+		/*level 7 상품전체보기
 		if(level == 7) {
 			ProductVO level = service.selectProducts(level);
 		}else {
 			List<ProductVO> level = service.selectProductss(start,uid);
-			
 		}
+		*/
 		List<ProductVO> Product = service.selectProductss(start,uid);
 		req.setAttribute("Product", Product);
 		
