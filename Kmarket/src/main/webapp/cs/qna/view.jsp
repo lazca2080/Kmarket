@@ -50,7 +50,7 @@
                         <div class="content">
                             ${vo.content}
                         </div>
-                        <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${vo.cateType1}&cateType2=${vo.cateType2}" class="btnList">목록보기</a>
+                        <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${vo.cateType1}" class="btnList">목록보기</a>
                     </article>
                 </section>
             </div>

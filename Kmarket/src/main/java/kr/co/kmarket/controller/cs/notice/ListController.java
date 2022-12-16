@@ -37,6 +37,8 @@ public class ListController extends HttpServlet{
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
 		
+	   System.out.println("cateType1 : "+cateType1);
+		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		// 전체 게시물 개수
@@ -66,7 +68,8 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
 	}

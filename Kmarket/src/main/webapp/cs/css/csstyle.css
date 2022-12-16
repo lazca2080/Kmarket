@@ -144,6 +144,9 @@ header > .logo a {
     text-indent: 10px;
     margin-top: 12px;
 }
+#cs > .main > section > ul > li > a:hover {
+	text-decoration: underline;
+}
 #cs > .main > section > ul .title {
     font-size: 18px;
 }

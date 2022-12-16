@@ -17,7 +17,7 @@
                     <aside>
                         <h2>공지사항</h2>
                         <ul>
-                            <li class="${cateType1 == '전체' ? 'on' : 'off'}">
+                            <li class="${cateType1 == null ? 'on' : 'off'}">
                                 <a href="/Kmarket/cs/notice/list.do?cate=notice">전체</a>
                             </li>
                             <li class="${cateType1 == '고객서비스' ? 'on' : 'off'}">
@@ -39,7 +39,7 @@
                         	<c:choose>
                         		<c:when test="${cateType1 eq null}">
                         			<h1>전체</h1>
-                            		<h2>공지사항 전체 내용입니다.</h2>
+                            		<h2>공지사항 전체 내용입니다. </h2>
                         		</c:when>
                         		<c:otherwise>
                         			 <h1>${cateType1}</h1>
@@ -51,23 +51,16 @@
                             <tbody>
                             	<c:forEach var="article" items="${articles}">
                             		<c:choose>
-                            			<c:when test="${article.cateType1 eq cateType1}">
+                            			<c:when test="${article.cateType1 ne null}">
                             				<tr id="articleList">
 			                                    <td>
-			                                        <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} //cateType1: ${article.cateType1} </a>
+			                                        <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} </a>
 			                                    </td>
 			                                    <td>
 			                                    	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 					                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 			                                    </td>
 	                                		</tr>
-                            			</c:when>
-                            			<c:when test="${cateType1 eq null}">	<!-- null이면 안 됨 다른 조건식 생각해야 함 -->
-                            				<tr>
-                            					<td>
-                            						<a>전체보기 조건 식 실행됨</a>
-                            					</td>
-                            				</tr>
                             			</c:when>
                             		</c:choose>
                             	</c:forEach>

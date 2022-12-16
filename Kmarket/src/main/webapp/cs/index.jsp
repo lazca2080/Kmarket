@@ -13,7 +13,7 @@
                     	<c:forEach var="latest" items="${latests}">
                     		<c:if test="${latest.cate eq 'notice'}">
                     		<li>
-	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate} ${latest.no}</a>
 	                            <%-- <span class="date">${latest.rdate}</span>  --%>
 	                            <span>
 	                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -33,7 +33,7 @@
                     </h1>
                     <ol>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">
                                 <span>회원</span>
                             </a>
                         </li>
@@ -75,7 +75,7 @@
                     	<c:forEach var="latest" items="${latests}">
 	                    	<c:if test="${latest.cate eq 'qna'}">
 	                        <li>
-	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <a href="/Kmarket/cs/notice/view.do?cate=qna&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // // ${latest.cate} ${latest.no}</a>
 	                                <p>
 	                                    <span class="uid">${latest.uid}</span>
 	                                    <span class="date">
