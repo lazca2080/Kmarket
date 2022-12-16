@@ -5,7 +5,7 @@
             <aside>
                 <ul class="category">
                     <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>${c1Name}
+                        <i class="fa fa-bars" aria-hidden="true"></i>
                     </li>
                     <li>
                         <a href="#">
@@ -14,7 +14,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate10" items="${cate10}">
+                        	<c:forEach var="cate10" items="${cate.cate10}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate10.cate1}&cate2=${cate10.cate2}">${cate10.c2Name}</a>
                             </li>
@@ -28,7 +28,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate11" items="${cate11}">
+                        	<c:forEach var="cate11" items="${cate.cate11}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate11.cate1}&cate2=${cate11.cate2}">${cate11.c2Name}</a>
                             </li>
@@ -42,7 +42,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate12" items="${cate12}">
+                        	<c:forEach var="cate12" items="${cate.cate12}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate12.cate1}&cate2=${cate12.cate2}">${cate12.c2Name}</a>
                             </li>
@@ -56,7 +56,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate13" items="${cate13}">
+                        	<c:forEach var="cate13" items="${cate.cate13}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate13.cate1}&cate2=${cate13.cate2}">${cate13.c2Name}</a>
                             </li>
@@ -70,7 +70,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate14" items="${cate14}">
+                        	<c:forEach var="cate14" items="${cate.cate14}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate14.cate1}&cate2=${cate14.cate2}">${cate14.c2Name}</a>
                             </li>
@@ -84,7 +84,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate15" items="${cate15}">
+                        	<c:forEach var="cate15" items="${cate.cate15}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate15.cate1}&cate2=${cate15.cate2}">${cate15.c2Name}</a>
                             </li>
@@ -98,7 +98,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate16" items="${cate16}">
+                        	<c:forEach var="cate16" items="${cate.cate16}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate16.cate1}&cate2=${cate16.cate2}">${cate16.c2Name}</a>
                             </li>
@@ -112,7 +112,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate17" items="${cate17}">
+                        	<c:forEach var="cate17" items="${cate.cate17}">
                             <li>
                                 <a href="/Kmarket/product/list.do?cate1=${cate17.cate1}&cate2=${cate17.cate2}">${cate17.c2Name}</a>
                             </li>
@@ -126,7 +126,7 @@
                             </i>
                         </a>
                         <ol>
-                        	<c:forEach var="cate18" items="${cate18}">
+                        	<c:forEach var="cate18" items="${cate.cate18}">
                             <li>
                                 <a href="#">${cate18.c2Name}</a>
                             </li>
@@ -142,10 +142,10 @@
                     <ol>
                     	<c:forEach var="best" items="${index}" begin="0" end="4">
                         <li>
-                            <a href="/Kmarket/product/view.do?cate1=${best.prodCate1}&cate2=${best.prodCate2}&prodNo=${best.prodNo}">
+                            <a href="/Kmarket/product/view.do?&prodNo=${best.prodNo}">
                                 <div class="thumb">
                                     <i>1</i>
-                                    <img src="/Kmarket/home/prodImg/${best.thumb1}" alt="item1">
+                                    <img src="/home/prodImg/${best.thumb1}" alt="item1">
                                 </div>
                                 <article>
 	                                <h2>${best.prodName}</h2>
@@ -216,7 +216,7 @@
                     </h3>
                     <c:forEach var="hit" items="${index}" begin="5" end="12">
                     <article>
-                        <a href="/Kmarket/product/view.do?cate1=${hit.prodCate1}&cate2=${hit.prodCate2}&prodNo=${hit.prodNo}">
+                        <a href="/Kmarket/product/view.do?&prodNo=${hit.prodNo}">
                             <div class="thumb">
                                 <img src="/home/prodImg/${hit.thumb1}" alt="t1">
                             </div>
@@ -271,7 +271,7 @@
                     </h3>
                     <c:forEach var="score" items="${index}" begin="13" end="20">
                     <article>
-                        <a href="/Kmarket/product/view.do?cate1=${score.prodCate1}&cate2=${score.prodCate2}&prodNo=${score.prodNo}">
+                        <a href="/Kmarket/product/view.do?&prodNo=${score.prodNo}">
                             <div class="thumb">
                                 <img src="/home/prodImg/${score.thumb1}" alt="t1">
                             </div>
@@ -325,7 +325,7 @@
                     </h3>
                     <c:forEach var="newProd" items="${index}" begin="21" end="28">
                     <article>
-                        <a href="/Kmarket/product/view.do?cate1=${newProd.prodCate1}&cate2=${newProd.prodCate2}&prodNo=${newProd.prodNo}">
+                        <a href="/Kmarket/product/view.do?&prodNo=${newProd.prodNo}">
                             <div class="thumb">
                                 <img src="/home/prodImg/${newProd.thumb1}" alt="t1">
                             </div>
@@ -381,7 +381,7 @@
                     <c:choose>
                     <c:when test="${not empty discount}">
                     <article>
-                        <a href="/Kmarket/product/view.do?cate1=${discount.prodCate1}&cate2=${discount.prodCate2}&prodNo=${discount.prodNo}">
+                        <a href="/Kmarket/product/view.do?&prodNo=${discount.prodNo}">
                             <div class="thumb">
                                 <img src="/home/prodImg/${discount.thumb1}" alt="t1">
                             </div>

@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket.service.IndexService;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.ProductVO;
 
@@ -17,6 +19,7 @@ public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
+	private IndexService ser = IndexService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
@@ -29,6 +32,9 @@ public class ViewController extends HttpServlet{
 		
 		ProductVO product = service.selectProduct(prodNo);
 		req.setAttribute("product", product);
+		
+		Map<String, Object> cate = ser.selectCategory();
+		req.setAttribute("cate", cate);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);

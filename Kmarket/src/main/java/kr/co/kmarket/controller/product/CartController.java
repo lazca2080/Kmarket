@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.kmarket.service.IndexService;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.ProductVO;
 
@@ -18,7 +19,7 @@ public class CartController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private ProductService service = ProductService.INSTANCE;
-	
+	private IndexService ser = IndexService.INSTANCE;
 
 	
 	@Override

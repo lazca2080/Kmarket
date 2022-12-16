@@ -154,6 +154,8 @@ public class ProductDAO {
 				vo.setBizType(rs.getString(23));
 				vo.setOrigin(rs.getString(24));
 				vo.setSellPrice(rs.getString(33));
+				vo.setC1Name(rs.getString(34));
+				vo.setC2Name(rs.getString(35));
 			}
 			
 			conn.close();

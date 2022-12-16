@@ -26,12 +26,18 @@ public class ProductSql {
 			+ "`detail`=? "
 			+ "`rdate`=NOW()"; */
 	
+	// 상품 등록
 	public static final String insertProduct = "INSERT INTO `km_product` (`prodCate1`,`prodCate2`,`prodName`,`descript`,`company`,`price`,`discount`,`point`,`stock`,`delivery`,`status`,`duty`,`receipt`,`bizType`,`origin`,`ip`,`thumb1`,`thumb2`,`thumb3`,`detail`,`seller`,`sellPrice`,`rdate`)"
 			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 
+	// 상품 번호 조회
 	public static final String selectProdNo = "SELECT MAX(`prodNo`) FROM `km_product`";
 	
-	public static final String SELECT_PRODUCT = "SELECT * FROM `km_product` WHERE `prodNo`=?";
+	// 상품 번호에 해당하는 상품 조회 및 카테고리 이름 조회
+	public static final String SELECT_PRODUCT = "SELECT A.*, B.`c1Name`, C.`c2Name` FROM `km_product` AS A "
+												+ "JOIN `km_product_cate1` AS B ON `prodCate1` = B.`cate1` "
+												+ "JOIN `km_product_cate2` AS C ON `prodCate2` = C.`cate2` AND `prodCate1` = C.`cate1` "
+												+ "WHERE `prodNo`=?";
 	
 	//판매량
 	public static final String SELECT_PRODUCTS_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
