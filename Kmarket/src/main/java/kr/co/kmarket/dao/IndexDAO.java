@@ -53,9 +53,18 @@ public class IndexDAO {
 		return category;
 	}
 	
-	public List<CategoryVO> selectCategory() {
+	public Map<String, Object> selectCategory() {
 		
-		List<CategoryVO> category = new ArrayList<>();
+		Map<String, Object> map = null;
+		List<CategoryVO> cate10 = null;
+		List<CategoryVO> cate11 = null;
+		List<CategoryVO> cate12 = null;
+		List<CategoryVO> cate13 = null;
+		List<CategoryVO> cate14 = null;
+		List<CategoryVO> cate15 = null;
+		List<CategoryVO> cate16 = null;
+		List<CategoryVO> cate17 = null;
+		List<CategoryVO> cate18 = null;
 		
 		try {
 			logger.debug("selectCategory...");
@@ -63,15 +72,74 @@ public class IndexDAO {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(Indexsql.SELECT_CATEGORY);
 			
+			cate10 = new ArrayList<>();
+			cate11 = new ArrayList<>();
+			cate12 = new ArrayList<>();
+			cate13 = new ArrayList<>();
+			cate14 = new ArrayList<>();
+			cate15 = new ArrayList<>();
+			cate16 = new ArrayList<>();
+			cate17 = new ArrayList<>();
+			cate18 = new ArrayList<>();
+			
 			while(rs.next()) {
 				CategoryVO vo = new CategoryVO();
+				int cate = rs.getInt(1);
 				vo.setCate1(rs.getInt(1));
 				vo.setC1Name(rs.getString(2));
 				vo.setCate2(rs.getInt(4));
 				vo.setC2Name(rs.getString(5));
 				
-				category.add(vo);
+				switch(cate) {
+					case 10 :
+						cate10.add(vo);
+						break;
+					
+					case 11 :
+						cate11.add(vo);
+						break;
+						
+					case 12 :
+						cate12.add(vo);
+						break;
+						
+					case 13 :
+						cate13.add(vo);
+						break;
+						
+					case 14 :
+						cate14.add(vo);
+						break;
+						
+					case 15 :
+						cate15.add(vo);
+						break;
+						
+					case 16 :
+						cate16.add(vo);
+						break;
+						
+					case 17 :
+						cate17.add(vo);
+						break;
+						
+					case 18 :
+						cate18.add(vo);
+						break;
+				}
+				
 			}
+			
+			map = new HashMap<>();
+			map.put("cate10", cate10);
+			map.put("cate11", cate11);
+			map.put("cate12", cate12);
+			map.put("cate13", cate13);
+			map.put("cate14", cate14);
+			map.put("cate15", cate15);
+			map.put("cate16", cate16);
+			map.put("cate17", cate17);
+			map.put("cate18", cate18);
 			
 			conn.close();
 			stmt.close();
@@ -81,7 +149,7 @@ public class IndexDAO {
 			logger.error(e.getMessage());
 		}
 		
-		return category;
+		return map;
 	}
 	
 	public List<CategoryVO> selectCate1() {
