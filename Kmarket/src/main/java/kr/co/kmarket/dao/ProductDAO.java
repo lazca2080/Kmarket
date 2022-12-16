@@ -78,6 +78,7 @@ public class ProductDAO {
 		
 	}
 
+	//상품 항목 리스트 조회
 	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
 		
 		List<ProductVO> products = new ArrayList<>();
@@ -162,6 +163,7 @@ public class ProductDAO {
 		return products;
 	}
 	
+	//단일 상품 조회
 	public ProductVO selectProduct(String prodNo) {
 		
 		ProductVO vo = null;
@@ -210,6 +212,7 @@ public class ProductDAO {
 		return vo;
 	}
 	
+	//상품 총 갯수 조회
 	public int selectCountTotal(String cate1, String cate2) {
 		
 		int total = 0;
@@ -268,6 +271,20 @@ public class ProductDAO {
 			logger.error(e.getMessage());
 		}
 		return vo;
+	}
+	
+	//장바구니 등록
+	public void updateCart() {
+		try {
+			logger.debug("updateCart....");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.UPDATE_PRODUCT_CART);
+			
+
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 	//장바구니 목록

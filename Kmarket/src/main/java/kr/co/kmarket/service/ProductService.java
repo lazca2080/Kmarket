@@ -45,6 +45,11 @@ public enum ProductService {
 		return dao.selectCate(cate1, cate2);
 	}
 	
+	//장바구니 등록
+	/*public void updateCart() {
+		dao.updateCart()
+	}
+	*/
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		return dao.selectProductCart(uid);
