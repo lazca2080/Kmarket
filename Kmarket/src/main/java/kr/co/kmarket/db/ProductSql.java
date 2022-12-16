@@ -91,7 +91,7 @@ public class ProductSql {
 	public static final String UPDATE_PRODUCT_CART = "INSERT INTO `km_product_cart`(`uid`, `prodNo`, `price`, `discount`, `point`, `delivery`, `total`, `rdate`, `count`) "
 													+ "SELECT ?, `prodNo`, `price`, `discount`, `point`, `delivery`, (`sellPrice`+`delivery`)*? , NOW(), ? "
 													+ "FROM `km_product` "
-													+ "WHERE prodNo = ?";
+													+ "WHERE prodNo = ?, uid=?";
 											
 	
 }

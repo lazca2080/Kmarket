@@ -46,10 +46,10 @@ public enum ProductService {
 	}
 	
 	//장바구니 등록
-	/*public void updateCart() {
-		dao.updateCart()
+	public int updateCart(ProductVO vo) {
+		return dao.updateCart(vo);
 	}
-	*/
+	
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		return dao.selectProductCart(uid);

@@ -5,25 +5,36 @@
 
 	$(function() {
 		
+		let num = 1;
+		
+		$('button[class=increase]').click(function(){
+			num++;
+			$('input[name=num]').val(num);
+			console.log(num);
+		});
+		
+		$('button[class=decrease]').click(function(){
+			if(num == 1){
+				return;
+			}
+			num--;
+			$('input[name=num]').val(num);
+		});
+		
 		$('.cart').click(function() {
 			
 			let prodNo = '${product.prodNo}';
-			
 			let uid = '${sessUser.uid}';
+			let count = $('input[name=num]').val();			
 			
-			//let count
 			console.log(product);
 			
-			/*if(confirm("장바구니에 담으시겠습니까?")){
-				location.href = '/Kmarket/product/cart.do?prodNo='+prodNo+'&uid='+uid;
-			}
-			*/
 			
-			/*
 			
 			let jsonData = {
 					"prodNo":prodNo,
-					"uid"	:uid
+					"uid"	:uid,
+					"count"	:count
 			};
 			
 			$.ajax({
@@ -37,7 +48,7 @@
 					
 				}
 			});
-		*/
+		
 			
 		});
 	});
