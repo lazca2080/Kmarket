@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="./_header.jsp"></jsp:include>
         <main>
             <aside>
                  <!-- Global Navigation Bar -->
@@ -31,7 +31,7 @@
                     <li>
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
-                            <li><a href="/Kmarket/admin/list.do">상품현황</a></li>
+                            <li><a href="/Kmarket/admin/product/list.do">상품현황</a></li>
                             <li><a href="/Kmarket/admin/register.do">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
@@ -107,20 +107,20 @@
                     </table>
                     <input type="button" value="선택삭제">
                     <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
+                        <span class="prev"> 
+                        	<c:if test="">
+	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+	                        </c:if>
                         </span>
                         <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
+                        	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}" class="on${currentPage eq i?'current':'off'}">${i}</a>
+                            </c:forEach>
                         </span>
                         <span class="next">
-                            <a href="#">다음&nbsp;></a>
+                        	<c:if test="${pageGroupEnd < lastPageNum}">
+                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+                            </c:if>
                         </span>
                     </div>
                 </section>
@@ -132,4 +132,4 @@
                 </p>
             </section>
         </main>
-<jsp:include page="../_footer.jsp"></jsp:include>
+<jsp:include page="./_footer.jsp"></jsp:include>

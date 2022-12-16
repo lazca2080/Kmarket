@@ -10,18 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.kmarket.service.AdminService;
 import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.ProductVO;
 
-@WebServlet("/admin/list.do")
+@WebServlet("/admin/product/list.do")
 public class ListController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private AdminService service = AdminService.INSTANCE;
-	private MemberService services = MemberService.INSTANCE;
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public void init() throws ServletException {
 
@@ -35,13 +38,40 @@ public class ListController extends HttpServlet{
 		req.setAttribute("products", products);
 		*/
 		String uid = req.getParameter("uid");
-		String cate = req.getParameter("cate");
 		String pg = req.getParameter("pg");
-		String group = req.getParameter("group");
+		int level = req.getIntHeader("level");
+		String seller = req.getParameter("seller");
 		//String search = req.getParameter("serarch");
 		
-		List<ProductVO> Product = service.selectProductss(uid);
+		//현재 페이지번호
+		int currentPage = service.getCureentPage(pg);
+		int total = service.selectCountTotal(uid);
+		logger.info("total :" + total);
+		int lastPageNum = service.getLastPageNum(total);
+		
+		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
+		int pageStartNum = service.getPageStartNum(total, currentPage);
+		int start = service.getStartNum(currentPage);
+		
+		if(level == 7) {
+			ProductVO level = service.selectProducts(level);
+		}else {
+			List<ProductVO> level = service.selectProductss(start,uid);
+			
+		}
+		List<ProductVO> Product = service.selectProductss(start,uid);
 		req.setAttribute("Product", Product);
+		
+		logger.info("pageGroupStart :" +result[0]);
+		logger.info("pageGroupEnd :" +result[1]);
+		req.setAttribute("seller", seller);
+		req.setAttribute("pg", pg);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("pageStartNum", pageStartNum+1);
+		req.setAttribute("level", level);
 		
 		
 		/*List<ProductVO> product = null;
@@ -52,7 +82,7 @@ public class ListController extends HttpServlet{
 		}
 		*/
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

@@ -12,22 +12,24 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.AdminSql;
 import kr.co.kmarket.db.DBCP;
+import kr.co.kmarket.db.ProductSql;
+import kr.co.kmarket.vo.MemberVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public class AdminDAO {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public ProductVO selectProducts() {
+	public ProductVO selectProducts(int level) {
 		
 		ProductVO vo = null;
 		
 		try {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
-			Statement stmt = conn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery(AdminSql.selectProduct);
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProduct);
+			psmt.setInt(1, level);
+			ResultSet rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				vo = new ProductVO();
@@ -46,7 +48,7 @@ public class AdminDAO {
 				vo.setDetail(rs.getString(20));
 			}
 			conn.close();
-			stmt.close();
+			psmt.close();
 			rs.close();
 			
 		} catch (Exception e) {
@@ -56,7 +58,7 @@ public class AdminDAO {
 		return vo;
 	}
 	
-	public List<ProductVO> selectProductss(String uid) {
+	public List<ProductVO> selectProductss(int limitestart,String uid) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
@@ -65,6 +67,7 @@ public class AdminDAO {
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductss);
 			psmt.setString(1, uid);
+			psmt.setInt(2, limitestart);
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -92,7 +95,69 @@ public class AdminDAO {
 		return products;
 	}
 	
-	/*public List<ProductVO> selectProductKeyword(String uid,String keyword) {
+	public int selectCountTotal(String seller) {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, seller);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public List<ProductVO> selectAdminList(String seller, int limiteStart) {
+		List<ProductVO> products = new ArrayList<>();
+		try {
+			logger.debug("selectAdminList...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.SELECT_ADMIN_LIST);
+			psmt.setString(1, seller);
+			logger.info("seller : " +seller);
+			psmt.setInt(2, limiteStart);
+			logger.info("limiteStart : " +limiteStart);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()){
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setDelivery(rs.getString(13));
+				vo.setThumb1(rs.getString(17));
+				vo.setSellPrice(rs.getInt(33));
+				
+				products.add(vo);
+			}
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("product size : " +products.size());
+		return products;
+	}
+	
+	/* 키워드
+	 * public List<ProductVO> selectProductKeyword(String uid,String keyword) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
 			logger.debug("selectProductKeyword...");
