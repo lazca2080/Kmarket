@@ -29,6 +29,8 @@ public class ViewController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String prodNo = req.getParameter("prodNo");
+		String uid = req.getParameter("sessUid");
+		req.setAttribute("uid", uid);
 		
 		ProductVO product = service.selectProduct(prodNo);
 		req.setAttribute("product", product);

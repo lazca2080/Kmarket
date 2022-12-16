@@ -1,18 +1,48 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+
 <script >
-/*
+
 	$(function() {
-		$('.cart').click(function(product) {
-			if(confirm("장바구니에 담으시겠습니까?")){
-				location.herf = "/product/cart.do?product"+product;
-			}
+		
+		$('.cart').click(function() {
 			
+			let prodNo = '${product.prodNo}';
+			
+			let uid = '${sessUser.uid}';
+			
+			//let count
+			console.log(product);
+			
+			/*if(confirm("장바구니에 담으시겠습니까?")){
+				location.href = '/Kmarket/product/cart.do?prodNo='+prodNo+'&uid='+uid;
+			}
+			*/
+			
+			/*
+			
+			let jsonData = {
+					"prodNo":prodNo,
+					"uid"	:uid
+			};
+			
+			$.ajax({
+				url : '/Kmarket/product/updateCart.do',
+				methid : 'get',
+				data : 'jsonData',
+				dataType : 'json',
+				success : function() {
+					
+					
+					
+				}
+			});
+		*/
 			
 		});
 	});
-	*/
+	
 </script>
         <main id="product">
             <aside>
@@ -230,8 +260,16 @@
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
-                            <input type="button" class="cart" value="장바구니">
-                            <input type="button" class="order" value="구매하기">
+                        	<c:choose>
+                        		<c:when test="${sessUser.uid ne null}">
+	                            <input type="button" class="cart" data-product="${product}" data-uid="${sessUser.uid}" value="장바구니">
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        	<input type="button" class="cart" data-no="${product.prodNo}" value="장바구니">
+	                        	</c:otherwise>
+	                        </c:choose>   
+	                            <input type="button" class="order" value="구매하기">
+                        	
                         </div>
                     </div>
                 </article>
