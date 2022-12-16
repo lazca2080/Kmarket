@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,10 +40,6 @@ public enum ProductService {
 		return dao.selectCountTotal(cate1, cate2);
 	}
 	
-	public List<CategoryVO> selectCategory() {
-		return dao.selectCategory();
-	}
-	
 	//상품 네비게이션
 	public CategoryVO selectCate(String cate1, String cate2) {
 		return dao.selectCate(cate1, cate2);
@@ -51,6 +48,22 @@ public enum ProductService {
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		return dao.selectProductCart(uid);
+	}
+	
+	public List<CategoryVO> selectCate(int cate) {
+		return dao.selectCate(cate);
+	}
+	
+	public Map<String, Object> selectCategory() {
+		return dao.selectCategory();
+	}
+	
+	public List<CategoryVO> selectCate1() {
+		return dao.selectCate1();
+	}
+	
+	public List<ProductVO> selectIndex() {
+		return dao.selectIndex();
 	}
 	
 	
