@@ -33,7 +33,7 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("IndexController doGet");
+		logger.info("cs::IndexController doGet...");
 		
 		// 최신글 리스트 5건 출력하기
 		String notice = "notice";

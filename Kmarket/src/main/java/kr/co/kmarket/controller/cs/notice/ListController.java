@@ -30,13 +30,42 @@ public class ListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("ListController doGet");
+		logger.info("cs::notice-ListController doGet...");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
+		String pg = req.getParameter("pg");
+		
+		// 현재 페이지 번호
+		int currentPage = service.getCurrentPage(pg);
+		// 전체 게시물 개수
+		int total = service.selectCountTotal(cate);
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		// 현재 페이지 게시글 시작값 
+		int limitStart = service.getLimitStart(currentPage);
+		// 페이지 그룹
+		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
+		// 페이지 시작 번호 
+		int pageStartNum = service.getPageStartNum(total, limitStart);
+		// 게시글 번호 정렬
+		int start = service.getStartNum(currentPage);
+		
+		// 페이지 글 가져오기
+		List<CsVO> articles = service.selectArticles(cate, cateType1, start);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
+		req.setAttribute("cateType2", cateType2);
+		req.setAttribute("articles", articles);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("total", total);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("limitStart", limitStart);
+		req.setAttribute("pageStartNum", pageStartNum+1);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);

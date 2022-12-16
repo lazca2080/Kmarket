@@ -5,21 +5,21 @@
         <section id="cs">
             <div class="main">
                 <h1 class="title">
-                    <strong>케이마켓</strong>이 도와드릴께요!
+                    <strong>케이마켓</strong>이 도와드릴게요!
                 </h1>
                 <section class="notice">
-                    <h1>공지사항<a href="/Kmarket/cs/notice/list.do">전체보기</a></h1>
+                    <h1>공지사항<a href="/Kmarket/cs/notice/list.do?cate=notice">전체보기</a></h1>
                     <ul>
-                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
+                    	<c:forEach var="latest" items="${latests}">
                     		<c:if test="${latest.cate eq 'notice'}">
-	                    		<li>
-		                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
-		                            <%-- <span class="date">${latest.rdate}</span>  --%>
-		                            <span>
-		                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-		                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
-	                            	</span>
-	                        	</li>
+                    		<li>
+	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <%-- <span class="date">${latest.rdate}</span>  --%>
+	                            <span>
+	                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
+                            	</span>
+                        	</li>
                     		</c:if>
                         </c:forEach>
                     </ul>
@@ -70,26 +70,21 @@
                     </ol>
                 </section>
                 <section class="qna">
-                    <h1>
-                        문의하기
-                        <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=회원">
-                            전체보기
-                        </a>
-                    </h1>
+                    <h1>문의하기<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=회원">전체보기</a></h1>
                     <ul>
-                    	<c:forEach var="latest" begin="0" end="4" items="${latests}">
-                    	<c:if test="${latest.cate eq 'qna'}">
-                        <li>
-                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
-                                <p>
-                                    <span class="uid">${latest.uid}</span>
-                                    <span class="date">
-                                    	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-		                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
-                                    </span>
-                                </p>
-                        </li>
-                        </c:if>
+                    	<c:forEach var="latest" items="${latests}">
+	                    	<c:if test="${latest.cate eq 'qna'}">
+	                        <li>
+	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                                <p>
+	                                    <span class="uid">${latest.uid}</span>
+	                                    <span class="date">
+	                                    	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+			                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
+	                                    </span>
+	                                </p>
+	                        </li>
+	                        </c:if>
                         </c:forEach>
                     </ul>
                     <a href="/Kmarket/cs/qna/write.do?cate=qna&cateType1=회원" class="ask">문의글 작성 ></a>

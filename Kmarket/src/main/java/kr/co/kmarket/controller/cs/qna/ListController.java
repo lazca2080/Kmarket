@@ -32,7 +32,7 @@ public class ListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("ListController doGet...");
+		logger.info("cs::qna-ListController doGet...");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
