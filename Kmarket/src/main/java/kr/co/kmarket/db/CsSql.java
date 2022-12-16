@@ -33,6 +33,22 @@ public class CsSql {
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `cs_article` WHERE `parent`=0 AND `cate`=?";
 	// 페이지 글 가져오기
 	public static final String SELECT_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
+	// 문의하기 - 공지사항 전체글 보기
+	public static final String SELECT_WHOLE_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`='notice' ORDER BY `no` DESC LIMIT ?,10";
+			
+	
+	/*** cs::faq list ***/
+	/*
+	public static final String SELECT_FAQ_ARTICLES = "(SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) "
+												  + " UNION "
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) " 
+												  + " UNION "
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) "
+												  + " UNION "
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10)";
+	*/									
+	
+	public static final String SELECT_FAQ_ARTICLES = "select * from `cs_article` where `cate`='faq' and `cateType1`=? order by `cateType2`, `rdate` desc";
 	
 	/*** cs - view ***/
 	public static final String SELECT_ARTICLE = "SELECT * FROM `cs_article` WHERE `no`=?";

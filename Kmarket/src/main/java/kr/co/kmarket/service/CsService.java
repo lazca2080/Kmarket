@@ -4,6 +4,7 @@ import kr.co.kmarket.dao.CsDAO;
 import kr.co.kmarket.vo.CsVO;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,6 +89,11 @@ public enum CsService {
 	// 페이지 글 가져오기
 	public List<CsVO> selectArticles(String cate, String cateType1, int start){
 		return dao.selectArticles(cate, cateType1, start);
+	}
+	
+	/*** cs::faq list ***/
+	public Map<String, Object> selectFaqArticles(String cateType1, int num){
+		return dao.selectFaqArticles(cateType1, num);
 	}
 	
 	
