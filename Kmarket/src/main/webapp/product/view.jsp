@@ -1,6 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script >
+/*
+	$(function() {
+		$('.cart').click(function(product) {
+			if(confirm("장바구니에 담으시겠습니까?")){
+				location.herf = "/product/cart.do?product"+product;
+			}
+			
+			
+		});
+	});
+	*/
+</script>
         <main id="product">
             <aside>
 				<ul class="category">
