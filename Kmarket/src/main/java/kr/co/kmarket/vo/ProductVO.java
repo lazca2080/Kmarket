@@ -33,9 +33,18 @@ public class ProductVO {
 	private String c2Name;
 	private int level;
 	private int score;
+	private String uid;
 	
 	// 추가
 	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
 	public int getScore() {
 		return score;
 	}
@@ -102,6 +111,10 @@ public class ProductVO {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	public void setCount(String count) {
+		this.count = Integer.parseInt(count);
+	}
+	
 	public int getTotal() {
 		return total;
 	}

@@ -274,17 +274,28 @@ public class ProductDAO {
 	}
 	
 	//장바구니 등록
-	public void updateCart() {
+	public int updateCart(ProductVO vo) {
+		int result = 0;
 		try {
 			logger.debug("updateCart....");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(ProductSql.UPDATE_PRODUCT_CART);
+			psmt.setString(1, vo.getUid());
+			psmt.setInt(2, vo.getCount());
+			psmt.setInt(3, vo.getCount());
+			psmt.setInt(4, vo.getProdNo());
+			psmt.setString(5, vo.getUid());
 			
-
+			result = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
 			
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return result;
 	}
 	
 	//장바구니 목록
