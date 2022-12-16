@@ -29,10 +29,36 @@ public class ProductVO {
 	private int count;
 	private int total;
 	private int hit;
-  private String c1Name;
+	private String c1Name;
 	private String c2Name;
+	private int level;
+	private int score;
 	
 	// 추가
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setScore(String score) {
+		this.score = Integer.parseInt(score);
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public void setLevel(String level) {
+		this.level = Integer.parseInt(level);
+	}
 	
 	public String getC1Name() {
 		return c1Name;

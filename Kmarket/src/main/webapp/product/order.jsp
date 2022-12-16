@@ -108,54 +108,30 @@
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
+                        <c:choose>
+                        <c:when test="${vo eq null}">
                         <tr class="empty">
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
+                        </c:when>
+                        <c:otherwise>
                         <tr>
                             <td><article>
                                 <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
+                                    <img src="/home/prodImg/${vo.thumb1}" alt="1">
                                 </a>
                                 <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
+                                    <h2><a href="/Kmarket/product/view.do?prodNo="+${vo.prodNo}>${vo.prodName}</a></h2>
+                                    <p>${vo.descript}</p>
                                 </div>
                             </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>무료배송</td>
-                            <td>27,000</td>
+                            <td>${count}</td>
+                            <td>${vo.sellPrice}</td>
+                            <td>${vo.delivery}</td>
+                            <td>${(vo.sellPrice+vo.delivery)*count}</td>
                         </tr>
-                        <tr>
-                            <td><article>
-                                <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
-                                </a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>무료배송</td>
-                            <td>27,000</td>
-                        </tr>
-                        <tr>
-                            <td><article>
-                                <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
-                                </a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>무료배송</td>
-                            <td>27,000</td>
-                        </tr>
+                        </c:otherwise>
+                        </c:choose>
                     </table>
                     <div class="final">
                         <h2>최종결제 정보</h2>
@@ -166,23 +142,23 @@
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>27,000</td>
+                                <td>${vo.price*count}</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>-1,000</td>
+                                <td>-${(vo.price*(vo.discount)/100)*count}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td>0</td>
+                                <td>${vo.delivery}</td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td>-1,000</td>
+                                <td>-${vo.point}</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>25,000</td>
+                                <td>${((vo.sellPrice+vo.delivery)*count)}</td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">

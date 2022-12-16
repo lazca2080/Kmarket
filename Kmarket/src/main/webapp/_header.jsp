@@ -53,6 +53,7 @@
 	                	</c:if>
 	                	<c:if test="${sessUser.type eq '2'}">
 	                		<a><span>${sessUser.manager}</span> 님, 반갑습니다</a>
+	                		<a href="/Kmarket/admin/">관리자</a>
 	                	</c:if>
 	                	<a href="/Kmarket/member/logout.do">로그아웃</a>
 		                <a href="#">마이페이지</a>

@@ -39,53 +39,59 @@ public class ProductSql {
 												+ "JOIN `km_product_cate2` AS C ON `prodCate2` = C.`cate2` AND `prodCate1` = C.`cate1` "
 												+ "WHERE `prodNo`=?";
 	
-	//판매량
-	public static final String SELECT_PRODUCTS_SOLD = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-													+ "order by `sold` desc "
-													+ "limit ?, 10";
+	// cate1, cate2에 해당하는 상품 조회
+	public static final String SELECT_PRODUCTS = "SELECT A.*, B.`level` FROM `km_product` AS A "
+												+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+												+ "WHERE `prodCate1`=? and `prodCate2`=? LIMIT ?, 10";
 	
-	//가격 낮은순
-	public static final String SELECT_PRODUCTS_SELLPRICE_DOWN = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-															+ "order by `sellPrice` asc "
-															+ "limit ?, 10";
+	// 판매량
+	public static final String SELECT_PRODUCTS_SOLD = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `sold` DESC LIMIT ?, 10";
 	
-	//가격 높은순
-	public static final String SELECT_PRODUCTS_SELLPRICE_up = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-															+ "order by `sellPrice` desc "
-															+ "limit ?, 10";
+	// 가격 낮은순
+	public static final String SELECT_PRODUCTS_SELLPRICE_DOWN = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `sellPrice` ASC LIMIT ?, 10";
 	
-	//평점 높은순
-	public static final String SELECT_PRODUCTS_SELLPRICE_SCORE = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-															  + "order by `score` desc "
-															  + "limit ?, 10";
+	// 가격 높은순
+	public static final String SELECT_PRODUCTS_SELLPRICE_up = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `sellPrice` DESC LIMIT ?, 10";
 	
-	//리뷰 많은순
-	public static final String SELECT_PRODUCTS_SELLPRICE_REVIEW = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-																+ "order by `review` desc "
-																+ "limit ?, 10";
+	// 평점 높은순
+	public static final String SELECT_PRODUCTS_SELLPRICE_SCORE = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `score` DESC LIMIT ?, 10";
 	
-	//최근등록순
-	public static final String SELECT_PRODUCTS_SELLPRICE_RDATE = "SELECT * FROM `km_product` WHERE `prodCate1`=? and `prodCate2`=? "
-																+ "order by `rdate` desc "
-																+ "limit ?, 10";
+	// 리뷰 많은순
+	public static final String SELECT_PRODUCTS_SELLPRICE_REVIEW = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `review` DESC LIMIT ?, 10";
 	
-	//게시글 총 갯수
+	// 최근등록순
+	public static final String SELECT_PRODUCTS_SELLPRICE_RDATE = "SELECT A.*, B.`level` FROM `km_product` AS A "
+																+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "
+																+ "WHERE `prodCate1`=? and `prodCate2`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+	
+	// 게시글 총 갯수
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` where `prodCate1`=? and `prodCate2`=?";
 	
-	//상품 네비게이션
+	// 상품 네비게이션
 	public static final String SELECT_CATE = "SELECT * FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b ON a.cate1 = b.cate1 WHERE a.`cate1`=? and b.cate2=?";
 	
+  // 장바구니 목록
+	public static final String SELECT_PRODUCTS_CART = "SELECT a.thumb1, a.prodName, a.descript, b.`count`, a.price, b.discount, b.`point`, b.delivery, a.sellPrice "
+													+ "FROM `km_product` AS a "
+													+ "JOIN `km_product_cart` AS b "
+													+ "ON a.prodNo=b.prodNo "
+													+ "WHERE `uid`=?";
+  
 	//장바구니 상품등록
 	public static final String UPDATE_PRODUCT_CART = "INSERT INTO `km_product_cart`(`uid`, `prodNo`, `price`, `discount`, `point`, `delivery`, `total`, `rdate`, `count`) "
 													+ "SELECT ?, `prodNo`, `price`, `discount`, `point`, `delivery`, (`sellPrice`+`delivery`)*? , NOW(), ? "
 													+ "FROM `km_product` "
 													+ "WHERE prodNo = ?";
 											
-	//장바구니 목록
-	public static final String SELECT_PRODUCTS_CART = "SELECT a.thumb1, a.prodName, a.descript, b.`count`, a.price, b.discount, b.`point`, b.delivery, a.sellPrice "
-													+ "FROM `km_product` AS a "
-													+ "JOIN `km_product_cart` AS b "
-													+ "ON a.prodNo=b.prodNo "
-													+ "WHERE `uid`=?";
 	
 }

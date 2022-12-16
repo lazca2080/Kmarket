@@ -79,18 +79,54 @@ public class ProductDAO {
 	}
 
 	//상품 항목 리스트 조회
-	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
 			logger.debug("selectProduct...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SOLD);
-			psmt.setString(1, cate1);
-			psmt.setString(2, cate2);
-			psmt.setInt(3, limiteStart);
 			
+			PreparedStatement psmt = null;
+			
+			if(sort == null) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("sold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SOLD);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("ascSold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_DOWN);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("descSold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_up);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("score")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_SCORE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("review")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_REVIEW);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("rdate")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_RDATE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}
+			
+			logger.info("sort : "+sort);
 			logger.info("selctCate1 : "+cate1);
 			logger.info("selctCate2 : "+cate2);
 			logger.info("selectlimit : "+limiteStart);
@@ -108,8 +144,10 @@ public class ProductDAO {
 				vo.setDiscount(rs.getInt(9));
 				vo.setPoint(rs.getInt(10));
 				vo.setDelivery(rs.getString(13));
+				vo.setScore(rs.getString(15));
 				vo.setThumb1(rs.getString(17));
 				vo.setSellPrice(rs.getInt(33));
+				vo.setLevel(rs.getString(34));
 				
 				products.add(vo);
 			}
@@ -150,6 +188,7 @@ public class ProductDAO {
 				vo.setDiscount(rs.getString(9));
 				vo.setPoint(rs.getString(10));
 				vo.setDelivery(rs.getString(13));
+				vo.setThumb1(rs.getString(17));
 				vo.setThumb2(rs.getString(18));
 				vo.setDetail(rs.getString(19));
 				vo.setStatus(rs.getString(21));
