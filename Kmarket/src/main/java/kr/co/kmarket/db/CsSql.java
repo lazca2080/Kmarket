@@ -39,16 +39,18 @@ public class CsSql {
 	
 	/*** cs::faq list ***/
 	/*
-	public static final String SELECT_FAQ_ARTICLES = "(SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) "
+	public static final String SELECT_FAQ_ARTICLES = "(SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC LIMIT 10) "
 												  + " UNION "
-												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) " 
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC LIMIT 10) " 
 												  + " UNION "
-												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10) "
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC LIMIT 10) "
 												  + " UNION "
-												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC 10)";
+												  + " (SELECT * FROM `cs_article` WHERE `cate`='faq' AND `cateType1`=? ORDER BY `no` DESC LIMIT 10)";
 	*/									
 	
-	public static final String SELECT_FAQ_ARTICLES = "select * from `cs_article` where `cate`='faq' and `cateType1`=? order by `cateType2`, `rdate` desc";
+	//public static final String SELECT_FAQ_ARTICLES = "select * from `cs_article` where `cate`='faq' and `cateType1`=? order by `cateType2`, `rdate` desc";
+	public static final String SELECT_FAQ_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `cateType2`, `rdate` DESC";
+	
 	
 	/*** cs - view ***/
 	public static final String SELECT_ARTICLE = "SELECT * FROM `cs_article` WHERE `no`=?";

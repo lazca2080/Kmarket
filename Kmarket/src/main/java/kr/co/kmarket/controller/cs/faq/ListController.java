@@ -32,24 +32,18 @@ public class ListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("cs::faq-ListController doGet...");
+		logger.info("doGet");
 		
-		String cate = req.getParameter("cate"); 
-		String cateType1 = req.getParameter("cateType1"); 
+		String cate = req.getParameter("cate");
+		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
 		
-		// 각 유형별 글 가져오기
-		int num = 0;
-		
-		
-		
-		
-		
-		
-		Map<String, Object> articles = service.selectFaqArticles(cateType1, num);
+		// 각 유형별 글 가져오기 (cate-cateType1)
+		List<CsVO> articles = service.selectFaqArticles(cate, cateType1);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
-		//req.setAttribute("cateType2", cateType2);
+		req.setAttribute("cateType2", cateType2);
 		req.setAttribute("articles", articles);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");
