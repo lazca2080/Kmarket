@@ -37,6 +37,18 @@
 		//alert('삭제하시겠습니까?');
 			
 		});
+		
+		let totalPrice = 0;
+		
+		$('input[type=checkbox]').change(function(){
+			if($(this).prop('checked')){
+				let total = $(this).next().val();
+				totalPrice += parseInt(total);
+				
+				console.log(totalPrice);		
+				$('.total > table tr:nth-last-child(1) td:last-child').text(totalPrice);
+			}
+		});
 	});
 </script>
         <main id="product">
@@ -199,7 +211,7 @@
                         <c:forEach var="cart" items="${cart}">
                         <tr class="${cart.cartNo}">
                             <td>
-                            	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
+                            	<input type="checkbox" name="cartNo" id="cartNo" value="${cart.cartNo}">
                             	<input type="hidden" name="total" value="${cart.total}">
                            	</td>
                             <td><article>
