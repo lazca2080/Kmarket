@@ -18,8 +18,8 @@ public enum AdminService {
 	private AdminService() { dao = new AdminDAO(); }
 	
 	// product 상품 리스트 불러오기
-	public ProductVO selectProducts(int level) {
-		return dao.selectProducts(level);
+	public ProductVO selectProducts() {
+		return dao.selectProducts();
 	}
 	
 	
@@ -34,6 +34,12 @@ public enum AdminService {
 	
 	public List<ProductVO> selectAdminList(int limiteStart, String seller) {
 		return dao.selectAdminList(seller, limiteStart);
+	}
+	
+	// 삭제
+	public int delectProduct(String prodNo) {
+		return dao.delectProduct(prodNo);
+		
 	}
 
 	// 서비스 로직

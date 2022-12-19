@@ -1,6 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"></jsp:include>
+<script>
+	$(function(){
+		$('.btn').click(function(){
+			let prodNo = $('input:checkbox:checked').val();
+			let checkbox = $('input:checkbox:checked');
+			
+			console.log("prodNo : " + prodNo);
+			
+			if(prodNo == null){
+				alert('상품을 선택하지 않았습니다.')
+				return;
+			}
+			
+			$.ajax({
+				url : '/Kmarket/admin/product/deleteProduct.do',
+				method : 'get',
+				data : {"prodNo":prodNo},
+				dataType : 'json',
+				success : function(data){
+					console.log("data :"+ data.result);
+					if(data.result == 1){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
+					}
+				}
+			});
+		});
+	});
+</script>
         <main>
             <aside>
                  <!-- Global Navigation Bar -->
@@ -89,7 +122,7 @@
                         </tr>
                         <c:forEach var="Product" items="${Product}">
                         <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
+                            <td><input type="checkbox" name="prodNo" id="prodNo" value="${Product.prodNo}"></td>
                             <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
                             <td>${Product.prodNo}</td>
                             <td>${Product.prodName}</td>
@@ -106,7 +139,7 @@
                         </tr>
                         </c:forEach>
                     </table>
-                    <input type="button" value="선택삭제">
+                    	<input type="button" value="선택삭제" class="btn">
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="">
