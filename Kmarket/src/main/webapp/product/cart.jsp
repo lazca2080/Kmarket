@@ -201,6 +201,10 @@
                             <td>
                             	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
                             	<input type="hidden" name="total" value="${cart.total}">
+                            	<input type="hidden" name="price" value="${cart.price}">
+                            	<input type="hidden" name="delivery" value="${cart.delivery}">
+                            	<input type="hidden" name="point" value="${cart.point}">
+                            	
                            	</td>
                             <td><article>
                                 <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">
