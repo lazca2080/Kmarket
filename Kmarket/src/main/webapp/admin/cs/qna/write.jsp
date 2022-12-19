@@ -58,10 +58,10 @@
             <section id="cs">
             	<div class="qna">
 	                <nav>
-	                    <h3>공지사항 보기</h3>
+	                    <h3>문의하기 보기</h3>
 	                    <p>
 	                        HOME > 고객센터 >
-	                        <strong>공지사항</strong>
+	                        <strong>문의하기</strong>
 	                    </p>
 	                </nav>
 	                <section class="write">

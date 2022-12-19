@@ -476,6 +476,7 @@ button[type=submit] {
 }
 
 #admin-faq > section > .write {
+	display: block;
     float: right;
     width: 100px;
     margin-top: 10px;
@@ -561,7 +562,12 @@ button[type=submit] {
 #admin-product-list > section > .write {
     float: right;
     width: 100px;
+    height: 30px;
     margin-top: 10px;
+    line-height: 30px;
+    display: block;
+    border: 1px solid #959595;
+    text-align: center;
 }
 
 #admin-product-list .paging {
@@ -658,7 +664,12 @@ button[type=submit] {
 #admin-faq > section > .write {
     float: right;
     width: 100px;
+    height: 30px;
     margin-top: 10px;
+    line-height: 30px;
+    display: block;
+    border: 1px solid #959595;
+    text-align: center;
 }
 
 #admin-faq .paging {
