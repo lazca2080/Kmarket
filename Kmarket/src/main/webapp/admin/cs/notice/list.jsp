@@ -97,7 +97,7 @@
                         </tr>
                     </table>
                     <input type="button" class="delete" value="선택삭제">
-                    <input type="button" class="write" value="작성하기">
+                    <a href="/Kmarket/admin/cs/notice/write.do" class="write">작성하기</a>
                     <div class="paging">
                         <span class="prev">
                             <a href="#"><&nbsp;이전</a>
