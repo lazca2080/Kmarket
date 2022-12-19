@@ -39,7 +39,7 @@ public class ListController extends HttpServlet{
 		*/
 		String uid = req.getParameter("uid");
 		String pg = req.getParameter("pg");
-		int level = req.getIntHeader("level");
+		//int level = req.getIntHeader("level");
 		String seller = req.getParameter("seller");
 		//String search = req.getParameter("serarch");
 		
@@ -53,18 +53,14 @@ public class ListController extends HttpServlet{
 		int pageStartNum = service.getPageStartNum(total, currentPage);
 		int start = service.getStartNum(currentPage);
 		
-		/*level 7 상품전체보기
-		if(level == 7) {
-			ProductVO level1 = service.selectProducts(level);
+		//level 7 상품전체보기
+		/*if(level == 7) {
+			ProductVO level1 = service.selectProducts();
 		}else {
-<<<<<<< HEAD
-			List<ProductVO> level = service.selectProductss(start,uid);
-=======
 			List<ProductVO> level1 = service.selectProductss(start,uid);
-			
->>>>>>> 2c46563ce7705e65701a3cf0e91bd05cd728083a
-		}
-		*/
+		}*/
+		
+		
 		List<ProductVO> Product = service.selectProductss(start,uid);
 		req.setAttribute("Product", Product);
 		
@@ -77,7 +73,6 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
-		req.setAttribute("level", level);
 		
 		
 		/*List<ProductVO> product = null;

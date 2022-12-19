@@ -19,7 +19,7 @@ public class AdminDAO {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public ProductVO selectProducts(int level) {
+	public ProductVO selectProducts() {
 		
 		ProductVO vo = null;
 		
@@ -27,7 +27,6 @@ public class AdminDAO {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProduct);
-			psmt.setInt(1, level);
 			ResultSet rs = psmt.executeQuery();
 			
 			if(rs.next()) {
@@ -153,6 +152,24 @@ public class AdminDAO {
 		}
 		logger.debug("product size : " +products.size());
 		return products;
+	}
+	
+	// 삭제
+	public int delectProduct(String prodNo) {
+		int result = 0;
+		try {
+			logger.info("delectProduct..");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.DELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			result = psmt.executeUpdate();
+			conn.close();
+			psmt.close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
 	
 	/* 키워드

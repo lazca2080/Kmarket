@@ -20,4 +20,6 @@ public class AdminSql {
 	
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` "
 												  + "where `seller`=? ";
+	
+	public static final String DELECT_PRODUCT = "delete from `km_product` where `prodNo`=? ";
 }
