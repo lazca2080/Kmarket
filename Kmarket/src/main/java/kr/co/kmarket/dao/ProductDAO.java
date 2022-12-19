@@ -324,6 +324,7 @@ public class ProductDAO {
 				vo.setSellPrice(rs.getString(9));
 				vo.setProdNo(rs.getString(10));
 				vo.setTotal(rs.getInt(11));
+				vo.setCartNo(rs.getInt(12));
 				
 				carts.add(vo);
 			}
@@ -340,13 +341,13 @@ public class ProductDAO {
 	}
 	
 	//장바구니 삭제
-	public int deleteCart(String prodNo) {
+	public int deleteCart(String cartNo) {
 		int cart = 0;
 		try {
 			logger.debug("deleteCart...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt =conn.prepareStatement(ProductSql.DELETE_PRODUCT_CART);
-			psmt.setString(1, prodNo);
+			psmt.setString(1, cartNo);
 			cart = psmt.executeUpdate();
 			
 			psmt.close();
