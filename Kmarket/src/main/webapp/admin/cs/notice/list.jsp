@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="./_header.jsp"></jsp:include>
+<jsp:include page="/admin/_header.jsp"></jsp:include>
+<!DOCTYPE html>
         <main>
             <aside>
                  <!-- Global Navigation Bar -->
@@ -31,8 +31,8 @@
                     <li>
                         <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                         <ol>
-                            <li><a href="/Kmarket/admin/product/list.do">상품현황</a></li>
-                            <li><a href="/Kmarket/admin/register.do">상품등록</a></li>
+                            <li><a href="#">상품현황</a></li>
+                            <li><a href="#">상품등록</a></li>
                             <li><a href="#">재고관리</a></li>
                         </ol>
                     </li>
@@ -57,80 +57,65 @@
             </aside>
             <section id="admin-product-list">
                 <nav>
-                    <h3>상품목록</h3>
+                    <h3>공지사항 목록</h3>
                     <p>
-                        HOME > 상품관리 >
-                        <strong>상품목록</strong>
+                        HOME > 고객센터 >
+                        <strong>공지사항</strong>
                     </p>
                 </nav>
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">상품명</option>
-                            <option value="search1">상품코드</option>
-                            <option value="search1">제조사</option>
-                            <option value="search1">판매자</option>
+                            <option value="search1">유형선택</option>
+                            <option value="search1">고객서비스</option>
+                            <option value="search1">안전거래</option>
+                            <option value="search1">위해상품</option>
+                            <option value="search1">이벤트 당첨</option>
                         </select>
-                        <input type="text" name="search" placeholder="검색할 단어">
                     </div>
                     <table>
                         <tr>
                             <th><input type="checkbox" name="all"></th>
-                            <th>이미지</th>
-                            <th>상품코드</th>
-                            <th>상품명</th>
-                            <th>판매가격</th>
-                            <th>할인율</th>
-                            <th>포인트</th>
-                            <th>재고</th>
-                            <th>판매자</th>
+                            <th>번호</th>
+                            <th>유형</th>
+                            <th>제목</th>
                             <th>조회</th>
+                            <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="Product" items="${Product}">
                         <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
-                            <td>${Product.prodNo}</td>
-                            <td>${Product.prodName}</td>
-                            <td>${Product.price}</td>
-                            <td>${Product.discount}</td>
-                            <td>${Product.point}</td>
-                            <td>${Product.stock}</td>
-                            <td>${sessUser.uid}</td>
-                            <td>${Product.hit}</td>
+                        	<td><input type="checkbox" name="all"></td>
+                            <td>100</td>
+                            <td>고객서비스</td>
+                            <td><a href="/Kmarket/admin/cs/notice/view.do">[안내] 해외결제 사칭 문자 주의</a></td>
+                            <td>120</td>
+                            <td>00.00.00</td>
                             <td>
-                                <a href="#">[삭제]</a>
+                                <a href="#">[삭제]</a><br>
                                 <a href="#">[수정]</a>
                             </td>
                         </tr>
-                        </c:forEach>
                     </table>
-                    <input type="button" value="선택삭제">
+                    <input type="button" class="delete" value="선택삭제">
+                    <input type="button" class="write" value="작성하기">
                     <div class="paging">
-                        <span class="prev"> 
-                        	<c:if test="">
-	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
-	                        </c:if>
+                        <span class="prev">
+                            <a href="#"><&nbsp;이전</a>
                         </span>
                         <span class="num">
-                        	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}" class="on${currentPage eq i?'current':'off'}">${i}</a>
-                            </c:forEach>
+                            <a href="#" class="on">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">7</a>
                         </span>
                         <span class="next">
-                        	<c:if test="${pageGroupEnd < lastPageNum}">
-                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
-                            </c:if>
+                            <a href="#">다음&nbsp;></a>
                         </span>
                     </div>
                 </section>
-                <p class="ico info">
-                    <strong>Tip!</strong>
-                    전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 
-                    총 34개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 
-                    있습니다.
-                </p>
             </section>
         </main>
-<jsp:include page="./_footer.jsp"></jsp:include>
+<jsp:include page="/admin/_footer.jsp"></jsp:include>
