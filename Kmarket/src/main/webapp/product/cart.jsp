@@ -231,8 +231,6 @@
                     <div class="total">
                     <c:forEach var="cart" items="${cart}">
                     <input type="hidden" class="cart_price" value="${cart.price}">
-                    <input type="hidden" class="cart_discount" value="${cart.discount}">
-                    <input type="hidden" class="cart_delivery" value="${cart.delivery}">
                         <h2>전체합계</h2>
                         <table>
                             <tr>
