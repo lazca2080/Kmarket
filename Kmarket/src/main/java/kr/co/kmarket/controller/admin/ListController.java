@@ -54,9 +54,9 @@ public class ListController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 		
 		if(level == 7) {
-			ProductVO level = service.selectProducts(level);
+			ProductVO level1 = service.selectProducts(level);
 		}else {
-			List<ProductVO> level = service.selectProductss(start,uid);
+			List<ProductVO> level1 = service.selectProductss(start,uid);
 			
 		}
 		List<ProductVO> Product = service.selectProductss(start,uid);

@@ -2,98 +2,173 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
 <script>
-	/*
 	$(function() {
-		let totalPrice = '${cart.sellPrice + cart.delivery}';
-		totalPrice = Math.floor(totalPoint);
-		$('.total_td').text(totalPrice);
+		$('.del').click(function() {
+			
+		let chk = $('input:checkbox:checked').val();
+		
+		console.log("chk : "+chk);
+		
+		if(chk == null){
+			alert('선택된 상품이 없습니다.');
+			return;
+		}
+		
+		$.ajax({
+			url : '/Kmarket/product/deleteCart.do',
+			method : 'get',
+			data : {"chk":chk},
+			dataType : 'json',
+			success : function(data) {
+				console.log("data : "+data.result);
+				if(data.result == 0){
+					alert('삭제되었습니다.');
+					return true;
+				}else {
+					alert('실패하였습니다.');
+					return false;
+				}
+			}
+			
+		});
+		
+		
+			
+		//alert('삭제하시겠습니까?');
+			
+		});
 	});
-	*/
 </script>
         <main id="product">
             <aside>
  				 <ul class="category">
                     <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>카테고리
+                        <i class="fa fa-bars" aria-hidden="true"></i>
                     </li>
-                        <li>
+                      <li>
+                        <a href="#">
+                            <i class="fas fa-shopping-bag" aria-hidden="true"></i>브랜드패션
+                            <i class="fas fa-angle-right" aria-hidden="true">
+                            </i>
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate10" items="${cate.cate10}">
+                            <li>
+                                <a href="/Kmarket/product/list.do?cate1=${cate10.cate1}&cate2=${cate10.cate2}">${cate10.c2Name}</a>
+                            </li>
+                            </c:forEach>
+                        </ol>
+                    </li>
+					<li>
                         <a href="#">
                             <i class="fas fa-tshirt" aria-hidden="true"></i>패션·의류·뷰티
+                            <i class="fas fa-angle-right" aria-hidden="true">
                             </i>
                         </a>
                         <ol>
+                        	<c:forEach var="cate11" items="${cate.cate11}">
                             <li>
-                                <a href="#">남성의류</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate11.cate1}&cate2=${cate11.cate2}">${cate11.c2Name}</a>
                             </li>
-                            <li>
-                                <a href="#">여성의류</a>
-                            </li>
-                            <li>
-                                <a href="#">잡화</a>
-                            </li>
-                            <li>
-                                <a href="#">뷰티</a>
-                            </li>
+                            </c:forEach>
                         </ol>
                     </li>
-                    <li>
+  					<li>
                         <a href="#">
-                            <i class="fas fa-laptop" aria-hidden="true"></i>가전·디지털
+                            <i class="fas fa-baby-carriage" aria-hidden="true"></i>유아동
+                            <i class="fas fa-angle-right" aria-hidden="true">
                             </i>
                         </a>
                         <ol>
+                        	<c:forEach var="cate12" items="${cate.cate12}">
                             <li>
-                                <a href="#">노트북/PC</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate12.cate1}&cate2=${cate12.cate2}">${cate12.c2Name}</a>
                             </li>
-                            <li>
-                                <a href="#">가전</a>
-                            </li>
-                            <li>
-                                <a href="#">휴대폰</a>
-                            </li>
-                            <li>
-                                <a href="#">기타</a>
-                            </li>
+                            </c:forEach>
                         </ol>
                     </li>
-                    <li>
+					<li>
                         <a href="#">
                             <i class="fas fa-utensils" aria-hidden="true"></i>식품·생필품
+                            <i class="fas fa-angle-right" aria-hidden="true">
                             </i>
                         </a>
                         <ol>
+                        	<c:forEach var="cate13" items="${cate.cate13}">
                             <li>
-                                <a href="#">신선식품</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate13.cate1}&cate2=${cate13.cate2}">${cate13.c2Name}</a>
                             </li>
-                            <li>
-                                <a href="#">가공식품</a>
-                            </li>
-                            <li>
-                                <a href="#">건강식품</a>
-                            </li>
-                            <li>
-                                <a href="#">생필품</a>
-                            </li>
+                            </c:forEach>
                         </ol>
                     </li>
-                    <li>
+					<li>
                         <a href="#">
-                            <i class="fas fa-home" aria-hidden="true"></i>홈·문구·취미
+                            <i class="fas fa-home" aria-hidden="true"></i>홈데코·문구·취미·반려
+                            <i class="fas fa-angle-right" aria-hidden="true">
                             </i>
                         </a>
                         <ol>
+                        	<c:forEach var="cate14" items="${cate.cate14}">
                             <li>
-                                <a href="#">가구/DIY</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate14.cate1}&cate2=${cate14.cate2}">${cate14.c2Name}</a>
                             </li>
+                            </c:forEach>
+                        </ol>
+                    </li>
+					<li>
+                        <a href="#">
+                            <i class="fas fa-tv" aria-hidden="true"></i>컴퓨터·디지털·가전
+                            <i class="fas fa-angle-right" aria-hidden="true">
+                            </i>
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate15" items="${cate.cate15}">
                             <li>
-                                <a href="#">침구·커튼</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate15.cate1}&cate2=${cate15.cate2}">${cate15.c2Name}</a>
                             </li>
+                            </c:forEach>
+                        </ol>
+                    </li>
+					<li>
+                        <a href="#">
+                            <i class="fas fa-running" aria-hidden="true"></i>스포츠·건강·렌탈
+                            <i class="fas fa-angle-right" aria-hidden="true">
+                            </i>
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate16" items="${cate.cate16}">
                             <li>
-                                <a href="#">생활용품</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate16.cate1}&cate2=${cate16.cate2}">${cate16.c2Name}</a>
                             </li>
+                            </c:forEach>
+                        </ol>
+                    </li>
+					<li>
+                        <a href="#">
+                            <i class="fas fa-car" aria-hidden="true"></i>자동차·공구
+                            <i class="fas fa-angle-right" aria-hidden="true">
+                            </i>
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate17" items="${cate.cate17}">
                             <li>
-                                <a href="#">사무용품</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate17.cate1}&cate2=${cate17.cate2}">${cate17.c2Name}</a>
                             </li>
+                            </c:forEach>
+                        </ol>
+                    </li>
+					<li>
+                        <a href="#">
+                            <i class="fas fa-book" aria-hidden="true"></i>여행·도서·티켓·e쿠폰
+                            <i class="fas fa-angle-right" aria-hidden="true">
+                            </i>
+                        </a>
+                        <ol>
+                        	<c:forEach var="cate18" items="${cate.cate18}">
+                            <li>
+                                <a href="#">${cate18.c2Name}</a>
+                            </li>
+                            </c:forEach>
                         </ol>
                     </li>
                 </ul>
@@ -103,8 +178,6 @@
                     <h1>장바구니</h1>
                     <p>
                         HOME > 
-                        <span>패션·의류·뷰티</span>
-                         > 
                         <strong>장바구니</strong>
                     </p>
                 </nav>
@@ -123,63 +196,40 @@
                         <tr class="empty">
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
+                        <c:forEach var="cart" items="${cart}">
                         <tr>
-                            <td><input type="checkbox" name="1"></td>
+                            <td><input type="checkbox" name="1" value="${cart.prodNo}"></td>
                             <td><article>
-                                <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
+                                <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">
+                                    <img src="/home/prodImg/${cart.thumb1}" alt="1">
                                 </a>
                                 <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
+                                    <h2><a href="#">${cart.prodName}</a></h2>
+                                    <p>${cart.descript}</p>
                                 </div>
                             </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>5%</td>
-                            <td>270</td>
+                            <td>${cart.count}</td>
+                            <td>${cart.price}</td>
+                            <td>${cart.discount}%</td>
+                            <td>${cart.point}p</td>
+                            <c:if test="${cart.delivery eq 0}">
                             <td>무료배송</td>
-                            <td class="total_td"></td>
+                            </c:if>
+                            <c:if test="${cart.delivery ne 0}">
+                            <td>${cart.delivery}원</td>
+                            </c:if>
+                            <td>${cart.total}</td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="1"></td>
-                            <td><article>
-                                <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
-                                </a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>5%</td>
-                            <td>270</td>
-                            <td>무료배송</td>
-                            <td>27,000</td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="1"></td>
-                            <td><article>
-                                <a href="#">
-                                    <img src="	https://via.placeholder.com/80x80" alt="1">
-                                </a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article></td>
-                            <td>1</td>
-                            <td>27,000</td>
-                            <td>5%</td>
-                            <td>270</td>
-                            <td>무료배송</td>
-                            <td>27,000</td>
-                        </tr>
+                        </c:forEach>
+                       
+                     
                     </table>
-                    <input type="button" name="del" value="선택삭제">
+                    <input type="button" name="del" class="del" value="선택삭제">
                     <div class="total">
+                    <c:forEach var="cart" items="${cart}">
+                    <input type="hidden" class="cart_price" value="${cart.price}">
+                    <input type="hidden" class="cart_discount" value="${cart.discount}">
+                    <input type="hidden" class="cart_delivery" value="${cart.delivery}">
                         <h2>전체합계</h2>
                         <table>
                             <tr>
@@ -208,6 +258,7 @@
                             </tr>
                         </table>
                         <input type="submit" value="주문하기">
+                        </c:forEach>
                     </div>
                </form>
             </section>
