@@ -56,8 +56,8 @@ public enum ProductService {
 	}
 	
 	//장바구니 삭제
-		public int deleteCart(String prodNo) {
-			return dao.deleteCart(prodNo);
+		public int deleteCart(String cartNo) {
+			return dao.deleteCart(cartNo);
 		}
 		
 	
