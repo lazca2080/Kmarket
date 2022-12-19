@@ -1,6 +1,6 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"></jsp:include>
         <section id="cs">
             <div class="main">
@@ -13,7 +13,7 @@
                     	<c:forEach var="latest" items="${latests}">
                     		<c:if test="${latest.cate eq 'notice'}">
                     		<li>
-	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate} ${latest.no}</a>
 	                            <%-- <span class="date">${latest.rdate}</span>  --%>
 	                            <span>
 	                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -27,43 +27,43 @@
                 <section class="faq">
                     <h1>
                         자주 묻는 질문
-                        <a href="/Kmarket/cs/faq/list.do">
+                        <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">
                             전체보기
                         </a>
                     </h1>
                     <ol>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">
                                 <span>회원</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span>쿠폰이벤트</span>
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=쿠폰/이벤트">
+                                <span>쿠폰/이벤트</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=주문/결제">
                                 <span>주문/결제</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=배송">
                                 <span>배송</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=취소/반품/교환">
                                 <span>취소/반품/교환</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=여행/숙박/항공">
                                 <span>여행/숙박/항공</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=안전거래">
                                 <span>안전거래</span>
                             </a>
                         </li>
@@ -75,9 +75,9 @@
                     	<c:forEach var="latest" items="${latests}">
 	                    	<c:if test="${latest.cate eq 'qna'}">
 	                        <li>
-	                            <a href="#" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate}</a>
+	                            <a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate} ${latest.no}</a>
 	                                <p>
-	                                    <span class="uid">${latest.uid}</span>
+	                                    <span class="uid">${latest.uid.substring(0,3)}**</span>
 	                                    <span class="date">
 	                                    	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 			                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>

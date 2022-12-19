@@ -1,7 +1,6 @@
-package kr.co.kmarket.controller.product;
+package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,16 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.kmarket.service.IndexService;
-import kr.co.kmarket.service.ProductService;
-import kr.co.kmarket.vo.ProductVO;
-
-@WebServlet("/product/view.do")
+@WebServlet("/admin/cs/notice/view.do")
 public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private ProductService service = ProductService.INSTANCE;
-	private IndexService ser = IndexService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,18 +21,9 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String prodNo = req.getParameter("prodNo");
-		String uid = req.getParameter("sessUid");
-		req.setAttribute("uid", uid);
-		
-		ProductVO product = service.selectProduct(prodNo);
-		req.setAttribute("product", product);
-		
-		Map<String, Object> cate = ser.selectCategory();
-		req.setAttribute("cate", cate);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/view.jsp");
 		dispatcher.forward(req, resp);
+		
 	}
 	
 	@Override

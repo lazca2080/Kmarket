@@ -55,9 +55,14 @@ public class ListController extends HttpServlet{
 		
 		/*level 7 상품전체보기
 		if(level == 7) {
-			ProductVO level = service.selectProducts(level);
+			ProductVO level1 = service.selectProducts(level);
 		}else {
+<<<<<<< HEAD
 			List<ProductVO> level = service.selectProductss(start,uid);
+=======
+			List<ProductVO> level1 = service.selectProductss(start,uid);
+			
+>>>>>>> 2c46563ce7705e65701a3cf0e91bd05cd728083a
 		}
 		*/
 		List<ProductVO> Product = service.selectProductss(start,uid);

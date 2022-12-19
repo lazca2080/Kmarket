@@ -52,7 +52,8 @@
                             			<td>
                             				<a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a>
                             			</td>
-                            			<td>${article.uid}</td>
+                            			<td>검토중 or 답변완료</td>
+                            			<td>${article.uid.substring(0,3)}**</td>
                                     	<td>
                                     		<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 		                            		<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>

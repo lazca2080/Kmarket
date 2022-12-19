@@ -30,7 +30,7 @@ public class WriteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("cs::qna-WriteController doGet...");
+		logger.info("doGet");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
@@ -45,7 +45,7 @@ public class WriteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("cs::qna-WriteController doPost...");
+		logger.info("doPost");
 		
 		// 비회원 글 작성시 (추후 구현)
 //		HttpSession session = req.getSession();

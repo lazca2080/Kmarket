@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,7 @@ public class CsDAO {
 	public List<CsVO> selectLatests(String cate1, String cate2, String cate3){
 		List<CsVO> latests = new ArrayList<>();
 		try {
-			logger.info("selectLatests...");
+			logger.info("selectLatests");
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_LATESTS);
 			psmt.setString(1, cate1);
@@ -130,10 +132,18 @@ public class CsDAO {
 			logger.info("CsDAO-selectArticles...");
 			
 			Connection con = DBCP.getConnection();
-			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
-			psmt.setString(1, cate);
-			psmt.setString(2, cateType1);
-			psmt.setInt(3, start);
+			PreparedStatement psmt = null;
+			
+			if(cateType1 == null) {
+				 psmt = con.prepareStatement(CsSql.SELECT_WHOLE_ARTICLES);
+				 psmt.setInt(1, start);
+			}else {
+				psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
+				psmt.setString(1, cate);
+				psmt.setString(2, cateType1);
+				psmt.setInt(3, start);
+			}
+			
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsVO article = new CsVO();
@@ -161,13 +171,55 @@ public class CsDAO {
 		return articles;
 	}
 
+	/*** cs::faq list ***/
+	// cate - cateType1
+	public List<CsVO> selectFaqArticles(String cate, String cateType1){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			
+			logger.info("selectFaqArticles");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_FAQ_ARTICLES);
+			psmt.setString(1, cate);
+			psmt.setString(2, cateType1);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				
+				articles.add(article);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	
+	
 	
 	/*** cs - view ***/
 	public CsVO selectArticle(String no) {
 		CsVO vo = null;
 		
 		try {
-			logger.info("CsDAO-selectArticle...");
+			logger.info("selectArticle");
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);

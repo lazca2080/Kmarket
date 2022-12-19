@@ -29,10 +29,45 @@ public class ProductVO {
 	private int count;
 	private int total;
 	private int hit;
-  private String c1Name;
+	private String c1Name;
 	private String c2Name;
+	private int level;
+	private int score;
+	private String uid;
 	
 	// 추가
+	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void setScore(String score) {
+		this.score = Integer.parseInt(score);
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public void setLevel(String level) {
+		this.level = Integer.parseInt(level);
+	}
 	
 	public String getC1Name() {
 		return c1Name;
@@ -76,6 +111,10 @@ public class ProductVO {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	public void setCount(String count) {
+		this.count = Integer.parseInt(count);
+	}
+	
 	public int getTotal() {
 		return total;
 	}

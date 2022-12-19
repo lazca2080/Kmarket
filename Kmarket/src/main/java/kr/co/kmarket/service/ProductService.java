@@ -27,8 +27,8 @@ public enum ProductService {
 	}
 	
 	//Product list 목록 불러오기
-	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
-		return dao.selectProducts(limiteStart, cate1, cate2);
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
+		return dao.selectProducts(limiteStart, cate1, cate2, sort);
 	}
 	
 	//Product 상품 하나 불러오기
@@ -45,10 +45,21 @@ public enum ProductService {
 		return dao.selectCate(cate1, cate2);
 	}
 	
+	//장바구니 등록
+	public int updateCart(String uid, String count, String prodNo) {
+		return dao.updateCart(uid, count, prodNo);
+	}
+	
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		return dao.selectProductCart(uid);
 	}
+	
+	//장바구니 삭제
+		public int deleteCart(String prodNo) {
+			return dao.deleteCart(prodNo);
+		}
+		
 	
 	public List<CategoryVO> selectCate(int cate) {
 		return dao.selectCate(cate);
@@ -65,6 +76,7 @@ public enum ProductService {
 	public List<ProductVO> selectIndex() {
 		return dao.selectIndex();
 	}
+	
 	
 	
 	// 서비스 로직

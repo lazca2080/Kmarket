@@ -144,6 +144,9 @@ header > .logo a {
     text-indent: 10px;
     margin-top: 12px;
 }
+#cs > .main > section > ul > li > a:hover {
+	text-decoration: underline;
+}
 #cs > .main > section > ul .title {
     font-size: 18px;
 }
@@ -347,7 +350,7 @@ footer  p > strong {
     display: inline-block;
     width: 200px;
     height: 60px;
-    margin: 40px auto 0;
+    margin: 40px auto 0; 
     border: 1px solid #ccc;
     border-radius: 34px;
     font-size: 16px;
@@ -363,7 +366,7 @@ footer  p > strong {
     display: inline-block;
     width: 200px;
     height: 60px;
-    margin: 40px auto 0;
+    margin: 40px auto 0;	
     background-color: #067dfd;
     border: 1px solid #0063ce;
     border-radius: 34px;
@@ -376,6 +379,8 @@ footer  p > strong {
 .btnSubmit:hover {
     background-color: #0956f6;
 }
+
+
 /*고객센터 sub 공통*/
 #cs > div > section > article > nav {
     width: 100%;
@@ -385,6 +390,7 @@ footer  p > strong {
 #cs > div > section > article > nav > h1 {
     font-size: 26px;
     font-weight: bold;
+    left: 391px;
 }
 #cs > div > section > article > nav > h2 {
     font-size: 20px;
@@ -459,6 +465,7 @@ footer  p > strong {
 #cs > .notice > section > article {
     padding: 26px;
     box-sizing: border-box;
+    position: relative;
 }
 
 /*notice - 글목록*/
@@ -546,7 +553,10 @@ footer  p > strong {
     font-size: 16px;
     line-height: 32px;
 }
-
+#cs > .notice > .view > article > .btnList {
+	position: absolute;
+    left: 380px;
+}
 /*faq 공통*/
 #cs > .faq {}
 #cs > .faq > nav {
@@ -637,9 +647,7 @@ footer  p > strong {
     height: auto;
     border-bottom: 1px solid #ccc;
 }
-#cs > .faq > .list > article > div > ul > li:nth-child(n+4) {
-    display: none;
-}
+
 #cs > .faq > .list > article > div > ul a {
     display: block;
     width: 100%;
@@ -667,7 +675,9 @@ footer  p > strong {
 
 /*faq - 글보기*/
 #cs > .faq > .view {}
-#cs > .faq > .view > article {}
+#cs > .faq > .view > article {
+	position: relative;
+}
 #cs > .faq > .view > article > nav {
     width: 100%;
     height: auto;
@@ -703,7 +713,10 @@ footer  p > strong {
     font-size: 16px;
     line-height: 32px;
 }
-
+#cs > .faq > .view > article > .btnList {
+	position: absolute;
+    left: 380px;
+}
  /*qna - 공통*/
  #cs > .qna {}
  #cs > .qna > nav {
@@ -773,6 +786,7 @@ footer  p > strong {
      min-height: 600px;
      padding: 26px;
      box-sizing: border-box;
+     position: relative;
  }
  /*qna - 리스트*/
  #cs > .qna > .list > article > table {
@@ -832,7 +846,9 @@ footer  p > strong {
 
  /*qna - 글보기*/
  #cs > .qna > .view {}
- #cs > .qna > .view > article {}
+ #cs > .qna > .view > article {
+ 	position: relative;
+ }
  #cs > .qna > .view > article > nav {
      width: 100%;
      height: auto;
@@ -861,13 +877,23 @@ footer  p > strong {
      font-size: 16px;
      line-height: 32px;
  }
-
+#cs > .qna > .view > article > .btnList {
+	position: absolute;
+    left: 390px;
+}
 /*qna - 글쓰기*/
  #cs > .qna > .write > article table {
     width: 100%;
     border-collapse: collapse;
     border-top: 2px solid #111;
+    margin-bottom: 106px;
 }
+ #cs > .qna > .write > article div {
+ 	position: absolute;
+    left: 276px;
+    bottom: 0px;
+    margin-bottom: 40px;
+ }
 #cs > .qna > .write > article table tr {
     width: 100%;
     height: 26px;
@@ -904,3 +930,5 @@ footer  p > strong {
     padding: 10px;
     box-sizing: border-box;
 }
+ 
+

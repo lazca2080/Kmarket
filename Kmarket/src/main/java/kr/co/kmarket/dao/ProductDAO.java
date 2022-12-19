@@ -78,18 +78,55 @@ public class ProductDAO {
 		
 	}
 
-	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2) {
+	//상품 항목 리스트 조회
+	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
 			logger.debug("selectProduct...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SOLD);
-			psmt.setString(1, cate1);
-			psmt.setString(2, cate2);
-			psmt.setInt(3, limiteStart);
 			
+			PreparedStatement psmt = null;
+			
+			if(sort == null) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("sold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SOLD);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("ascSold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_DOWN);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("descSold")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_up);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("score")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_SCORE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("review")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_REVIEW);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}else if(sort.equals("rdate")) {
+				psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCTS_SELLPRICE_RDATE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, limiteStart);
+			}
+			
+			logger.info("sort : "+sort);
 			logger.info("selctCate1 : "+cate1);
 			logger.info("selctCate2 : "+cate2);
 			logger.info("selectlimit : "+limiteStart);
@@ -107,8 +144,10 @@ public class ProductDAO {
 				vo.setDiscount(rs.getInt(9));
 				vo.setPoint(rs.getInt(10));
 				vo.setDelivery(rs.getString(13));
+				vo.setScore(rs.getString(15));
 				vo.setThumb1(rs.getString(17));
 				vo.setSellPrice(rs.getInt(33));
+				vo.setLevel(rs.getString(34));
 				
 				products.add(vo);
 			}
@@ -124,6 +163,7 @@ public class ProductDAO {
 		return products;
 	}
 	
+	//단일 상품 조회
 	public ProductVO selectProduct(String prodNo) {
 		
 		ProductVO vo = null;
@@ -148,6 +188,7 @@ public class ProductDAO {
 				vo.setDiscount(rs.getString(9));
 				vo.setPoint(rs.getString(10));
 				vo.setDelivery(rs.getString(13));
+				vo.setThumb1(rs.getString(17));
 				vo.setThumb2(rs.getString(18));
 				vo.setDetail(rs.getString(19));
 				vo.setStatus(rs.getString(21));
@@ -171,6 +212,7 @@ public class ProductDAO {
 		return vo;
 	}
 	
+	//상품 총 갯수 조회
 	public int selectCountTotal(String cate1, String cate2) {
 		
 		int total = 0;
@@ -231,6 +273,31 @@ public class ProductDAO {
 		return vo;
 	}
 	
+	//장바구니 등록
+	public int updateCart(String uid, String count, String prodNo) {
+		int result = 0;
+		try {
+			logger.debug("updateCart....");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.UPDATE_PRODUCT_CART);
+			psmt.setString(1, uid);
+			psmt.setString(2, count);
+			psmt.setString(3, count);
+			psmt.setString(4, prodNo);
+			
+			
+			result = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		
@@ -255,6 +322,8 @@ public class ProductDAO {
 				vo.setPoint(rs.getString(7));
 				vo.setDelivery(rs.getString(8));
 				vo.setSellPrice(rs.getString(9));
+				vo.setProdNo(rs.getString(10));
+				vo.setTotal(rs.getInt(11));
 				
 				carts.add(vo);
 			}
@@ -268,6 +337,27 @@ public class ProductDAO {
 		}
 		
 		return carts;
+	}
+	
+	//장바구니 삭제
+	public int deleteCart(String prodNo) {
+		int cart = 0;
+		try {
+			logger.debug("deleteCart...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt =conn.prepareStatement(ProductSql.DELETE_PRODUCT_CART);
+			psmt.setString(1, prodNo);
+			cart = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		int result = cart;
+		
+		return result;
 	}
 	
 public List<CategoryVO> selectCate(int cate) {
