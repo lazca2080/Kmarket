@@ -18,7 +18,7 @@
         <header>
             <div>
                 <a href="/Kmarket/admin/index.do" class="logo">
-                    <img src="./img/admin_logo.png" alt="admin_logo">
+                    <img src="../img/admin_logo.png" alt="admin_logo">
                 </a>
                 <p>
                 <c:choose>

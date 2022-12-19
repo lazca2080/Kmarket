@@ -125,7 +125,7 @@
                     <tr>
                         <th>
                             <span class="essential">*</span>
-                            팩스번호
+                            이메일
                         </th>
                         <td>
                             <input type="email" name="kms_email" placeholder="이메일 입력" required>
