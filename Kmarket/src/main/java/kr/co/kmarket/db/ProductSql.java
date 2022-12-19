@@ -81,7 +81,7 @@ public class ProductSql {
 	public static final String SELECT_CATE = "SELECT * FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b ON a.cate1 = b.cate1 WHERE a.`cate1`=? and b.cate2=?";
 	
   // 장바구니 목록
-	public static final String SELECT_PRODUCTS_CART = "SELECT a.thumb1, a.prodName, a.descript, b.`count`, a.price, b.discount, b.`point`, b.delivery, a.sellPrice, a.prodNo, b.total "
+	public static final String SELECT_PRODUCTS_CART = "SELECT a.thumb1, a.prodName, a.descript, b.`count`, a.price, b.discount, b.`point`, b.delivery, a.sellPrice, a.prodNo, b.total, b.`cartNo` "
 													+ "FROM `km_product` AS a "
 													+ "JOIN `km_product_cart` AS b "
 													+ "ON a.prodNo=b.prodNo "
@@ -94,5 +94,5 @@ public class ProductSql {
 													+ "WHERE prodNo = ?";
 											
 	//장바구니 상품삭제
-	public static final String DELETE_PRODUCT_CART = "delete from `km_product_cart` where `prodNo` = ?";
+	public static final String DELETE_PRODUCT_CART = "delete from `km_product_cart` where `cartNo` = ?";
 }

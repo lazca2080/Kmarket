@@ -34,8 +34,21 @@ public class ProductVO {
 	private int level;
 	private int score;
 	private String uid;
+	private int cartNo;
 	
 	// 추가
+	
+	public int getCartNo() {
+		return cartNo;
+	}
+	
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+	
+	public void setCartNo(String cartNo) {
+		this.cartNo = Integer.parseInt(cartNo);
+	}
 	
 	public String getUid() {
 		return uid;

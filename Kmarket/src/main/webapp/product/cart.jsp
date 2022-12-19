@@ -5,11 +5,12 @@
 	$(function() {
 		$('.del').click(function() {
 			
-		let chk = $('input:checkbox:checked').val();
+		let cartNo = $('input:checkbox:checked').val();
+		let checkbox = $('input:checkbox:checked');
 		
-		console.log("chk : "+chk);
+		console.log("cartNo : "+cartNo);
 		
-		if(chk == null){
+		if(cartNo == null){
 			alert('선택된 상품이 없습니다.');
 			return;
 		}
@@ -17,12 +18,13 @@
 		$.ajax({
 			url : '/Kmarket/product/deleteCart.do',
 			method : 'get',
-			data : {"chk":chk},
+			data : {"cartNo":cartNo},
 			dataType : 'json',
 			success : function(data) {
 				console.log("data : "+data.result);
-				if(data.result == 0){
+				if(data.result == 1){
 					alert('삭제되었습니다.');
+					checkbox.parent().parent().hide();
 					return true;
 				}else {
 					alert('실패하였습니다.');
@@ -31,8 +33,6 @@
 			}
 			
 		});
-		
-		
 			
 		//alert('삭제하시겠습니까?');
 			
@@ -197,8 +197,8 @@
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
                         <c:forEach var="cart" items="${cart}">
-                        <tr>
-                            <td><input type="checkbox" name="1" value="${cart.prodNo}"></td>
+                        <tr class="${cart.cartNo}">
+                            <td><input type="checkbox" name="1" value="${cart.cartNo}"></td>
                             <td><article>
                                 <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">
                                     <img src="/home/prodImg/${cart.thumb1}" alt="1">

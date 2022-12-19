@@ -31,12 +31,12 @@ public class DeleteCartController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String prodNo = req.getParameter("prodNo");
+		String cartNo = req.getParameter("cartNo");
 		String uid = req.getParameter("uid");
 		
-		logger.info("prodNo : " +prodNo);
+		logger.info("cartNo : " +cartNo);
 		
-		int result = service.deleteCart(prodNo);
+		int result = service.deleteCart(cartNo);
 		
 		logger.debug("result : " +result);
 		
