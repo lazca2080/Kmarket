@@ -6,6 +6,7 @@
 		$('.del').click(function() {
 			
 		let cartNo = $('input:checkbox:checked').val();
+		let checkbox = $('input:checkbox:checked');
 		
 		console.log("cartNo : "+cartNo);
 		
@@ -23,6 +24,7 @@
 				console.log("data : "+data.result);
 				if(data.result == 1){
 					alert('삭제되었습니다.');
+					checkbox.parent().parent().hide();
 					return true;
 				}else {
 					alert('실패하였습니다.');
@@ -31,8 +33,6 @@
 			}
 			
 		});
-		
-		
 			
 		//alert('삭제하시겠습니까?');
 			
@@ -197,7 +197,7 @@
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
                         <c:forEach var="cart" items="${cart}">
-                        <tr>
+                        <tr class="${cart.cartNo}">
                             <td><input type="checkbox" name="1" value="${cart.cartNo}"></td>
                             <td><article>
                                 <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">
