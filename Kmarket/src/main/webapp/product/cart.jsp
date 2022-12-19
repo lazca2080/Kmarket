@@ -24,7 +24,7 @@
 				console.log("data : "+data.result);
 				if(data.result == 1){
 					alert('삭제되었습니다.');
-					checkbox.parent().parent().hide();
+					checkbox.parent().parent().remove();
 					return true;
 				}else {
 					alert('실패하였습니다.');
@@ -198,7 +198,10 @@
                         </tr>
                         <c:forEach var="cart" items="${cart}">
                         <tr class="${cart.cartNo}">
-                            <td><input type="checkbox" name="1" value="${cart.cartNo}"></td>
+                            <td>
+                            	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
+                            	<input type="hidden" name="total" value="${cart.total}">
+                           	</td>
                             <td><article>
                                 <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">
                                     <img src="/home/prodImg/${cart.thumb1}" alt="1">
