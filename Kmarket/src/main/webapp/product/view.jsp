@@ -23,27 +23,37 @@
 		
 		$('.cart').click(function() {
 			
-			let prodNo = '${product.prodNo}';
-			let uid = '${sessUser.uid}';
+			let prodNo = $(this).attr('data-no');
+			let uid = $(this).attr('data-uid');
 			let count = $('input[name=num]').val();			
 			
-			console.log(product);
+			console.log("uid : "+uid);
+			console.log("prodNo : " +prodNo);
+			console.log("count : "+count);
 			
-			
-			
+			/*
 			let jsonData = {
 					"prodNo":prodNo,
 					"uid"	:uid,
 					"count"	:count
 			};
 			
+			console.log("jsonData 정보 :" ${Json.parse(Json.stringify(jsonData))});
+			*/
+			
 			$.ajax({
 				url : '/Kmarket/product/updateCart.do',
-				methid : 'get',
-				data : 'jsonData',
+				method : 'get',
+				data : {"prodNo":prodNo, "uid":uid, "count":count },
 				dataType : 'json',
-				success : function() {
+				success : function(data) {
+					console.log("data : "+data);
 					
+					if(data.result == 1){
+						alert('상품이 장바구니에 추가되었습니다.');
+					}else{
+						alert('장바구니에 담지 못했습니다.');
+					}
 					
 					
 				}
@@ -300,7 +310,7 @@
                         <div class="button">
                         	<c:choose>
                         		<c:when test="${sessUser.uid ne null}">
-	                            <input type="button" class="cart" data-product="${product}" data-uid="${sessUser.uid}" value="장바구니">
+	                            <input type="button" class="cart" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="장바구니">
 	                        	</c:when>
 	                        	<c:otherwise>
 	                        	<input type="button" class="cart" data-no="${product.prodNo}" value="장바구니">

@@ -46,14 +46,20 @@ public enum ProductService {
 	}
 	
 	//장바구니 등록
-	public int updateCart(ProductVO vo) {
-		return dao.updateCart(vo);
+	public int updateCart(String uid, String count, String prodNo) {
+		return dao.updateCart(uid, count, prodNo);
 	}
 	
 	//장바구니 목록
 	public List<ProductVO> selectProductCart(String uid) {
 		return dao.selectProductCart(uid);
 	}
+	
+	//장바구니 삭제
+		public int deleteCart(String prodNo) {
+			return dao.deleteCart(prodNo);
+		}
+		
 	
 	public List<CategoryVO> selectCate(int cate) {
 		return dao.selectCate(cate);
@@ -70,6 +76,7 @@ public enum ProductService {
 	public List<ProductVO> selectIndex() {
 		return dao.selectIndex();
 	}
+	
 	
 	
 	// 서비스 로직

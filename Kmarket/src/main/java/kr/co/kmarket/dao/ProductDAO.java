@@ -274,17 +274,17 @@ public class ProductDAO {
 	}
 	
 	//장바구니 등록
-	public int updateCart(ProductVO vo) {
+	public int updateCart(String uid, String count, String prodNo) {
 		int result = 0;
 		try {
 			logger.debug("updateCart....");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(ProductSql.UPDATE_PRODUCT_CART);
-			psmt.setString(1, vo.getUid());
-			psmt.setInt(2, vo.getCount());
-			psmt.setInt(3, vo.getCount());
-			psmt.setInt(4, vo.getProdNo());
-			psmt.setString(5, vo.getUid());
+			psmt.setString(1, uid);
+			psmt.setString(2, count);
+			psmt.setString(3, count);
+			psmt.setString(4, prodNo);
+			
 			
 			result = psmt.executeUpdate();
 			
@@ -322,6 +322,8 @@ public class ProductDAO {
 				vo.setPoint(rs.getString(7));
 				vo.setDelivery(rs.getString(8));
 				vo.setSellPrice(rs.getString(9));
+				vo.setProdNo(rs.getString(10));
+				vo.setTotal(rs.getInt(11));
 				
 				carts.add(vo);
 			}
@@ -335,6 +337,27 @@ public class ProductDAO {
 		}
 		
 		return carts;
+	}
+	
+	//장바구니 삭제
+	public int deleteCart(String prodNo) {
+		int cart = 0;
+		try {
+			logger.debug("deleteCart...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt =conn.prepareStatement(ProductSql.DELETE_PRODUCT_CART);
+			psmt.setString(1, prodNo);
+			cart = psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		int result = cart;
+		
+		return result;
 	}
 	
 public List<CategoryVO> selectCate(int cate) {

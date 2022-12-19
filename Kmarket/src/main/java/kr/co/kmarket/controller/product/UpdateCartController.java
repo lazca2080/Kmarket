@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.ProductService;
 
@@ -27,13 +30,26 @@ public class UpdateCartController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("updateCart......");
+		
 		String prodNo = req.getParameter("prodNo");
 		String uid = req.getParameter("uid");
 		String count = req.getParameter("count");
+		
+		logger.info("prodNo : " +prodNo);
+		logger.info("uid : " +uid);
+		logger.info("count : " +count);
 	
-		//service.updateCart(vo);
+		int result = service.updateCart(uid, count, prodNo);
 		
+		logger.debug("result : "+result);
 		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		logger.debug("result1 : " +result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 	
 	@Override
