@@ -35,10 +35,12 @@
                     <article>
                         <nav>
                             <h2 class="title">[${vo.cateType2}] ${vo.title}</h2>
-                            <span class="date">${vo.rdate.substring(2,10)}</span>
+                            <span class="date">${vo.rdate.substring(0,10)}</span>
                         </nav>
                         <div class="content">
-                            ${vo.content}
+                        	<p>
+                        		${vo.content}
+                        	</p>
                         </div>
                         <a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}" class="btnList">목록보기</a>
                     </article>

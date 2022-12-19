@@ -44,11 +44,13 @@
                             <h2 class="title">[${vo.cateType2}] ${vo.title}</h2>
                             <p>
                                 <span>${vo.uid}</span>
-                                <span>${vo.rdate.substring(2,10)}</span>
+                                <span>${vo.rdate.substring(0,10)}</span>
                             </p>
                         </nav>
                         <div class="content">
-                            ${vo.content}
+                        	<p>
+                        		${vo.content}
+                        	</p>
                         </div>
                         <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${vo.cateType1}" class="btnList">목록보기</a>
                     </article>
