@@ -39,14 +39,50 @@
 		});
 		
 		let totalPrice = 0;
+		let costPrice = 0;
+		let totalDelivery = 0;
+		let totalPoint = 0;
+		let count = 0;
 		
-		$('input[type=checkbox]').change(function(){
+		$('input[type=checkbox]').change(function(index, element){
 			if($(this).prop('checked')){
-				let total = $(this).next().val();
+				
+				let price = $(this).next().val();
+				costPrice += parseInt(price);
+				
+				let delivery = $(this).next().next().val();
+				totalDelivery += parseInt(delivery);
+				
+				let point = $(this).next().next().next().val();
+				totalPoint += parseInt(point);
+				
+				let total = $(this).next().next().next().next().val();
 				totalPrice += parseInt(total);
 				
-				console.log(totalPrice);		
-				$('.total > table tr:nth-last-child(1) td:last-child').text(totalPrice);
+				console.log(costPrice);
+				$('.costPrice_span').text(costPrice);
+				$('.totalDelivery_span').text(totalDelivery);
+				$('.totalPoint_span').text(totalPoint);
+				$('.totalPrice_span').text(totalPrice);
+				
+			}else {
+				let price = $(this).next().val();
+				costPrice -= parseInt(price);
+				
+				let delivery = document.getElementById('delivery').value;
+				totalDelivery -= parseInt(delivery);
+				
+				let point = document.getElementById('point').value;
+				totalPoint -= parseInt(point);
+				
+				let total = document.getElementById('total').value;
+				totalPrice -= parseInt(total);
+				
+				console.log(costPrice);
+				$('.costPrice_span').text(costPrice);
+				$('.totalDelivery_span').text(totalDelivery);
+				$('.totalPoint_span').text(totalPoint);
+				$('.totalPrice_span').text(totalPrice);
 			}
 		});
 	});
@@ -212,10 +248,10 @@
                         <tr class="${cart.cartNo}">
                             <td>
                             	<input type="checkbox" name="cartNo" id="cartNo" value="${cart.cartNo}">
-                            	<input type="hidden" name="total" value="${cart.total}">
-                            	<input type="hidden" name="price" value="${cart.price}">
-                            	<input type="hidden" name="delivery" value="${cart.delivery}">
-                            	<input type="hidden" name="point" value="${cart.point}">
+                            	<input type="hidden" class="price" value="${cart.price}">
+                            	<input type="hidden" id="delivery" value="${cart.delivery}">
+                            	<input type="hidden" id="point" value="${cart.point}">
+                            	<input type="hidden" id="total" value="${cart.total}">
                             	
                            	</td>
                             <td><article>
@@ -251,27 +287,27 @@
                         <table>
                             <tr>
                                 <td>상품수</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>상품금액</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td>할인금액</td>
-                                <td>-1,000</td>
-                            </tr>
-                            <tr>
-                                <td>배송비</td>
                                 <td>0</td>
                             </tr>
                             <tr>
+                                <td>상품금액</td>
+                                <td class="costPrice_span">0</td>
+                            </tr>
+                            <tr>
+                                <td>할인금액</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>배송비</td>
+                                <td class="totalDelivery_span">0</td>
+                            </tr>
+                            <tr>
                                 <td>포인트</td>
-                                <td>260</td>
+                                <td class="totalPoint_span">0</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>26,000</td>
+                                <td class="totalPrice_span">0</td>
                             </tr>
                         </table>
                         <input type="submit" value="주문하기">
