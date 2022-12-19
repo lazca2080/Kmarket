@@ -106,7 +106,7 @@ public enum CsService {
 	
 	/*** cs - view ***/
 	public CsVO selectArticle(String no) {
-		logger.info("csService-selectArticle...");
+		logger.info("selectArticle");
 		return dao.selectArticle(no);
 	}
 	

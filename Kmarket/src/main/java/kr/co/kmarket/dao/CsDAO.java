@@ -219,7 +219,7 @@ public class CsDAO {
 		CsVO vo = null;
 		
 		try {
-			logger.info("CsDAO-selectArticle");
+			logger.info("selectArticle");
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);

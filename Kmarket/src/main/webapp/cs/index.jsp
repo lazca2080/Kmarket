@@ -1,6 +1,6 @@
 <%@ page  contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"></jsp:include>
         <section id="cs">
             <div class="main">
@@ -75,9 +75,9 @@
                     	<c:forEach var="latest" items="${latests}">
 	                    	<c:if test="${latest.cate eq 'qna'}">
 	                        <li>
-	                            <a href="/Kmarket/cs/notice/view.do?cate=qna&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // // ${latest.cate} ${latest.no}</a>
+	                            <a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title} // ${latest.cate} ${latest.no}</a>
 	                                <p>
-	                                    <span class="uid">${latest.uid}</span>
+	                                    <span class="uid">${latest.uid.substring(0,3)}**</span>
 	                                    <span class="date">
 	                                    	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 			                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
