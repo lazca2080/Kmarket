@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
         <main id="product">
             <aside>
@@ -121,7 +122,7 @@
                                     <img src="/home/prodImg/${vo.thumb1}" alt="1">
                                 </a>
                                 <div>
-                                    <h2><a href="/Kmarket/product/view.do?prodNo="+${vo.prodNo}>${vo.prodName}</a></h2>
+                                    <h2><a href="/Kmarket/product/view.do?prodNo=${vo.prodNo}">${vo.prodName}</a></h2>
                                     <p>${vo.descript}</p>
                                 </div>
                             </article></td>
@@ -138,7 +139,7 @@
                         <table>
                             <tr>
                                 <td>총</td>
-                                <td>3 건</td>
+                                <td>${count} 건</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
@@ -146,7 +147,8 @@
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>-${(vo.price*(vo.discount)/100)*count}</td>
+                                <fmt:parseNumber var="percent" value="${((vo.price*(vo.discount)/100)*count)}" integerOnly="true" />
+                                <td>-${percent}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
@@ -154,7 +156,7 @@
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td>-${vo.point}</td>
+                                <td>0</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
@@ -203,7 +205,7 @@
                         <div>
                             <p>
                                 현재 포인트 : 
-                                <span>7200</span>점
+                                <span>${sessUser.point}</span>점
                             </p>
 
                             <label>
