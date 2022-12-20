@@ -157,6 +157,7 @@ public class CsDAO {
 				article.setUid(rs.getString(8));
 				article.setRegip(rs.getString(9));
 				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
 				
 				articles.add(article);
 				
@@ -222,9 +223,19 @@ public class CsDAO {
 			logger.info("selectArticle");
 			
 			Connection con = DBCP.getConnection();
+			
+			con.setAutoCommit(false);
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);
+			PreparedStatement psmt2 = con.prepareStatement(CsSql.UPDATE_HIT);
+			
 			psmt.setString(1, no);
+			psmt2.setString(1, no);
+			
+			psmt2.executeUpdate();
 			ResultSet rs = psmt.executeQuery();
+			
+			con.commit();
+			
 			if(rs.next()) {
 				vo = new CsVO();
 				vo.setNo(rs.getInt(1));
@@ -241,6 +252,7 @@ public class CsDAO {
 			
 			rs.close();
 			psmt.close();
+			psmt2.close();
 			con.close();
 			
 		} catch (Exception e) {

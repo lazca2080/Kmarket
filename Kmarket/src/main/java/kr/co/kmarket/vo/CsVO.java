@@ -14,9 +14,22 @@ public class CsVO {
 	private String rdate;		// 날짜 
 	
 	// 추가
+	private int hit;
 	private int totalOrdNo;
 	private int totalOrdPrice;
 	private int totalProd;
+	
+	public int getHit() {
+		return hit;
+	}
+	
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	
+	public void setHit(String hit) {
+		this.hit = Integer.parseInt(hit);
+	}
 	
 	public int getTotalOrdNo() {
 		return totalOrdNo;
