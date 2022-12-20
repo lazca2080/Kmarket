@@ -5,6 +5,7 @@ $(function(){
 		let totalDelivery = 0;
 		let totalPoint = 0;
 		let totalPrice = 0;
+		let idx = 0;
 		
 		let totalNo = new Array();
 		
@@ -155,6 +156,7 @@ $(function(){
 			}else {
 
 				count -= 1;
+				let cartNo = $(this).val();
 				
 				let price = $(this).next().val();
 				costPrice -= parseInt(price);
@@ -178,7 +180,7 @@ $(function(){
 				$('.totalPrice_span').text(totalPrice);
 				$('.totalSale_span').text(totalSalePrice);
 				
-				let idx = totalNo.indexOf(cartNo);
+				idx = totalNo.indexOf(cartNo);
 				
 				totalNo.splice(idx, 1);
 				
@@ -192,6 +194,15 @@ $(function(){
 		$('.cart > form').submit(function(e){
 			e.preventDefault();
 			
-			console.log(totalNo);
+			$.ajax({
+				url:'/Kmarket/product/cart.do',
+				method:'post',
+				data:{ "totalNo":totalNo },
+				dataType:'json',
+				success: function(data){
+					
+				}
+			});
+			
 		});		
 })
