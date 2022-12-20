@@ -38,41 +38,64 @@
 		});
 			
 		//alert('삭제하시겠습니까?');
-			
-		$(document).on('click','.chk',function(){
-			if($('input[name=all]').is(':checked')){
-				$('input[name=cartNo]').prop('checked', true);
-			}else{
-				$('input[name=cartNo]').prop('checked', false);
-			}
-		});
-	
+		
 		let totalPrice = 0;
 		let costPrice = 0;
 		let totalDelivery = 0;
 		let totalPoint = 0;
 		let count = 0;
 		let totalSellPrice = 0;
+			
+		$(document).on('click','.chk',function(){
+			if($('input[name=all]').is(':checked')){
+				$('input[name=cartNo]').prop('checked', true);
+				
+				let price = $('input[class=price]).val();
+				costPrice = parseInt(price);
+				
+				console.log("Price : "+price);
+				console.log("costPrice : "+costPrice);
+				
+				let sellPrice = $(this).next().next().val();
+				totalSellPrice = parseInt(sellPrice);
+				
+				let delivery = $(this).next().next().next().val();
+				totalDelivery = parseInt(delivery);
+				
+				let point = $(this).next().next().next().next().val();
+				totalPoint = parseInt(point);
+				
+				let total = $(this).next().next().next().next().next().val();
+				totalPrice = parseInt(total);
+				
+				count += 1; 
+				
+				
+				$.ajax({
+					url : '/Kmarket/product/deleteCart.do',
+					method : 'post',
+					data : {"costPrice ":costPrice, "totalSellPrice":totalSellPrice, "totalDelivery":totalDelivery, "totalPoint":totalPoint, "totalPrice":totalPrice},
+					dataType : 'json',
+					success : function(data) {
+						console.log("data : "+data.result);
+						
+					}
+				});
+				
+				
+			}else{
+				$('input[name=cartNo]').prop('checked', false);
+				
+				
+			}
+		});
+	
+		
 		
 		$('input[name=cartNo]').change(function(){
 			if($(this).prop('checked')){
 				
-				let price = $(this).next().val();
-				costPrice += parseInt(price);
 				
-				let sellPrice = $(this).next().next().val();
-				totalSellPrice += parseInt(sellPrice);
-				
-				let delivery = $(this).next().next().next().val();
-				totalDelivery += parseInt(delivery);
-				
-				let point = $(this).next().next().next().next().val();
-				totalPoint += parseInt(point);
-				
-				let total = $(this).next().next().next().next().next().val();
-				totalPrice += parseInt(total);
-				
-				count += 1;
 				
 				console.log(costPrice);
 				$('.costPrice_span').text(costPrice);
