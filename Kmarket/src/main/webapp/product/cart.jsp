@@ -1,204 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script src="/Kmarket/product/js/Cart.js"></script>
 <script>
 	$(function() {
-		
-		let count = 0;
-		let costPrice = 0;
-		let totalSalePrice = 0;
-		let totalDelivery = 0;
-		let totalPoint = 0;
-		let totalPrice = 0;
-		
-		// 선택 삭제 클릭
-		$('.del').click(function() {
-			
-		let cartNo = $('input:checkbox:checked').val();
-		let checkbox = $('input:checkbox:checked');
-		
-		console.log("cartNo : "+cartNo);
-		
-		if(cartNo == null){
-			alert('선택된 상품이 없습니다.');
-			return;
-		}
-		
-		$.ajax({
-			url : '/Kmarket/product/deleteCart.do',
-			method : 'get',
-			data : {"cartNo":cartNo},
-			dataType : 'json',
-			success : function(data) {
-				console.log("data : "+data.result);
-				if(data.result == 1){
-					alert('삭제되었습니다.');
-					checkbox.parent().parent().remove();
-					
-					count -= 1;
-					
-					let price = $(this).next().val();
-					costPrice -= parseInt(price)*count;
-					
-					let sellPrice = $(this).next().next().val();
-					totalSalePrice -= parseInt(sellPrice);
-					
-					let delivery = $(this).next().next().next().val();
-					totalDelivery -= parseInt(delivery);
-					
-					let point = $(this).next().next().next().next().val();
-					totalPoint -= parseInt(point);
-					
-					let total = $(this).next().next().next().next().next().val();
-					totalPrice -= parseInt(total);
-					
-					
-					console.log(costPrice);
-					$('.productCount_span').text(count);
-					$('.costPrice_span').text(costPrice*count);
-					$('.totalDelivery_span').text(totalDelivery);
-					$('.totalPoint_span').text(totalPoint);
-					$('.totalPrice_span').text(totalPrice);
-					$('.totalSale_span').text(totalSalePrice);
-					
-					return true;
-				}else {
-					alert('실패하였습니다.');
-					return false;
-				}
-			}
-			
-		});
-		
-		
-		});
-			
-		//alert('삭제하시겠습니까?');
-		
-	
-		// 전체 선택 체크박스
-		$(document).on('click','.chk',function(){
-			if($('input[name=all]').is(':checked')){
-				$('input[name=cartNo]').prop('checked', true);
-				
-				let uid = $(this).next().val();
-				
-				$.ajax({
-					url:'/Kmarket/product/cart.do',
-					method:'post',
-					data: { "uid":uid },
-					dataType:"json",
-					success: function(data){
-						
-						console.log("data.totalCount : "+data.totalCount);
-						console.log("costPrice : "+costPrice);
-						
-						count = parseInt(data.totalCount);
-						costPrice = parseInt(data.costPrice);
-						totalSalePrice = data.totalSalePrice;
-						totalDelivery = data.totalDelivery;
-						totalPoint = data.totalPoint;
-						totalPrice = data.totalPrice;
-						
-						$('.productCount_span').text(count);
-						$('.costPrice_span').text(costPrice);
-						$('.totalDelivery_span').text(totalDelivery);
-						$('.totalPoint_span').text(totalPoint);
-						$('.totalPrice_span').text(totalPrice);
-						$('.totalSale_span').text(totalSalePrice);
-						
-						console.log(count);
-						console.log(costPrice);
-						console.log(totalSalePrice);
-						console.log(totalDelivery);
-						console.log(totalPoint);
-						console.log(totalPrice);
-					}
-					
-				});
-				
-			}else{
-				$('input[name=cartNo]').prop('checked', false);
-				
-				count = 0; 
-				costPrice = 0;				
-				totalSalePrice = 0;
-				totalDelivery = 0;
-				totalPoint = 0;
-				totalPrice = 0;
-				
-				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice);
-				$('.totalDelivery_span').text(totalDelivery);
-				$('.totalPoint_span').text(totalPoint);
-				$('.totalPrice_span').text(totalPrice);
-				$('.totalSale_span').text(totalSalePrice);
-			}
-		});
-	
-		
-		// 장바구니 품목 당 체크박스
-		$('input[name=cartNo]').change(function(){
-			if($(this).prop('checked')){
-				
-				count += 1;
-				
-				let price = $(this).next().val();
-				costPrice += parseInt(price);
-				
-				let sellPrice = $(this).next().next().val();
-				totalSalePrice += parseInt(sellPrice);
-				
-				let delivery = $(this).next().next().next().val();
-				totalDelivery += parseInt(delivery);
-				
-				let point = $(this).next().next().next().next().val();
-				totalPoint += parseInt(point);
-				
-				let total = $(this).next().next().next().next().next().val();
-				totalPrice += parseInt(total);
-				
-				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice);
-				$('.totalDelivery_span').text(totalDelivery);
-				$('.totalPoint_span').text(totalPoint);
-				$('.totalPrice_span').text(totalPrice);
-				$('.totalSale_span').text(totalSalePrice);
-				
-				
-			}else {
-
-				count -= 1;
-				
-				let price = $(this).next().val();
-				costPrice -= parseInt(price);
-				console.log(price)
-				
-				let sellPrice = $(this).next().next().val();
-				totalSalePrice -= parseInt(sellPrice);
-				console.log(sellPrice)
-				
-				let delivery = $(this).next().next().next().val();
-				totalDelivery -= parseInt(delivery);
-				console.log(delivery)
-				
-				let point = $(this).next().next().next().next().val();
-				totalPoint -= parseInt(point);
-				console.log(point)
-				
-				let total = $(this).next().next().next().next().next().val();
-				totalPrice -= parseInt(total);
-				console.log(total)
-				
-				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice);
-				$('.totalDelivery_span').text(totalDelivery);
-				$('.totalPoint_span').text(totalPoint);
-				$('.totalPrice_span').text(totalPrice);
-				$('.totalSale_span').text(totalSalePrice);
-			}
-		});
-		
 		
 	});
 </script>
@@ -344,7 +149,7 @@
                         <strong>장바구니</strong>
                     </p>
                 </nav>
-               <form action="/Kmarket/product/order.do?prodNo=${prodNo}&order=order&count=${count}">
+               <form action="#">
                     <table border="0">
                         <tr>
                             <th>
@@ -405,8 +210,6 @@
                     </table>
                     <input type="button" name="del" class="del" value="선택삭제">
                     <div class="total">
-                    <c:forEach var="cart" items="${cart}">
-                    <input type="hidden" class="cart_price" value="${cart.price}">
                         <h2>전체합계</h2>
                         <table>
                             <tr>
@@ -434,8 +237,7 @@
                                 <td class="totalPrice_span">0</td>
                             </tr>
                         </table>
-                        <input type="submit" value="주문하기">
-                        </c:forEach>
+                        <input type="submit" class="submit" value="주문하기">
                     </div>
                </form>
             </section>
