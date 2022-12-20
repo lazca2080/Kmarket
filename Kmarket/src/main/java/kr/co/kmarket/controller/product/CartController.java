@@ -73,6 +73,8 @@ public class CartController extends HttpServlet{
 		json.addProperty("totalPoint", vo.getTotalPoint());
 		json.addProperty("totalPrice", vo.getTotalPrice());
 		
+		logger.debug("costprice : "+vo.getCostPrice());
+		
 		HttpSession session = req.getSession();
 		session.setAttribute("totalCount", vo.getTotalcount());
 		session.setAttribute("costPrice", vo.getCostPrice());

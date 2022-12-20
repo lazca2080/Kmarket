@@ -558,8 +558,6 @@
     letter-spacing: -0.1em;
 }
 
-#product > .cart > form > table .empty { display: none ;}
-
 #product > .cart > form > table td { text-align: center;}
 
 #product > .cart > form > table td:last-child {
@@ -689,13 +687,12 @@
     letter-spacing: -0.1em;
 }
 
-#product > .cart > form > table .empty { display: none ;}
-
 #product > .cart > form > table td { text-align: center;}
 
 #product > .cart > form > table td:last-child {
     color: #ff006c;
     font-weight: bold;
+    height: 50px;
 }
 
 #product > .cart > form > table th > input {}

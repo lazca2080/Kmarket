@@ -283,7 +283,8 @@ public class ProductDAO {
 			psmt.setString(1, uid);
 			psmt.setString(2, count);
 			psmt.setString(3, count);
-			psmt.setString(4, prodNo);
+			psmt.setString(4, count);
+			psmt.setString(5, prodNo);
 			
 			
 			result = psmt.executeUpdate();

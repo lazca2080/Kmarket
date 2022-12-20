@@ -11,6 +11,7 @@
 		let totalPoint = 0;
 		let totalPrice = 0;
 		
+		// 선택 삭제 클릭
 		$('.del').click(function() {
 			
 		let cartNo = $('input:checkbox:checked').val();
@@ -75,21 +76,12 @@
 		//alert('삭제하시겠습니까?');
 		
 	
-			
+		// 전체 선택 체크박스
 		$(document).on('click','.chk',function(){
 			if($('input[name=all]').is(':checked')){
-				
-				
-				
 				$('input[name=cartNo]').prop('checked', true);
 				
 				let uid = $(this).next().val();
-				
-				let uuid = JSON.stringify(uid);			
-				
-				console.log("uuid : "+uuid);
-				
-				
 				
 				$.ajax({
 					url:'/Kmarket/product/cart.do',
@@ -101,8 +93,8 @@
 						console.log("data.totalCount : "+data.totalCount);
 						console.log("costPrice : "+costPrice);
 						
-						count = data.totalCount; 
-						costPrice = data.costPrice;				
+						count = parseInt(data.totalCount);
+						costPrice = parseInt(data.costPrice);
 						totalSalePrice = data.totalSalePrice;
 						totalDelivery = data.totalDelivery;
 						totalPoint = data.totalPoint;
@@ -114,6 +106,13 @@
 						$('.totalPoint_span').text(totalPoint);
 						$('.totalPrice_span').text(totalPrice);
 						$('.totalSale_span').text(totalSalePrice);
+						
+						console.log(count);
+						console.log(costPrice);
+						console.log(totalSalePrice);
+						console.log(totalDelivery);
+						console.log(totalPoint);
+						console.log(totalPrice);
 					}
 					
 				});
@@ -138,7 +137,7 @@
 		});
 	
 		
-		
+		// 장바구니 품목 당 체크박스
 		$('input[name=cartNo]').change(function(){
 			if($(this).prop('checked')){
 				
@@ -159,10 +158,8 @@
 				let total = $(this).next().next().next().next().next().val();
 				totalPrice += parseInt(total);
 				
-				
-				console.log(costPrice);
 				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice*count);
+				$('.costPrice_span').text(costPrice);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
@@ -175,23 +172,26 @@
 				
 				let price = $(this).next().val();
 				costPrice -= parseInt(price);
+				console.log(price)
 				
 				let sellPrice = $(this).next().next().val();
 				totalSalePrice -= parseInt(sellPrice);
+				console.log(sellPrice)
 				
 				let delivery = $(this).next().next().next().val();
 				totalDelivery -= parseInt(delivery);
+				console.log(delivery)
 				
 				let point = $(this).next().next().next().next().val();
 				totalPoint -= parseInt(point);
+				console.log(point)
 				
 				let total = $(this).next().next().next().next().next().val();
 				totalPrice -= parseInt(total);
+				console.log(total)
 				
-				
-				console.log(costPrice);
 				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice*count);
+				$('.costPrice_span').text(costPrice);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
@@ -359,9 +359,13 @@
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
+                        <c:choose>
+                        <c:when test="${empty cart}">
                         <tr class="empty">
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
+                        </c:when>
+                        <c:otherwise>
                         <c:forEach var="cart" items="${cart}">
                         <tr class="${cart.cartNo}">
                             <td>
@@ -395,7 +399,8 @@
                             <td>${cart.total}</td>
                         </tr>
                         </c:forEach>
-                       
+                        </c:otherwise>
+                        </c:choose>
                      
                     </table>
                     <input type="button" name="del" class="del" value="선택삭제">
