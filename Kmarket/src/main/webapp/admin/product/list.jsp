@@ -69,7 +69,7 @@
                         <c:forEach var="Product" items="${Product}">
                         <tr>
                             <td><input type="checkbox" name="prodNo" id="prodNo" value="${Product.prodNo}"></td>
-                            <td><img src="/Kmarket/home/prodImg/${Product.thumb1}" class="thumb"></td>
+                            <td><img src="/home/prodImg/${Product.thumb1}" class="thumb"></td>
                             <td>${Product.prodNo}</td>
                             <td>${Product.prodName}</td>
                             <td>${Product.price}</td>
