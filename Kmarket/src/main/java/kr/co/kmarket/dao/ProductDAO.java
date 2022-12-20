@@ -283,7 +283,8 @@ public class ProductDAO {
 			psmt.setString(1, uid);
 			psmt.setString(2, count);
 			psmt.setString(3, count);
-			psmt.setString(4, prodNo);
+			psmt.setString(4, count);
+			psmt.setString(5, prodNo);
 			
 			
 			result = psmt.executeUpdate();
@@ -359,6 +360,45 @@ public class ProductDAO {
 		int result = cart;
 		
 		return result;
+	}
+	
+	//최종가격 조회
+	public ProductVO selectTotalPrice(String uid) {
+		
+		logger.debug("dao uid : "+uid);
+		ProductVO vo = null;
+		
+		try {
+			logger.debug("selectTotalPrice...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_TOTAL_PRICE);
+			psmt.setString(1, uid);
+			
+			
+			logger.debug("psmt : "+psmt);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+			vo = new ProductVO();
+			vo.setTotalcount(rs.getInt(1));
+			vo.setCostPrice(rs.getInt(2));
+			vo.setTotalSalePrice(rs.getInt(3));
+			vo.setTotalDelivery(rs.getInt(4));
+			vo.setTotalPoint(rs.getInt(5));
+			vo.setTotalPrice(rs.getInt(6));
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("vo size : " +vo);
+		
+		return vo;
 	}
 	
 public List<CategoryVO> selectCate(int cate) {

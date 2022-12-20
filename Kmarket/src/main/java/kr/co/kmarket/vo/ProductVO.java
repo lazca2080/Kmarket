@@ -35,13 +35,95 @@ public class ProductVO {
 	private int score;
 	private String uid;
 	private int cartNo;
+	private int totalcount;
+	private int costPrice;
+	private int totalSalePrice;
+	private int totalDelivery;
+	private int totalPoint;
+	private int totalPrice;
+	
+	
 	
 	// 추가
+	
+	
 	
 	public int getCartNo() {
 		return cartNo;
 	}
 	
+	public int getTotalPoint() {
+		return totalPoint;
+	}
+
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
+	}
+	
+	public void setTotalPoint(String totalPoint) {
+		this.totalPoint = Integer.parseInt(totalPoint);
+	}
+
+	public int getTotalcount() {
+		return totalcount;
+	}
+
+	public void setTotalcount(int totalcount) {
+		this.totalcount = totalcount;
+	}
+	
+	public void setTotalcount(String totalcount) {
+		this.totalcount = Integer.parseInt(totalcount);
+	}
+
+	public int getCostPrice() {
+		return costPrice;
+	}
+
+	public void setCostPrice(int costPrice) {
+		this.costPrice = costPrice;
+	}
+	
+	public void setCostPrice(String costPrice) {
+		this.costPrice = Integer.parseInt(costPrice);
+	}
+
+	public int getTotalSalePrice() {
+		return totalSalePrice;
+	}
+
+	public void setTotalSalePrice(int totalSalePrice) {
+		this.totalSalePrice = totalSalePrice;
+	}
+	
+	public void setTotalSalePrice(String totalSalePrice) {
+		this.totalSalePrice = Integer.parseInt(totalSalePrice);
+	}
+
+	public int getTotalDelivery() {
+		return totalDelivery;
+	}
+
+	public void setTotalDelivery(int totalDelivery) {
+		this.totalDelivery = totalDelivery;
+	}
+	
+	public void setTotalDelivery(String totalDelivery) {
+		this.totalDelivery = Integer.parseInt(totalDelivery);
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = Integer.parseInt(totalPrice);
+	}
+
 	public void setCartNo(int cartNo) {
 		this.cartNo = cartNo;
 	}

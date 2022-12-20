@@ -157,6 +157,7 @@ public class CsDAO {
 				article.setUid(rs.getString(8));
 				article.setRegip(rs.getString(9));
 				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
 				
 				articles.add(article);
 				
@@ -222,9 +223,19 @@ public class CsDAO {
 			logger.info("selectArticle");
 			
 			Connection con = DBCP.getConnection();
+			
+			con.setAutoCommit(false);
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);
+			PreparedStatement psmt2 = con.prepareStatement(CsSql.UPDATE_HIT);
+			
 			psmt.setString(1, no);
+			psmt2.setString(1, no);
+			
+			psmt2.executeUpdate();
 			ResultSet rs = psmt.executeQuery();
+			
+			con.commit();
+			
 			if(rs.next()) {
 				vo = new CsVO();
 				vo.setNo(rs.getInt(1));
@@ -241,6 +252,7 @@ public class CsDAO {
 			
 			rs.close();
 			psmt.close();
+			psmt2.close();
 			con.close();
 			
 		} catch (Exception e) {
@@ -251,5 +263,131 @@ public class CsDAO {
 	}
 	
 	
+	/*** admin - index - main  ***/
+	public CsVO selectAdminMain() {
+		
+		CsVO vo = null;
+		
+		try {
+			logger.debug("selectAdminMain...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(CsSql.SELECT_ADMIN_MAIN);
+			
+			if(rs.next()) {
+				vo = new CsVO();
+				vo.setTotalOrdNo(rs.getString(1));
+				if(rs.getString(2) == null) {
+					vo.setTotalOrdPrice(0);
+				}else {
+					vo.setTotalOrdPrice(rs.getString(2));
+				}
+				vo.setUid(rs.getString(3));
+				vo.setTotalProd(rs.getString(4));
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	/*** admin - cs - index  ***/
+	public Map<String, Object> selectNoticeQna() {
+		
+		Map<String, Object> map = new HashMap<>();
+		List<CsVO> qna    = null;
+		List<CsVO> notice = null;
+		
+		try {
+			logger.debug("selectNoticeQna...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(CsSql.SELECT_QNA_NOTICE);
+			
+			qna    = new ArrayList<>();
+			notice = new ArrayList<>();
+			
+			while(rs.next()) {
+				CsVO vo = new CsVO();
+				String cate = rs.getString(3);
+				vo.setCate(rs.getString(3));
+				vo.setCateType1(rs.getString(4));
+				vo.setCateType2(rs.getString(5));
+				vo.setContent(rs.getString(7));
+				vo.setRdate(rs.getString(10).substring(2,16));
+				
+				switch(cate) {
+				case "qna" :
+					qna.add(vo);
+					break;
+				case "notice" :
+					notice.add(vo);
+					break;
+				}
+				
+				
+			}
+			
+			map.put("qna", qna);
+			map.put("notice", notice);
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return map;
+	}
 
+	/*** admiin - cs - notice - modify ***/
+	public CsVO updateArticle(CsVO article) {
+		try {
+			logger.info("updateArticle");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.UPDATE_ARTICLE);
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getCateType1());
+			psmt.setString(3, article.getCateType2());
+			psmt.setString(4, article.getTitle());
+			psmt.setString(5, article.getContent());
+			psmt.setInt(6, article.getNo());
+			
+			psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return article;
+	}
+	
+	
+	/*** 글 삭제 ***/
+	public void deleteArticle(String no) {
+		try {
+			logger.info("deleteArticle");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 }

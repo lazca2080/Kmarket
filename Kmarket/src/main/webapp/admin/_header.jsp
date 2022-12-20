@@ -80,6 +80,7 @@
                             <li><a href="#">배송관리</a></li>
                         </ol>
                     </li>
+                    <c:if test="${sessUser.level eq 7}">
                     <li>
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                         <ol>
@@ -88,5 +89,6 @@
                             <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
                         </ol>
                     </li>
+                    </c:if>
                 </ul>
             </aside>

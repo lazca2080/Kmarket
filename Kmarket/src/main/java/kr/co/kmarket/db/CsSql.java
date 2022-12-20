@@ -55,12 +55,53 @@ public class CsSql {
 	/*** cs - view ***/
 	public static final String SELECT_ARTICLE = "SELECT * FROM `cs_article` WHERE `no`=?";
 	
-	
-
-	
-	
+	/*** admin - cs - index - main  ***/
+	public static final String SELECT_ADMIN_MAIN = "SELECT COUNT(`ordNo`), SUM(`ordPrice`), (SELECT COUNT(`uid`) FROM `km_member`), (SELECT COUNT(`prodNo`) FROM `km_product`) FROM `km_product_order`";
 	
 	
+	/*** admin - cs - index - qna, notice ***/
+	public static final String SELECT_QNA_NOTICE = "SELECT * FROM `cs_article` WHERE `cate`='notice' OR `cate`='qna'";
+	
+	/*** admiin - cs - notice - modify ***/
+	public static final String UPDATE_ARTICLE = "UPDATE `cs_article` SET "
+											  + " `cate`=?, "
+											  + " `cateType1`=?, "
+											  + " `cateType2`=?, "
+											  + " `title`=?, "
+											  + " `content`=?, "
+											  + " `rdate`=NOW()"
+											  + " WHERE `no`=?";
+	
+	/*** 글 삭제 ***/
+	public static final String DELETE_ARTICLE = "DELETE FROM `cs_article` WHERE `no`=?";
+											  
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*** cs - qna ***/
+	public static final String SELECT_WHOLE_QNA_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`='qna' ORDER BY `no` DESC LIMIT ?,10";
+	
+	/*** cs - 조회수 up  ***/
+	public static final String UPDATE_HIT = "UPDATE `cs_article` SET `hit`=`hit`+1 WHERE `no`=?";
 	
 	
 }

@@ -110,9 +110,28 @@ public enum CsService {
 		return dao.selectArticle(no);
 	}
 	
+	
+	/*** admin - index - main ***/
+	public CsVO selectAdminMain() {
+		return dao.selectAdminMain();
+	}
+	
+	/*** admin - cs - index - notice, qna 출력  ***/
+	public Map<String, Object> selectNoticeQna() {
+		return dao.selectNoticeQna();
+	}
+	
+	/*** admiin - cs - notice - modify 
+	 * @return ***/
+	public CsVO updateArticle(CsVO article) {
+		return dao.updateArticle(article);
+	}
 
 	
-	
+	/*** 글 삭제 ***/
+	public void deleteArticle(String no) {
+		dao.deleteArticle(no);
+	}
 	
 	
 	

@@ -31,23 +31,24 @@ $(function(){
             <section id="cs">
             	<div class="notice">
 	                <nav>
-	                    <h3>공지사항 작성</h3>
+	                    <h3>공지사항 보기</h3>
 	                    <p>
 	                        HOME > 고객센터 >
 	                        <strong>공지사항</strong>
 	                    </p>
 	                </nav>
-	                <section class="write">
+	                <section class="modify">
 						<article>
-	                        <form action="/Kmarket/admin/cs/notice/write.do" method="post">
+	                        <form action="/Kmarket/admin/cs/notice/modify.do" method="post">
 	                        <input type="text" name="uid" value="${sessUser.uid}"/>	
 	                        <input type="text" name="cate" value="${cate}"/>	<!-- 이후 hidden으로 수정 예정 -->
-	                       	<input type="text" name="cateType1" />		<!-- 이후 hidden으로 수정 예정 -->	
-                     		<input type="text" name="cateType2" /> 		<!-- 이후 hidden으로 수정 예정 -->	
+	                        <input type="text" name="no" value="${no}"/>		<!-- 이후 hidden으로 수정 예정 -->	
+	                       	<input type="text" name="cateType1" value="${vo.cateType1}"/>		<!-- 이후 hidden으로 수정 예정 -->	
+                     		<input type="text" name="cateType2" value="${vo.cateType2}"/> 		<!-- 이후 hidden으로 수정 예정 -->	
 	                            <table>
 	                                <tbody>
 	                                    <tr>
-	                                        <td>유형</td>
+	                                        <td>문의유형</td>
 	                                        <td>
 	                                            <select name="type">
 	                                            	<option>1차 유형 선택</option>
@@ -70,20 +71,20 @@ $(function(){
 	                                    <tr>
 	                                        <td>제목</td>
 	                                        <td>
-	                                            <input type="text" name="title" placeholder="제목을 입력하세요." required/>
+	                                            <input type="text" name="title" value="${vo.title}"  required/>
 	                                        </td>
 	                                    </tr>
 	                                    <tr>
 	                                        <td>내용</td>
 	                                        <td>
-	                                            <textarea name="content" placeholder="내용을 입력하세요." required></textarea>
+	                                            <textarea name="content" required>${vo.content}</textarea>
 	                                        </td>
 	                                    </tr>
 	                                </tbody>
 	                            </table>
 	                             <div>
 	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">취소하기</a>
-	                                <input type="submit" class="btnSubmit" value="등록하기">
+	                                <input type="submit" class="btnModify" value="수정하기">
 	                            </div>
 	                        </form>
 	                    </article>

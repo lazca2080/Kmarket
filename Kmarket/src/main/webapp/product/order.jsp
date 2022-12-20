@@ -139,28 +139,27 @@
                         <table>
                             <tr>
                                 <td>총</td>
-                                <td>${count} 건</td>
+                                <td>${totalCount} 건</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>${vo.price*count}</td>
+                                <td>${costPrice}</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <fmt:parseNumber var="percent" value="${((vo.price*(vo.discount)/100)*count)}" integerOnly="true" />
-                                <td>-${percent}</td>
+                                <td>${totalSalePrice}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td>${vo.delivery}</td>
+                                <td>${totalDelivery}</td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td>0</td>
+                                <td>${totalPoint}</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>${((vo.sellPrice+vo.delivery)*count)}</td>
+                                <td>${totalPrice}</td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">

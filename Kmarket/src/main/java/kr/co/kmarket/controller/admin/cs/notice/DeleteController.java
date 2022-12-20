@@ -1,7 +1,6 @@
-package kr.co.kmarket.controller.admin;
+package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,35 +9,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
 
-@WebServlet("/admin/index.do")
-public class IndexController extends HttpServlet{
+@WebServlet("/admin/cs/notice/delete.do")
+public class DeleteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.INSTANCE;
-
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public void init() throws ServletException {
-
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		CsVO vo = service.selectAdminMain();
-		req.setAttribute("vo", vo);
+		logger.info("DeleteController");
 		
-		Map<String, Object> index = service.selectNoticeQna();
-		req.setAttribute("index", index);
+		String no = req.getParameter("no");
+//		int no = Integer.parseInt(req.getParameter("no"));
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/index.jsp");
-		dispatcher.forward(req, resp);
+		service.deleteArticle(no);
+		
+		req.setAttribute("no", no);
+		
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
+		
+		
+		
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 	}
 }

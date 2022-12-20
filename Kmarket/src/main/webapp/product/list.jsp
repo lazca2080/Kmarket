@@ -136,7 +136,7 @@
                         <ol>
                         	<c:forEach var="cate18" items="${cate.cate18}">
                             <li>
-                                <a href="#">${cate18.c2Name}</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate18.cate1}&cate2=${cate18.cate2}">${cate18.c2Name}</a>
                             </li>
                             </c:forEach>
                         </ol>
@@ -249,7 +249,7 @@
                     
                     <span class="num">
                     	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                        	<a href="./list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupEnd + 1}" class="on${currentPage == i?'current':'off'}">${i}</a>
+                        	<a href="./list.do?cate1=${cate1}&cate2=${cate2}&pg=${i}" class="on${currentPage == i?'current':'off'}">${i}</a>
                      	</c:forEach>
                     </span>
                     <span class="next">
