@@ -35,6 +35,7 @@ public class UpdateCartController extends HttpServlet{
 		String uid = req.getParameter("uid");
 		String count = req.getParameter("count");
 		
+		
 		logger.info("prodNo : " +prodNo);
 		logger.info("uid : " +uid);
 		logger.info("count : " +count);

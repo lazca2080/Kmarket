@@ -219,7 +219,7 @@
                         <ol>
                         	<c:forEach var="cate18" items="${cate.cate18}">
                             <li>
-                                <a href="#">${cate18.c2Name}</a>
+                                <a href="/Kmarket/product/list.do?cate1=${cate18.cate1}&cate2=${cate18.cate2}">${cate18.c2Name}</a>
                             </li>
                             </c:forEach>
                         </ol>

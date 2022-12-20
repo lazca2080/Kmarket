@@ -42,6 +42,7 @@ public class CartController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
 		
+		
 		logger.info(uid);
 		//logger.info(prodNo);
 		
