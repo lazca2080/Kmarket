@@ -191,18 +191,23 @@ $(function(){
 			}
 		});
 		
+		/*
 		$('.cart > form').submit(function(e){
 			e.preventDefault();
 			
+			console.log(totalNo);
+			
 			$.ajax({
-				url:'/Kmarket/product/cart.do',
+				url:'/Kmarket/product/order.do',
 				method:'post',
-				data:{ "totalNo":totalNo },
+				traditional: true,
+				data: JSON.stringify(totalNo),
 				dataType:'json',
 				success: function(data){
 					
 				}
 			});
 			
-		});		
+		});
+		*/		
 })

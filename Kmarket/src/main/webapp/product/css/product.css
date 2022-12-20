@@ -972,8 +972,6 @@
     letter-spacing: -0.1em;
 }
 
-#product > .order > form > table .empty { display: none ;}
-
 #product > .order > form > table td { text-align: center;}
 
 #product > .order > form > table td:last-child {
@@ -1009,6 +1007,7 @@
 }
 
 #product > .order > form > article {
+	position: relative;
     width: 560px;
     height: auto;
     margin-top: 16px;
@@ -1097,9 +1096,18 @@
 
 #product > .order > form input {
     color: #555;
-    padding: 2px 0;
+    padding: 2px 4px;
     border: 1px solid #999;
     box-sizing: border-box;
+}
+
+#product > .order > form button {
+	position: absolute;
+    top: 108px;
+    left: 220px;
+	border: 1px solid #999;
+	width: 88px; 
+	height: 22px;
 }
 
 #product > .order > form > .delivery > table input[name=addr1] { width: 400px; }
