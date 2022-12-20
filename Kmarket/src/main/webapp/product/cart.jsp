@@ -3,6 +3,14 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <script>
 	$(function() {
+		
+		let count = 0;
+		let costPrice = 0;
+		let totalSalePrice = 0;
+		let totalDelivery = 0;
+		let totalPoint = 0;
+		let totalPrice = 0;
+		
 		$('.del').click(function() {
 			
 		let cartNo = $('input:checkbox:checked').val();
@@ -25,6 +33,33 @@
 				if(data.result == 1){
 					alert('삭제되었습니다.');
 					checkbox.parent().parent().remove();
+					
+					count -= 1;
+					
+					let price = $(this).next().val();
+					costPrice -= parseInt(price)*count;
+					
+					let sellPrice = $(this).next().next().val();
+					totalSalePrice -= parseInt(sellPrice);
+					
+					let delivery = $(this).next().next().next().val();
+					totalDelivery -= parseInt(delivery);
+					
+					let point = $(this).next().next().next().next().val();
+					totalPoint -= parseInt(point);
+					
+					let total = $(this).next().next().next().next().next().val();
+					totalPrice -= parseInt(total);
+					
+					
+					console.log(costPrice);
+					$('.productCount_span').text(count);
+					$('.costPrice_span').text(costPrice*count);
+					$('.totalDelivery_span').text(totalDelivery);
+					$('.totalPoint_span').text(totalPoint);
+					$('.totalPrice_span').text(totalPrice);
+					$('.totalSale_span').text(totalSalePrice);
+					
 					return true;
 				}else {
 					alert('실패하였습니다.');
@@ -39,54 +74,66 @@
 			
 		//alert('삭제하시겠습니까?');
 		
-		let totalPrice = 0;
-		let costPrice = 0;
-		let totalDelivery = 0;
-		let totalPoint = 0;
-		let count = 0;
-		let totalSellPrice = 0;
+	
 			
 		$(document).on('click','.chk',function(){
 			if($('input[name=all]').is(':checked')){
+				
+				
+				
 				$('input[name=cartNo]').prop('checked', true);
 				
-				let price = $('input[class=price]).val();
-				costPrice = parseInt(price);
+				let uid = $(this).next().val();
 				
-				console.log("Price : "+price);
-				console.log("costPrice : "+costPrice);
+				let uuid = JSON.stringify(uid);			
 				
-				let sellPrice = $(this).next().next().val();
-				totalSellPrice = parseInt(sellPrice);
+				console.log("uuid : "+uuid);
 				
-				let delivery = $(this).next().next().next().val();
-				totalDelivery = parseInt(delivery);
-				
-				let point = $(this).next().next().next().next().val();
-				totalPoint = parseInt(point);
-				
-				let total = $(this).next().next().next().next().next().val();
-				totalPrice = parseInt(total);
-				
-				count += 1; 
 				
 				
 				$.ajax({
-					url : '/Kmarket/product/deleteCart.do',
-					method : 'post',
-					data : {"costPrice ":costPrice, "totalSellPrice":totalSellPrice, "totalDelivery":totalDelivery, "totalPoint":totalPoint, "totalPrice":totalPrice},
-					dataType : 'json',
-					success : function(data) {
-						console.log("data : "+data.result);
+					url:'/Kmarket/product/cart.do',
+					method:'post',
+					data: { "uid":uid },
+					dataType:"json",
+					success: function(data){
 						
+						console.log("data.totalCount : "+data.totalCount);
+						console.log("costPrice : "+costPrice);
+						
+						count = data.totalCount; 
+						costPrice = data.costPrice;				
+						totalSalePrice = data.totalSalePrice;
+						totalDelivery = data.totalDelivery;
+						totalPoint = data.totalPoint;
+						totalPrice = data.totalPrice;
+						
+						$('.productCount_span').text(count);
+						$('.costPrice_span').text(costPrice);
+						$('.totalDelivery_span').text(totalDelivery);
+						$('.totalPoint_span').text(totalPoint);
+						$('.totalPrice_span').text(totalPrice);
+						$('.totalSale_span').text(totalSalePrice);
 					}
+					
 				});
-				
 				
 			}else{
 				$('input[name=cartNo]').prop('checked', false);
 				
+				count = 0; 
+				costPrice = 0;				
+				totalSalePrice = 0;
+				totalDelivery = 0;
+				totalPoint = 0;
+				totalPrice = 0;
 				
+				$('.productCount_span').text(count);
+				$('.costPrice_span').text(costPrice);
+				$('.totalDelivery_span').text(totalDelivery);
+				$('.totalPoint_span').text(totalPoint);
+				$('.totalPrice_span').text(totalPrice);
+				$('.totalSale_span').text(totalSalePrice);
 			}
 		});
 	
@@ -95,24 +142,42 @@
 		$('input[name=cartNo]').change(function(){
 			if($(this).prop('checked')){
 				
+				count += 1;
+				
+				let price = $(this).next().val();
+				costPrice += parseInt(price);
+				
+				let sellPrice = $(this).next().next().val();
+				totalSalePrice += parseInt(sellPrice);
+				
+				let delivery = $(this).next().next().next().val();
+				totalDelivery += parseInt(delivery);
+				
+				let point = $(this).next().next().next().next().val();
+				totalPoint += parseInt(point);
+				
+				let total = $(this).next().next().next().next().next().val();
+				totalPrice += parseInt(total);
 				
 				
 				console.log(costPrice);
-				$('.costPrice_span').text(costPrice);
+				$('.productCount_span').text(count);
+				$('.costPrice_span').text(costPrice*count);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
-				$('.productCount_span').text(count);
-				$('.totalSale_span').text(totalSellPrice);
+				$('.totalSale_span').text(totalSalePrice);
 				
 				
 			}else {
 
+				count -= 1;
+				
 				let price = $(this).next().val();
 				costPrice -= parseInt(price);
 				
 				let sellPrice = $(this).next().next().val();
-				totalSellPrice -= parseInt(sellPrice);
+				totalSalePrice -= parseInt(sellPrice);
 				
 				let delivery = $(this).next().next().next().val();
 				totalDelivery -= parseInt(delivery);
@@ -123,15 +188,14 @@
 				let total = $(this).next().next().next().next().next().val();
 				totalPrice -= parseInt(total);
 				
-				count -= 1;
 				
 				console.log(costPrice);
-				$('.costPrice_span').text(costPrice);
+				$('.productCount_span').text(count);
+				$('.costPrice_span').text(costPrice*count);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
-				$('.productCount_span').text(count);
-				$('.totalSale_span').text(totalSellPrice);
+				$('.totalSale_span').text(totalSalePrice);
 			}
 		});
 		
@@ -283,7 +347,10 @@
                <form action="#">
                     <table border="0">
                         <tr>
-                            <th><input type="checkbox" name="all" class="chk"></th>
+                            <th>
+                            	<input type="checkbox" name="all" class="chk">
+                            	<input type="hidden" class="uid" value="${sessUser.uid}">
+                            </th>
                             <th>상품명</th>
                             <th>총수량</th>
                             <th>판매가</th>
