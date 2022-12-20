@@ -62,7 +62,20 @@ public class CsSql {
 	/*** admin - cs - index - qna, notice ***/
 	public static final String SELECT_QNA_NOTICE = "SELECT * FROM `cs_article` WHERE `cate`='notice' OR `cate`='qna'";
 	
+	/*** admiin - cs - notice - modify ***/
+	public static final String UPDATE_ARTICLE = "UPDATE `cs_article` SET "
+											  + " `cate`=?, "
+											  + " `cateType1`=?, "
+											  + " `cateType2`=?, "
+											  + " `title`=?, "
+											  + " `content`=?, "
+											  + " `rdate`=NOW()"
+											  + " WHERE `no`=?";
 	
+	/*** 글 삭제 ***/
+	public static final String DELETE_ARTICLE = "DELETE FROM `cs_article` WHERE `no`=?";
+											  
+			
 	
 	
 	

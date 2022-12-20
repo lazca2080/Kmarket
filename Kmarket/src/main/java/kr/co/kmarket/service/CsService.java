@@ -121,9 +121,17 @@ public enum CsService {
 		return dao.selectNoticeQna();
 	}
 	
+	/*** admiin - cs - notice - modify 
+	 * @return ***/
+	public CsVO updateArticle(CsVO article) {
+		return dao.updateArticle(article);
+	}
 
 	
-	
+	/*** 글 삭제 ***/
+	public void deleteArticle(String no) {
+		dao.deleteArticle(no);
+	}
 	
 	
 	

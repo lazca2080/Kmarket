@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
 
-@WebServlet("/admin/cs/notice/view.do")
-public class ViewController extends HttpServlet{
+@WebServlet("/admin/cs/notice/delete.do")
+public class DeleteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.INSTANCE;
@@ -25,35 +25,24 @@ public class ViewController extends HttpServlet{
 	@Override
 	public void init() throws ServletException {
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("doGet");
+		logger.info("DeleteController");
 		
-		String cate = req.getParameter("cate");
-		String cateType1 = req.getParameter("cateType1");
-		String cateType2 = req.getParameter("cateType2");
 		String no = req.getParameter("no");
+//		int no = Integer.parseInt(req.getParameter("no"));
 		
-		CsVO vo  = service.selectArticle(no);
+		service.deleteArticle(no);
 		
-		req.setAttribute("cate", cate);
-		req.setAttribute("cateType1", cateType1);
-		req.setAttribute("cateType2", cateType2);
 		req.setAttribute("no", no);
-		req.setAttribute("vo", vo);
+		
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
 		
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/view.jsp");
-		dispatcher.forward(req, resp);
 		
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		logger.info("doPost");
 	}
-
 }

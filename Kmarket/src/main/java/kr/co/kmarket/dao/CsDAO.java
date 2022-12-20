@@ -336,4 +336,46 @@ public class CsDAO {
 		return map;
 	}
 
+	/*** admiin - cs - notice - modify ***/
+	public CsVO updateArticle(CsVO article) {
+		try {
+			logger.info("updateArticle");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.UPDATE_ARTICLE);
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getCateType1());
+			psmt.setString(3, article.getCateType2());
+			psmt.setString(4, article.getTitle());
+			psmt.setString(5, article.getContent());
+			psmt.setInt(6, article.getNo());
+			
+			psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return article;
+	}
+	
+	
+	/*** 글 삭제 ***/
+	public void deleteArticle(String no) {
+		try {
+			logger.info("deleteArticle");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 }
