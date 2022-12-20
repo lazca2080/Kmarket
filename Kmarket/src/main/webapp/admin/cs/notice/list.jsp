@@ -135,7 +135,7 @@
                             <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="text" value="${cateType1}">
+                        <input type="hidden" value="${cateType1}">
                     </div>
                     <table id="tb">
                         <tr>
@@ -167,22 +167,22 @@
                         
                     </table>
                     <input type="button" class="delete" value="선택삭제">
-                    <a href="/Kmarket/admin/cs/notice/write.do" class="write">작성하기</a>
+                    <a href="/Kmarket/admin/cs/notice/write.do?cate=notice" class="write">작성하기</a>
                     <div class="paging">
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/admin/notice/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                             <!-- <a href="#" class="on">1</a> -->
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
 	                        </c:forEach>
                         </span>
                         <span class="next">
                             <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
 	                        </c:if>
                         </span>
                     </div>
