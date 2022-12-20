@@ -34,6 +34,11 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = Integer.parseInt(gender);
 	}
+	public void setLevel(String level) {
+		this.gender = Integer.parseInt(level);
+	}
+	
+	
 	
 	public String getUid() {
 		return uid;
@@ -89,6 +94,7 @@ public class MemberVO {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	
 	public String getZip() {
 		return zip;
 	}

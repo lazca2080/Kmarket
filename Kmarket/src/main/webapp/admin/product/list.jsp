@@ -76,7 +76,7 @@
                             <td>${Product.discount}</td>
                             <td>${Product.point}</td>
                             <td>${Product.stock}</td>
-                            <td>${sessUser.uid}</td>
+                           	<td>${Product.seller}</td>
                             <td>${Product.hit}</td>
                             <td>
                                 <a href="#">[삭제]</a>
@@ -89,17 +89,17 @@
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="">
-	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 1}&level=${sessUser.level}"><&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}" class="on${currentPage eq i?'current':'off'}">${i}</a>
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}" class="on${currentPage eq i?'current':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
                         	<c:if test="${pageGroupEnd < lastPageNum}">
-                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}&level=${sessUser.level}">다음&nbsp;></a>
                             </c:if>
                         </span>
                     </div>

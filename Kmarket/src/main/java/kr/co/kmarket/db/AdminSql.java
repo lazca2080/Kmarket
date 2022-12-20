@@ -2,8 +2,13 @@ package kr.co.kmarket.db;
 
 public class AdminSql {
 
-	public static final String selectProduct = "SELECT * FROM `km_product` ";
-	
+	//관리자 전체 조회
+	public static final String selectProduct = "SELECT * FROM `km_product` AS a JOIN "
+												+ "`km_member` AS b ON a.`seller` = b.`uid` "
+												+ "WHERE `level` <= 7 "
+												+ "ORDER BY `prodNo` DESC "
+												+ "LIMIT ?,10 ";
+	// 판매자상품만 조회
 	public static final String selectProductss = "SELECT * FROM `km_product` WHERE `seller`=? "
 			 										+ "order by `prodNo` desc LIMIT ?, 10";
 
