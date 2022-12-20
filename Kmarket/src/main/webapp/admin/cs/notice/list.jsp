@@ -56,8 +56,16 @@ $(function(){
 		 
   });
 		
-	    
-	$('.checkArticle').click(function(){});    
+	$('#remove').click(function(e){
+		let isDelete = confirm('정말 삭제하시겠습니까?');
+		
+		if(isDelete){
+			return true;
+		}else{
+			return false;
+		}
+	});    
+	
 	    
 	
 });
@@ -106,8 +114,8 @@ $(function(){
 					                <fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 	                            </td>
 	                            <td>
-	                                <a href="#">[삭제]</a><br>
-	                                <a href="#">[수정]</a>
+	                                <a href="/Kmarket/admin/cs/notice/delete.do?no=${article.no}" id="remove">[삭제]</a><br>
+	                                <a href="/Kmarket/admin/cs/notice/modify.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[수정]</a>
 	                            </td>
                         	</tr>
 						</c:forEach>
