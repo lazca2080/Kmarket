@@ -344,7 +344,7 @@
                         <strong>장바구니</strong>
                     </p>
                 </nav>
-               <form action="#">
+               <form action="/Kmarket/product/order.do?prodNo=${prodNo}&order=order&count=${count}">
                     <table border="0">
                         <tr>
                             <th>

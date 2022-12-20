@@ -39,7 +39,8 @@ public class CartController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String uid = req.getParameter("uid");
-		//String prodNo = req.getParameter("prodNo");
+		String prodNo = req.getParameter("prodNo");
+		String count = req.getParameter("count");
 		
 		logger.info(uid);
 		//logger.info(prodNo);
@@ -49,6 +50,9 @@ public class CartController extends HttpServlet{
 		
 		Map<String, Object> cate = ser.selectCategory();
 		req.setAttribute("cate", cate);
+		
+		req.setAttribute("prodNo", prodNo);
+		req.setAttribute("count", count);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/cart.jsp");
 		dispatcher.forward(req, resp);
