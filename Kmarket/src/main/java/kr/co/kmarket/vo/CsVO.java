@@ -13,7 +13,48 @@ public class CsVO {
 	private String regip;		// IP
 	private String rdate;		// 날짜 
 	
+	// 추가
+	private int totalOrdNo;
+	private int totalOrdPrice;
+	private int totalProd;
 	
+	public int getTotalOrdNo() {
+		return totalOrdNo;
+	}
+	
+	public void setTotalOrdNo(int totalOrdNo) {
+		this.totalOrdNo = totalOrdNo;
+	}
+	
+	public void setTotalOrdNo(String totalOrdNo) {
+		this.totalOrdNo = Integer.parseInt(totalOrdNo);
+	}
+	
+	public int getTotalOrdPrice() {
+		return totalOrdPrice;
+	}
+	
+	public void setTotalOrdPrice(int totalOrdPrice) {
+		this.totalOrdPrice = totalOrdPrice;
+	}
+	
+	public void setTotalOrdPrice(String totalOrdPrice) {
+		this.totalOrdPrice = Integer.parseInt(totalOrdPrice);
+	}
+	
+	public int getTotalProd() {
+		return totalProd;
+	}
+	
+	public void setTotalProd(int totalProd) {
+		this.totalProd = totalProd;
+	}
+	
+	public void setTotalProd(String totalProd) {
+		this.totalProd = Integer.parseInt(totalProd);
+	}
+	
+	// 기존
 	public int getNo() {
 		return no;
 	}

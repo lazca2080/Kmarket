@@ -251,5 +251,89 @@ public class CsDAO {
 	}
 	
 	
+	/*** admin - index - main  ***/
+	public CsVO selectAdminMain() {
+		
+		CsVO vo = null;
+		
+		try {
+			logger.debug("selectAdminMain...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(CsSql.SELECT_ADMIN_MAIN);
+			
+			if(rs.next()) {
+				vo = new CsVO();
+				vo.setTotalOrdNo(rs.getString(1));
+				if(rs.getString(2) == null) {
+					vo.setTotalOrdPrice(0);
+				}else {
+					vo.setTotalOrdPrice(rs.getString(2));
+				}
+				vo.setUid(rs.getString(3));
+				vo.setTotalProd(rs.getString(4));
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	/*** admin - cs - index  ***/
+	public Map<String, Object> selectNoticeQna() {
+		
+		Map<String, Object> map = new HashMap<>();
+		List<CsVO> qna    = null;
+		List<CsVO> notice = null;
+		
+		try {
+			logger.debug("selectNoticeQna...");
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(CsSql.SELECT_QNA_NOTICE);
+			
+			qna    = new ArrayList<>();
+			notice = new ArrayList<>();
+			
+			while(rs.next()) {
+				CsVO vo = new CsVO();
+				String cate = rs.getString(3);
+				vo.setCate(rs.getString(3));
+				vo.setCateType1(rs.getString(4));
+				vo.setCateType2(rs.getString(5));
+				vo.setContent(rs.getString(7));
+				vo.setRdate(rs.getString(10).substring(2,16));
+				
+				switch(cate) {
+				case "qna" :
+					qna.add(vo);
+					break;
+				case "notice" :
+					notice.add(vo);
+					break;
+				}
+				
+				
+			}
+			
+			map.put("qna", qna);
+			map.put("notice", notice);
+			
+			conn.close();
+			stmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return map;
+	}
 
 }
