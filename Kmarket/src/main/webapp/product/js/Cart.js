@@ -178,7 +178,7 @@ $(function(){
 				$('.totalPrice_span').text(totalPrice);
 				$('.totalSale_span').text(totalSalePrice);
 				
-				var idx = totalNo.indexOf(cartNo);
+				let idx = totalNo.indexOf(cartNo);
 				
 				totalNo.splice(idx, 1);
 				
