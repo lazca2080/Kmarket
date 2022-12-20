@@ -9,10 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.kmarket.service.CsService;
+import kr.co.kmarket.vo.CsVO;
+
 @WebServlet("/admin/cs/notice/view.do")
 public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private CsService service = CsService.INSTANCE;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -21,6 +29,21 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		logger.info("doGet");
+		
+		String cate = req.getParameter("cate");
+		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
+		String no = req.getParameter("no");
+		
+		CsVO vo  = service.selectArticle(no);
+		
+		req.setAttribute("cate", cate);
+		req.setAttribute("cateType1", cateType1);
+		req.setAttribute("cateType2", cateType2);
+		req.setAttribute("vo", vo);
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/view.jsp");
 		dispatcher.forward(req, resp);
 		
@@ -28,6 +51,8 @@ public class ViewController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doPost");
 	}
 
 }
