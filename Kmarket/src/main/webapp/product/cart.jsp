@@ -33,58 +33,86 @@
 			}
 			
 		});
+		
+		
+		});
 			
 		//alert('삭제하시겠습니까?');
 			
+		$(document).on('click','.chk',function(){
+			if($('input[name=all]').is(':checked')){
+				$('input[name=cartNo]').prop('checked', true);
+			}else{
+				$('input[name=cartNo]').prop('checked', false);
+			}
 		});
-		
+	
 		let totalPrice = 0;
 		let costPrice = 0;
 		let totalDelivery = 0;
 		let totalPoint = 0;
 		let count = 0;
+		let totalSellPrice = 0;
 		
-		$('input[type=checkbox]').change(function(index, element){
+		$('input[name=cartNo]').change(function(){
 			if($(this).prop('checked')){
 				
 				let price = $(this).next().val();
 				costPrice += parseInt(price);
 				
-				let delivery = $(this).next().next().val();
+				let sellPrice = $(this).next().next().val();
+				totalSellPrice += parseInt(sellPrice);
+				
+				let delivery = $(this).next().next().next().val();
 				totalDelivery += parseInt(delivery);
 				
-				let point = $(this).next().next().next().val();
+				let point = $(this).next().next().next().next().val();
 				totalPoint += parseInt(point);
 				
-				let total = $(this).next().next().next().next().val();
+				let total = $(this).next().next().next().next().next().val();
 				totalPrice += parseInt(total);
+				
+				count += 1;
 				
 				console.log(costPrice);
 				$('.costPrice_span').text(costPrice);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
+				$('.productCount_span').text(count);
+				$('.totalSale_span').text(totalSellPrice);
+				
 				
 			}else {
+
 				let price = $(this).next().val();
 				costPrice -= parseInt(price);
 				
-				let delivery = document.getElementById('delivery').value;
+				let sellPrice = $(this).next().next().val();
+				totalSellPrice -= parseInt(sellPrice);
+				
+				let delivery = $(this).next().next().next().val();
 				totalDelivery -= parseInt(delivery);
 				
-				let point = document.getElementById('point').value;
+				let point = $(this).next().next().next().next().val();
 				totalPoint -= parseInt(point);
 				
-				let total = document.getElementById('total').value;
+				let total = $(this).next().next().next().next().next().val();
 				totalPrice -= parseInt(total);
+				
+				count -= 1;
 				
 				console.log(costPrice);
 				$('.costPrice_span').text(costPrice);
 				$('.totalDelivery_span').text(totalDelivery);
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
+				$('.productCount_span').text(count);
+				$('.totalSale_span').text(totalSellPrice);
 			}
 		});
+		
+		
 	});
 </script>
         <main id="product">
@@ -232,7 +260,7 @@
                <form action="#">
                     <table border="0">
                         <tr>
-                            <th><input type="checkbox" name="all"></th>
+                            <th><input type="checkbox" name="all" class="chk"></th>
                             <th>상품명</th>
                             <th>총수량</th>
                             <th>판매가</th>
@@ -249,6 +277,7 @@
                             <td>
                             	<input type="checkbox" name="cartNo" id="cartNo" value="${cart.cartNo}">
                             	<input type="hidden" class="price" value="${cart.price}">
+                            	<input type="hidden" class="salePrice" value="${cart.price-cart.sellPrice}">
                             	<input type="hidden" id="delivery" value="${cart.delivery}">
                             	<input type="hidden" id="point" value="${cart.point}">
                             	<input type="hidden" id="total" value="${cart.total}">
@@ -287,7 +316,7 @@
                         <table>
                             <tr>
                                 <td>상품수</td>
-                                <td>0</td>
+                                <td class="productCount_span">0</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
@@ -295,7 +324,7 @@
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>0</td>
+                                <td class="totalSale_span">0</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
