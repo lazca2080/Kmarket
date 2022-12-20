@@ -401,7 +401,115 @@ public class ProductDAO {
 		return vo;
 	}
 	
-public List<CategoryVO> selectCate(int cate) {
+	//장바구니 선택 항목 조회
+	public List<ProductVO> selectCart(String[] cartNo) {
+		
+		// 가져온 cartNo의 배열 길이를 구함
+		int length = cartNo.length;
+		
+		// 쿼리문
+		String sql = "SELECT a.*, b.`prodName`, b.`descript`, b.`thumb1` FROM `km_product_cart` AS a JOIN `km_product` ";
+			  sql += "AS b ON a.`prodNo` = b.`prodNo` WHERE `cartNo`=?";
+			  
+		List<ProductVO> products = new ArrayList<>();
+		
+		logger.debug("length : "+length);
+		try {
+			logger.debug("selectCart...");
+			Connection conn = DBCP.getConnection();
+			
+			// cartNo의 배열 길이만큼 OR `cartNo`=? 를 추가함 최초 WHERE `cartNo`=? 가 있음으로 i= 1부터 시작함
+			for(int i = 1; i<length; i++) {
+				sql += " OR `cartNo`=?";
+			}
+			
+			// 콘솔창에서 sql문이 어떻게 만들어지는지 확인하면 좋을듯!
+			logger.debug("sql : "+sql);
+			
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			
+			// cartNo의 배열 길이만큼 매개변수 값을 대입함
+			// 배열의 첫번째 값은 cartNo[0]임 따라서 k=0부터 시작하고, 매개변수 대입을 (k+1, cartNo[k]) 로 하면 (1, cartNo[0])가 됨
+			for(int k = 0; k<length; k++) {
+				psmt.setString(k+1, cartNo[k]);
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setCartNo(rs.getString(1));
+				vo.setUid(rs.getString(2));
+				vo.setProdNo(rs.getString(3));
+				vo.setCount(rs.getString(4));
+				vo.setPrice(rs.getString(5));
+				vo.setDiscount(rs.getString(6));
+				vo.setPoint(rs.getString(7));
+				vo.setDelivery(rs.getString(8));
+				vo.setTotal(rs.getInt(9));
+				vo.setProdName(rs.getString(11));
+				vo.setDescript(rs.getString(12));
+				vo.setThumb1(rs.getString(13));
+				
+				products.add(vo);
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return products;
+	}
+	
+	public ProductVO selectSumCart(String[] cartNo) {
+		int length = cartNo.length;
+		String sql = "SELECT COUNT(`count`), SUM(`price`), SUM(`price`)-SUM(`total`), SUM(`delivery`), SUM(`total`)+SUM(`delivery`), SUM(`point`) FROM `km_product_cart` ";
+			  sql += "WHERE `cartNo`=?";
+			  
+		ProductVO vo = null;
+		
+		logger.debug("length : "+length);
+		try {
+			logger.debug("selectCart...");
+			Connection conn = DBCP.getConnection();
+			
+			for(int i = 1; i<length; i++) {
+				sql += " OR `cartNo`=?";
+			}
+			
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			for(int k = 0; k<length; k++) {
+				psmt.setString(k+1, cartNo[k]);
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+				vo.setCount(rs.getString(1));
+				vo.setPrice(rs.getString(2));
+				vo.setDiscount(rs.getString(3));
+				vo.setDelivery(rs.getString(4));
+				vo.setTotal(rs.getInt(5));
+				vo.setPoint(rs.getString(6));
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	public List<CategoryVO> selectCate(int cate) {
 		
 		List<CategoryVO> category = new ArrayList<>();
 		

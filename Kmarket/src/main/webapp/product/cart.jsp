@@ -2,11 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
 <script src="/Kmarket/product/js/Cart.js"></script>
-<script>
-	$(function() {
-		
-	});
-</script>
         <main id="product">
             <aside>
  				 <ul class="category">
@@ -149,7 +144,7 @@
                         <strong>장바구니</strong>
                     </p>
                 </nav>
-               <form action="#">
+               <form action="/Kmarket/product/order.do" method="post">
                     <table border="0">
                         <tr>
                             <th>
@@ -180,7 +175,6 @@
                             	<input type="hidden" id="delivery" value="${cart.delivery}">
                             	<input type="hidden" id="point" value="${cart.point}">
                             	<input type="hidden" id="total" value="${cart.total}">
-                            	
                            	</td>
                             <td><article>
                                 <a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">

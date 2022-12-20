@@ -2,6 +2,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Kmarket/product/js/zipcode.js"></script>
+<script>
+	$(function(){
+		
+		$('input[class=addPoint]').click(function(){
+			
+			// 현재 uid가 가지고있는 point값 가져오기 // 259번째 줄 input hidden 추가
+			let currentPoint = $('input[name=currentPoint]').val();
+			
+			// 할인 받을 point값 가져오기
+			let point = $('input[name=point]').val();
+			
+			// 현재 가지고 있는 point보다 높게 입력시 alert, return;
+			if(parseInt(point) > parseInt(currentPoint)){
+				alert('가지고 계신 포인트 보다 많습니다.');
+				return;
+			}
+			
+			// 최종결제 정보 포인트 할인에 가져온 point 값 집어넣기 // 140번째 줄 아래 input hidden 추가
+			$('.order > form > .final > table tr:eq(4) > td:eq(1)').text(point);
+			
+			// input에 사용한 point값을 가져온 point 값으로 변경하기
+			$('input[name=ordusedPoint]').attr('value', point);
+			
+			// total값 가져오기
+			let total = $('input[name=ordTotPrice]').val();
+			
+			// total에서 할인받은 point값 빼기
+			let finalTotal = parseInt(total)-parseInt(point);
+			
+			// form으로 보낼 total값 변경
+			$('input[name=ordTotPrice]').attr('value', finalTotal);
+			
+			// 최종결제 정보 전체주문금액 변경
+			$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
+		});
+	});
+</script>
         <main id="product">
             <aside>
             	 <ul class="category">
@@ -100,37 +139,49 @@
                         <strong>주문결제</strong>
                     </p>
                 </nav>
-               <form action="#">
+                <!-- form 전송시 데이터가 필요해서 input hidden을 과하게 집어넣음... -->
+                <form action="#">
+					<input type="hidden" name="ordCount" value="${vo.count}">
+					<input type="hidden" name="ordPrice" value="${vo.price}">
+					<input type="hidden" name="ordDiscount" value="${vo.discount}">
+					<input type="hidden" name="ordDelivery" value="${vo.delivery}">
+					<input type="hidden" name="ordsavePoint" value="${vo.point}">
+					<input type="hidden" name="ordusedPoint" value="">
+					<input type="hidden" name="ordTotPrice" value="${vo.total}">
                     <table border="0">
                         <tr>
                             <th>상품명</th>
                             <th>총수량</th>
                             <th>판매가</th>
+                            <th>할인</th>
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
                         <c:choose>
-                        <c:when test="${vo eq null}">
+                        <c:when test="${prod eq null}">
                         <tr class="empty">
                             <td colspan="7">장바구니에 상품이 없습니다.</td>
                         </tr>
                         </c:when>
                         <c:otherwise>
-                        <tr>
+                        <c:forEach var="cart" items="${prod}">
+                        <tr class="${cart.cartNo}">
                             <td><article>
                                 <a href="#">
-                                    <img src="/home/prodImg/${vo.thumb1}" alt="1">
+                                    <img src="/home/prodImg/${cart.thumb1}" alt="1">
                                 </a>
                                 <div>
-                                    <h2><a href="/Kmarket/product/view.do?prodNo=${vo.prodNo}">${vo.prodName}</a></h2>
-                                    <p>${vo.descript}</p>
+                                    <h2><a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
+                                    <p>${cart.descript}</p>
                                 </div>
                             </article></td>
-                            <td>${count}</td>
-                            <td>${vo.sellPrice}</td>
-                            <td>${vo.delivery}</td>
-                            <td>${(vo.sellPrice+vo.delivery)*count}</td>
+                            <td>${cart.count}</td>
+                            <td>${cart.price}</td>
+                            <td>${cart.discount}%</td>
+                            <td>${cart.delivery}</td>
+                            <td>${cart.total}</td>
                         </tr>
+                        </c:forEach>
                         </c:otherwise>
                         </c:choose>
                     </table>
@@ -139,27 +190,27 @@
                         <table>
                             <tr>
                                 <td>총</td>
-                                <td>${totalCount} 건</td>
+                                <td>${vo.count} 건</td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>${costPrice}</td>
+                                <td>${vo.price}</td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>${totalSalePrice}</td>
+                                <td>${vo.discount}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td>${totalDelivery}</td>
+                                <td class="point">${vo.delivery}</td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
-                                <td>${totalPoint}</td>
+                                <td>0</td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>${totalPrice}</td>
+                                <td>${vo.total}</td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">
@@ -182,19 +233,19 @@
                             <tr>
                                 <td>우편번호</td>
                                 <td>
-                                    <input type="text" name="zip">
-                                    <input type="button" value="검색">
+                                    <input type="text" name="zip" id="zip" readonly="readonly">
+                                    <button type="button" onclick="zipcode()">우편번호 찾기</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>기본주소</td>
                                 <td>
-                                    <input type="text" name="addr1">
+                                    <input type="text" name="addr1" id="addr1">
                                 </td>
                             </tr>
                             <tr>
                                 <td>상세주소</td>
-                                <td><input type="text" name="addr2"></td>
+                                <td><input type="text" name="addr2" id="addr2"></td>
                             </tr>
                         </table>
                     </article>
@@ -208,8 +259,9 @@
                             </p>
 
                             <label>
+                            	<input type="hidden" name="currentPoint" value="${sessUser.point}">
                                 <input type="text" name="point">점
-                                <input type="button" value="적용">
+                                <input type="button" class="addPoint" value="적용">
                             </label>
                             <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
                         </div>
@@ -263,7 +315,7 @@
                             </span></li>
                         </ul>
                     </article>
-               </form>
+                </form>
             </section>
         </main>
 <jsp:include page="../_footer.jsp"></jsp:include>

@@ -42,7 +42,6 @@ public class CartController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
 		
-		
 		logger.info(uid);
 		//logger.info(prodNo);
 		
@@ -76,18 +75,9 @@ public class CartController extends HttpServlet{
 		json.addProperty("totalSalePrice", vo.getCostPrice() - vo.getTotalSalePrice());
 		json.addProperty("totalDelivery", vo.getTotalDelivery());
 		json.addProperty("totalPoint", vo.getTotalPoint());
-		json.addProperty("totalPrice", vo.getTotalPrice());
+		json.addProperty("totalPrice", vo.getTotalPrice() + vo.getTotalDelivery());
 		
 		logger.debug("costprice : "+vo.getCostPrice());
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("totalCount", vo.getTotalcount());
-		session.setAttribute("costPrice", vo.getCostPrice());
-		session.setAttribute("totalSalePrice", vo.getCostPrice() - vo.getTotalSalePrice());
-		session.setAttribute("totalDelivery", vo.getTotalDelivery());
-		session.setAttribute("totalPoint", vo.getTotalPoint());
-		session.setAttribute("totalPrice", vo.getTotalPrice());
-		
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
