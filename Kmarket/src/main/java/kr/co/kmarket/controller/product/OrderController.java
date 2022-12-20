@@ -31,15 +31,9 @@ public class OrderController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// view 구매하기 버튼 클릭 시
-		String prodNo = req.getParameter("prodNo");
-		String order  = req.getParameter("order");
-		String count  = req.getParameter("count");
+		String cartNo = req.getParameter("cartNo");
+		System.out.println("cartNo : " + cartNo);
 		
-		if(order.equals("order")) {
-			ProductVO vo = service.selectProduct(prodNo);
-			req.setAttribute("vo", vo);
-			req.setAttribute("count", count);
-		}
 		
 		// aside 카테고리 영역 불러오기
 		Map<String, Object> cate = service.selectCategory();
