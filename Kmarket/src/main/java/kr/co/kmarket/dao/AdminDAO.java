@@ -18,32 +18,29 @@ import kr.co.kmarket.vo.ProductVO;
 public class AdminDAO {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	public ProductVO selectProducts() {
-		
-		ProductVO vo = null;
+	public List<ProductVO> selectProducts(int start) {
+		List<ProductVO> products = new ArrayList<>();
 		
 		try {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProduct);
+			psmt.setInt(1, start);
 			ResultSet rs = psmt.executeQuery();
 			
-			if(rs.next()) {
-				vo = new ProductVO();
-				vo.setProdName(rs.getString(4));
-				vo.setDescript(rs.getString(5));
-				vo.setCompany(rs.getString(6));
-				vo.setSeller(rs.getString(7));
-				vo.setPrice(rs.getString(8));
-				vo.setDiscount(rs.getString(9));
-				vo.setPoint(rs.getString(10));
-				vo.setStock(rs.getString(11));
-				vo.setDelivery(rs.getString(13));
-				vo.setThumb1(rs.getString(17));
-				vo.setThumb2(rs.getString(18));
-				vo.setThumb3(rs.getString(19));
-				vo.setDetail(rs.getString(20));
+			while(rs.next()) {
+				ProductVO product = new ProductVO();
+				product.setThumb1(rs.getString(17));
+				product.setProdNo(rs.getInt(1));
+				product.setProdName(rs.getString(4));
+				product.setPrice(rs.getString(8));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSeller(rs.getString(7));
+				product.setHit(rs.getInt(14));
+				
+				products.add(product);
 			}
 			conn.close();
 			psmt.close();
@@ -53,7 +50,9 @@ public class AdminDAO {
 			logger.error(e.getMessage());
 		}
 		
-		return vo;
+		logger.debug("products size : " +products.size());
+		
+		return products;
 	}
 	
 	public List<ProductVO> selectProductss(int limitestart,String uid) {
@@ -79,6 +78,7 @@ public class AdminDAO {
 				product.setStock(rs.getInt(11));
 				product.setHit(rs.getInt(14));
 				
+				
 				products.add(product);
 			}
 			
@@ -89,6 +89,7 @@ public class AdminDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		logger.debug("products size : " +products.size());
 		
 		return products;
 	}
