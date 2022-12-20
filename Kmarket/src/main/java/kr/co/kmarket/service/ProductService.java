@@ -56,9 +56,14 @@ public enum ProductService {
 	}
 	
 	//장바구니 삭제
-		public int deleteCart(String cartNo) {
+	public int deleteCart(String cartNo) {
 			return dao.deleteCart(cartNo);
-		}
+	}
+		
+	//최종 가격 조회
+	public ProductVO selectTotalPrice(String uid) {
+		return dao.selectTotalPrice(uid);
+	}
 		
 	
 	public List<CategoryVO> selectCate(int cate) {

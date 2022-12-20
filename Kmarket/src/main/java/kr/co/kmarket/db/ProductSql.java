@@ -95,4 +95,11 @@ public class ProductSql {
 											
 	//장바구니 상품삭제
 	public static final String DELETE_PRODUCT_CART = "delete from `km_product_cart` where `cartNo` = ?";
+	
+	//장바구니 최종 가격
+	public static final String SELECT_TOTAL_PRICE = "SELECT Count(b.`cartNo`), SUM(b.`price`*b.`count`), SUM(a.`sellPrice`*b.`count`), SUM(b.`delivery`), SUM(b.`point`), SUM(b.`total`) "
+													+"FROM `km_product` AS a "
+													+"JOIN `km_product_cart` AS b "
+													+"ON a.prodNo=b.prodNo "
+													+"WHERE `uid`=?";
 }
