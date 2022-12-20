@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"></jsp:include>
             <section id="admin-index">
                 <nav>
@@ -14,74 +15,77 @@
                         <tr>
                             <td>
                                 <strong>주문건수(건)</strong>
-                                <span>131</span>
+                                <span>${vo.totalOrdNo}</span>
                             </td>
                             <td>
                                 <strong>주문금액(원)</strong>
-                                <span>1,130,000</span>
+                                <span>${vo.totalOrdPrice}</span>
                             </td>
+                            <c:if test="${sessUser.level eq 7}">
                             <td>
                                 <strong>회원가입(명)</strong>
-                                <span>1014</span>
+                                <span>${vo.uid}</span>
                             </td>
                             <td>
                                 <strong>쇼핑몰 방문(명)</strong>
-                                <span>1014</span>
+                                <span>0</span>
                             </td>
                             <td>
                                 <strong>신규게시물(건)</strong>
-                                <span>100</span>
+                                <span>${vo.totalProd}</span>
                             </td>
+                            </c:if>
                         </tr>
                         <tr>
                             <td>
                                 <p>
                                     <span>PC</span>
-                                    <span>60</span>
+                                    <span>${vo.totalOrdNo}</span>
                                 </p>
                                 <p>
                                     <span>Mobile</span>
-                                    <span>71</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>PC</span>
-                                    <span>60</span>
+                                    <span>${vo.totalOrdPrice}</span>
                                 </p>
                                 <p>
                                     <span>Mobile</span>
-                                    <span>71</span>
+                                    <span>0</span>
+                                </p>
+                            </td>
+                            <c:if test="${sessUser.level eq 7}">
+                            <td>
+                                <p>
+                                    <span>PC</span>
+                                    <span>${vo.uid}</span>
+                                </p>
+                                <p>
+                                    <span>Mobile</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>PC</span>
-                                    <span>60</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>Mobile</span>
-                                    <span>71</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>PC</span>
-                                    <span>60</span>
+                                    <span>${vo.totalProd}</span>
                                 </p>
                                 <p>
                                     <span>Mobile</span>
-                                    <span>71</span>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <span>PC</span>
-                                    <span>60</span>
-                                </p>
-                                <p>
-                                    <span>Mobile</span>
-                                    <span>71</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                         </tr>
@@ -89,73 +93,74 @@
                             <td>
                                 <p>
                                     <span>어제</span>
-                                    <span>4</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>주간</span>
-                                    <span>10</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>월간</span>
-                                    <span>30</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>어제</span>
-                                    <span>4</span>
+                                    <span></span>
                                 </p>
                                 <p>
                                     <span>주간</span>
-                                    <span>10</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>월간</span>
-                                    <span>30</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>어제</span>
-                                    <span>4</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>주간</span>
-                                    <span>10</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>월간</span>
-                                    <span>30</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>어제</span>
-                                    <span>4</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>주간</span>
-                                    <span>10</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>월간</span>
-                                    <span>30</span>
+                                    <span>0</span>
                                 </p>
                             </td>
                             <td>
                                 <p>
                                     <span>어제</span>
-                                    <span>4</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>주간</span>
-                                    <span>10</span>
+                                    <span>0</span>
                                 </p>
                                 <p>
                                     <span>월간</span>
-                                    <span>30</span>
+                                    <span>0</span>
                                 </p>
                             </td>
+                            </c:if>
                         </tr>
                     </table>
                 </article>
@@ -191,74 +196,29 @@
                     <div>
                         <h4>공지사항</h4>
                         <article>
+                        	<c:forEach var="notice" items="${index.notice}" end="4">
                             <p>
                                 <span>
-                                    [공지] 케이마켓 판매자님들은 주기적인 비밀번호
-                                    변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 
-                                    변경을 하세요.
+                                    [${notice.cateType2}]
+                                    ${notice.content}
                                 </span>
-                                <span>20-07-08 12:23</span>
+                                <span>${notice.rdate}</span>
                             </p>
-                            <p>
-                                <span>
-                                    [공지] 1주년 기념 신규가입 사은품 안내
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [공지] 1주년 기념 신규가입 사은품 안내
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [공지] 1주년 기념 신규가입 사은품 안내
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [공지] 1주년 기념 신규가입 사은품 안내
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
+                            </c:forEach>
                         </article>
                     </div>
                     <div>
                         <h4>고객문의</h4>
                         <article>
+                        	<c:forEach var="qna" items="${index.qna}" end="4">
                             <p>
                                 <span>
-                                    [문의] 상품이 잘못 왔습니다.
+                                    [${qna.cateType2}]
+                                    ${qna.content}
                                 </span>
-                                <span>20-07-08 12:23</span>
+                                <span>${qna.rdate}</span>
                             </p>
-                            <p>
-                                <span>
-                                    [문의] 안녕하세요. 주문자 입니다. 구매한 상품에 
-                                    문제가 있어서 이렇게 문의글을 남깁니다.
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [문의] 상품이 1개 잘못 왔습니다.
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [문의] 상품이 1개 잘못 왔습니다.
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>
-                                    [문의] 상품이 1개 잘못 왔습니다.
-                                </span>
-                                <span>20-07-08 12:23</span>
-                            </p>
+                            </c:forEach>
                         </article>
                     </div>
                 </div>

@@ -110,6 +110,17 @@ public enum CsService {
 		return dao.selectArticle(no);
 	}
 	
+	
+	/*** admin - index - main ***/
+	public CsVO selectAdminMain() {
+		return dao.selectAdminMain();
+	}
+	
+	/*** admin - cs - index - notice, qna 출력  ***/
+	public Map<String, Object> selectNoticeQna() {
+		return dao.selectNoticeQna();
+	}
+	
 
 	
 	
