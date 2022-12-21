@@ -18,8 +18,8 @@ public enum AdminService {
 	private AdminService() { dao = new AdminDAO(); }
 	
 	// product 상품 리스트 불러오기
-	public List<ProductVO> selectProducts(int start) {
-		return dao.selectProducts(start);
+	public List<ProductVO> selectProducts(int start,String search) {
+		return dao.selectProducts(start,search);
 	}
 	
 	
@@ -28,12 +28,17 @@ public enum AdminService {
 		return dao.selectProductss(limitdstart,uid);
 	}
 	
-	public int selectCountTotal(String seller) {
-		return dao.selectCountTotal(seller);
+	public int selectCountTotal(String seller,String search) {
+		return dao.selectCountTotal(seller,search);
 	}
 	
 	public List<ProductVO> selectAdminList(int limiteStart, String seller) {
 		return dao.selectAdminList(seller, limiteStart);
+	}
+	
+	
+	public List<ProductVO> selectProductKeyword(String keyword,int start) {
+		return dao.selectProductKeyword(keyword,start);
 	}
 	
 	// 삭제
