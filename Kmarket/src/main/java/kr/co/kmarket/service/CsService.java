@@ -139,12 +139,16 @@ public enum CsService {
 		return dao.selectNoticeQna();
 	}
 	
-	/*** admiin - cs - notice - modify 
-	 * @return ***/
+	/*** admiin - cs - notice - modify ***/
 	public CsVO updateArticle(CsVO article) {
 		return dao.updateArticle(article);
 	}
-
+	
+	/*** admin - cs - qna - 답변 ***/
+	public CsVO updateReply(CsVO article) {
+		return dao.updateReply(article);
+	}
+	
 	
 	/*** 글 삭제 ***/
 	public int deleteArticle(String no) {

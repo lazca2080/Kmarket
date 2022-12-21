@@ -34,6 +34,9 @@ public class SelectCateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		logger.info("doGet");
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		
@@ -43,18 +46,19 @@ public class SelectCateController extends HttpServlet {
 		String jsonData = null;
 		Gson gson = new Gson();
 		
-		if(cateType1 != null && cateType2 == null) {
-			logger.debug("here1");
-			List<CsVO> vo = service.selectArticlesCateType(cateType1);
-			jsonData = gson.toJson(vo);
-			
-		}else if(cateType1 != null && cateType2 != null) {
-			logger.debug("here2");
+//		if(cateType1 != null && cateType2 == null) {
+//			logger.debug("here1 controller");
+//			List<CsVO> vo = service.selectArticlesCateType(cateType1);
+//			jsonData = gson.toJson(vo);
+//			
+//		}else 
+		if(cateType1 != null && cateType2 != null) {
+			logger.debug("here1 controller");
 			List<CsVO> vo = service.selectArticlesCateType2(cateType1, cateType2);
 			jsonData = gson.toJson(vo);
 		}
 		
-		logger.debug("here3 : " + jsonData);
+		logger.debug("here3 controller: " + jsonData);
 		PrintWriter writer = resp.getWriter();
 		writer.print(jsonData);
 		

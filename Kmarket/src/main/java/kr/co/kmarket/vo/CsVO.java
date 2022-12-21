@@ -18,7 +18,16 @@ public class CsVO {
 	private int totalOrdNo;
 	private int totalOrdPrice;
 	private int totalProd;
+	private String replyContent;
 	
+	public String getReplyContent() {
+		return replyContent;
+	}
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
 	public int getHit() {
 		return hit;
 	}

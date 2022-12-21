@@ -545,6 +545,24 @@ public class CsDAO {
 		return article;
 	}
 	
+	/*** admin - cs - qna - 답변 ***/
+	public CsVO updateReply(CsVO article) {
+		try {
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.UPDATE_REPLY);
+			psmt.setString(1, article.getReplyContent());
+			psmt.setInt(2, article.getNo());
+			
+			psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return article;
+	}
 	
 	/*** 글 삭제 ***/
 	public int deleteArticle(String no) {

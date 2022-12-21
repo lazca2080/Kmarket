@@ -1026,6 +1026,76 @@ button[type=submit] {
     box-sizing: border-box;
     width: 112.43px;
 }
+
+/*** cs - qna 답변 ***/
+#cs > .qna > .reply > article > form > table {
+	border-top: 2px solid #111;
+}
+#cs > .qna > .reply > article > form > table tr > td:nth-child(1) {
+	font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 0;
+    padding-left: 16px;
+}
+ 
+#cs > .qna > .reply > article > form > table tr > td:nth-child(2) > h2 {
+	font-size: 15px;
+}
+#cs > .qna > .reply > article > form > table tr > td:nth-child(2) > p {
+	font-size: 15px;
+}
+#cs > .qna > .reply > article > form {
+	position: relative;
+}
+#cs > .qna > .reply > article > form > div {
+	float: right;
+	position: absolute;
+	right: 8%;
+    padding-top: 40px;
+}
+#cs > .qna > .reply > article > form > table input {
+    width: 600px;
+}
+#cs > .qna > .reply > article > form > table textarea {
+    width: 600px;
+    height: 150px;;
+}
+#cs > .qna > .reply .btnDelete {
+	background-color: #dcdcdc;
+    border: 1px solid #D2D2D2;
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+#cs > .qna > .reply .btnList {
+	background-color: #9BC9F0;
+    border: 1px solid #D2D2D2;
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+#cs > .qna > .reply .btnSubmit {
+	background-color: #9BC9F0;
+    border: 1px solid #D2D2D2;
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    box-sizing: border-box;
+    width: 88.23px;
+    height: 35.8px;
+}
+
 /*faq 공통*/
 #cs > .faq {}
 #cs > .faq > nav {
