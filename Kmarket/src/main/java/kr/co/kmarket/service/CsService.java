@@ -86,10 +86,19 @@ public enum CsService {
 		return (currentPage-1)*10;
 	}
 	
-	// 페이지 글 가져오기
+	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
 	public List<CsVO> selectArticles(String cate, String cateType1, int start){
 		return dao.selectArticles(cate, cateType1, start);
 	}
+	// 문의하기 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
+	public List<CsVO> selectArticlesQna(String cate, String cateType1, int start){
+		return dao.selectArticlesQna(cate, cateType1, start);
+	}
+	// 문의하기 - 유형별 글 가져오기 (cateType1)
+	public List<CsVO> selectArticlesCateType(String cateType1){
+		return dao.selectArticlesCateType(cateType1);
+	}
+	
 	
 	/*** cs::faq list ***/
 	// cate - cateType1

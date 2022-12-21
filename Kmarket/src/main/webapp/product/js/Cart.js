@@ -1,5 +1,5 @@
 $(function(){
-	let count = 0;
+		let count = 0;
 		let costPrice = 0;
 		let totalSalePrice = 0;
 		let totalDelivery = 0;

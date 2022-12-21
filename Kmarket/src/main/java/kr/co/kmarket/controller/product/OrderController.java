@@ -33,11 +33,19 @@ public class OrderController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// view 구매하기 버튼 클릭 시
-		/*
-		String cartNo = req.getParameter("cartNo");
-		System.out.println("cartNo : " + cartNo);
-		*/
+		String prodNo = req.getParameter("prodNo");
+		String uid    = req.getParameter("uid");
+		String count  = req.getParameter("count");
+		
+		int coun = Integer.parseInt(count);
+		
+		List<ProductVO> products = service.selectOrderProduct(prodNo, coun);
+		
+		ProductVO vo = service.selectOrderTotal(prodNo, coun);
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("prod", products);
+		session.setAttribute("vo", vo);
 		
 		// aside 카테고리 영역 불러오기
 		Map<String, Object> cate = service.selectCategory();
@@ -53,8 +61,7 @@ public class OrderController extends HttpServlet{
 		// 선택한 상품만큼 cartNo가 넘어옴 이때, name=cartNo이 동일해서 배열로 저장 가능함.
 		String[] cartNo = req.getParameterValues("cartNo");
 		
-		// 선택한 상품 products 가져오기
-		List<ProductVO> products = service.selectCart(cartNo);
+		List<ProductVO> products = service.selectCarts(cartNo);
 		
 		// 선택한 상품 상품값들 가져오기. db를 한번만 access하고 싶은데.. 방법이 생각나지 않아서 두번돌림
 		// 트랜잭션을 이용해서 map에 저장할 수 있을지 모르겠음 List<ProductVO> 값과 productVO값이라.

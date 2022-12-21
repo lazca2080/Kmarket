@@ -126,7 +126,37 @@ $('.choose').empty();
 			
 		});
 		
-		
+				$('#selectBox').change(function(){
+			let selectCate1 = $('#selectBox option:selected').val();
+			console.log("1차 카테고리 선택: " + selectCate1);
+			
+			let jsonData = {"selectCate1":selectCate1};
+			
+			$.ajax({
+				url: '/Kmarket/admin/cs/qna/select.do', 
+				method: 'get',
+				data:jsonData,
+				dataType:'json',
+				success: function(data){
+					
+					$('.row').remove();
+
+					for(let vo of data){
+						let row = "<tr class='row'>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "<td></td>";
+							row + "</tr>";
+							
+						$('#tb').append(row);
+					}
+				}
+			});
+		});
 		
 	});
 
@@ -134,7 +164,7 @@ $('.choose').empty();
 <!DOCTYPE html>
             <section id="admin-faq">
                 <nav>
-                    <h3>공지사항 목록</h3>
+                    <h3>문의하기 목록</h3>
                     <p>
                         HOME > 고객센터 >
                         <strong>공지사항</strong>
@@ -142,7 +172,7 @@ $('.choose').empty();
                 </nav>
                 <section>
                     <div>
-                        <select name="search1">
+                        <select name="search" id="selectBox">
                             <option value="0">1차 선택</option>
                             <option value="10">회원</option>
                             <option value="11">쿠폰/이벤트</option>
@@ -152,21 +182,22 @@ $('.choose').empty();
                             <option value="15">여행/숙박/항공</option>
                             <option value="16">안전거래</option>
                         </select>
-						<select name="search2" class="choose">
+                        </select>
+                        <select name="search" id="selectBox2" class="choose">
                             <option value="search1">2차 선택</option>
                             <option value="search1">jquery 구현</option>
                         </select>
                     </div>
-                    <table>
+                    <table id="tb">
                         <tr>
                             <th><input type="checkbox" name="all"></th>
                             <th>번호</th>
                             <th>1차 유형</th>
                             <th>2차 유형</th>
                             <th>제목</th>
-                            <th>조회</th>
-                            <th>날짜</th>
-                            <th>관리</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>상태</th>
                         </tr>
 						<c:forEach var="article" items="${articles}">
 						<c:set var="i" value="${i+1}"/>
@@ -175,37 +206,34 @@ $('.choose').empty();
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
-	                            <td><a href="/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
-	                            <td>${article.hit}</td>
+	                            <td><a href="/Kmarket/admin/cs/qna/view.do?cate=qna&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
+	                            <td>${article.uid.substring(0,3)}**</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 					                <fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 	                            </td>
-	                            <td>
-	                                <a href="#">[삭제]</a><br>
-	                                <a href="#">[수정]</a>
-	                            </td>
+	                            <td>검답</td>
                         	</tr>
 						</c:forEach>
                         
                     </table>
                     <input type="button" class="delete" value="선택삭제">
-                    <a href="/Kmarket/admin/cs/notice/write.do?cate=notice" class="write">작성하기</a>
+                    <a href="/Kmarket/admin/cs/qna/write.do?cate=qna" class="write">작성하기</a>
                     <div class="paging">
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                             <!-- <a href="#" class="on">1</a> -->
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
 	                        </c:forEach>
                         </span>
                         <span class="next">
                             <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
 	                        </c:if>
                         </span>
                     </div>
