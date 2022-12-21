@@ -94,6 +94,11 @@ public enum CsService {
 	public List<CsVO> selectArticlesQna(String cate, String cateType1, int start){
 		return dao.selectArticlesQna(cate, cateType1, start);
 	}
+	//자주묻는 질문 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
+	public List<CsVO> selectArticlesFaq(String cate, String cateType1, int start){
+		return dao.selectArticlesFaq(cate, cateType1, start);
+	}
+	
 	// 문의하기 - 유형별 글 가져오기 (cateType1)
 	public List<CsVO> selectArticlesCateType(String cateType1){
 		return dao.selectArticlesCateType(cateType1);

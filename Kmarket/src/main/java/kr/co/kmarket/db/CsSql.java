@@ -97,7 +97,8 @@ public class CsSql {
 	
 	
 	
-	
+	/*** cs - faq ***/
+	public static final String SELECT_WHOLE_FAQ_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`='faq' ORDER BY `no` DESC LIMIT ?,10";
 	/*** cs - qna ***/
 	public static final String SELECT_WHOLE_QNA_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`='qna' ORDER BY `no` DESC LIMIT ?,10";
 	/*** cs - 조회수 up  ***/

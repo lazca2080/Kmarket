@@ -85,7 +85,7 @@
                         <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                         <ol>
                             <li><a href="/Kmarket/admin/cs/notice/list.do?cate=notice">공지사항</a></li>
-                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
+                            <li><a href="/Kmarket/admin/cs/faq/list.do?cate=faq">자주묻는 질문</a></li>
                             <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
                         </ol>
                     </li>
