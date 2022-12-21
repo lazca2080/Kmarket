@@ -181,7 +181,8 @@ $(function(){
                             <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="hidden" value="${cateType1}"/>
+                        <input type="text" value="${cate}"/>
+                        <input type="text" value="${cateType1}"/>
                         <input type="text" id="uid" value="${sessUser.uid}"/>
                         <input type="button" class="test" value="test button">
                         <input type="button" class="test2" value="test button2">
