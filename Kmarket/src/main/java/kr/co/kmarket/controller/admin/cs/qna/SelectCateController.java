@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.admin.cs.qna;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
@@ -32,13 +35,32 @@ public class SelectCateController extends HttpServlet {
 		
 		logger.info("doGet");
 		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
 		
-		List<CsVO> vo = service.selectArticlesCateType(cateType1);
+		logger.debug("cateType1 : " + cateType1);
+		logger.debug("cateType2 : " + cateType2);
 		
-		if(list에서 선택한 cateType1 값 = SQL문으로 가지고 온 cateType1 값) {
+		String jsonData = null;
+		Gson gson = new Gson();
+		
+		if(cateType1 != null && cateType2 == null) {
+			logger.debug("here1");
+			List<CsVO> vo = service.selectArticlesCateType(cateType1);
+			jsonData = gson.toJson(vo);
 			
-			map.put(cateType1, vo);
+		}else if(cateType1 != null && cateType2 != null) {
+			logger.debug("here2");
+			List<CsVO> vo = service.selectArticlesCateType2(cateType1, cateType2);
+			jsonData = gson.toJson(vo);
 		}
+		
+		logger.debug("here3 : " + jsonData);
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData);
+		
+		
+		
+		
 		
 	}
 	@Override

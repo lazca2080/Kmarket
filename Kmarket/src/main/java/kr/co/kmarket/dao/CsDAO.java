@@ -269,7 +269,7 @@ public class CsDAO {
 	public List<CsVO> selectArticlesCateType(String cateType1){
 		List<CsVO> articles = new ArrayList<>();
 		try {
-			logger.info("CsDAO-selectArticles...");
+			logger.info("selectArticles cateType1");
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = null;
@@ -304,7 +304,46 @@ public class CsDAO {
 		}
 		return articles;
 	}
- 	
+	// 문의하기 - 유형별 글 가져오기 (cateType2)
+		public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2){
+			List<CsVO> articles = new ArrayList<>();
+			try {
+				logger.info("selectArticlesCateType2");
+				
+				Connection con = DBCP.getConnection();
+				PreparedStatement psmt = null;
+				
+				psmt = con.prepareStatement(CsSql.SELECT_CATETYPE2);
+				psmt.setString(1, cateType1);
+				psmt.setString(2, cateType2);
+				
+				ResultSet rs = psmt.executeQuery();
+				while(rs.next()) {
+					CsVO article = new CsVO();
+					article.setNo(rs.getInt(1));
+					article.setParent(rs.getInt(2));
+					article.setCate(rs.getString(3));
+					article.setCateType1(rs.getString(4));
+					article.setCateType2(rs.getString(5));
+					article.setTitle(rs.getString(6));
+					article.setContent(rs.getString(7));
+					article.setUid(rs.getString(8));
+					article.setRegip(rs.getString(9));
+					article.setRdate(rs.getString(10));
+					article.setHit(rs.getString(11));
+					
+					articles.add(article);
+					
+				}
+				rs.close();
+				psmt.close();
+				con.close();
+				
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
+			return articles;
+		}
 	/*** cs::faq list ***/
 	// cate - cateType1
 	public List<CsVO> selectFaqArticles(String cate, String cateType1){
