@@ -284,10 +284,11 @@ public class ProductDAO {
 			if(rs.next()) {
 				vo = new ProductVO();
 				vo.setPrice(rs.getInt(1)*coun);
-				vo.setDiscount((rs.getInt(4)*coun)-(rs.getInt(1)*coun));
+				vo.setDiscount((rs.getInt(1)*coun)-(rs.getInt(4)*coun));
 				vo.setDelivery(rs.getInt(3));
 				vo.setTotal(rs.getInt(4)*coun+rs.getInt(3));
-				vo.setCount(coun);
+				vo.setCount(1);
+				vo.setPoint(rs.getInt(5)*coun);
 			}
 			
 			conn.close();
@@ -708,6 +709,48 @@ public class ProductDAO {
 		
 		return order;
 		
+	}
+	
+	//장바구니 선택항목 order_item insert
+	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint) {
+		
+		String sql = "INSERT INTO `km_product_order_item` (`prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total`, `orderNo`) ";
+			  sql += "SELECT `prodNo`, `count`, `price`, `discount`, `point` , `delivery`, `total`, ? FROM `km_product_cart` ";
+			  sql += "WHERE cartNo = ?";
+		
+		int length = cartNo.length;
+		
+		for(int i = 1; i<length; i++) {
+			sql += " OR `cartNo`=?";
+		}
+			  
+		try {
+			logger.debug("public void insertSelectCartPoint...");
+			Connection conn = DBCP.getConnection();
+			
+			conn.setAutoCommit(false);
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			PreparedStatement psmt2 = conn.prepareStatement(ProductSql.INSERT_POINT);
+			psmt.setInt(1, ordNo);
+			for(int k = 0; k<length; k++) {
+				psmt.setString(k+2, cartNo[k]);
+			}
+			
+			psmt2.setString(1, uid);
+			psmt2.setInt(2, ordNo);
+			psmt2.setString(3, ordsavePoint);
+			
+			psmt.executeUpdate();
+			psmt2.executeUpdate();
+			conn.commit();
+			
+			conn.close();
+			psmt.close();
+			psmt2.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 	public List<CategoryVO> selectCate(int cate) {

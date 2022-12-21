@@ -83,14 +83,16 @@ public class CompleteController extends HttpServlet{
 		vo.setOrdCompelete("1");
 		vo.setOrdRecipReceiver(receiver);
 		
-		
 		CompleteVO order = service.insertOrder(vo);
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("order", order);
 		
-		resp.sendRedirect("/Kmarket/product/complete.do");
+		String[] cartNo = (String[]) session.getAttribute("cartNo");
 		
+		service.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint);
+		
+		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
 
 }

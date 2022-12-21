@@ -36,16 +36,18 @@ public class OrderController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String uid    = req.getParameter("uid");
 		String count  = req.getParameter("count");
-		
-		int coun = Integer.parseInt(count);
-		
-		List<ProductVO> products = service.selectOrderProduct(prodNo, coun);
-		
-		ProductVO vo = service.selectOrderTotal(prodNo, coun);
-		
+		int coun = 0; 
+		List<ProductVO> products = null;
+		ProductVO vo = null;
 		HttpSession session = req.getSession();
-		session.setAttribute("prod", products);
-		session.setAttribute("vo", vo);
+		
+		if(count != null) {
+			coun = Integer.parseInt(count);
+			products = service.selectOrderProduct(prodNo, coun);
+			vo = service.selectOrderTotal(prodNo, coun);
+			session.setAttribute("prod", products);
+			session.setAttribute("vo", vo);
+		}
 		
 		// aside 카테고리 영역 불러오기
 		Map<String, Object> cate = service.selectCategory();
@@ -70,6 +72,7 @@ public class OrderController extends HttpServlet{
 		// session저장 이유는 complete 페이지로 넘길시 일을 줄이기 위해서임.
 		// 로그아웃 시 remove 해줘야 하지 않을까 싶음.
 		HttpSession session = req.getSession();
+		session.setAttribute("cartNo", cartNo);
 		session.setAttribute("prod", products);
 		session.setAttribute("vo", vo);
 		
