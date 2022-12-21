@@ -14,6 +14,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.kmarket.dao.ProductDAO;
 import kr.co.kmarket.vo.CategoryVO;
+import kr.co.kmarket.vo.CompleteVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public enum ProductService {
@@ -34,6 +35,16 @@ public enum ProductService {
 	//Product 상품 하나 불러오기
 	public ProductVO selectProduct(String prodNo) {
 		return dao.selectProduct(prodNo);
+	}
+	
+	//Product 상품 하나 불러오기
+	public List<ProductVO> selectOrderProduct(String prodNo, int count) {
+		return dao.selectOrderProduct(prodNo, count);
+	}
+	
+	//Product 상품 하나 계산
+	public ProductVO selectOrderTotal(String prodNo, int coun) {
+		return dao.selectOrderTotal(prodNo, coun);
 	}
 	
 	public int selectCountTotal(String cate1, String cate2) {
@@ -60,8 +71,13 @@ public enum ProductService {
 			return dao.deleteCart(cartNo);
 	}
 	
-	//장바구니 상품 조회
-	public List<ProductVO> selectCart(String[] cartNo) {
+	//장바구니 상품 조회 2개 이상
+	public List<ProductVO> selectCarts(String[] cartNo) {
+		return dao.selectCarts(cartNo);
+	}
+	
+	//장바구니 상품 조회 1개
+	public ProductVO selectCart(String cartNo) {
 		return dao.selectCart(cartNo);
 	}
 	
@@ -76,10 +92,9 @@ public enum ProductService {
 	}
 	
 	//최종 order 등록
-	public void insertOrder() {
-		dao.insertOrder();
+	public CompleteVO insertOrder(CompleteVO vo) {
+		return dao.insertOrder(vo);
 	}
-		
 	
 	public List<CategoryVO> selectCate(int cate) {
 		return dao.selectCate(cate);

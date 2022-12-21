@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.kmarket.service.IndexService;
 import kr.co.kmarket.service.ProductService;
@@ -42,8 +44,11 @@ public class CompleteController extends HttpServlet{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String now = sdf.format(new Date());
 		
-		String uid = req.getParameter("uid");
-		String ordNo        = now+uid;
+		Random random = new Random();
+		int rand = random.nextInt(10000000);
+		
+		int ordNo           = rand;
+		String uid          = req.getParameter("uid");
 		String ordCount     = req.getParameter("ordCount");
 		String ordPrice     = req.getParameter("ordPrice");
 		String ordDiscount  = req.getParameter("ordDiscount");
@@ -57,6 +62,7 @@ public class CompleteController extends HttpServlet{
 		String addr1 		= req.getParameter("addr1");
 		String addr2 		= req.getParameter("addr2");
 		String payment 		= req.getParameter("payment");
+		String receiver     = req.getParameter("receiver");
 		
 		CompleteVO vo = new CompleteVO();
 		vo.setOrdNo(ordNo);
@@ -75,9 +81,15 @@ public class CompleteController extends HttpServlet{
 		vo.setOrdRecipAddr2(addr2);
 		vo.setOrdPayment(payment);
 		vo.setOrdCompelete("1");
+		vo.setOrdRecipReceiver(receiver);
 		
 		
-		service.insertOrder();
+		CompleteVO order = service.insertOrder(vo);
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("order", order);
+		
+		resp.sendRedirect("/Kmarket/product/complete.do");
 		
 	}
 

@@ -189,25 +189,25 @@
                                     <tr>
                                         <td>총 상품금액</td>
                                         <td>
-                                            <span>${vo.price}원</span>
+                                            <span>${order.ordPrice}원</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>총 할인금액</td>
                                         <td>
-                                            <span>-${vo.discount}원</span>
+                                            <span>-${order.ordDiscount}원</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>배송비</td>
                                         <td>
-                                            <span>${vo.delivery}원</span>
+                                            <span>${order.ordDelivery}원</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>총 결제금액</td>
                                         <td>
-                                            <span>${vo.total}</span>원
+                                            <span>${order.ordTotPrice}</span>원
                                         </td>
                                     </tr>
                                 </table>
@@ -221,19 +221,38 @@
                     <table border="0">
                         <tr>
                             <td>주문번호</td>
-                            <td>2008101324568</td>
+                            <td>${order.ordNo}</td>
                             <td rowspan="3">총 결제금액</td>
                             <td rowspan="3">
-                                <span>${vo.total}</span>원
+                                <span>${order.ordTotPrice}</span>원
                             </td>
                         </tr>
                         <tr>
                             <td>결제방법</td>
+                            <c:choose>
+                            <c:when test="${order.ordPayment eq 1}">
                             <td>신용카드</td>
+                            </c:when>
+                            <c:when test="${order.ordPayment eq 2}">
+                            <td>체크카드</td>
+                            </c:when>
+							<c:when test="${order.ordPayment eq 3}">
+							<td>실시간 계좌이체</td>
+                            </c:when>
+                            <c:when test="${order.ordPayment eq 4}">
+                            <td>무통장 입금</td>
+                            </c:when>
+                            <c:when test="${order.ordPayment eq 5}">
+                            <td>휴대폰 결제</td>
+                            </c:when>
+                            <c:when test="${order.ordPayment eq 6}">
+                            <td>카카오페이</td>
+                            </c:when>
+                            </c:choose>
                         </tr>
                         <tr>
                             <td>주문자/연락처</td>
-                            <td>홍길동/010-1234-1234</td>
+                            <td>${order.ordRecipName}/${order.ordRecipHp}</td>
                         </tr>
                     </table>
                 </article>
@@ -243,20 +262,20 @@
                     <table border="0">
                         <tr>
                             <td>수취인</td>
-                            <td>${sessUser.name}</td>
+                            <td>${order.ordRecipReceiver}</td>
                             <td>주문자 정보</td>
                         </tr>
                         <tr>
                             <td>연락처</td>
-                            <td>010-1234-1234</td>
+                            <td>${order.ordRecipReceiver}</td>
                             <td rowspan="2">
-                                홍길동
-                                <br> 010-1234-1234
+                                ${order.ordRecipName}
+                                <br> ${order.ordRecipHp}
                             </td>
                         </tr>
                         <tr>
                             <td>배송지 주소</td>
-                            <td>부산광역시 강남구 대연동 123 10층</td>
+                            <td>${order.ordRecipAddr1} ${order.ordRecipAddr2}</td>
                         </tr>
                     </table>
                 </article>

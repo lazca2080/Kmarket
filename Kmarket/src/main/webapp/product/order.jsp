@@ -329,10 +329,10 @@
                             <span>신용카드</span>
                             <p>
                                 <label>
-                                    <input type="radio" name="payment" value="type1">신용카드 결제
+                                    <input type="radio" name="payment" value="1">신용카드 결제
                                 </label>
                                 <label>
-                                    <input type="radio" name="payment" value="type2">체크카드 결제
+                                    <input type="radio" name="payment" value="2">체크카드 결제
                                 </label>
                             </p>
                         </div>
@@ -340,10 +340,10 @@
                             <span>계좌이체</span>
                             <p>
                                 <label>
-                                    <input type="radio" name="payment" value="type3">실시간 계좌이체
+                                    <input type="radio" name="payment" value="3">실시간 계좌이체
                                 </label>
                                 <label>
-                                    <input type="radio" name="payment" value="type4">무통장 입금
+                                    <input type="radio" name="payment" value="4">무통장 입금
                                 </label>
                             </p>
                         </div>
@@ -351,10 +351,10 @@
                             <span>기타</span>
                             <p>
                                 <label>
-                                    <input type="radio" name="payment" value="type4">휴대폰 결제
+                                    <input type="radio" name="payment" value="5">휴대폰 결제
                                 </label>
                                 <label>
-                                    <input type="radio" name="payment" value="type5">카카오페이
+                                    <input type="radio" name="payment" value="6">카카오페이
                                     <img src="../img/ico_kakaopay.gif" alt="카카오페이">
                                 </label>
                             </p>
