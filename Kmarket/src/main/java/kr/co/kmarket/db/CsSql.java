@@ -73,6 +73,13 @@ public class CsSql {
 											  + " `rdate`=NOW()"
 											  + " WHERE `no`=?";
 	
+	
+	/*** admin - cs - qna - 답변 ***/
+	public static final String UPDATE_REPLY = "UPDATE `cs_article` SET "
+											+ " `replyContent`=? "
+											+ " WHERE `no`=?";
+	
+	
 	/*** 글 삭제 ***/
 	public static final String DELETE_ARTICLE = "DELETE FROM `cs_article` WHERE `no`=?";
 											  
