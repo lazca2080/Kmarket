@@ -37,7 +37,7 @@
 			
 		});
 		
-		$('select[name=search1]').change(function() {
+		$('select[id=selectBox]').change(function() {
 
 			let select = $(this).val();
 			
@@ -76,7 +76,7 @@
 					
 				$('.choose').append(tags);
 			}else if(select == '13'){
-$('.choose').empty();
+				$('.choose').empty();
 				
 				let tags = "<option value='0'>2차 선택</option>";
 				 	tags += "<option value='10'>배송상태/기간</option>";
@@ -88,7 +88,7 @@ $('.choose').empty();
 				$('.choose').append(tags);
 				
 			}else if(select == '14'){
-$('.choose').empty();
+				$('.choose').empty();
 				
 				let tags = "<option value='0'>2차 선택</option>";
 				 	tags += "<option value='10'>반품신청/철회</option>";
@@ -101,7 +101,7 @@ $('.choose').empty();
 				$('.choose').append(tags);
 				
 			}else if(select == '15'){
-$('.choose').empty();
+				$('.choose').empty();
 				
 				let tags = "<option value='0'>2차 선택</option>";
 				 	tags += "<option value='10'>여행/숙박</option>";
@@ -110,7 +110,7 @@ $('.choose').empty();
 				$('.choose').append(tags);
 				
 			}else if(select == '16'){
-$('.choose').empty();
+				$('.choose').empty();
 				
 				let tags = "<option value='0'>2차 선택</option>";
 				 	tags += "<option value='10'>서비스 이용규칙 위반</option>";
@@ -126,7 +126,7 @@ $('.choose').empty();
 			
 		});
 		
-				$('#selectBox').change(function(){
+		$('#selectBox').change(function(){
 			let selectCate1 = $('#selectBox option:selected').val();
 			console.log("1차 카테고리 선택: " + selectCate1);
 			
