@@ -74,6 +74,11 @@ public enum ProductService {
 	public ProductVO selectTotalPrice(String uid) {
 		return dao.selectTotalPrice(uid);
 	}
+	
+	//최종 order 등록
+	public void insertOrder() {
+		dao.insertOrder();
+	}
 		
 	
 	public List<CategoryVO> selectCate(int cate) {

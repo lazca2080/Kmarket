@@ -281,6 +281,12 @@
                                 </td>
                             </tr>
                             <tr>
+                            	<td>수취인</td>
+                            	<td>
+                            		<input type="text" name="receiver">
+                            	</td>
+                            </tr>
+                            <tr>
                                 <td>우편번호</td>
                                 <td>
                                     <input type="text" name="zip" id="zip" readonly="readonly">

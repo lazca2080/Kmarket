@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.kmarket.service.IndexService;
+import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.vo.CompleteVO;
 
 @WebServlet("/product/complete.do")
 public class CompleteController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private IndexService ser = IndexService.INSTANCE;
+	private ProductService service = ProductService.INSTANCE;
 	
 	@Override
 	public void init() throws ServletException {
@@ -28,7 +29,7 @@ public class CompleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Map<String, Object> cate = ser.selectCategory();
+		Map<String, Object> cate = service.selectCategory();
 		req.setAttribute("cate", cate);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/complete.jsp");
@@ -75,6 +76,8 @@ public class CompleteController extends HttpServlet{
 		vo.setOrdPayment(payment);
 		vo.setOrdCompelete("1");
 		
+		
+		service.insertOrder();
 		
 	}
 
