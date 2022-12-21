@@ -3,7 +3,6 @@ package kr.co.kmarket.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +11,35 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.AdminSql;
 import kr.co.kmarket.db.DBCP;
-import kr.co.kmarket.db.ProductSql;
 import kr.co.kmarket.vo.ProductVO;
 
 public class AdminDAO {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	public List<ProductVO> selectProducts(int start) {
+	
+	public List<ProductVO> selectProducts(int start,String search) {
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProduct);
-			psmt.setInt(1, start);
+			PreparedStatement psmt = null;
+			if(search == null) {
+				psmt = conn.prepareStatement(AdminSql.selectProduct);
+				psmt.setInt(1, start);
+			}else if(search == "prodName") {
+				psmt = conn.prepareStatement(AdminSql.selectProduct1);
+				psmt.setInt(1, start);
+			}else if(search == "prodNo") {
+				psmt = conn.prepareStatement(AdminSql.selectProduct2);
+				psmt.setInt(1, start);
+			}else if(search == "company") {
+				psmt = conn.prepareStatement(AdminSql.selectProduct3);
+				psmt.setInt(1, start);
+			}else if(search == "seller") {
+				psmt = conn.prepareStatement(AdminSql.selectProduct4);
+				psmt.setInt(1, start);
+			}
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -95,13 +109,23 @@ public class AdminDAO {
 		return products;
 	}
 	
-	public int selectCountTotal(String seller) {
+	public int selectCountTotal(String seller,String search) {
 		int total = 0;
+		
 		try {
 			logger.info("selectCountTotal...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
-			psmt.setString(1, seller);
+			PreparedStatement psmt = null;
+			
+			if(search == null){
+				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
+				psmt.setString(1, seller);
+			}else {
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search);
+				psmt.setString(1, "%"+search+"%");
+				psmt.setString(2, "%"+search+"%");
+				psmt.setString(3, seller);
+			}
 			
 			ResultSet rs = psmt.executeQuery();
 			
@@ -174,34 +198,29 @@ public class AdminDAO {
 		return result;
 	}
 	
-	/* 키워드
-	 * public List<ProductVO> selectProductKeyword(String uid,String keyword) {
+	 //키워드
+	 public List<ProductVO> selectProductKeyword(String keyword,int start) {
 		List<ProductVO> products = new ArrayList<>();
 		try {
 			logger.debug("selectProductKeyword...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductKeyword);
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.select_Product_Keyword);
 			psmt.setString(1, "%"+keyword+"%");
-			psmt.setString(1, "%"+keyword+"%");
-			psmt.setString(3, uid);
+			psmt.setString(2, "%"+keyword+"%");
+			psmt.setInt(3, start);
 			ResultSet rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				ProductVO product = new ProductVO();
+				product.setThumb1(rs.getString(17));
 				product.setProdNo(rs.getInt(1));
 				product.setProdName(rs.getString(4));
-				product.setCompany(rs.getString(6));
-				product.setDescript(rs.getString(5));
-				product.setSeller(rs.getString(7));
 				product.setPrice(rs.getString(8));
-				product.setDiscount(rs.getString(9));
-				product.setPoint(rs.getString(10));
-				product.setStock(rs.getString(11));
-				product.setDelivery(rs.getString(13));
-				product.setThumb1(rs.getString(17));
-				product.setThumb2(rs.getString(18));
-				product.setThumb3(rs.getString(19));
-				product.setDetail(rs.getString(20));
+				product.setDiscount(rs.getInt(9));
+				product.setPoint(rs.getInt(10));
+				product.setStock(rs.getInt(11));
+				product.setSeller(rs.getString(7));
+				product.setHit(rs.getInt(14));
 				
 				products.add(product);
 			}
@@ -216,7 +235,7 @@ public class AdminDAO {
 		
 		return products;
 	}
-	*/
+	
 	
 	
 }

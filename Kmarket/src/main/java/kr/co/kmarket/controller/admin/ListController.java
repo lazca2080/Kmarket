@@ -33,22 +33,19 @@ public class ListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		/*
-		ProductVO products = service.selectProducts();
-		req.setAttribute("products", products);
-		*/
-		
 		String uid = req.getParameter("uid");
 		String pg = req.getParameter("pg");
 		String level = req.getParameter("level");
 		String seller = req.getParameter("seller");
-		//String search = req.getParameter("serarch");
+		String search = req.getParameter("serarch");
+		String text = req.getParameter("text");
 		
 		//현재 페이지번호
 		int currentPage = service.getCureentPage(pg);
-		int total = service.selectCountTotal(uid);
+		int total = service.selectCountTotal(uid,search);
 		int lastPageNum = service.getLastPageNum(total);
 		logger.info("total :" + total);
+		logger.info("total :" + search);
 		
 		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
 		int pageStartNum = service.getPageStartNum(total, currentPage);
@@ -56,12 +53,14 @@ public class ListController extends HttpServlet{
 		
 		//level 7 상품전체보기
 		if(level.equals("7")) {
-		List<ProductVO>  Product = service.selectProducts(start);
-		req.setAttribute("Product", Product);
+			List<ProductVO>  Product = service.selectProducts(start,search);
+			req.setAttribute("Product", Product);
 		}else {
 			List<ProductVO> Product = service.selectProductss(start,uid);
 			req.setAttribute("Product", Product);
 		}
+		
+		
 		logger.info("level : "+level);
 		logger.info("pageGroupStart :" +result[0]);
 		logger.info("pageGroupEnd :" +result[1]);
@@ -73,15 +72,7 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("level", level);
-		
-		
-		/*List<ProductVO> product = null;
-		if(search == null) {
-			product = service.selectProductss(uid);
-		}else {
-			product = service.selectProductKeyword(uid, search);
-		}
-		*/
+		req.setAttribute("search", search);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");
 		dispatcher.forward(req, resp);

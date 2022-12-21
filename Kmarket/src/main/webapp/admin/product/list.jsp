@@ -32,6 +32,17 @@
 				}
 			});
 		});
+		
+		$('input[type=submit]').click(function(){
+			
+			let search = $('select[name=search]').val();
+			let text = $('input[name=search]').val();
+			let level = $('input[type=hidden]').val();
+			
+			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level;
+			
+		});
+		
 	});
 </script>
             <section id="admin-product-list">
@@ -45,12 +56,14 @@
                 <section>
                     <div>
                         <select name="search">
-                            <option value="search1">상품명</option>
-                            <option value="search1">상품코드</option>
-                            <option value="search1">제조사</option>
-                            <option value="search1">판매자</option>
+                            <option value="prodName">상품명</option>
+                            <option value="prodNo">상품코드</option>
+                            <option value="company">제조사</option>
+                            <option value="seller">판매자</option>
                         </select>
+                       	<input type="hidden" value="${sessUser.level}" >
                         <input type="text" name="search" placeholder="검색할 단어">
+                        <input type="submit" value="검색">
                     </div>
                     <table>
                         <tr>
@@ -88,8 +101,8 @@
                     	<input type="button" value="선택삭제" class="btn">
                     <div class="paging">
                         <span class="prev"> 
-                        	<c:if test="">
-	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 1}&level=${sessUser.level}"><&nbsp;이전</a>
+                        	<c:if test="${pageGroupStart > 1}">
+	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 10}&level=${sessUser.level}"><&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
