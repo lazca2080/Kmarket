@@ -76,6 +76,7 @@ public class AdminDAO {
 				product.setDiscount(rs.getInt(9));
 				product.setPoint(rs.getInt(10));
 				product.setStock(rs.getInt(11));
+				product.setSeller(rs.getString(7));
 				product.setHit(rs.getInt(14));
 				
 				
