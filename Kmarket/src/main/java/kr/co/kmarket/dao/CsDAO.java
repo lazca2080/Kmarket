@@ -375,7 +375,8 @@ public class CsDAO {
 	
 	
 	/*** 글 삭제 ***/
-	public void deleteArticle(String no) {
+	public int deleteArticle(String no) {
+		int result = 0;
 		try {
 			logger.info("deleteArticle");
 			
@@ -385,9 +386,13 @@ public class CsDAO {
 			
 			psmt.executeUpdate();
 			
+			psmt.close();
+			con.close();
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		return result;
 	}
 	
 }

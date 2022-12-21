@@ -56,6 +56,7 @@ $(function(){
 		 
   });
 		
+	// [관리] - [삭제] 버튼 클릭 시 ( 개별 게시글 삭제 )
 	$('#remove').click(function(e){
 		let isDelete = confirm('정말 삭제하시겠습니까?');
 		
@@ -65,6 +66,65 @@ $(function(){
 			return false;
 		}
 	});    
+	
+    // [선택삭제] 버튼 클릭 시 ( 선택 게시글 삭제 ) -- 아직 다중 게시글 삭제 기능 구현 안 됨 
+    $('.test').click(function(e){
+
+		let isDelete = confirm('정말 삭제하시겠습니까?');
+		
+		if(isDelete){
+    	
+	    	let uid = $('#uid').val();
+	    	let no = $('input:checkbox:checked').val();
+			let checkbox = $('input:checkbox:checked');
+			
+			console.log("uid : " + uid);
+			console.log("no : " + no);
+	    	
+			if(no == null){
+				alert('삭제할 게시물을 선택하십시오.')
+				return;
+			}
+			
+			$.ajax({
+				url : '/Kmarket/admin/cs/notice/delete.do',
+				method : 'get',
+				data : {"no":no},
+				dataType : 'json',
+				success : function(data){
+					console.log("data :"+ data.result);
+					if(data.result == 1){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
+					}
+				}
+			});
+			return true;
+		}else{
+			return false;
+		}
+    	
+    });
+    
+/* let tbl = $('#tb');
+	
+	// 테이블 헤더에 있는 checkbox 클릭시
+    $(":checkbox:first", tbl).click(function(){
+        // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
+        if( $(this).is(":checked") ){
+            $(":checkbox", tbl).attr("checked", "checked");
+        }
+        else{
+            $(":checkbox", tbl).removeAttr("checked");
+        }
+
+    }); */
+     
+   
 	
 	    
 	
@@ -89,11 +149,13 @@ $(function(){
                             <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="hidden" value="${cateType1}">
+                        <input type="hidden" value="${cateType1}"/>
+                        <input type="text" id="uid" value="${sessUser.uid}"/>
+                        <input type="button" class="test" value="test button">
                     </div>
                     <table id="tb">
                         <tr>
-                            <th><input type="checkbox" name="checkArticle"></th>
+                            <th><input type="checkbox" name="checkArticle" id="allCk"></th>
                             <th>번호</th>
                             <th>유형</th>
                             <th>제목</th>
@@ -104,7 +166,7 @@ $(function(){
 						<c:forEach var="article" items="${articles}">
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
-	                        	<td><input type="checkbox" name="all"></td>
+	                        	<td><input type="checkbox" name="articleNo" value="${article.no}">${article.no}</td>
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td><a href="/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>

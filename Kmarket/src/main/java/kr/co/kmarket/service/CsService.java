@@ -129,8 +129,8 @@ public enum CsService {
 
 	
 	/*** 글 삭제 ***/
-	public void deleteArticle(String no) {
-		dao.deleteArticle(no);
+	public int deleteArticle(String no) {
+		return dao.deleteArticle(no);
 	}
 	
 	

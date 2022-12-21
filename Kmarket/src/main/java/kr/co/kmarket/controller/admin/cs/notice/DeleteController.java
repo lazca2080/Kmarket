@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
@@ -31,6 +34,21 @@ public class DeleteController extends HttpServlet{
 		logger.info("DeleteController");
 		
 		String no = req.getParameter("no");
+		logger.info("no: " + no);
+		
+		int result = service.deleteArticle(no);
+		logger.info("result:" + result);
+		
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+		
+		/**
+		
+		
+		String no = req.getParameter("no");
 //		int no = Integer.parseInt(req.getParameter("no"));
 		
 		service.deleteArticle(no);
@@ -38,7 +56,7 @@ public class DeleteController extends HttpServlet{
 		req.setAttribute("no", no);
 		
 		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
-		
+		**/
 		
 		
 	}
