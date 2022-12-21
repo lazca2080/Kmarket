@@ -130,7 +130,10 @@
 			let selectCate1 = $('#selectBox option:selected').val();
 			console.log("1차 카테고리 선택: " + selectCate1);
 			
-			let jsonData = {"selectCate1":selectCate1};
+			/* let jsonData = {"selectCate1":selectCate1}; */
+			let jsonData = {
+					"cateType1":cateType1
+			}
 			
 			$.ajax({
 				url: '/Kmarket/admin/cs/qna/select.do', 
@@ -139,7 +142,7 @@
 				dataType:'json',
 				success: function(data){
 					
-					$('.row').remove();
+					$('.row').remove();	// 테이블 비우기
 
 					for(let vo of data){
 						let row = "<tr class='row'>";
