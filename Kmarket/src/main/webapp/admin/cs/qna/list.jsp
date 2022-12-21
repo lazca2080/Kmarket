@@ -2,6 +2,135 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/admin/_header.jsp"></jsp:include>
+<script>
+	$(function() {
+		
+		$('.delete').click(function() {
+
+			let no = $('input:checkbox:checked').val();
+			let checkbox = $('input:checkbox:checked');
+			
+			console.log("no : "+no);
+			
+			if(no == null){
+				alert('선택된 사항이 없습니다.');
+				return;
+			}
+			
+			$.ajax({
+				url : '/Kmarket/admin/cs/qna/delete.do',
+				method : 'get',
+				data : {"no":no},
+				dataType : 'json',
+				success : function(data) {
+					console.log("data : "+data.result);
+					if(data.result == 1){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
+					}
+				}
+			});
+			
+		});
+		
+		$('select[name=search1]').change(function() {
+
+			let select = $(this).val();
+			
+			console.log("select : "+select);
+			
+			if(select == '10'){
+				$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>가입</option>";
+				 	tags += "<option value='11'>탈퇴</option>";
+					tags += "<option value='12'>회원정보</option>";
+					tags += "<option value='13'>로그인</option>";
+					
+				$('.choose').append(tags);
+				
+			}else if(select == '11'){
+				$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>쿠폰/할인혜택</option>";
+				 	tags += "<option value='11'>포인트</option>";
+					tags += "<option value='12'>제휴</option>";
+					tags += "<option value='13'>이벤트</option>";
+					
+				$('.choose').append(tags);	
+				
+			}else if(select == '12'){
+				$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>상품</option>";
+				 	tags += "<option value='11'>결제</option>";
+					tags += "<option value='12'>구매내역</option>";
+					tags += "<option value='13'>영수증/증빙</option>";
+					
+				$('.choose').append(tags);
+			}else if(select == '13'){
+$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>배송상태/기간</option>";
+				 	tags += "<option value='11'>배송정보확인/변경</option>";
+					tags += "<option value='12'>해외배송</option>";
+					tags += "<option value='13'>당일배송</option>";
+					tags += "<option value='13'>해외직구</option>";
+					
+				$('.choose').append(tags);
+				
+			}else if(select == '14'){
+$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>반품신청/철회</option>";
+				 	tags += "<option value='11'>반품정보확인/변경</option>";
+					tags += "<option value='12'>교환AS신청/철회</option>";
+					tags += "<option value='13'>교환정보확인/변경</option>";
+					tags += "<option value='13'>취소신청/철회</option>";
+					tags += "<option value='13'>취소확인/환불정보</option>";
+					
+				$('.choose').append(tags);
+				
+			}else if(select == '15'){
+$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>여행/숙박</option>";
+				 	tags += "<option value='11'>항공</option>";
+					
+				$('.choose').append(tags);
+				
+			}else if(select == '16'){
+$('.choose').empty();
+				
+				let tags = "<option value='0'>2차 선택</option>";
+				 	tags += "<option value='10'>서비스 이용규칙 위반</option>";
+				 	tags += "<option value='11'>지식재산권침해</option>";
+					tags += "<option value='12'>법령 및 정책위반 상품</option>";
+					tags += "<option value='13'>게시물 정책위반</option>";
+					tags += "<option value='14'>직거래/외부거래유도</option>";
+					tags += "<option value='15'>표시광고</option>";
+					tags += "<option value='16'>청소년 위해상품/이미지</option>";
+					
+				$('.choose').append(tags);
+			}
+			
+		});
+		
+		
+		
+	});
+
+</script>
 <!DOCTYPE html>
             <section id="admin-faq">
                 <nav>
@@ -13,16 +142,17 @@
                 </nav>
                 <section>
                     <div>
-                        <select name="search">
-                            <option value="search1">1차 선택</option>
-                            <option value="search1">회원</option>
-                            <option value="search1">쿠폰/이벤트</option>
-                            <option value="search1">주문/결제</option>
-                            <option value="search1">취소/반품/교환</option>
-                            <option value="search1">여행/숙박/항공</option>
-                            <option value="search1">안전거래</option>
+                        <select name="search1">
+                            <option value="0">1차 선택</option>
+                            <option value="10">회원</option>
+                            <option value="11">쿠폰/이벤트</option>
+                            <option value="12">주문/결제</option>
+                            <option value="13">배송</option>
+                            <option value="14">취소/반품/교환</option>
+                            <option value="15">여행/숙박/항공</option>
+                            <option value="16">안전거래</option>
                         </select>
-						<select name="search">
+						<select name="search2" class="choose">
                             <option value="search1">2차 선택</option>
                             <option value="search1">jquery 구현</option>
                         </select>
@@ -41,7 +171,7 @@
 						<c:forEach var="article" items="${articles}">
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
-	                        	<td><input type="checkbox" name="all"></td>
+	                        	<td><input type="checkbox" name="all" value="${article.no}"></td>
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
