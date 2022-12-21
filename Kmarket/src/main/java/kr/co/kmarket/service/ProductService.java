@@ -96,6 +96,11 @@ public enum ProductService {
 		return dao.insertOrder(vo);
 	}
 	
+	//최종 order item 등록
+	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint) {
+		dao.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint);
+	}
+	
 	public List<CategoryVO> selectCate(int cate) {
 		return dao.selectCate(cate);
 	}

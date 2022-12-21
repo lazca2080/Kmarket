@@ -130,5 +130,12 @@ public class ProductSql {
 	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordNo`=?";
 	
 	//order 항목 가격 계산
-	public static final String SELECT_ORDER_TOTAL = "SELECT `price`,`discount`,`delivery`,`sellPrice` FROM `km_product` WHERE `prodNo`=?";
+	public static final String SELECT_ORDER_TOTAL = "SELECT `price`,`discount`,`delivery`,`sellPrice`,`point` FROM `km_product` WHERE `prodNo`=?";
+	
+	//최종 선택 항목 order items insert
+	public static final String INSERT_SELECT_CART = "INSERT INTO `km_product_order_item` (`prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total`, `orderNo`) "
+													+ "SELECT `prodNo`, `count`, `price`, `discount`, `point` , `delivery`, `total`, ? FROM `km_product_cart` "
+													+ "WHERE cartNo = ?";
+	//최종 point 넣기
+	public static final String INSERT_POINT = "INSERT INTO `km_member_point` (`uid`,`ordNo`,`point`,`pointDate`) VALUES (?,?,?,NOW())";
 }
