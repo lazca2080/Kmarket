@@ -102,7 +102,9 @@ public class CsSql {
 	public static final String SELECT_WHOLE_QNA_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`='qna' ORDER BY `no` DESC LIMIT ?,10";
 	/*** cs - 조회수 up  ***/
 	public static final String UPDATE_HIT = "UPDATE `cs_article` SET `hit`=`hit`+1 WHERE `no`=?";
-	// 문의사향 유형1 글 가져오기
-	public static final String SELECT_CATETYPE1 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`='?";
+	// 문의하기 유형1 글 가져오기
+	public static final String SELECT_CATETYPE1 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`=?";
+	// 문의하기 유형1 글 가져오기
+	public static final String SELECT_CATETYPE2 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`=? and `cateType2`=?";
 	
 }

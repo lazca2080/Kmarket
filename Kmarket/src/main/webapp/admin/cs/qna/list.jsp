@@ -5,6 +5,7 @@
 <script>
 	$(function() {
 		
+		// 글 삭제하기 (단독)
 		$('.delete').click(function() {
 
 			let no = $('input:checkbox:checked').val();
@@ -37,11 +38,11 @@
 			
 		});
 		
+		// 카테고리 1차 선택에 따른 2차 선택문 
 		$('select[id=selectBox]').change(function() {
 
 			let select = $(this).val();
 			
-			console.log("select : "+select);
 			
 			if(select == '10'){
 				$('.choose').empty();
@@ -127,42 +128,62 @@
 		});
 		
 		$('#selectBox').change(function(){
-			let selectCate1 = $('#selectBox option:selected').val();
-			console.log("1차 카테고리 선택: " + selectCate1);
-			
-			/* let jsonData = {"selectCate1":selectCate1}; */
-			let jsonData = {
-					"cateType1":cateType1
-			}
-			
-			$.ajax({
-				url: '/Kmarket/admin/cs/qna/select.do', 
-				method: 'get',
-				data:jsonData,
-				dataType:'json',
-				success: function(data){
-					
-					$('.row').remove();	// 테이블 비우기
-
-					for(let vo of data){
-						let row = "<tr class='row'>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "<td></td>";
-							row + "</tr>";
-							
-						$('#tb').append(row);
-					}
+			$('#selectBox2').change(function(){
+				
+				let cateType1 = $('#selectBox option:selected').val();
+				let cateType2 = $('#selectBox2 option:selected').val();
+				console.log("1차 카테고리 선택: " + cateType1); 
+				console.log("2차 카테고리 선택: " + cateType2); 
+				
+				let jsonData = {
+						"cateType1":cateType1,
+						"cateType2":cateType2
 				}
+				console.log("컨트롤러로 보내는 jsonData: "+ Object.values(jsonData));
+				
+				
+				$.ajax({
+					url: '/Kmarket/admin/cs/qna/select.do', 
+					method: 'get',
+					data:jsonData,
+					dataType:'json',
+					success: function(data){
+						console.log("here1 : " + data);
+						
+						$('.row').remove();	// 테이블 비우기
+
+						let no = 1;
+						
+						for(let vo of data){
+							
+							console.log("here2");
+							
+							let row = "<tr class='row'>";
+								row + "<td>" + vo.no + "</td>";
+								row + "<td>"+ no +"</td>";
+								row + "<td>"+ vo.cateType1 +"</td>";
+								row + "<td>"+ vo.cateType2 +"</td>";
+								row + "<td>dfdf</td>";
+								row + "<td>dfdsfad</td>";
+								row + "<td>dfdf</td>";
+								row + "</tr>";
+								
+					
+								
+							$('#tb').append(row);
+							no++;
+							console.log("here3 : " + no);
+						}
+					}
+				}); 
+				
 			});
 		});
+			
+			
 		
-	});
-
+	
+});
 </script>
 <!DOCTYPE html>
             <section id="admin-faq">
@@ -185,10 +206,8 @@
                             <option value="15">여행/숙박/항공</option>
                             <option value="16">안전거래</option>
                         </select>
-                        </select>
                         <select name="search" id="selectBox2" class="choose">
                             <option value="search1">2차 선택</option>
-                            <option value="search1">jquery 구현</option>
                         </select>
                     </div>
                     <table id="tb">
