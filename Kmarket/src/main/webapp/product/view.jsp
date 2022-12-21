@@ -11,6 +11,12 @@
 			num++;
 			$('input[name=num]').val(num);
 			console.log(num);
+			
+			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
+			
+			console.log(totalPrice);
+			
+			$('.totalPrice').text(totalPrice);
 		});
 		
 		$('button[class=decrease]').click(function(){
@@ -19,6 +25,12 @@
 			}
 			num--;
 			$('input[name=num]').val(num);
+			
+			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
+			
+			console.log(totalPrice);
+			
+			$('.totalPrice').text(totalPrice);
 		});
 		
 		$('.cart').click(function() {
@@ -73,6 +85,8 @@
 			num++;
 			$('input[name=num]').val(num);
 			console.log(num);
+			
+			
 		});
 		
 		$('button[class=decrease]').click(function(){
@@ -304,7 +318,7 @@
                             <button class="increase">+</button>
                         </div>
                         <div class="total">
-                            <span>${product.sellPrice+product.delivery}</span>
+                            <span class="totalPrice">${product.sellPrice+product.delivery}</span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">

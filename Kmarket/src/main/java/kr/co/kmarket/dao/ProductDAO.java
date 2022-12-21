@@ -190,12 +190,12 @@ public class ProductDAO {
 				vo.setDelivery(rs.getString(13));
 				vo.setThumb1(rs.getString(17));
 				vo.setThumb2(rs.getString(18));
-				vo.setDetail(rs.getString(19));
+				vo.setDetail(rs.getString(20));
 				vo.setStatus(rs.getString(21));
-				vo.setDuty(rs.getString(21));
-				vo.setReceipt(rs.getString(22));
-				vo.setBizType(rs.getString(23));
-				vo.setOrigin(rs.getString(24));
+				vo.setDuty(rs.getString(22));
+				vo.setReceipt(rs.getString(23));
+				vo.setBizType(rs.getString(24));
+				vo.setOrigin(rs.getString(25));
 				vo.setSellPrice(rs.getString(33));
 				vo.setC1Name(rs.getString(34));
 				vo.setC2Name(rs.getString(35));
