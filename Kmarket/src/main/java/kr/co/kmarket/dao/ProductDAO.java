@@ -15,6 +15,7 @@ import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.db.Indexsql;
 import kr.co.kmarket.db.ProductSql;
 import kr.co.kmarket.vo.CategoryVO;
+import kr.co.kmarket.vo.CompleteVO;
 import kr.co.kmarket.vo.ProductVO;
 
 public class ProductDAO {
@@ -190,6 +191,7 @@ public class ProductDAO {
 				vo.setDelivery(rs.getString(13));
 				vo.setThumb1(rs.getString(17));
 				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
 				vo.setDetail(rs.getString(20));
 				vo.setStatus(rs.getString(21));
 				vo.setDuty(rs.getString(22));
@@ -199,6 +201,93 @@ public class ProductDAO {
 				vo.setSellPrice(rs.getString(33));
 				vo.setC1Name(rs.getString(34));
 				vo.setC2Name(rs.getString(35));
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	// order 클릭 시 조회
+	public List<ProductVO> selectOrderProduct(String prodNo, int count) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		ProductVO vo = null;
+		
+		try {
+			logger.debug("selectProduct...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_PRODUCT);
+			psmt.setString(1, prodNo);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setProdCate1(rs.getString(2));
+				vo.setProdCate2(rs.getString(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setPrice(rs.getInt(8)*count);
+				vo.setDiscount(rs.getString(9));
+				vo.setPoint(rs.getString(10));
+				vo.setDelivery(rs.getString(13));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				vo.setDuty(rs.getString(22));
+				vo.setReceipt(rs.getString(23));
+				vo.setBizType(rs.getString(24));
+				vo.setOrigin(rs.getString(25));
+				vo.setSellPrice(rs.getInt(33));
+				vo.setC1Name(rs.getString(34));
+				vo.setC2Name(rs.getString(35));
+				vo.setTotal(rs.getInt(33)*count+rs.getInt(13));
+				vo.setCount(count);
+				
+				products.add(vo);
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return products;
+	}
+	
+	//order 상품 계산
+	public ProductVO selectOrderTotal(String prodNo, int coun) {
+		
+		ProductVO vo = null;
+		
+		try {
+			logger.debug("selectOrderTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_ORDER_TOTAL);
+			psmt.setString(1, prodNo);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+				vo.setPrice(rs.getInt(1)*coun);
+				vo.setDiscount((rs.getInt(4)*coun)-(rs.getInt(1)*coun));
+				vo.setDelivery(rs.getInt(3));
+				vo.setTotal(rs.getInt(4)*coun+rs.getInt(3));
+				vo.setCount(coun);
 			}
 			
 			conn.close();
@@ -401,8 +490,8 @@ public class ProductDAO {
 		return vo;
 	}
 	
-	//장바구니 선택 항목 조회
-	public List<ProductVO> selectCart(String[] cartNo) {
+	//장바구니 선택 항목 조회 2개 이상
+	public List<ProductVO> selectCarts(String[] cartNo) {
 		
 		// 가져온 cartNo의 배열 길이를 구함
 		int length = cartNo.length;
@@ -465,6 +554,50 @@ public class ProductDAO {
 		return products;
 	}
 	
+	//장바구니 선택 항목 조회 1개
+	public ProductVO selectCart(String cartNo) {
+		
+		ProductVO vo = null;
+		
+		String sql = "SELECT a.*, b.`prodName`, b.`descript`, b.`thumb1` FROM `km_product_cart` AS a JOIN `km_product` ";
+			  sql += "AS b ON a.`prodNo` = b.`prodNo` WHERE `cartNo`=?";
+		
+		try {
+			logger.debug("selectCart...");
+			Connection conn = DBCP.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement(sql);
+			psmt.setString(1, cartNo);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new ProductVO();
+				vo.setCartNo(rs.getString(1));
+				vo.setUid(rs.getString(2));
+				vo.setProdNo(rs.getString(3));
+				vo.setCount(rs.getString(4));
+				vo.setPrice(rs.getString(5));
+				vo.setDiscount(rs.getString(6));
+				vo.setPoint(rs.getString(7));
+				vo.setDelivery(rs.getString(8));
+				vo.setTotal(rs.getInt(9));
+				vo.setProdName(rs.getString(11));
+				vo.setDescript(rs.getString(12));
+				vo.setThumb1(rs.getString(13));
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
 	//장바구니 선택 항복 계산
 	public ProductVO selectSumCart(String[] cartNo) {
 		int length = cartNo.length;
@@ -511,17 +644,70 @@ public class ProductDAO {
 	}
 	
 	//장바구니 최종 항목 order 등록
-	public void insertOrder() {
+	public CompleteVO insertOrder(CompleteVO vo) {
+		
+		CompleteVO order = null;
+		
 		try {
 			logger.debug("insertOrder...");
 			Connection conn = DBCP.getConnection();
 			
+			conn.setAutoCommit(false);
 			
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.INSERT_ORDER);
+			psmt.setInt(1, vo.getOrdNo());
+			psmt.setString(2, vo.getOrdUid());
+			psmt.setInt(3, vo.getOrdCount());
+			psmt.setInt(4, vo.getOrdPrice());
+			psmt.setInt(5, vo.getOrdDiscount());
+			psmt.setInt(6, vo.getOrdDelivery());
+			psmt.setInt(7, vo.getOrdSavePoint());
+			psmt.setInt(8, vo.getOrdUsedPoint());
+			psmt.setInt(9, vo.getOrdTotPrice());
+			psmt.setString(10, vo.getOrdRecipName());
+			psmt.setString(11, vo.getOrdRecipHp());
+			psmt.setString(12, vo.getOrdRecipZip());
+			psmt.setString(13, vo.getOrdRecipAddr1());
+			psmt.setString(14, vo.getOrdRecipAddr2());
+			psmt.setString(15, vo.getOrdPayment());
+			psmt.setString(16, vo.getOrdCompelete());
+			psmt.setString(17, vo.getOrdRecipReceiver());
+			
+			psmt.executeUpdate();
+			
+			PreparedStatement psmt2 = conn.prepareStatement(ProductSql.SELECT_ORDER);
+			psmt2.setInt(1, vo.getOrdNo());
+			ResultSet rs = psmt2.executeQuery();
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				order = new CompleteVO();
+				order.setOrdNo(rs.getString(1));
+				order.setOrdPrice(rs.getString(4));
+				order.setOrdDiscount(rs.getString(5));
+				order.setOrdDelivery(rs.getString(6));
+				order.setOrdTotPrice(rs.getString(9));
+				order.setOrdRecipName(rs.getString(10));
+				order.setOrdRecipHp(rs.getString(11));
+				order.setOrdRecipAddr1(rs.getString(13));
+				order.setOrdRecipAddr2(rs.getString(14));
+				order.setOrdPayment(rs.getString(15));
+				order.setOrdRecipReceiver(rs.getString(18));
+			}
+			
+			conn.close();
+			psmt.close();
+			psmt2.close();
+			rs.close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			
 		}
+		
+		return order;
+		
 	}
 	
 	public List<CategoryVO> selectCate(int cate) {

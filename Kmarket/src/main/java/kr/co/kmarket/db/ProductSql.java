@@ -104,4 +104,31 @@ public class ProductSql {
 													+"WHERE `uid`=?";
 	//장바구니 선택항목
 	public static final String SELECT_CART = "SELECT * FROM `km_product_cart` WHERE `cartNo`=?";
+	
+	//장바구니 선택항목 order 등록
+	public static final String INSERT_ORDER = "INSERT INTO `km_product_order` SET "
+			+ "`ordNo`=?, "
+			+ "`ordUid`=?, "
+			+ "`ordCount`=?, "
+			+ "`ordPrice`=?, "
+			+ "`ordDiscount`=?, "
+			+ "`ordDelivery`=?, "
+			+ "`savePoint`=?, "
+			+ "`usedPoint`=?, "
+			+ "`ordTotPrice`=?, "
+			+ "`recipName`=?, "
+			+ "`recipHp`=?, "
+			+ "`recipZip`=?, "
+			+ "`recipAddr1`=?, "
+			+ "`recipAddr2`=?, "
+			+ "`ordPayment`=?, "
+			+ "`ordComplete`=?, "
+			+ "`ordDate`=NOW(), "
+			+ "`recipReceiver`=?";
+	
+	//order 항목 조회
+	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordNo`=?";
+	
+	//order 항목 가격 계산
+	public static final String SELECT_ORDER_TOTAL = "SELECT `price`,`discount`,`delivery`,`sellPrice` FROM `km_product` WHERE `prodNo`=?";
 }

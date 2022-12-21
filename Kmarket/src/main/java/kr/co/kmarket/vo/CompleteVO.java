@@ -18,8 +18,14 @@ public class CompleteVO {
 	private String ordRecipAddr2;
 	private String ordPayment;
 	private String ordCompelete;
+	private String ordRecipReceiver;
 	
-	
+	public String getOrdRecipReceiver() {
+		return ordRecipReceiver;
+	}
+	public void setOrdRecipReceiver(String ordRecipReceiver) {
+		this.ordRecipReceiver = ordRecipReceiver;
+	}
 	public int getOrdCount() {
 		return ordCount;
 	}
