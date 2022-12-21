@@ -465,6 +465,7 @@ public class ProductDAO {
 		return products;
 	}
 	
+	//장바구니 선택 항복 계산
 	public ProductVO selectSumCart(String[] cartNo) {
 		int length = cartNo.length;
 		String sql = "SELECT COUNT(`count`), SUM(`price`), SUM(`price`)-SUM(`total`), SUM(`delivery`), SUM(`total`)+SUM(`delivery`), SUM(`point`) FROM `km_product_cart` ";
@@ -507,6 +508,20 @@ public class ProductDAO {
 		}
 		
 		return vo;
+	}
+	
+	//장바구니 최종 항목 order 등록
+	public void insertOrder() {
+		try {
+			logger.debug("insertOrder...");
+			Connection conn = DBCP.getConnection();
+			
+			
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			
+		}
 	}
 	
 	public List<CategoryVO> selectCate(int cate) {
