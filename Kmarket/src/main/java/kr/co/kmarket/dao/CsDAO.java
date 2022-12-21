@@ -382,9 +382,10 @@ public class CsDAO {
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.DELETE_ARTICLE);
+			
 			psmt.setString(1, no);
 			
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			
 			psmt.close();
 			con.close();
