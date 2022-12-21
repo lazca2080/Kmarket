@@ -22,22 +22,9 @@ $(function(){
 	            }
 	        }
 	    } */
-	
+
+  // 유형 선택에 따른 목록 출력 
   $('#selectBox').change(function(){
-	  
-	/* 해당 switch문 또는 아래 if문 선택 사용  
-	
-	let selectOption = $("#selectBox option:selected").val();
-	  console.log("selectOption: " + selectOption);
-	  
-	  switch(selectOption){
-	  	case 'option1' : location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=고객서비스'; break;
-	  	case 'option2' : location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=안전거래'; break;
-	  	case 'option3' : location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=위해상품'; break;
-	  	case 'option4' : location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=이벤트당첨'; break;
-	  	
-	  }  
-	*/  
 	  
  		let selectOption = $("#selectBox option:selected").val();
  		console.log("selectOption: " + selectOption);
@@ -56,7 +43,8 @@ $(function(){
 		 
   });
 		
-	// [관리] - [삭제] 버튼 클릭 시 ( 개별 게시글 삭제 )
+	    
+	// [관리] - [삭제] 버튼 클릭 시 ( 개별 게시글 삭제 : ajax 수정 예정 )
 	$('#remove').click(function(e){
 		let isDelete = confirm('정말 삭제하시겠습니까?');
 		
@@ -67,7 +55,7 @@ $(function(){
 		}
 	});    
 	
-    // [선택삭제] 버튼 클릭 시 ( 선택 게시글 삭제 ) -- 아직 다중 게시글 삭제 기능 구현 안 됨 
+    // [선택삭제] 버튼 클릭 시 ( 선택 게시글 단독 삭제 ) 
     $('.test').click(function(e){
 
 		let isDelete = confirm('정말 삭제하시겠습니까?');
@@ -124,8 +112,52 @@ $(function(){
 
     }); */
      
-   
-	
+   //  [선택삭제] 버튼 클릭 시 ( 선택 게시글 다중 삭제 ) 
+   $('.test2').click(function(){
+	   let isDelete = confirm('정말 삭제하시겠습니까?');
+	   
+	   if(isDelete){
+		   
+		   let chk_arr = [];
+		   
+		   $('input:checkbox[type=checkbox]:checked').each(function(){
+			   let chk = $(this).val();
+			   chk_arr.push(chk);
+			   
+			   console.log("chk_arr: " + chk_arr);
+			   
+			   $.ajax({
+				   url: '/Kmarket/admin/cs/notice/delete.do',
+				   method: 'post',
+				   data: {"chk_arr":chk_arr},
+				   dateType: 'json',
+				   success:function(date){
+					   console.log("data :"+ data.result);
+					   if(data.result == 1){
+					   		console.log("컨트롤러에서 받은 chk_arr: " + data);
+						 	alert('삭제되었습니다.');
+							checkbox.parent().parent().remove();
+							return true;
+						}else{
+							alert('실패하였습니다.');
+							return false;
+						}
+				   }
+			   });
+			   
+			   if(chk_arr == null){
+					alert('삭제할 게시물을 선택하십시오.')
+					return;
+				}
+			   
+			   
+			   
+		   });
+		   return true;
+	   }else{
+		   return false;
+	   }
+   });
 	    
 	
 });
@@ -149,9 +181,11 @@ $(function(){
                             <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="hidden" value="${cateType1}"/>
+                        <input type="text" value="${cate}"/>
+                        <input type="text" value="${cateType1}"/>
                         <input type="text" id="uid" value="${sessUser.uid}"/>
                         <input type="button" class="test" value="test button">
+                        <input type="button" class="test2" value="test button2">
                     </div>
                     <table id="tb">
                         <tr>

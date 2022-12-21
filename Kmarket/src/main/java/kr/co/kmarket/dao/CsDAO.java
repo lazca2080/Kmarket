@@ -125,7 +125,7 @@ public class CsDAO {
 		}
 		return total;
 	}
-	// 페이지 글 가져오기
+	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
 	public List<CsVO> selectArticles(String cate, String cateType1, int start){
 		List<CsVO> articles = new ArrayList<>();
 		try {
@@ -171,7 +171,92 @@ public class CsDAO {
 		}
 		return articles;
 	}
-
+	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
+	public List<CsVO> selectArticlesQna(String cate, String cateType1, int start){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("CsDAO-selectArticles...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			if(cateType1 == null) {
+				 psmt = con.prepareStatement(CsSql.SELECT_WHOLE_QNA_ARTICLES);
+				 psmt.setInt(1, start);
+			}else {
+				psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
+				psmt.setString(1, cate);
+				psmt.setString(2, cateType1);
+				psmt.setInt(3, start);
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+				
+				articles.add(article);
+				
+			}
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+	// 문의하기 - 유형별 글 가져오기 (cateType1)
+	public List<CsVO> selectArticlesCateType(String cateType1){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("CsDAO-selectArticles...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			psmt = con.prepareStatement(CsSql.SELECT_CATETYPE1);
+			psmt.setString(1, cateType1);
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+				
+				articles.add(article);
+				
+			}
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
+ 	
 	/*** cs::faq list ***/
 	// cate - cateType1
 	public List<CsVO> selectFaqArticles(String cate, String cateType1){
@@ -382,9 +467,10 @@ public class CsDAO {
 			
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.DELETE_ARTICLE);
+			
 			psmt.setString(1, no);
 			
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			
 			psmt.close();
 			con.close();
