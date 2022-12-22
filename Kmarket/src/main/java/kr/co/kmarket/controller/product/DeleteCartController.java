@@ -36,27 +36,35 @@ public class DeleteCartController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		// JSON.stringify(totalNo) 를 통해 받은 데이터는 "문자" 로 넘어옴
 		String cartNo = req.getParameter("totalNo");
 		
 		System.out.println("cartNo : "+cartNo);
 		
+		// 문자를 "," 나눈후 저장
 		String cart[] = cartNo.split(",");
 		
-		List<String> totalNo = new ArrayList<>(); 
-		
+		// 길이를 구한다.
 		int length = cart.length;
 		
+		// 값을 저장할 List를 생성한다.
+		List<String> totalNo = new ArrayList<>(); 
+		
+		// cart[] 길이만큼 반복
 		for(int i = 0; i<length; i++) {
-			System.out.println("cart : "+cart[i].replaceAll("[^\\d]", ""));
+			// 이때 cart[]에는 ex) "[18", "17]" 이렇게 저장되어있다. sysout 참고
+			System.out.println("cart : "+cart[i]);
+			
+			// 숫자를 제외한 문자를 없애고 저장
 			totalNo.add(cart[i].replaceAll("[^\\d]", ""));
 		}
 		
 		System.out.println("list : "+totalNo.get(0));
 		
-		//int result = service.deleteCart(totalNo);
+		int result = service.deleteCart(totalNo);
 		
 		JsonObject json = new JsonObject();
-		//json.addProperty("result", result);
+		json.addProperty("result", result);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());

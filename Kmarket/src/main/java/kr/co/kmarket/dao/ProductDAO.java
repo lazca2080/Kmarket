@@ -436,10 +436,12 @@ public class ProductDAO {
 	public int deleteCart(List<String> totalNo) {
 		int result = 0;
 		
+		// List의 크기 구하기
 		int length = totalNo.size();
 		
 		String sql = "DELETE FROM `km_product_cart` WHERE `cartNo` = ?";
 		
+		// List의 크기에 맞춰서 조건문 추가
 		for(int i = 1; i<length; i++) {
 			sql += " OR `cartNo`=?";
 		}
@@ -450,10 +452,16 @@ public class ProductDAO {
 			logger.debug("deleteCart...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt =conn.prepareStatement(sql);
+			// List의 크기에 맞춰서 setString 추가
 			for(int k = 0; k<length; k++) {
+				// setString은 (1, xx)이고 List의 값은 0부터 시작
+				// 따라서 k = 0부터 시작 (k+1, totalNo.get(k)) 로 설정
 				psmt.setString(k+1, totalNo.get(k));
 			}
 			
+			// !중요! 이때 result는 sql 실행 횟수를 가져옴
+			// List의 크기가 3이라면 3번 지워서 result = 3이 나옴.
+			// 더 자세한건 Cart.js 참조
 			result = psmt.executeUpdate();
 			
 			psmt.close();
