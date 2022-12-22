@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.sf.json.JSONArray;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -67,8 +71,8 @@ public enum ProductService {
 	}
 	
 	//장바구니 삭제
-	public int deleteCart(String cartNo) {
-			return dao.deleteCart(cartNo);
+	public int deleteCart(List<String> totalNo) {
+		return dao.deleteCart(totalNo);
 	}
 	
 	//장바구니 상품 조회 2개 이상

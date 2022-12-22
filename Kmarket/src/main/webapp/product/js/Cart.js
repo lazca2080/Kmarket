@@ -1,4 +1,12 @@
 $(function(){
+		let Uid = $('input[class=uid]').val();
+		
+		if(Uid == ''){
+			alert('먼저 로그인 하세요');
+			location.href = "/Kmarket/member/login.do";
+			return false;
+		}
+	
 		let count = 0;
 		let costPrice = 0;
 		let totalSalePrice = 0;
@@ -13,9 +21,6 @@ $(function(){
 		$('.del').click(function() {
 			
 		let cartNo = $('input:checkbox:checked').val();
-		let checkbox = $('input:checkbox:checked');
-		
-		console.log("cartNo : "+cartNo);
 		
 		if(cartNo == null){
 			alert('선택된 상품이 없습니다.');
@@ -25,10 +30,11 @@ $(function(){
 		$.ajax({
 			url : '/Kmarket/product/deleteCart.do',
 			method : 'get',
-			data : {"cartNo":cartNo},
+			data : {"totalNo": JSON.stringify(totalNo)},
 			dataType : 'json',
-			success : function(data) {
-				console.log("data : "+data.result);
+			success : function() {
+				
+				/*
 				if(data.result == 1){
 					alert('삭제되었습니다.');
 					checkbox.parent().parent().remove();
@@ -50,8 +56,6 @@ $(function(){
 					let total = $(this).next().next().next().next().next().val();
 					totalPrice -= parseInt(total);
 					
-					
-					console.log(costPrice);
 					$('.productCount_span').text(count.toLocaleString());
 					$('.costPrice_span').text(costPrice*count);
 					$('.totalDelivery_span').text(totalDelivery);
@@ -64,14 +68,11 @@ $(function(){
 					alert('실패하였습니다.');
 					return false;
 				}
+				*/
 			}
-			
 		});
 		});
 			
-		//alert('삭제하시겠습니까?');
-		
-	
 		// 전체 선택 체크박스
 		$(document).on('click','.chk',function(){
 			if($('input[name=all]').is(':checked')){
@@ -100,7 +101,6 @@ $(function(){
 						$('.totalPrice_span').text(totalPrice);
 						$('.totalSale_span').text(totalSalePrice);
 					}
-					
 				});
 				
 			}else{
@@ -191,23 +191,31 @@ $(function(){
 			}
 		});
 		
-		/*
-		$('.cart > form').submit(function(e){
-			e.preventDefault();
+		$('.cart > form').submit(function(){
 			
-			console.log(totalNo);
+			// 로그인이 풀렸을 경우
+			if(Uid == ''){
+				alert('다시 로그인해주세요.');
+				location.href = "/Kmarket/member/login.do";
+				return false;
+			}
 			
-			$.ajax({
-				url:'/Kmarket/product/order.do',
-				method:'post',
-				traditional: true,
-				data: JSON.stringify(totalNo),
-				dataType:'json',
-				success: function(data){
-					
-				}
-			});
+			let check = totalNo.length;
+			
+			console.log(check);
+			
+			if(totalNo == 0){
+				alert('상품을 선택하세요');
+				return false;
+			}
+			
+			let result = confirm('선택하신 상품으로 주문 하시겠습니까?');
+			
+			if(result){
+				return true;
+			}else{
+				return false;
+			}
 			
 		});
-		*/		
 })
