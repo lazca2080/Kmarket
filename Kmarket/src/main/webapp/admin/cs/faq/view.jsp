@@ -16,19 +16,19 @@
 							    <tbody>
 							        <tr>
 							            <td>
-							            	<h2>유형</h2>
+							            	유형
 							            </td>
 							            <td>${vo.cateType1} - ${vo.cateType2}</td>
 							        </tr>
 							        <tr>
 							            <td>
-							            <h2>제목</h2>
+							           		제목
 							            </td>
 							            <td>${vo.title} // no: ${no}</td>
 							        </tr>
 							        <tr>
 							            <td>
-							            	<h2>내용</h2>
+							            	내용
 							            </td>
 							            <td>${vo.content}</td>
 							        </tr>
@@ -36,7 +36,7 @@
 							</table>
 							 <div>
 							   <a href="/Kmarket/admin/cs/faq/delete.do?no=${no}" class="btnDelete" id="remove">삭제</a>
-	                           <a href="/Kmarket/admin/cs/faq/modify.do?cate=notice&cateType1=${vo.cateType1}&cateType2=${vo.cateType2}&no=${no}" class="btnModify">수정</a>
+	                           <a href="/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1=${vo.cateType1}&cateType2=${vo.cateType2}&no=${no}" class="btnModify">수정</a>
 	                           <a href="/Kmarket/admin/cs/faq/list.do" class="btnList">목록</a>
 							</div>
 						</article>

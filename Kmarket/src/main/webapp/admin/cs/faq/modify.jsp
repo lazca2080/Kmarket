@@ -103,32 +103,6 @@
 			
 		});
 		
-		$('#cs > .faq > .write > article > form').submit(function() {
-			
-			let cateType1 = $('#selectBox option:selected').val();
-			let cateType2 = $('#selectBox2 option:selected').val();
-			console.log("cateType1: " + cateType1);
-			console.log("cateType2: " + cateType2);
-			
-			if(cateType1 == 0 || cateType2 == 0){
-				alert('카테고리를 선택하세요');
-				return false;
-			}
-			console.log("카테 오류");
-			
-			
-			// 로그인이 풀렸을 경우
-			if(Uid == ''){
-				alert('다시 로그인해주세요.');
-				location.href = "/Kmarket/member/login.do";
-				return false;
-			}
-			
-			
-			
-		});
-		
-		
 	});
 
 </script>
@@ -142,15 +116,16 @@
 	                        <strong>자주묻는질문</strong>
 	                    </p>
 	                </nav>
-	                <section class="write">
+	                <section class="modify">
 						<article>
-	                        <form action="/Kmarket/admin/cs/faq/write.do" method="post">
+	                        <form action="/Kmarket/admin/cs/faq/modify.do?cate=faq" method="post">
 	                        <input type="hidden" name="uid" value="${sessUser.uid}">
 	                        <input type="hidden" name="cate" value="${cate}">
+	                        <input type="hidden" name="no" value="${no}">
 	                            <table>
 	                                <tbody>
 	                                    <tr>
-	                                        <td>문의유형</td>
+	                                        <td>유형</td>
 	                                        <td>
 	                                            <select name="cateType1" id="selectBox">
 	                                                <option value="0">1차 선택</option>
@@ -167,22 +142,22 @@
 	                                        </td>
 	                                    </tr>
 	                                    <tr>
-	                                        <td>문의제목</td>
+	                                        <td>제목</td>
 	                                        <td>
-	                                            <input type="text" name="title" placeholder="제목을 입력하세요.">
+	                                            <input type="text" name="title" value="${vo.title}">
 	                                        </td>
 	                                    </tr>
 	                                    <tr>
-	                                        <td>문의내용</td>
+	                                        <td>내용</td>
 	                                        <td>
-	                                            <textarea name="content" placeholder="내용을 입력하세요."></textarea>
+	                                            <textarea name="content">${vo.content}</textarea>
 	                                        </td>
 	                                    </tr>
 	                                </tbody>
 	                            </table>
 	                             <div>
 	                                <a href="/Kmarket/admin/cs/faq/list.do" class="btnList">취소하기</a>
-	                                <input type="submit" class="btnSubmit" value="등록하기">
+	                                <input type="submit" class="btnModify" value="등록하기">
 	                            </div>
 	                        </form>
 	                    </article>

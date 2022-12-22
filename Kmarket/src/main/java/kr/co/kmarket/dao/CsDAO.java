@@ -72,6 +72,8 @@ public class CsDAO {
 			PreparedStatement psmt = con.prepareStatement(CsSql.INSERT_ARTICLE);
 			Statement stmt = con.createStatement();
 			
+			logger.debug("cate : "+article.getCate());
+			
 			psmt.setString(1, article.getCate());
 			psmt.setString(2, article.getCateType1());
 			psmt.setString(3, article.getCateType2());
@@ -389,7 +391,7 @@ public class CsDAO {
 	}
 	
 	// 자주묻는질문 - 유형별 글 가져오기 (cateType2)
-			public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2){
+			public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
 				List<CsVO> articles = new ArrayList<>();
 				try {
 					logger.info("selectArticlesFaqCateType2");
@@ -400,6 +402,7 @@ public class CsDAO {
 					psmt = con.prepareStatement(CsSql.SELECT_FAQ_CATETYPE2);
 					psmt.setString(1, cateType1);
 					psmt.setString(2, cateType2);
+					psmt.setInt(3, start);
 					
 					ResultSet rs = psmt.executeQuery();
 					while(rs.next()) {

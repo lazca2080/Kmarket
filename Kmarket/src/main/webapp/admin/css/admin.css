@@ -1099,8 +1099,9 @@ button[type=submit] {
 /*faq 공통*/
 #cs > .faq {}
 #cs > .faq > nav {
+	position: relative;
     width: 100%;
-    height: 60px;
+    height: 50px;
     border-bottom: 1px solid #e9e9e9;
     box-sizing: border-box;
 }
@@ -1112,7 +1113,7 @@ button[type=submit] {
 #cs > .faq > nav p {
     float: left;
     margin-top: 16px;
-    font-size: 16px;
+    font-size: 13px;
 }
 #cs > .faq > nav p > span {
     font-size: 12px;
@@ -1159,7 +1160,7 @@ button[type=submit] {
     text-decoration: underline;
 }
 #cs > .faq > section > article {
-    float: right;
+ 
     width: 980px;
     min-height: 600px;
     padding: 26px;
@@ -1168,8 +1169,21 @@ button[type=submit] {
 
 /*faq - 글보기*/
 #cs > .faq > nav > h3 {
-	font-size: 20px;
+	position: absolute;
+    left: 0px;
+    bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
 	
+}
+#cs > .faq > nav > p{
+	position: absolute;
+    right: 0;
+    bottom: 10px;
+}
+
+#cs > .faq > nav > p > strong {
+	font-weight: bold; 
 }
 
 #cs > .faq > .view {}
@@ -1206,10 +1220,10 @@ button[type=submit] {
 	position: absolute;
     left: 380px;
 }
-#cs > .faq > .view > article > form > table {
+#cs > .faq > .view > article > table {
 	border-top: 2px solid #111;
 }
-#cs > .faq > .view > article > form > table tr > td:nth-child(1) {
+#cs > .faq > .view > article > table tr > td:nth-child(1) {
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -1217,16 +1231,16 @@ button[type=submit] {
     padding-left: 16px;
 }
  
-#cs > .faq > .view > article > form > table tr > td:nth-child(2) > h2 {
+#cs > .faq > .view > article > table tr > td:nth-child(2) {
 	font-size: 15px;
 }
 #cs > .faq > .view > article > form > table tr > td:nth-child(2) > p {
 	font-size: 15px;
 }
-#cs > .faq > .view > article > form {
+#cs > .faq > .view > article  {
 	position: relative;
 }
-#cs > .faq > .view > article > form > div {
+#cs > .faq > .view > article >  div {
 	float: right;
 	position: absolute;
     right: 0px;
@@ -1268,6 +1282,128 @@ button[type=submit] {
     text-decoration: none;
     box-sizing: border-box;
 }
+
+/*** faq 글 쓰기 ***/
+#cs > .faq > .write > article > form > table {
+	border-top: 2px solid #111;
+}
+#cs > .faq > .write > article > form > table tr > td:nth-child(1) {
+	font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 0;
+    padding-left: 16px;
+}
+ 
+#cs > .faq > .write > article > form > table tr > td:nth-child(2) > h2 {
+	font-size: 15px;
+}
+#cs > .faq > .write > article > form > table tr > td:nth-child(2) > p {
+	font-size: 15px;
+}
+#cs > .faq > .write > article > form {
+	position: relative;
+}
+#cs > .faq > .write > article > form > div {
+	float: right;
+	position: absolute;
+	right: 34%;
+    padding-top: 40px;
+}
+#cs > .faq > .write > article > form > table input {
+    width: 600px;
+}
+#cs > .faq > .write > article > form > table textarea {
+    width: 600px;
+    height: 300px;;
+}
+#cs > .faq > .write .btnList {
+	background-color: #dcdcdc;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #111;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+#cs > .faq > .write .btnSubmit {
+	background-color: #9BC9F0;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #111;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+    width: 112.43px;
+}
+
+/*** faq 수정 ***/
+
+#cs > .faq > .modify > article > form > table {
+	border-top: 2px solid #111;
+}
+#cs > .faq > .modify > article > form > table tr > td:nth-child(1) {
+	font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 0;
+    padding-left: 16px;
+}
+ 
+#cs > .faq > .modify > article > form > table tr > td:nth-child(2) > h2 {
+	font-size: 15px;
+}
+#cs > .faq > .modify > article > form > table tr > td:nth-child(2) > p {
+	font-size: 15px;
+}
+#cs > .faq > .modify > article > form {
+	position: relative;
+}
+#cs > .faq > .modify > article > form > div {
+	float: right;
+	position: absolute;
+	right: 34%;
+    padding-top: 40px;
+}
+#cs > .faq > .modify > article > form > table input {
+    width: 600px;
+}
+#cs > .faq > .modify > article > form > table textarea {
+    width: 600px;
+    height: 300px;;
+}
+#cs > .faq > .modify .btnList {
+	background-color: #dcdcdc;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #111;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+#cs > .faq > .modify .btnModify {
+	background-color: #9BC9F0;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #111;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 8px 31px;
+    text-decoration: none;
+    box-sizing: border-box;
+    width: 112.43px;
+}
+
 
 /*qna - 공통*/
  #cs > .qna {}
@@ -1462,3 +1598,4 @@ button[type=submit] {
     padding: 10px;
     box-sizing: border-box;
 }
+

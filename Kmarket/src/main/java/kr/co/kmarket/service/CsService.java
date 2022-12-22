@@ -117,8 +117,8 @@ public enum CsService {
 	}
 	
 	// 문의하기 - 유형별 글 가져오기 (cateType2)
-		public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2){
-			return dao.selectArticlesFaqCateType2(cateType1, cateType2);
+		public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
+			return dao.selectArticlesFaqCateType2(cateType1, cateType2, start);
 		}
 		
 		
