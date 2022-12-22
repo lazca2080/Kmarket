@@ -49,14 +49,14 @@ $(function(){
 	                                    <tr>
 	                                        <td>유형</td>
 	                                        <td>
-	                                            <select name="type">
+	                                            <select name="type" required>
 	                                            	<option>1차 유형 선택</option>
 	                                            	<option>고객서비스</option>
 	                                            	<option>안전거래</option>
 	                                            	<option>위해상품</option>
 	                                            	<option>이벤트당첨</option>
 	                                            </select>
-    											<select name="cateType2">
+    											<select name="cateType2" required>
     												<option>2차 유형 선택</option>
     												<option>공지</option>
     												<option>안내</option>

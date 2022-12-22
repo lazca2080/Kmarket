@@ -164,8 +164,10 @@ public enum CsService {
 		return dao.deleteArticle(no);
 	}
 	
-	
-	
+	/*** 글 다중 삭제 ***/
+	public int deleteArticles(List<String> ArticleArr) {
+		return dao.deleteArticles(ArticleArr);
+	}
 	
 	
 	

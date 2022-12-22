@@ -2,6 +2,8 @@ package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,12 +55,35 @@ public class DeleteController extends HttpServlet{
 		
 		logger.info("doPost");
 		
-		String[] arrChk = req.getParameterValues("chk_arr");
-		int size = arrChk.length;
+		//JSON.stringify를 통해 받은 데이터 (문자 형태)
+		String chk = req.getParameter("chk_arr");
+		logger.info("chk: " + chk);
 		
-		for(int i=0; i<size; i++) {
-			System.out.println("JSP에서 받은 배열: " + arrChk);
+		// 문자열을 ,로 나눈 후 저장
+		String arrChks[] = chk.split(",");
+		
+		// 길이 구하기
+		int length = arrChks.length;
+		
+		// 한 번에 저장할 List 생성
+		List<String> chk_arr = new ArrayList<>();
+
+		for (int i=0; i<length; i++) {
+			System.out.println("arrChks: "+arrChks[i]);	//"[18","17]"
+			chk_arr.add(arrChks[i].replaceAll("[^\\d]", ""));						// 숫자를 제외한 문자를 없앤 후 저장
 		}
+		
+		System.out.println("list: "+chk_arr.get(0));
+		//진행 중
+		
+		
+//		int size = arrChk.length;
+//		
+//		for(int i=0; i<size; i++) {
+//			System.out.println("JSP에서 받은 배열: " + arrChk);
+//		}
+		
+		
 		
 		
 	}

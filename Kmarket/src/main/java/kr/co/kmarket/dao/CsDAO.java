@@ -673,4 +673,43 @@ public class CsDAO {
 		return result;
 	}
 	
+	/*** 글 다중 삭제 ***/
+	public int deleteArticles(List<String> ArticleArr) {
+		int result = 0;
+		int length = ArticleArr.size();
+		String sql = "DELETE FROM `cs_article` WHERE `no`=?";
+		
+		// List의 크기만큼 조건문 실행
+		for(int i=1; i<length; i++) {
+			sql += " OR `no`=?";
+		}
+		logger.info(sql);
+		
+		try {
+			logger.info("deleteArticles");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(sql);
+			// List의 크기만큼 setString 
+			for(int k=0; k<length; k++) {
+				psmt.setString(k+1, ArticleArr.get(k));
+			}
+			// result는 sql 실행 횟수를 가지고 온다
+			result = psmt.executeUpdate();
+			
+			psmt.close();
+			con.close();
+			
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.info("result: "+result);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 }
