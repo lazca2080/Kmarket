@@ -171,7 +171,7 @@ public class CsDAO {
 		}
 		return articles;
 	}
-	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
+	// 문의하기 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
 	public List<CsVO> selectArticlesQna(String cate, String cateType1, int start){
 		List<CsVO> articles = new ArrayList<>();
 		try {
@@ -204,6 +204,7 @@ public class CsDAO {
 				article.setRegip(rs.getString(9));
 				article.setRdate(rs.getString(10));
 				article.setHit(rs.getString(11));
+				article.setReplyContent(rs.getString(12));
 				
 				articles.add(article);
 				
@@ -425,6 +426,47 @@ public class CsDAO {
 			rs.close();
 			psmt.close();
 			psmt2.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	
+	}
+	/*** admin - cs - qna - reply ***/
+	public CsVO selectArticleQNA(String no) {
+		CsVO vo = null;
+		
+		try {
+			logger.info("selectArticle");
+			
+			Connection con = DBCP.getConnection();
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_ARTICLE);
+			
+			psmt.setString(1, no);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new CsVO();
+				vo.setNo(rs.getInt(1));
+				vo.setParent(rs.getInt(2));
+				vo.setCate(rs.getString(3));
+				vo.setCateType1(rs.getString(4));
+				vo.setCateType2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(7));
+				vo.setUid(rs.getString(8));
+				vo.setRegip(rs.getString(9));
+				vo.setRdate(rs.getString(10));
+				vo.setHit(rs.getString(11));
+				vo.setReplyContent(rs.getString(12));
+			}
+			
+			rs.close();
+			psmt.close();
 			con.close();
 			
 		} catch (Exception e) {

@@ -34,13 +34,15 @@ public class ReplyController extends HttpServlet{
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		String no = req.getParameter("no");
+		String replyContent = req.getParameter("replyContent");
 		
-		CsVO vo = service.selectArticle(no);
+		CsVO vo = service.selectArticleQNA(no);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);
 		req.setAttribute("no", no);
+		req.setAttribute("replyContent", replyContent);
 		req.setAttribute("vo", vo);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/qna/reply.jsp");

@@ -30,6 +30,9 @@ public class DeleteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doGet");
+		
 		String no = req.getParameter("no");
 		
 		logger.debug("no : " +no);
@@ -43,10 +46,14 @@ public class DeleteController extends HttpServlet{
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
+		
+		//resp.sendRedirect("/Kmarket/admin/cs/qna/list.do");
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doPost");
 		
 	}
 }

@@ -13,7 +13,36 @@
 			alert('답변이 작성되었습니다.');
 		});
 		
-		
+		// 글 삭제하기
+		$('.btnDelete').click(function(){
+			
+			let no = $('input[name=no]').val();
+			console.log("no: "+no);
+			
+			let rm = confirm('문의글을 삭제하시겠습니까?');
+			
+			if(rm){
+				$.ajax({
+					url: '/Kmarket/admin/cs/qna/delete.do',
+					method: 'get',
+					data : {"no":no},
+					dataType : 'json',
+					success:function(data){
+						console.log("data : "+data.result);
+						if(data.result == 1){
+							alert('삭제되었습니다.');
+							location.replace('/Kmarket/admin/cs/qna/list.do');
+							return true;
+						}else{
+							alert('실패하였습니다.');
+							return false;
+						}
+					}
+				});
+			}else{
+				return false;
+			}
+		});
 		
 		
 	});

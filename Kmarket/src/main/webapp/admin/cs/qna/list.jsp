@@ -34,7 +34,7 @@
 						return false;
 					}
 				}
-			});
+			}); 
 			
 		});
 		
@@ -154,6 +154,7 @@
 						let rows = "";
 						console.log(data.length);
 						
+						//for문 조건 수정해야 함 (출력횟수 오류)
 						for(let vo of data){
 							
 							/* console.log("here2"); */
@@ -183,7 +184,7 @@
 			});
 		});
 			
-			
+		
 		
 	
 });
@@ -232,13 +233,22 @@
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
-	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
+	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no} // re: ${article.replyContent}</a></td>
 	                            <td>${article.uid.substring(0,3)}**</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 					                <fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 	                            </td>
-	                            <td>기능구현중</td>
+	                            <td>
+	                            	<c:choose>
+	                            		<c:when test="${article.replyContent ne null}">
+	                            			답변완료
+	                            		</c:when>
+	                            		<c:otherwise>
+	                            			검토중
+	                            		</c:otherwise>
+	                            	</c:choose>
+	                            </td>
                         	</tr>
 						</c:forEach>
                         
