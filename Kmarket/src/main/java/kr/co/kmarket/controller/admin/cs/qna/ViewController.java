@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/admin/cs/qna/view.do")
 public class ViewController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+
 	
 	@Override
 	public void init() throws ServletException {
@@ -20,6 +22,7 @@ public class ViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);
