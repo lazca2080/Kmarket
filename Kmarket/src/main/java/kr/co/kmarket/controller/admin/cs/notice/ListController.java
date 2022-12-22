@@ -37,6 +37,7 @@ public class ListController extends HttpServlet{
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
 		
+		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		// 전체 게시물 개수

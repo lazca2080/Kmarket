@@ -2,7 +2,7 @@
 <jsp:include page="/admin/_header.jsp"></jsp:include>
 <!DOCTYPE html>
             <section id="cs">
-            	<div class="qna">
+            	<div class="faq">
 	                <nav>
 	                    <h3>자주묻는질문 보기</h3>
 	                    <p>
@@ -10,26 +10,34 @@
 	                        <strong>자주묻는질문</strong>
 	                    </p>
 	                </nav>
-	                <section class="write">
+	                <section class="view">
 						<article>
 							<table>
 							    <tbody>
 							        <tr>
-							            <td>유형</td>
-							            <td>회원 - 가입</td>
+							            <td>
+							            	<h2>유형</h2>
+							            </td>
+							            <td>${vo.cateType1} - ${vo.cateType2}</td>
 							        </tr>
 							        <tr>
-							            <td>제목</td>
-							            <td>개인 회원과 법인 회원에 차이가 있나요?</td>
+							            <td>
+							            <h2>제목</h2>
+							            </td>
+							            <td>${vo.title} // no: ${no}</td>
 							        </tr>
 							        <tr>
-							            <td>내용</td>
-							            <td>개인회원은 본인인증, 법인회원은 사업자 등록번호를 기준으로 사업자 인증 후 가입 가능합니다.개인회원은 본인인증, 법인회원은 사업자 등록번호를 기준으로 사업자 인증 후 가입 가능합니다.개인회원은 본인인증, 법인회원은 사업자 등록번호를 기준으로 사업자 인증 후 가입 가능합니다.style 수정하기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</td>
+							            <td>
+							            	<h2>내용</h2>
+							            </td>
+							            <td>${vo.content}</td>
 							        </tr>
 							    </tbody>
 							</table>
 							 <div>
-							    <a href="./list.html" class="btnList">취소하기</a>
+							   <a href="/Kmarket/admin/cs/faq/delete.do?no=${no}" class="btnDelete" id="remove">삭제</a>
+	                           <a href="/Kmarket/admin/cs/faq/modify.do?cate=notice&cateType1=${vo.cateType1}&cateType2=${vo.cateType2}&no=${no}" class="btnModify">수정</a>
+	                           <a href="/Kmarket/admin/cs/faq/list.do" class="btnList">목록</a>
 							</div>
 						</article>
 	                </section>

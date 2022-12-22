@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
 
@@ -18,6 +21,7 @@ public class ListController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.INSTANCE;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
@@ -30,6 +34,7 @@ public class ListController extends HttpServlet{
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
+		
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);

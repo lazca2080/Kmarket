@@ -36,6 +36,8 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		
 		logger.info("cate : " +cate);
+		logger.info("cateType1 : "+cateType1);
+		logger.info("cateType2 : "+cateType2);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
