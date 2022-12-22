@@ -22,6 +22,7 @@ public class ProductDAO {
 	
 	org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	// 상품 입력
 	public int insertProduct(ProductVO vo) {
 		
 		int prodNo = 0;
@@ -79,7 +80,7 @@ public class ProductDAO {
 		
 	}
 
-	//상품 항목 리스트 조회
+	//상품 항목 리스트 조회 및 조건에 따른 리스트 조회
 	public List<ProductVO> selectProducts(int limiteStart, String cate1, String cate2, String sort) {
 		
 		List<ProductVO> products = new ArrayList<>();
@@ -712,7 +713,7 @@ public class ProductDAO {
 	}
 	
 	//장바구니 선택항목 order_item insert
-	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
+	public void insertSelectDeleteCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
 		
 		String sql = "INSERT INTO `km_product_order_item` (`prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total`, `orderNo`) ";
 			  sql += "SELECT `prodNo`, `count`, `price`, `discount`, `point` , `delivery`, `total`, ? FROM `km_product_cart` ";
@@ -744,7 +745,11 @@ public class ProductDAO {
 			psmt3.setInt(1, Integer.parseInt(currentPoint)-Integer.parseInt(ordusedPoint)+Integer.parseInt(ordsavePoint));
 			psmt3.setString(2, uid);
 			
+			PreparedStatement psmt4 = conn.prepareStatement(ProductSql.DELETE_CART);
+			psmt4.setString(1, uid);
+			
 			psmt.executeUpdate();
+			psmt4.executeUpdate();
 			psmt2.executeUpdate();
 			psmt3.executeUpdate();
 			conn.commit();
@@ -753,6 +758,7 @@ public class ProductDAO {
 			psmt.close();
 			psmt2.close();
 			psmt3.close();
+			psmt4.close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());

@@ -91,7 +91,7 @@ public class CompleteController extends HttpServlet{
 		
 		String[] cartNo = (String[]) session.getAttribute("cartNo");
 		
-		service.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
+		service.insertSelectDeleteCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
 		
 		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
