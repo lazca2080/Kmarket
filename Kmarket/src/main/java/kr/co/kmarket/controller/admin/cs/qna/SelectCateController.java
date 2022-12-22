@@ -39,6 +39,7 @@ public class SelectCateController extends HttpServlet {
 		
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
+		String replyContent = req.getParameter("replyContent");
 		
 		logger.debug("cateType1 : " + cateType1);
 		logger.debug("cateType2 : " + cateType2);

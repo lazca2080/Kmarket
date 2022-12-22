@@ -332,6 +332,7 @@ public class CsDAO {
 					article.setRegip(rs.getString(9));
 					article.setRdate(rs.getString(10));
 					article.setHit(rs.getString(11));
+					article.setReplyContent(rs.getString(12));
 					
 					articles.add(article);
 					
