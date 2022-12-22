@@ -52,6 +52,20 @@
                         		${vo.content}
                         	</p>
                         </div>
+                        <c:choose>
+                        	<c:when test="${vo.replyContent ne null}">
+	                        	<div class="replyContent">
+		                        	<h2>
+		                        		[답변] ${vo.title}
+		                        	</h2>
+		                        	<p>
+		                        		${vo.replyContent}
+		                        	</p>
+	                       		</div>
+	                        </c:when>
+	                        <c:otherwise>
+	                        </c:otherwise>
+                        </c:choose>
                         <a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${vo.cateType1}" class="btnList">목록보기</a>
                     </article>
                 </section>

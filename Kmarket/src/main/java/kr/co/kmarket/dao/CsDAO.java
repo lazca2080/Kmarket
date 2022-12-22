@@ -158,6 +158,7 @@ public class CsDAO {
 				article.setRegip(rs.getString(9));
 				article.setRdate(rs.getString(10));
 				article.setHit(rs.getString(11));
+				article.setReplyContent(rs.getString(12));
 				
 				articles.add(article);
 				
@@ -461,6 +462,7 @@ public class CsDAO {
 				vo.setUid(rs.getString(8));
 				vo.setRegip(rs.getString(9));
 				vo.setRdate(rs.getString(10));
+				vo.setReplyContent(rs.getString(12));
 			}
 			
 			rs.close();

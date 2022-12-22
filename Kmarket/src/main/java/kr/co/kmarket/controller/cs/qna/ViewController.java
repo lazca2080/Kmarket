@@ -31,24 +31,21 @@ public class ViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("cs::qna-ViewController doGet...");
+		logger.info("doGet...");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		String no = req.getParameter("no");
-		
-		logger.info("데이터 수신 완료...");
-		logger.info("데이터 service 보내기 시작...");
+		String replyContent = req.getParameter("replyContent");
 		
 		CsVO vo = service.selectArticle(no);
 		
-		logger.info("데이터 service 보내기 완료...");
-
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);
 		req.setAttribute("vo", vo);
+		req.setAttribute("replyContent", replyContent);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);

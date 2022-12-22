@@ -52,7 +52,16 @@
                             			<td>
                             				<a href="/Kmarket/cs/qna/view.do?cate=qna&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a>
                             			</td>
-                            			<td>검토중 or 답변완료</td>
+                            			<td>
+											<c:choose>
+			                            		<c:when test="${article.replyContent ne null}">
+			                            			<p style="color: #35A2EB;">답변완료</p>
+			                            		</c:when>
+			                            		<c:otherwise>
+			                            			검토중
+			                            		</c:otherwise>
+			                            	</c:choose>
+										</td>
                             			<td>${article.uid.substring(0,3)}**</td>
                                     	<td>
                                     		<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
