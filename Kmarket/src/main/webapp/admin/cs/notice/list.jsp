@@ -56,7 +56,7 @@ $(function(){
 	});    
 	
     // [선택삭제] 버튼 클릭 시 ( 선택 게시글 단독 삭제 ) 
-    $('.test').click(function(e){
+    $('.delete').click(function(e){
 
 		let isDelete = confirm('정말 삭제하시겠습니까?');
 		
@@ -112,48 +112,49 @@ $(function(){
 
     }); */
      
+    
+    
    //  [선택삭제] 버튼 클릭 시 ( 선택 게시글 다중 삭제 ) 
+    
    $('.test2').click(function(){
-	   let isDelete = confirm('정말 삭제하시겠습니까?');
 	   
+	   let chk_arr = [];	
+	   
+	   let chk = $('input:checkbox:checked').val();
+	   let checkbox = $('input:checkbox:checked');
+	   if(chk == null){
+		   alert('삭제할 게시글을 선택하십시오.');
+		   return;
+	   }
+	   
+	   let isDelete = confirm('정말 삭제하시겠습니까?');
 	   if(isDelete){
 		   
-		   let chk_arr = [];
+		   $.ajax({
+			   url: '/Kmarket/admin/cs/notice/delete.do',
+			   method: 'post',
+			   data: {"chk_arr" : JSON.stringify(chk_arr)},
+			   dateType: 'json',
+			   success:function(date){
+				   /* console.log("data :"+ data.result);
+				   if(data.result == 1){
+				   		console.log("컨트롤러에서 받은 chk_arr: " + data);
+					 	alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false; 
+					} */
+			   }
+		   }); 
 		   
-		   $('input:checkbox[type=checkbox]:checked').each(function(){
-			   let chk = $(this).val();
-			   chk_arr.push(chk);
-			   
-			   console.log("chk_arr: " + chk_arr);
-			   
-			   $.ajax({
-				   url: '/Kmarket/admin/cs/notice/delete.do',
-				   method: 'post',
-				   data: {"chk_arr":chk_arr},
-				   dateType: 'json',
-				   success:function(date){
-					   console.log("data :"+ data.result);
-					   if(data.result == 1){
-					   		console.log("컨트롤러에서 받은 chk_arr: " + data);
-						 	alert('삭제되었습니다.');
-							checkbox.parent().parent().remove();
-							return true;
-						}else{
-							alert('실패하였습니다.');
-							return false;
-						}
-				   }
-			   });
-			   
-			   if(chk_arr == null){
-					alert('삭제할 게시물을 선택하십시오.')
-					return;
-				}
-			   
-			   
-			   
-		   });
-		   return true;
+		   
+		   
+		   
+		   
+	  
+	   		return true;
 	   }else{
 		   return false;
 	   }
@@ -182,10 +183,9 @@ $(function(){
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
                         <input type="text" value="${cate}"/>
-                        <input type="text" value="${cateType1}"/>
+                        <input type="text" value="${cateType1}" placeholder="cateType1"/>
                         <input type="text" id="uid" value="${sessUser.uid}"/>
-                        <input type="button" class="test" value="test button">
-                        <input type="button" class="test2" value="test button2">
+                        <input type="button" class="test2" value="기능X 테스트버튼">
                     </div>
                     <table id="tb">
                         <tr>

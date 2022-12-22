@@ -56,6 +56,9 @@ public class LoginController extends HttpServlet{
 			HttpSession sess = req.getSession();
 			sess.setAttribute("sessUser", vo);
 			
+			// 세션 유지시간 1시간 
+			sess.setMaxInactiveInterval(60*60) ;
+			
 			System.out.println("--- 로그인 성공 ---");
 			
 			

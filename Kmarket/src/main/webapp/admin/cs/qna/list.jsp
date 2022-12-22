@@ -6,8 +6,8 @@
 	$(function() {
 		
 		
-		// 글 삭제하기 (단독)
-		$('.delete').click(function() {
+		// 글 삭제하기 (단독) 실행됨 삭제X
+		/* $('.delete').click(function() {
 
 			let no = $('input:checkbox:checked').val();
 			let checkbox = $('input:checkbox:checked');
@@ -37,7 +37,43 @@
 				}
 			}); 
 			
+		}); */
+		
+		
+		// 글 삭제하기 (다중 선택)
+		
+		$('.delete').click(function(){
+			
+			let noArr = [];
+			let checkbox = $('input:checkbox:checked');
+			
+			$('input[name=articleNo]:checked').each(function(){
+				noArr.push($(this).val());
+			});
+			console.log(noArr);
+			
+			$.ajax({
+				url: '/Kmarket/admin/cs/qna/delete.do',
+				method: 'post',
+				data: {"noArr":JSON.stringify(noArr)},
+				dataType:'json',
+				success:function(data){
+					console.log("data : "+data.result);
+					if(data.result==noArr.length){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
+					}
+					
+				}
+			});
 		});
+		
+		
+		
 		
 		// 카테고리 1차 선택에 따른 2차 선택문 
 		$('select[id=selectBox]').change(function() {
@@ -163,14 +199,14 @@
 							let rdate = vo.rdate.substring(2,10);
 							
 							let rows = "<tr class='row'>";
-							rows += "<td><input type='checkbox' name='all' value='"+vo.no+"'></td>";
+							rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'></td>";
 							rows += "<td>"+no+"</td>";
 							rows += "<td>"+vo.cateType1+"</td>";
 							rows += "<td>"+vo.cateType2+"</td>";
 							rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
 							rows += "<td>"+uid+"**</td>";
 							rows += "<td>"+rdate+"</td>";
-							rows += "<td>"+(vo.replyContent != null? '답변완료' : '검토중')+"</td>"; 
+							rows += "<td>"+(vo.replyContent != null? '<p style="color: #35A2EB;">답변완료</p>' : '검토중')+"</td>"; 
 							rows += "</tr>"; 
 							 
 							$('#tb').append(rows);
@@ -229,7 +265,7 @@
 						<c:forEach var="article" items="${articles}">
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
-	                        	<td><input type="checkbox" name="all" value="${article.no}"></td>
+	                        	<td><input type="checkbox" name="articleNo" value="${article.no}">${article.no}</td>
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
