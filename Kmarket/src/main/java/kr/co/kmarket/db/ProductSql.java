@@ -138,4 +138,7 @@ public class ProductSql {
 													+ "WHERE cartNo = ?";
 	//최종 point 넣기
 	public static final String INSERT_POINT = "INSERT INTO `km_member_point` (`uid`,`ordNo`,`point`,`pointDate`) VALUES (?,?,?,NOW())";
+	
+	//최종 point 수정
+	public static final String UPDATE_POINT = "UPDATE `km_member` SET `point`=? WHERE `uid`=?";
 }

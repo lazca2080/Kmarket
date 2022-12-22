@@ -41,13 +41,13 @@ public class CompleteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmm");
 		String now = sdf.format(new Date());
 		
 		Random random = new Random();
-		int rand = random.nextInt(10000000);
+		int rand = random.nextInt(100);
 		
-		int ordNo           = rand;
+		int ordNo           = rand+Integer.parseInt(now);
 		String uid          = req.getParameter("uid");
 		String ordCount     = req.getParameter("ordCount");
 		String ordPrice     = req.getParameter("ordPrice");
@@ -63,6 +63,7 @@ public class CompleteController extends HttpServlet{
 		String addr2 		= req.getParameter("addr2");
 		String payment 		= req.getParameter("payment");
 		String receiver     = req.getParameter("receiver");
+		String currentPoint = req.getParameter("currentPoint");
 		
 		CompleteVO vo = new CompleteVO();
 		vo.setOrdNo(ordNo);
@@ -90,7 +91,7 @@ public class CompleteController extends HttpServlet{
 		
 		String[] cartNo = (String[]) session.getAttribute("cartNo");
 		
-		service.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint);
+		service.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
 		
 		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
