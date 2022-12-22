@@ -38,6 +38,7 @@ public class SelectController extends HttpServlet{
 		
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
+		int 	start 	 = 0;
 		
 		logger.debug("cateType1 : "+cateType1);
 		logger.debug("cateType2 : "+cateType2);
@@ -47,7 +48,7 @@ public class SelectController extends HttpServlet{
 		
 		if(cateType1 != null && cateType2 != null) {
 			logger.debug("selectcateType...");
-			List<CsVO> vo= service.selectArticlesFaqCateType2(cateType1,cateType2);
+			List<CsVO> vo= service.selectArticlesFaqCateType2(cateType1,cateType2,start);
 			jsonData = gson.toJson(vo);
 		}
 		
