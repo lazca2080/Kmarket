@@ -17,7 +17,7 @@ public class AdminDAO {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public List<ProductVO> selectProducts(int start,String search) {
+	public List<ProductVO> selectProducts(int start,String search, String text) {
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
@@ -27,18 +27,22 @@ public class AdminDAO {
 			if(search == null) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct);
 				psmt.setInt(1, start);
-			}else if(search == "prodName") {
+			}else if(search.equals("prodName")) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct1);
-				psmt.setInt(1, start);
-			}else if(search == "prodNo") {
+				psmt.setString(1, "%"+text+"%");
+				psmt.setInt(2, start);
+			}else if(search.equals("prodNo")) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct2);
-				psmt.setInt(1, start);
-			}else if(search == "company") {
+				psmt.setString(1, "%"+text+"%"); 
+				psmt.setInt(2, start);
+			}else if(search.equals("company")) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct3);
-				psmt.setInt(1, start);
-			}else if(search == "seller") {
+				psmt.setString(1, "%"+text+"%");
+				psmt.setInt(2, start);
+			}else if(search.equals("seller")) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct4);
-				psmt.setInt(1, start);
+				psmt.setString(1, "%"+text+"%");
+				psmt.setInt(2, start);
 			}
 			ResultSet rs = psmt.executeQuery();
 			
@@ -69,15 +73,31 @@ public class AdminDAO {
 		return products;
 	}
 	
-	public List<ProductVO> selectProductss(int limitestart,String uid) {
+	public List<ProductVO> selectProductss(int limitestart,String uid,String search,String text) {
 		
 		List<ProductVO> products = new ArrayList<>();
 		
 		try {
 			logger.debug("selectProductss...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt = conn.prepareStatement(AdminSql.selectProductss);
-			psmt.setString(1, uid);
+			PreparedStatement psmt = null;
+			if(search == null){
+				psmt = conn.prepareStatement(AdminSql.selectProductss);
+				psmt.setString(1, uid);
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.selectProductss1);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("prodNo")){
+				psmt = conn.prepareStatement(AdminSql.selectProductss2);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.selectProductss3);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.selectProductss4);
+				psmt.setString(1, "%"+text+"%");
+			}
+			
 			psmt.setInt(2, limitestart);
 			ResultSet rs = psmt.executeQuery();
 			
@@ -120,11 +140,22 @@ public class AdminDAO {
 			if(search == null){
 				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
 				psmt.setString(1, seller);
-			}else {
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search);
-				psmt.setString(1, "%"+search+"%");
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1);
+				psmt.setString(1, seller);
 				psmt.setString(2, "%"+search+"%");
-				psmt.setString(3, seller);
+			}else if(search.equals("prodNo")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+search+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+search+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+search+"%");
 			}
 			
 			ResultSet rs = psmt.executeQuery();
