@@ -127,7 +127,10 @@ public enum CsService {
 		logger.info("selectArticle");
 		return dao.selectArticle(no);
 	}
-	
+	/*** admin - cs - qna - reply ***/
+	public CsVO selectArticleQNA(String no) {
+		return dao.selectArticleQNA(no);
+	}
 	
 	/*** admin - index - main ***/
 	public CsVO selectAdminMain() {
