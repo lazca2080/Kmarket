@@ -21,7 +21,7 @@ $(function(){
 		$('.del').click(function() {
 			
 		let cartNo = $('input:checkbox:checked').val();
-		
+		let checkbox = $('input:checkbox:checked');
 		if(cartNo == null){
 			alert('선택된 상품이 없습니다.');
 			return;
@@ -32,13 +32,15 @@ $(function(){
 			method : 'get',
 			data : {"totalNo": JSON.stringify(totalNo)},
 			dataType : 'json',
-			success : function() {
+			success : function(data) {
 				
-				/*
-				if(data.result == 1){
+				// data.result는 지운 갯수, tatalNo.length 랑 같음
+				// 이 부분은 임시로 만든 방법이고 더 좋은 방법이 있으면 바꿔야할듯
+				if(data.result == totalNo.length){
 					alert('삭제되었습니다.');
 					checkbox.parent().parent().remove();
 					
+					/*
 					count -= 1;
 					
 					let price = $(this).next().val();
@@ -55,20 +57,25 @@ $(function(){
 					
 					let total = $(this).next().next().next().next().next().val();
 					totalPrice -= parseInt(total);
-					
 					$('.productCount_span').text(count.toLocaleString());
 					$('.costPrice_span').text(costPrice*count);
 					$('.totalDelivery_span').text(totalDelivery);
 					$('.totalPoint_span').text(totalPoint);
 					$('.totalPrice_span').text(totalPrice);
 					$('.totalSale_span').text(totalSalePrice);
+					*/
+					$('.productCount_span').text('0');
+					$('.costPrice_span').text('0');
+					$('.totalDelivery_span').text('0');
+					$('.totalPoint_span').text('0');
+					$('.totalPrice_span').text('0');
+					$('.totalSale_span').text('0');
 					
 					return true;
 				}else {
 					alert('실패하였습니다.');
 					return false;
 				}
-				*/
 			}
 		});
 		});
