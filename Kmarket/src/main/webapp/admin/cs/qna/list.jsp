@@ -5,6 +5,7 @@
 <script>
 	$(function() {
 		
+		
 		// 글 삭제하기 (단독)
 		$('.delete').click(function() {
 
@@ -151,10 +152,9 @@
 						console.log(data);
 						$('.row').remove();	// 테이블 비우기 
 						let no = 1;
-						let rows = "";
+						
 						console.log(data.length);
 						
-						//for문 조건 수정해야 함 (출력횟수 오류)
 						for(let vo of data){
 							
 							/* console.log("here2"); */
@@ -162,7 +162,7 @@
 							let uid = vo.uid.substring(0,3);
 							let rdate = vo.rdate.substring(2,10);
 							
-							rows += "<tr class='row'>";
+							let rows = "<tr class='row'>";
 							rows += "<td><input type='checkbox' name='all' value='"+vo.no+"'></td>";
 							rows += "<td>"+no+"</td>";
 							rows += "<td>"+vo.cateType1+"</td>";
@@ -170,7 +170,7 @@
 							rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
 							rows += "<td>"+uid+"**</td>";
 							rows += "<td>"+rdate+"</td>";
-							rows += "<td>기능구현중</td>";
+							rows += "<td>"+(vo.replyContent != null? '답변완료' : '검토중')+"</td>"; 
 							rows += "</tr>"; 
 							 
 							$('#tb').append(rows);
@@ -242,7 +242,7 @@
 	                            <td>
 	                            	<c:choose>
 	                            		<c:when test="${article.replyContent ne null}">
-	                            			답변완료
+	                            			<p style="color: #35A2EB;">답변완료</p>
 	                            		</c:when>
 	                            		<c:otherwise>
 	                            			검토중

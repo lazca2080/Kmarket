@@ -38,6 +38,7 @@ public class ListController extends HttpServlet{
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
+		String replyContent = req.getParameter("replyContent");
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -70,6 +71,7 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("replyContent", replyContent);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
