@@ -19,7 +19,7 @@
 			if(parseInt(point) > parseInt(currentPoint)){
 				alert('가지고 계신 포인트 보다 많습니다.');
 				return;
-			}else if(parseInt(point) <= 5000){
+			}else if(parseInt(point) < 5000){
 				alert('5000점 이상부터 사용 가능합니다.');
 				return;
 			}
@@ -198,6 +198,7 @@
 					<input type="hidden" name="ordsavePoint" value="${vo.point}">
 					<input type="hidden" name="ordusedPoint" value="0">
 					<input type="hidden" name="ordTotPrice" value="${vo.total}">
+					<input type="hidden" name="currentPoint" value="${sessUser.point}">
                     <table border="0">
                         <tr>
                             <th>상품명</th>
@@ -315,11 +316,13 @@
                             </p>
 
                             <label>
-                            	<input type="hidden" name="currentPoint" value="${sessUser.point}">
                                 <input type="text" name="point">점
                                 <input type="button" class="addPoint" value="적용">
                             </label>
-                            <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
+                            <span>
+                            	포인트 5,000점 이상이면 현금처럼 사용 가능합니다.<br>
+                            	적립하신 포인트는 3일 뒤 사용 가능합니다.
+                            </span>
                         </div>
                     </article>
                     <!-- 결제방법 -->

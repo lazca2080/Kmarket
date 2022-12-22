@@ -75,7 +75,7 @@ public class CartController extends HttpServlet{
 		json.addProperty("totalSalePrice", vo.getCostPrice() - vo.getTotalSalePrice());
 		json.addProperty("totalDelivery", vo.getTotalDelivery());
 		json.addProperty("totalPoint", vo.getTotalPoint());
-		json.addProperty("totalPrice", vo.getTotalPrice() + vo.getTotalDelivery());
+		json.addProperty("totalPrice", vo.getTotalPrice());
 		
 		logger.debug("costprice : "+vo.getCostPrice());
 		

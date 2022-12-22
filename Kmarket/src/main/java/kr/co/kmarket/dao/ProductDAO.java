@@ -602,7 +602,7 @@ public class ProductDAO {
 	//장바구니 선택 항복 계산
 	public ProductVO selectSumCart(String[] cartNo) {
 		int length = cartNo.length;
-		String sql = "SELECT COUNT(`count`), SUM(`price`), SUM(`price`)-SUM(`total`), SUM(`delivery`), SUM(`total`)+SUM(`delivery`), SUM(`point`) FROM `km_product_cart` ";
+		String sql = "SELECT COUNT(`count`), SUM(`price`), SUM(`price`)-(SUM(`total`)-SUM(`delivery`)), SUM(`delivery`), SUM(`total`), SUM(`point`) FROM `km_product_cart` ";
 			  sql += "WHERE `cartNo`=?";
 			  
 		ProductVO vo = null;
@@ -712,7 +712,7 @@ public class ProductDAO {
 	}
 	
 	//장바구니 선택항목 order_item insert
-	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint) {
+	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
 		
 		String sql = "INSERT INTO `km_product_order_item` (`prodNo`, `count`, `price`, `discount`, `point`, `delivery`, `total`, `orderNo`) ";
 			  sql += "SELECT `prodNo`, `count`, `price`, `discount`, `point` , `delivery`, `total`, ? FROM `km_product_cart` ";
@@ -730,23 +730,29 @@ public class ProductDAO {
 			
 			conn.setAutoCommit(false);
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			PreparedStatement psmt2 = conn.prepareStatement(ProductSql.INSERT_POINT);
 			psmt.setInt(1, ordNo);
 			for(int k = 0; k<length; k++) {
 				psmt.setString(k+2, cartNo[k]);
 			}
 			
+			PreparedStatement psmt2 = conn.prepareStatement(ProductSql.INSERT_POINT);
 			psmt2.setString(1, uid);
 			psmt2.setInt(2, ordNo);
 			psmt2.setString(3, ordsavePoint);
 			
+			PreparedStatement psmt3 = conn.prepareStatement(ProductSql.UPDATE_POINT);
+			psmt3.setInt(1, Integer.parseInt(currentPoint)-Integer.parseInt(ordusedPoint)+Integer.parseInt(ordsavePoint));
+			psmt3.setString(2, uid);
+			
 			psmt.executeUpdate();
 			psmt2.executeUpdate();
+			psmt3.executeUpdate();
 			conn.commit();
 			
 			conn.close();
 			psmt.close();
 			psmt2.close();
+			psmt3.close();
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());

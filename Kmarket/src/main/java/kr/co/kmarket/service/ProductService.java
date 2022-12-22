@@ -97,8 +97,8 @@ public enum ProductService {
 	}
 	
 	//최종 order item 등록
-	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint) {
-		dao.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint);
+	public void insertSelectCartPoint(String[] cartNo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
+		dao.insertSelectCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
 	}
 	
 	public List<CategoryVO> selectCate(int cate) {
