@@ -2,6 +2,10 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,17 +35,28 @@ public class DeleteCartController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cartNo = req.getParameter("cartNo");
-		String uid = req.getParameter("uid");
 		
-		logger.info("cartNo : " +cartNo);
+		String cartNo = req.getParameter("totalNo");
 		
-		int result = service.deleteCart(cartNo);
+		System.out.println("cartNo : "+cartNo);
 		
-		logger.debug("result : " +result);
+		String cart[] = cartNo.split(",");
+		
+		List<String> totalNo = new ArrayList<>(); 
+		
+		int length = cart.length;
+		
+		for(int i = 0; i<length; i++) {
+			System.out.println("cart : "+cart[i].replaceAll("[^\\d]", ""));
+			totalNo.add(cart[i].replaceAll("[^\\d]", ""));
+		}
+		
+		System.out.println("list : "+totalNo.get(0));
+		
+		//int result = service.deleteCart(totalNo);
 		
 		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
+		//json.addProperty("result", result);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());

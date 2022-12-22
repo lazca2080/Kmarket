@@ -42,6 +42,22 @@
 			// 최종결제 정보 전체주문금액 변경
 			$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
 		});
+		
+		$('.order > form').submit(function(){
+			
+			if(f.keyCode == 13){
+				return false;
+			}
+			
+			let result = confirm('입력하신 정보가 맞습니까?');
+			
+			if(result){
+				return true;
+			}else{
+				return false;
+			}
+			
+		});
 	});
 </script>
         <main id="product">

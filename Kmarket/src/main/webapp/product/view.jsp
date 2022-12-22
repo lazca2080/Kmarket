@@ -34,28 +34,43 @@
 			let uid = $(this).attr('data-uid');
 			let count = $('input[name=num]').val();			
 			
-			$.ajax({
-				url : '/Kmarket/product/updateCart.do',
-				method : 'get',
-				data : {"prodNo":prodNo, "uid":uid, "count":count },
-				dataType : 'json',
-				success : function(data) {
-					if(data.result == 1){
-						alert('상품이 장바구니에 추가되었습니다.');
-					}else{
-						alert('장바구니에 담지 못했습니다.');
+			if(uid == ''){
+				alert('비회원은 이용할 수 없습니다.');
+				return false;
+			}else {
+				$.ajax({
+					url : '/Kmarket/product/updateCart.do',
+					method : 'get',
+					data : {"prodNo":prodNo, "uid":uid, "count":count },
+					dataType : 'json',
+					success : function(data) {
+						if(data.result == 1){
+							let message = confirm('상품이 장바구니에 추가되었습니다. 확인하시겠습니까?');
+							if(message){
+								location.href = "/Kmarket/product/cart.do?uid="+uid;
+							}
+						}else{
+							alert('장바구니에 담지 못했습니다.');
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		
 		$('.order').click(function(){
 			
-			let prodNo = $(this).attr('data-no');
 			let uid = $(this).attr('data-uid');
-			let count = $('input[name=num]').val();
 			
-			location.href = "/Kmarket/product/order.do?prodNo="+prodNo+"&count="+count;
+			if(uid == ''){
+				alert('비회원은 구입할 수 없습니다.');
+				return false;
+			}else {
+				let prodNo = $(this).attr('data-no');
+				let uid = $(this).attr('data-uid');
+				let count = $('input[name=num]').val();
+				
+				location.href = "/Kmarket/product/order.do?prodNo="+prodNo+"&count="+count;	
+			}
 		});
 	});
 	
@@ -276,15 +291,8 @@
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
-                        	<c:choose>
-                        		<c:when test="${sessUser.uid ne null}">
-	                            <input type="button" class="cart" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="장바구니">
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        	<input type="button" class="cart" data-no="${product.prodNo}" value="장바구니">
-	                        	</c:otherwise>
-	                        </c:choose>   
-	                            <input type="button" class="order" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="구매하기">
+                            <input type="button" class="cart" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="장바구니">
+                            <input type="button" class="order" data-no="${product.prodNo}" data-uid="${sessUser.uid}" value="구매하기">
                         </div>
                     </div>
                 </article>

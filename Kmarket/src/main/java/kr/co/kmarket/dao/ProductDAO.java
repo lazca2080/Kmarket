@@ -433,14 +433,28 @@ public class ProductDAO {
 	}
 	
 	//장바구니 삭제
-	public int deleteCart(String cartNo) {
-		int cart = 0;
+	public int deleteCart(List<String> totalNo) {
+		int result = 0;
+		
+		int length = totalNo.size();
+		
+		String sql = "DELETE FROM `km_product_cart` WHERE `cartNo` = ?";
+		
+		for(int i = 1; i<length; i++) {
+			sql += " OR `cartNo`=?";
+		}
+		
+		logger.debug(sql);
+		
 		try {
 			logger.debug("deleteCart...");
 			Connection conn = DBCP.getConnection();
-			PreparedStatement psmt =conn.prepareStatement(ProductSql.DELETE_PRODUCT_CART);
-			psmt.setString(1, cartNo);
-			cart = psmt.executeUpdate();
+			PreparedStatement psmt =conn.prepareStatement(sql);
+			for(int k = 0; k<length; k++) {
+				psmt.setString(k+1, totalNo.get(k));
+			}
+			
+			result = psmt.executeUpdate();
 			
 			psmt.close();
 			conn.close();
@@ -448,7 +462,8 @@ public class ProductDAO {
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		int result = cart;
+		
+		logger.debug("d : "+result);
 		
 		return result;
 	}
