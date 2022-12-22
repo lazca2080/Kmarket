@@ -37,7 +37,7 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String level = req.getParameter("level");
 		String seller = req.getParameter("seller");
-		String search = req.getParameter("serarch");
+		String search = req.getParameter("search");
 		String text = req.getParameter("text");
 		
 		//현재 페이지번호
@@ -45,7 +45,8 @@ public class ListController extends HttpServlet{
 		int total = service.selectCountTotal(uid,search);
 		int lastPageNum = service.getLastPageNum(total);
 		logger.info("total :" + total);
-		logger.info("total :" + search);
+		logger.info("search :" + search);
+		logger.info("text :" + text);
 		
 		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
 		int pageStartNum = service.getPageStartNum(total, currentPage);
@@ -53,10 +54,10 @@ public class ListController extends HttpServlet{
 		
 		//level 7 상품전체보기
 		if(level.equals("7")) {
-			List<ProductVO>  Product = service.selectProducts(start,search);
+			List<ProductVO>  Product = service.selectProducts(start,search,text);
 			req.setAttribute("Product", Product);
 		}else {
-			List<ProductVO> Product = service.selectProductss(start,uid);
+			List<ProductVO> Product = service.selectProductss(start,uid,search,text);
 			req.setAttribute("Product", Product);
 		}
 		
@@ -73,6 +74,7 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("level", level);
 		req.setAttribute("search", search);
+		req.setAttribute("text", text);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp");
 		dispatcher.forward(req, resp);

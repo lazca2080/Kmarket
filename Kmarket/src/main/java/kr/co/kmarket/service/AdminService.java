@@ -18,14 +18,14 @@ public enum AdminService {
 	private AdminService() { dao = new AdminDAO(); }
 	
 	// product 상품 리스트 불러오기
-	public List<ProductVO> selectProducts(int start,String search) {
-		return dao.selectProducts(start,search);
+	public List<ProductVO> selectProducts(int start,String search,String text) {
+		return dao.selectProducts(start,search,text);
 	}
 	
 	
 	// 판매자(관리자)의 상품목록만 조회
-	public List<ProductVO> selectProductss(int limitdstart,String uid) {
-		return dao.selectProductss(limitdstart,uid);
+	public List<ProductVO> selectProductss(int limitdstart,String uid,String search,String text) {
+		return dao.selectProductss(limitdstart,uid,search,text);
 	}
 	
 	public int selectCountTotal(String seller,String search) {
