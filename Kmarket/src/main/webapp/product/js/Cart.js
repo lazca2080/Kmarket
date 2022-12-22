@@ -71,6 +71,7 @@ $(function(){
 					$('.totalPrice_span').text('0');
 					$('.totalSale_span').text('0');
 					
+					totalNo = [];
 					return true;
 				}else {
 					alert('실패하였습니다.');
@@ -84,6 +85,13 @@ $(function(){
 		$(document).on('click','.chk',function(){
 			if($('input[name=all]').is(':checked')){
 				$('input[name=cartNo]').prop('checked', true);
+				
+				totalNo = [];
+				$('input[name=cartNo]').each(function(){
+					totalNo.push($(this).val());
+				});
+				
+				console.log(totalNo);
 				
 				let uid = $(this).next().val();
 				
@@ -126,6 +134,10 @@ $(function(){
 				$('.totalPoint_span').text(totalPoint);
 				$('.totalPrice_span').text(totalPrice);
 				$('.totalSale_span').text(totalSalePrice);
+				
+				totalNo = [];
+				
+				console.log(totalNo);
 			}
 		});
 	
@@ -160,6 +172,7 @@ $(function(){
 				$('.totalSale_span').text(totalSalePrice);
 				
 				totalNo.push(cartNo);
+				console.log(totalNo);
 			}else {
 
 				count -= 1;
@@ -190,6 +203,8 @@ $(function(){
 				idx = totalNo.indexOf(cartNo);
 				
 				totalNo.splice(idx, 1);
+				
+				console.log(totalNo);
 				
 				// count = 0 일때 전체 체크박스 해제
 				if(count == 0){
