@@ -57,6 +57,30 @@ public class DeleteController extends HttpServlet{
 		
 		logger.info("doPost");
 		
+		String[] chkList = req.getParameterValues("chkArr");	
+		int length = chkList.length;
+		
+		for(int k=0; k<length; k++) {
+			logger.info("chkList: "+chkList[k]);
+			int result = service.deleteArticle(chkList[k]);
+			
+			JsonObject json = new JsonObject();
+			json.addProperty("result", result);
+			
+			PrintWriter writer = resp.getWriter();
+			writer.print(json.toString());
+		}
+		
+		
+		
+		
+		
+//		for(int i=0; i<length; i++) {
+//			service.deleteArticle(chkList[i]);
+//		}
+		
+		
+		/*
 		// JSON.stringify로 받은 데이터 (문자 형태)
 		String noArrString = req.getParameter("noArr");
 		System.out.println("noArrString: " + noArrString);	// ["454","445"]
@@ -77,8 +101,8 @@ public class DeleteController extends HttpServlet{
 			ArticleArr.add(noArr[i].replaceAll("[^\\d]", ""));
 		}
 		
-		System.out.println("list0: "+ArticleArr.get(0));
-		System.out.println("list1: "+ArticleArr.get(1));
+		System.out.println("list0: "+ArticleArr.get(0));	// list0: 508
+		System.out.println("list1: "+ArticleArr.get(1));	// list1: 507
 		
 		int result = service.deleteArticles(ArticleArr);
 		
@@ -88,5 +112,7 @@ public class DeleteController extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 		
+		
+		*/
 	}
 }

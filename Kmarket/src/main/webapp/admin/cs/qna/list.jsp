@@ -40,8 +40,8 @@
 		}); */
 		
 		
-		// 글 삭제하기 (다중 선택)
-		
+		// 글 삭제하기 (다중 선택) 실행됨 삭제X
+		/*
 		$('.delete').click(function(){
 			
 			let noArr = [];
@@ -51,6 +51,8 @@
 				noArr.push($(this).val());
 			});
 			console.log(noArr);
+			console.log(noArr.length);
+			
 			
 			$.ajax({
 				url: '/Kmarket/admin/cs/qna/delete.do',
@@ -70,10 +72,70 @@
 					
 				}
 			});
+		}); 
+		*/
+		let chkNo = document.getElementsByName("articleNo");
+		let rowCnt = chkNo.length;
+		
+		console.log(rowCnt);
+		
+		$('input[name=testbutton]').click(function(){
+			
+			let list = $('input[name=articleNo]');
+			let chkArr = new Array();
+			
+			console.log("list length: "+list.length);	//
+			
+			for(let i=0; i<list.length; i++){
+				if(list[i].checked){
+					chkArr.push(list[i].value);
+				}
+			}
+			
+			console.log(chkArr);	// ['513', '512']
+			
+			$.ajax({
+				url: '/Kmarket/admin/cs/qna/delete.do',
+				method: 'POST',
+				traditional: true,
+				dataType:'json',
+				data: {"chkArr" : chkArr},
+				success:function(data){
+					console.log("data : "+data.result);	// 출력안됨,,,
+					if(data.result == 1){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
+					}
+				}
+			});
+			
 		});
 		
 		
 		
+		
+		
+		// 전체 체크박스 체크 여부에 따른 하위 체크박스 상태
+		$('input[name=all]').change(function(){
+			if($('input[name=all]').is(":checked")){
+				$('input[name=articleNo]').prop("checked", true);
+			}else{
+				$('input[name=articleNo]').prop("checked", false);
+			}
+		});
+		// 하위 체크박스 체크 여부에 따른 전체 체크박스 상태
+		// (선택된 하위 체크박스 개수 = 전체 체크박스 개수 -> 전체체크 true)
+		$('input[name=articleNo]').change(function(){
+			if($('input[name=articleNo]:checked').length == $('input[name=articleNo]')){
+				$('input[name=all]').prop("checked", true);
+			}else{
+				$('input[name=all]').prop("checked", false);
+			}
+		});
 		
 		// 카테고리 1차 선택에 따른 2차 선택문 
 		$('select[id=selectBox]').change(function() {
@@ -250,6 +312,7 @@
                             <option value="search1">2차 선택</option>
                         </select>
                          <input type="text" id="uid" value="${sessUser.uid}"/>
+                         <input type="button" name="testbutton" value="testbutton"/>
                     </div>
                     <table id="tb">
                     	<tr>
