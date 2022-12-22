@@ -90,6 +90,19 @@
 			}
 			
 		});
+		
+		$('#selectBox').change(function() {
+			$('#selectBox2').change(function() {
+				
+				let cateType1 = $('#selectBox option:selected').val();
+				let cateType2 = $('#selectBox2 option:selected').val();
+				console.log("cateType1: " + cateType1);
+				console.log("cateType2: " + cateType2);
+				
+			});
+			
+		});
+		
 	});
 
 </script>
@@ -105,7 +118,7 @@
 	                </nav>
 	                <section class="write">
 						<article>
-	                        <form action="/Kmarket/admin/cs/faq/write.do" method="post">
+	                        <form action="/Kmarket/admin/cs/faq/write.do?cate=faq" method="post">
 	                        <input type="hidden" name="uid" value="${sessUser.uid}">
 	                        <input type="hidden" name="cate" value="${cate}">
 	                            <table>
@@ -113,7 +126,7 @@
 	                                    <tr>
 	                                        <td>문의유형</td>
 	                                        <td>
-	                                            <select name="type" id="selectBox">
+	                                            <select name="cateType1" id="selectBox">
 	                                                <option value="0">1차 선택</option>
 						                            <option value="회원">회원</option>
 						                            <option value="쿠폰/이벤트">쿠폰/이벤트</option>
@@ -122,7 +135,7 @@
 						                            <option value="여행/숙박/항공">여행/숙박/항공</option>
 						                            <option value="안전거래">안전거래</option>
 	                                            </select>
-												<select name="type" id="selectBox2" class="choose">
+												<select name="cateType2" id="selectBox2" class="choose">
 	                                                <option value="0">2차 선택</option>
 	                                            </select>
 	                                        </td>
