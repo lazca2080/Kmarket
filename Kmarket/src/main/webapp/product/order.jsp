@@ -7,6 +7,9 @@
 <script>
 	$(function(){
 		
+		let oriPoint = 0;
+		let oriTotal = 0;
+		
 		$('input[class=addPoint]').click(function(){
 			
 			// 현재 uid가 가지고있는 point값 가져오기 // 259번째 줄 input hidden 추가
@@ -41,6 +44,7 @@
 			
 			// 최종결제 정보 전체주문금액 변경
 			$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
+			
 		});
 		
 		$('.order > form').submit(function(){
@@ -332,7 +336,7 @@
                             </p>
 
                             <label>
-                                <input type="text" name="point">점
+                                <input type="text" name="point" value="0">점
                                 <input type="button" class="addPoint" value="적용">
                             </label>
                             <span>

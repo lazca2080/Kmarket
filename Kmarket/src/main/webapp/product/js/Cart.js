@@ -38,6 +38,7 @@ $(function(){
 				// 이 부분은 임시로 만든 방법이고 더 좋은 방법이 있으면 바꿔야할듯
 				if(data.result == totalNo.length){
 					alert('삭제되었습니다.');
+					
 					checkbox.parent().parent().remove();
 					
 					/*
@@ -70,6 +71,26 @@ $(function(){
 					$('.totalPoint_span').text('0');
 					$('.totalPrice_span').text('0');
 					$('.totalSale_span').text('0');
+					
+					
+					console.log(cartNo);
+					
+					if(cartNo == "on"){
+						
+						let table = "<tr>";
+						   table += "<th><input type='checkbox' name='all' class='chk'></th>";
+						   table += "<th>상품명</th>";
+						   table += "<th>총수량</th>";
+						   table += "<th>판매가</th>";
+						   table += "<th>할인</th>";
+						   table += "<th>포인트</th>";
+						   table += "<th>배송비</th>";
+						   table += "<th>소계</th>";
+						   table += "</tr>";
+						   table += "<tr class='empty'><td colspan='7'>장바구니에 상품이 없습니다.</td></tr>";
+						
+						$('.cart > form > table').append(table);
+					}
 					
 					totalNo = [];
 					return true;
