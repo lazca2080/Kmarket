@@ -5,6 +5,9 @@
 <script>
 $(function() {
 	
+	let totalNo = new Array();
+	
+	//개별 선택 삭제
 	$('.delete').click(function() {
 		
 		let isDelete = confirm('정말 삭제하시겠습니까?');
@@ -24,13 +27,14 @@ $(function() {
 			$.ajax({
 				url : '/Kmarket/admin/cs/faq/delete.do',
 				method : 'get',
-				data : {"no":no},
+				data : {"totalNo":JSON.stringify(totalNo)},
 				dataType : 'json',
 				success : function(data) {
 					console.log("data : "+data.result);
-					if(data.result == 1){
+					if(data.result == totalNo.length){
 						alert('삭제되었습니다.');
 						checkbox.parent().parent().remove();
+						totalNo = [];
 						return true;
 					}else{
 						alert('실패하였습니다.');
@@ -44,6 +48,26 @@ $(function() {
 		}
 		
 	});
+	
+	//전체선택 체크박스
+	$(document).on('click','.chk',function(){
+		if($('input[name=all]').is(':checked')){
+			$('input[name=no]').prop('checked', true);
+			
+			totalNo = [];
+			$('input[name=no]').each(function(){
+				totalNo.push($(this).val());
+			});
+			
+			console.log("true totalNo : "+totalNo);
+			
+		}esle{
+			$('input[name=no]').prop('checked', false);
+			totalNo = [];
+			console.log("false totalNo : "+totalNo);
+		}
+	});
+	
 	
 	$('#remove').click(function() {
 		
@@ -172,7 +196,7 @@ $(function() {
 						let rdate = vo.rdate.substring(2,10);
 						
 						let rows = "<tr class='row'>";
-						rows += "<td><input type='checkbox' name='all' value='"+vo.no+"'></td>";
+						rows += "<td><input type='checkbox' name='no' value='"+vo.no+"'></td>";
 						rows += "<td>"+no+"</td>";
 						rows += "<td>"+vo.cateType1+"</td>";
 						rows += "<td>"+vo.cateType2+"</td>";
@@ -221,7 +245,10 @@ $(function() {
                     </div>
                     <table id="tb">
                         <tr>
-                            <th><input type="checkbox" name="all"></th>
+                            <th>
+                            <input type="checkbox" name="all" class="chk">
+                            <input type="hidden" class="uid" value="${sessUser.uid}">
+                            </th>
                             <th>번호</th>
                             <th>1차 유형</th>
                             <th>2차 유형</th>
@@ -233,7 +260,7 @@ $(function() {
                         <c:forEach var="article" items="${articles}">
                         <c:set var="i" value="${i+1}"/>
                         <tr class="row">
-                        	<td><input type="checkbox" name="all" value="${article.no}"></td>
+                        	<td><input type="checkbox" name="no" value="${article.no}"></td>
                             <td>${i}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
