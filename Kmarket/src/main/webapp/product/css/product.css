@@ -1,11 +1,34 @@
 /* 상품목록 */
 
-#product > section {
+main > .mainsection {
+	padding: 0px;
+}
+
+#product > .view {
     padding: 16px;
     box-sizing: border-box;
 }
 
-#product > .list {}
+#product > .cart {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .list {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .complete {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .order {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
 
 #product > section > nav {
     width: 100%;

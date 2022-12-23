@@ -90,15 +90,38 @@
 	                            </c:forEach>  --%>
                             </tbody>
                         </table>
+                        <!-- cateType1 이 없을때 -> 전체 리스트, 있을때 cateType1에 해당하는 리스트 출력 따라서 조건문 추가.  -->
                         <div class="page">
 	                        <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+	                        <c:choose>
+		                        <c:when test="${cateType1 eq null}">
+		                        <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${pageGroupStart-1}" class="prev">이전</a>
+		                        </c:when>
+		                        <c:otherwise>
+		                        <a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${pageGroupStart-1}" class="prev">이전</a>
+		                        </c:otherwise>
+	                        </c:choose>
 	                        </c:if>
 	                        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                        <c:choose>
+	                        	<c:when test="${cateType1 eq null}">
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            </c:when>
+	                            <c:otherwise>
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            </c:otherwise>
+                            </c:choose>
 	                        </c:forEach>
-	                        <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+	                        <!--  <c:if test="${pageGroupStart lt lastPageNum}">로 되어있어서 수정  -->  
+	                        <c:if test="${pageGroupEnd lt lastPageNum}">
+	                        	<c:choose>
+	                        	<c:when test="${cateType1 eq null}">
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${pageGroupStart+1}" class="next">다음</a>
+								</c:when>
+								<c:otherwise>
+								<a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${pageGroupStart+1}" class="next">다음</a>
+								</c:otherwise>
+	                        	</c:choose>
 	                        </c:if>
                         </div>
                     </article>

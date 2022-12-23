@@ -33,6 +33,12 @@ public class LogoutController extends HttpServlet{
 		
 		HttpSession sess = req.getSession();
 		MemberVO sessUser = (MemberVO) sess.getAttribute("sessUser");
+		
+		if(sessUser == null) {
+			resp.sendRedirect("/Kmarket/");
+			return;
+		}
+		
 		String uid = sessUser.getUid();
 		
 		// 세션 해제
@@ -45,10 +51,8 @@ public class LogoutController extends HttpServlet{
 		cookie.setMaxAge(0);
 		resp.addCookie(cookie);
 		
-	
 		// 데이터베이스 사용자 sessId update
 		service.updateUserForSessionOut(uid);
-		
 		
 		resp.sendRedirect("/Kmarket/member/login.do?success=200");
 	}
