@@ -88,6 +88,11 @@
 			
 			console.log(checkbox.length);	// 선택된 게시글 개수 확인
 			
+			if(checkbox.length == 0){
+				alert('삭제할 게시글을 선택하십시오.');
+				return;
+			}
+			
 			let chkArr = new Array();
 			
 			console.log("list length: "+list.length);	// 페이지 내 게시글 개수 확인2
@@ -318,7 +323,6 @@
                             <option value="search1">2차 선택</option>
                         </select>
                          <input type="text" id="uid" value="${sessUser.uid}"/>
-                         <input type="button" name="testbutton" value="testbutton"/>
                     </div>
                     <table id="tb">
                     	<tr>
@@ -360,6 +364,7 @@
                     </table>
                     <input type="button" class="delete" name="deleteButton" value="선택삭제">
                     <div class="paging">
+                    	<h2>page자리</h2>
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
 	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
