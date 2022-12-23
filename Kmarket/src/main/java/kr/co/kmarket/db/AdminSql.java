@@ -37,17 +37,21 @@ public class AdminSql {
 	public static final String selectProductss = "SELECT * FROM `km_product` WHERE `seller`=? "
 			 									+ "order by `prodNo` desc LIMIT ?, 10";
 	
-	public static final String selectProductss1 = "SELECT * FROM `km_product` WHERE  `prodName` LIKE ? "
-												+ "ORDER BY `prodNo` DESC LIMIT ?, 10";
-	
-	public static final String selectProductss2 = "SELECT * FROM `km_product` WHERE  `prodNo` LIKE ? "
-												+ "ORDER BY `prodNo` DESC LIMIT ?, 10";
+	public static final String selectProductss1 = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b "
+												+ "ON a.seller = b.uid WHERE  `prodName` LIKE ? "
+												+ "AND `seller`= ? ORDER BY `prodNo` DESC LIMIT ?, 10 ";
 
-	public static final String selectProductss3 = "SELECT * FROM `km_product` WHERE  `company` LIKE ? "
-												+ "ORDER BY `prodNo` DESC LIMIT ?, 10";
+	public static final String selectProductss2 = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b "
+												+ "ON a.seller = b.uid WHERE  `prodNo` LIKE ? "
+												+ "AND `seller`= ? ORDER BY `prodNo` DESC LIMIT ?, 10 ";
 
-	public static final String selectProductss4 = "SELECT * FROM `km_product` WHERE  `seller` LIKE ? "
-												+ "ORDER BY `prodNo` DESC LIMIT ?, 10";
+	public static final String selectProductss3 = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b "
+												+ "ON a.seller = b.uid WHERE  a.company LIKE ? "
+												+ "AND `seller`= ? ORDER BY `prodNo` DESC LIMIT ?, 10 ";
+
+	public static final String selectProductss4 = "SELECT * FROM `km_product` AS a JOIN `km_member` AS b "
+												+ "ON a.seller = b.uid WHERE  `seller` LIKE ? "
+												+ "AND `seller`= ? ORDER BY `prodNo` DESC LIMIT ?, 10 ";
 
 	public static final String select_Product_Keyword = "SELECT `prodNo`,`prodName`,`company` FROM `km_product` "
 													+ "WHERE `seller` = ? and "
