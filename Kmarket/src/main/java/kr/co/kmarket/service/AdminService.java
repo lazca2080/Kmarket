@@ -32,6 +32,10 @@ public enum AdminService {
 		return dao.selectCountTotal(seller,search);
 	}
 	
+	public int selectCountTotalAll(String search) {
+		return dao.selectCountTotalAll(search);
+	}
+	
 	public List<ProductVO> selectAdminList(int limiteStart, String seller) {
 		return dao.selectAdminList(seller, limiteStart);
 	}

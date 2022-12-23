@@ -83,5 +83,22 @@ public class AdminSql {
 																+ "WHERE `seller`= ? AND  "
 																+ "(`seller` LIKE ?) ";
 	
+	public static final String select_count_total_for_search1All = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
+																+ "JOIN `km_member` AS b ON a.seller = b.uid "
+																+ "WHERE `prodName` LIKE ?";
+	
+	public static final String select_count_total_for_search2All = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
+																+ "JOIN `km_member` AS b ON a.seller = b.uid "
+																+ "WHERE `prodNo` LIKE ?";
+
+	public static final String select_count_total_for_search3All = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
+																+ "JOIN `km_member` AS b ON a.seller = b.uid "
+																+ "WHERE `company` LIKE ?";
+
+	public static final String select_count_total_for_search4All = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
+																+ "JOIN `km_member` AS b ON a.seller = b.uid "
+																+ "WHERE `seller` LIKE ?";
+
+
 	public static final String DELECT_PRODUCT = "delete from `km_product` where `prodNo`=? ";
 }
