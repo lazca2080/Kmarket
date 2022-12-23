@@ -77,7 +77,14 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="Product" items="${Product}">
+                        <c:choose>
+                        <c:when test="${empty Product}">
+                        <tr>
+                        	<td colspan="11" style="color:red">등록된 상품이 없습니다.</td>
+                        </tr>
+                        </c:when>
+                        <c:otherwise>
+						<c:forEach var="Product" items="${Product}">
                         <tr>
                             <td><input type="checkbox" name="prodNo" id="prodNo" value="${Product.prodNo}"></td>
                             <td><img src="/home/prodImg/${Product.thumb1}" class="thumb"></td>
@@ -95,6 +102,8 @@
                             </td>
                         </tr>
                         </c:forEach>
+                        </c:otherwise>
+                        </c:choose>
                     </table>
                     	<input type="button" value="선택삭제" class="btn">
                     <div class="paging">

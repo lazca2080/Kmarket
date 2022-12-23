@@ -24,7 +24,7 @@ public class AdminDAO {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
-			if(search == null) {
+			if(search == "" || search == null) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct);
 				psmt.setInt(1, start);
 			}else if(search.equals("prodName")) {
@@ -81,7 +81,7 @@ public class AdminDAO {
 			logger.debug("selectProductss...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
-			if(search == null){
+			if(search == "" || search == null){
 				psmt = conn.prepareStatement(AdminSql.selectProductss);
 				psmt.setString(1, uid);
 			}else if(search.equals("prodName")){
@@ -145,7 +145,7 @@ public class AdminDAO {
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
 			
-			if(search == null) {
+			if(search == "" || search == null) {
 				psmt = conn.prepareStatement(AdminSql.SELECT_TOTAL);
 			}else if(search.equals("prodName")){
 				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
@@ -185,7 +185,7 @@ public class AdminDAO {
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
 			
-			if(search == null){
+			if(search == "" || search == null){
 				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
 				psmt.setString(1, seller);
 			}else if(search.equals("prodName")){
