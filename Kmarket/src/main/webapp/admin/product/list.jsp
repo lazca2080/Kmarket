@@ -40,9 +40,7 @@
 			let level = $('input[type=hidden]').val();
 			
 			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level;
-			
 		});
-		
 	});
 </script>
             <section id="admin-product-list">
@@ -102,17 +100,17 @@
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="${pageGroupStart > 1}">
-	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 10}&level=${sessUser.level}"><&nbsp;이전</a>
+	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 10}&level=${sessUser.level}&text=${text}&search=${search}"><&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}" class="on${currentPage eq i?'current':'off'}">${i}</a>
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="on${currentPage eq i?'current':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
                         	<c:if test="${pageGroupEnd < lastPageNum}">
-                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}&level=${sessUser.level}">다음&nbsp;></a>
+                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}&level=${sessUser.level}&text=${text}&search=${search}">다음&nbsp;></a>
                             </c:if>
                         </span>
                     </div>
