@@ -77,22 +77,26 @@
 		let chkNo = document.getElementsByName("articleNo");
 		let rowCnt = chkNo.length;
 		
-		console.log(rowCnt);
+		console.log(chkNo.length);		// 페이지 내 게시글 개수 확인
 		
 		$('input[name=testbutton]').click(function(){
 			
 			let list = $('input[name=articleNo]');
+			let checkbox = $('input[name=articleNo]:checked');
+			
+			console.log(checkbox.length);	// 선택된 게시글 개수 확인
+			
 			let chkArr = new Array();
 			
-			console.log("list length: "+list.length);	//
+			console.log("list length: "+list.length);	// 페이지 내 게시글 개수 확인2
 			
-			for(let i=0; i<list.length; i++){
+			for(let i=0; i<list.length; i++){	// 페이지 내 게시글 개수동안 체크된 게시글 배열 생성
 				if(list[i].checked){
 					chkArr.push(list[i].value);
 				}
 			}
 			
-			console.log(chkArr);	// ['513', '512']
+			console.log(chkArr);	// ['513', '512']    0:"532"   1:"531"
 			
 			$.ajax({
 				url: '/Kmarket/admin/cs/qna/delete.do',
@@ -101,10 +105,11 @@
 				dataType:'json',
 				data: {"chkArr" : chkArr},
 				success:function(data){
-					console.log("data : "+data.result);	// 출력안됨,,,
+					alert('here1');	// 체크 개수가 2개 이상부터 실행 X
+					console.log("data : "+data.result);	
 					if(data.result == 1){
 						alert('삭제되었습니다.');
-						checkbox.parent().parent().remove();
+						checkbox.parent().parent().remove(); // 수정해야 함 for문 사용?
 						return true;
 					}else{
 						alert('실패하였습니다.');
