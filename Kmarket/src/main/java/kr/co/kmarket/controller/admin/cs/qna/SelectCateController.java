@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.CsService;
+import kr.co.kmarket.vo.AdminCsListVO;
 import kr.co.kmarket.vo.CsVO;
 import net.sf.json.JSONObject;
 
@@ -39,15 +40,16 @@ public class SelectCateController extends HttpServlet {
 		
 		resp.setContentType("text/html;charset=UTF-8");
 		
+		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
-		String replyContent = req.getParameter("replyContent");
+		String pg = req.getParameter("pg");
 		
 		logger.debug("cateType1 : " + cateType1);
 		logger.debug("cateType2 : " + cateType2);
 		
-		String jsonData = null;
-		Gson gson = new Gson();
+		
+		
 		
 //		if(cateType1 != null && cateType2 == null) {
 //			logger.debug("here1 controller");
@@ -55,18 +57,40 @@ public class SelectCateController extends HttpServlet {
 //			jsonData = gson.toJson(vo);
 //			
 //		}else 
-		if(cateType1 != null && cateType2 != null) {
-			logger.debug("here1 controller");
-			List<CsVO> vo = service.selectArticlesCateType2(cateType1, cateType2);
-			jsonData = gson.toJson(vo);
-		}
+	
+		logger.debug("here1 controller");
+		// *
+		int currentPage = service.getCurrentPage(pg);
+		// 전체 게시물 개수 
+		int total = service.selectCountTotal(cate, cateType1, cateType2);
+		// 마지막 페이지 번호*
+		int lastPageNum = service.getLastPageNum(total);
+		// 현재 페이지 게시글 시작값*
+		int limitStart = service.getLimitStart(currentPage);
+		// 페이지 그룹* pageGroupStart, end
+		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
+		// 페이지 시작 번호*
+		int pageStartNum = service.getPageStartNum(total, limitStart);
+		// 게시글 번호 정렬
+		int start = service.getStartNum(currentPage);
+		
+		List<CsVO> articles = service.selectArticlesCateType2(cateType1, cateType2, start);
+		
+		AdminCsListVO vo = new AdminCsListVO();
+		vo.setCurrentPage(currentPage);
+		vo.setLastPageNum(lastPageNum);
+		vo.setLimitStart(limitStart);
+		vo.setPageGroupStart(result[0]);
+		vo.setPageGroupEnd(result[1]);
+		vo.setPageStartNum(pageStartNum);
+		vo.setArticles(articles);
+		
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(vo);			
 		
 		logger.debug("here3 controller: " + jsonData);
 		PrintWriter writer = resp.getWriter();
 		writer.print(jsonData);
-		
-		
-		
 		
 		
 	}
