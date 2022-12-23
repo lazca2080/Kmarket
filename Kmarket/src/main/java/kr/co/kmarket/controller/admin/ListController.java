@@ -65,13 +65,6 @@ public class ListController extends HttpServlet{
 			req.setAttribute("Product", Product);
 		}
 		
-		logger.debug("total : "+total);
-		logger.debug("currentPage : "+currentPage);
-		logger.debug("lastPageNum : "+lastPageNum);
-		logger.debug("result : "+result);
-		logger.debug("pageStartNum : "+pageStartNum);
-		logger.debug("start : "+start);
-		
 		req.setAttribute("seller", seller);
 		req.setAttribute("pg", pg);
 		req.setAttribute("currentPage", currentPage);

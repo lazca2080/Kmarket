@@ -33,11 +33,8 @@ public class DeleteController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String prodNo = req.getParameter("prodNo");
-		String uid = req.getParameter("uid");
 		
-		logger.info("prodNo : "+prodNo);
 		int result = service.delectProduct(prodNo);
-		logger.debug("result : "+result);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
