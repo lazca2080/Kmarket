@@ -4,6 +4,7 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Kmarket/product/js/zipcode.js"></script>
+<script src="/Kmarket/product/js/order.js"></script>
             </aside>
             <section class="order">
                 <nav>
@@ -32,6 +33,7 @@
                             <th>총수량</th>
                             <th>판매가</th>
                             <th>할인</th>
+                            <th>포인트</th>
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
@@ -56,6 +58,7 @@
                             <td>${cart.count}</td>
                             <td>${cart.price}</td>
                             <td>${cart.discount}%</td>
+                            <td>${cart.point}</td>
                             <td>${cart.delivery}</td>
                             <td>${cart.total}</td>
                         </tr>
@@ -89,6 +92,10 @@
                             <tr>
                                 <td>전체주문금액</td>
                                 <td>${vo.total}</td>
+                            </tr>
+							<tr>
+                                <td>적립 포인트</td>
+                                <td>${vo.point}</td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">
@@ -148,7 +155,6 @@
                             </label>
                             <span>
                             	포인트 5,000점 이상이면 현금처럼 사용 가능합니다.<br>
-                            	적립하신 포인트는 3일 뒤 사용 가능합니다.
                             </span>
                         </div>
                     </article>
