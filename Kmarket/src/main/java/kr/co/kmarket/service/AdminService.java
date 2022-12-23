@@ -22,18 +22,21 @@ public enum AdminService {
 		return dao.selectProducts(start,search,text);
 	}
 	
-	
 	// 판매자(관리자)의 상품목록만 조회
 	public List<ProductVO> selectProductss(int limitdstart,String uid,String search,String text) {
 		return dao.selectProductss(limitdstart,uid,search,text);
 	}
 	
-	public int selectCountTotal(String seller,String search) {
-		return dao.selectCountTotal(seller,search);
+	public int selectTotal(String search, String text) {
+		return dao.selectTotal(search, text);
 	}
 	
-	public int selectCountTotalAll(String search) {
-		return dao.selectCountTotalAll(search);
+	public int selectCountTotal(String seller,String search,String text) {
+		return dao.selectCountTotal(seller,search,text);
+	}
+	
+	public int selectCountTotalAll(String search, String text) {
+		return dao.selectCountTotalAll(search,text);
 	}
 	
 	public List<ProductVO> selectAdminList(int limiteStart, String seller) {

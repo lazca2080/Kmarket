@@ -3,18 +3,6 @@
 <script src="/Kmarket/member/js/memberSeller.js"></script>
 <script src="/Kmarket/member/js/zipcode.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script><!-- 우편번호 찾기 오픈 API --> 
-<script>
-	/*$(function(){
-		
-		let zip = $('input[name=kms_zip]').val();
-		let zip1 = $('input[name=kms_addr1]').val();
-		let zip2 = $('input[name=kms_addr2]').val();
-		
-		if(zip == '' && zip1 == '' && zip2 == ''){
-			console.log('test');
-		}
-	});*/
-</script>
 <main id="member">
     <div class="registerSeller">
         <nav>

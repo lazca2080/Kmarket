@@ -36,10 +36,11 @@ public class ListController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String replyContent = req.getParameter("replyContent");
 		
+		System.out.println("cate: "+cate);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
-		// 전체 게시물 개수
+		// 전체 게시물 개수 
 		int total = service.selectCountTotal(cate);
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);

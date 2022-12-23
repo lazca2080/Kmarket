@@ -86,16 +86,24 @@ public class AdminDAO {
 				psmt.setString(1, uid);
 			}else if(search.equals("prodName")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss1);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, "%"+uid+"%");
+				psmt.setString(2, "%"+text+"%");
+				psmt.setString(3, "%"+limitestart+"%");
 			}else if(search.equals("prodNo")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss2);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, "%"+uid+"%");
+				psmt.setString(2, "%"+text+"%");
+				psmt.setString(3, "%"+limitestart+"%");
 			}else if(search.equals("company")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss3);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, "%"+uid+"%");
+				psmt.setString(2, "%"+text+"%");
+				psmt.setString(3, "%"+limitestart+"%");
 			}else if(search.equals("seller")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss4);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, "%"+uid+"%");
+				psmt.setString(2, "%"+text+"%");
+				psmt.setString(3, "%"+limitestart+"%");
 			}
 			
 			psmt.setInt(2, limitestart);
@@ -129,7 +137,47 @@ public class AdminDAO {
 		return products;
 	}
 	
-	public int selectCountTotal(String seller,String search) {
+	public int selectTotal(String search, String text) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(AdminSql.SELECT_TOTAL);
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("prodNo")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4All);
+				psmt.setString(1, "%"+text+"%");
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public int selectCountTotal(String seller,String search,String text) {
 		int total = 0;
 		
 		try {
@@ -141,21 +189,21 @@ public class AdminDAO {
 				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
 				psmt.setString(1, seller);
 			}else if(search.equals("prodName")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1);
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search1);
 				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt.setString(2, "%"+text+"%");
 			}else if(search.equals("prodNo")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2);
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search2);
 				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt.setString(2, "%"+text+"%");
 			}else if(search.equals("company")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3);
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search3);
 				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt.setString(2, "%"+text+"%");
 			}else if(search.equals("seller")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4);
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search4);
 				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt.setString(2, "%"+text+"%");
 			}
 			
 			ResultSet rs = psmt.executeQuery();
@@ -176,7 +224,7 @@ public class AdminDAO {
 		return total;
 	}
 	
-	public int selectCountTotalAll(String search) {
+	public int selectCountTotalAll(String search, String text) {
 		int total = 0;
 		
 		try {
@@ -188,17 +236,17 @@ public class AdminDAO {
 				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
 			}else if(search.equals("prodName")){
 				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
-				psmt.setString(1, "%"+search+"%");
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("prodNo")){
 				logger.debug("prodNo search");
 				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2All);
-				psmt.setString(1, "%"+search+"%");
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("company")){
 				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3All);
-				psmt.setString(1, "%"+search+"%");
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("seller")){
 				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4All);
-				psmt.setString(1, "%"+search+"%");
+				psmt.setString(1, "%"+text+"%");
 			}
 			
 			ResultSet rs = psmt.executeQuery();

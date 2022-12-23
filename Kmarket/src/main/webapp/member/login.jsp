@@ -1,5 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="./_header.jsp"></jsp:include> 
+<script>
+	$(function(){
+		
+		let success = $('input[name=success]').val();
+		
+		if(success == 101){
+			alert('회원가입이 완료되었습니다.');
+		}else if(success == 102){
+			alert('회원가입에 실패했습니다. 다시 시도해주세요');
+		}
+		
+	});
+</script>
 <main id="member">
     <div class="login">
         <nav>
@@ -10,6 +23,7 @@
             </p>
         </nav>
         <form action="/Kmarket/member/login.do" method="post">
+        	<input type="hidden" name="success" value="${success}">
             <table border="0">
                 <tr>
                     <td>아이디</td>

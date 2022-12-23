@@ -69,6 +69,10 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		
+		System.out.println("pageGroupStart : "+result[0]);
+		System.out.println("pageGroupEnd : "+result[1]);
+		System.out.println("lastPageNum : "+lastPageNum);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
