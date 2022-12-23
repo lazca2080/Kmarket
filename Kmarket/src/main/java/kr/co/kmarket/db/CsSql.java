@@ -59,6 +59,8 @@ public class CsSql {
 	/*** admin - cs - index - main  ***/
 	public static final String SELECT_ADMIN_MAIN = "SELECT COUNT(`ordNo`), SUM(`ordPrice`), (SELECT COUNT(`uid`) FROM `km_member`), (SELECT COUNT(`prodNo`) FROM `km_product`) FROM `km_product_order`";
 	
+	public static final String SELECT_ADMIN_MAIN_USER = "SELECT COUNT(`ordNo`), SUM(`ordPrice`) FROM `km_product_order_item` WHERE uid=``";
+	
 	
 	/*** admin - cs - index - qna, notice ***/
 	public static final String SELECT_QNA_NOTICE = "SELECT * FROM `cs_article` WHERE `cate`='notice' OR `cate`='qna'";
