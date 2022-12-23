@@ -237,6 +237,8 @@
 			
 		});
 		
+		
+		// 카테고리 선택에 따른 테이블 출력
 		$('#selectBox').change(function(){
 			$('#selectBox2').change(function(){
 				
@@ -246,6 +248,7 @@
 				console.log("cateType2: " + cateType2); 
 				
 				let jsonData = {
+						"cate": "qna",
 						"cateType1":cateType1,
 						"cateType2":cateType2
 				}
@@ -262,9 +265,9 @@
 						$('.row').remove();	// 테이블 비우기 
 						let no = 1;
 						
-						console.log(data.length);
+						console.log(data.articles.length);
 						
-						for(let vo of data){
+						for(let vo of data.articles){
 							
 							/* console.log("here2"); */
 							console.log(vo.no);
@@ -286,7 +289,44 @@
 							
 							no++;
 							/* console.log("no : " + no); */
+							
+							
 						} 
+						
+						// paging - 동적생성
+						$('.paging > prev').empty();
+						$('.paging > .num').empty();	
+						$('.paging > .next').empty();	
+						
+						// paging - 이전 버튼
+						if(data.pageGroupStart > 1){
+							
+							let pgPrev = ""
+							
+						}
+						
+						// paing - 현재 페이지
+						for(let i=data.pageGroupStart; i<data.pageGroupEnd; i++){
+							
+							let param1 = "cate=qna&";
+							let param2 = "pg=1&";
+							let param3 = "cateType1="+cateType1+"&";
+							let param4 = "cateType2="+cateType2+"&";
+							
+							let pgNum = "<a href='/Kmarket/admin/cs/qna/list.do?"+param1+param2+param3+param4+"' class='num'>"+i+"</a>";
+							
+							$('.paging > .num').append(pgNum);
+							
+						}
+						// paging - 다음 버튼
+						
+						
+						/*
+						let paging = "<div>";
+							paging += "aaa";
+							paging +="</div>";
+						$('.paging').append(paging);
+						*/
 					}
 				}); 
 				
@@ -322,7 +362,7 @@
                         <select name="search" id="selectBox2" class="choose">
                             <option value="search1">2차 선택</option>
                         </select>
-                         <input type="text" id="uid" value="${sessUser.uid}"/>
+                         <input type="hidden" id="uid" value="${sessUser.uid}"/>
                     </div>
                     <table id="tb">
                     	<tr>
@@ -342,7 +382,7 @@
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
-	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no} // cate:${article.cate}</a></td>
+	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}"> ${article.title} </a></td>
 	                            <td>${article.uid.substring(0,3)}**</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>

@@ -31,6 +31,7 @@ public class CsSql {
 	/*** cs - list ***/
 	// 전체 게시물 개수 (cate)
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`=?";
+	public static final String SELECT_COUNT_TOTAL_WITH_CATE2 = "select count(`no`) from `cs_article` where `cate`=? and `cateType1`=? and `cateType2`=?";
 	// 페이지 글 가져오기
 	public static final String SELECT_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
 	// 공지사항 전체글 보기
@@ -112,8 +113,8 @@ public class CsSql {
 	public static final String UPDATE_HIT = "UPDATE `cs_article` SET `hit`=`hit`+1 WHERE `no`=?";
 	// 문의하기 유형1 글 가져오기
 	public static final String SELECT_CATETYPE1 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`=?";
-	// 문의하기 유형1 글 가져오기
-	public static final String SELECT_CATETYPE2 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`=? and `cateType2`=?";
+	// 문의하기 유형2 글 가져오기
+	public static final String SELECT_CATETYPE2 = "SELECT * FROM `cs_article` WHERE `cate`='qna' and `cateType1`=? and `cateType2`=? ORDER BY `no` DESC LIMIT ?,10";
 	//자주묻는 질문 유형2 글 가져오기 
 	public static final String SELECT_FAQ_CATETYPE2="SELECT * FROM `cs_article` WHERE `cate`='faq' and `cateType1`=? and `cateType2`=? ORDER BY `no` DESC LIMIT ?,10";
 	

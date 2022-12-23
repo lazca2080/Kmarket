@@ -46,6 +46,9 @@ public enum CsService {
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
+	public int selectCountTotal(String cate, String cateType1, String cateType2) {
+		return dao.selectCountTotal(cate, cateType1, cateType2);
+	}
 	// 마지막 페이지 번호
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0; // 마지막 페이지
@@ -104,8 +107,8 @@ public enum CsService {
 		return dao.selectArticlesCateType(cateType1);
 	}
 	// 문의하기 - 유형별 글 가져오기 (cateType2)
-	public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2){
-		return dao.selectArticlesCateType2(cateType1, cateType2);
+	public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2, int start){
+		return dao.selectArticlesCateType2(cateType1, cateType2, start);
 	}
 	
 	

@@ -127,6 +127,33 @@ public class CsDAO {
 		}
 		return total;
 	}
+	
+	public int selectCountTotal(String cate, String cateType1, String cateType2) {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			
+			Connection con = DBCP.getConnection();
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_COUNT_TOTAL_WITH_CATE2);
+			psmt.setString(1, cate);
+			psmt.setString(2, cateType1);
+			psmt.setString(3, cateType2);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
 	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
 	public List<CsVO> selectArticles(String cate, String cateType1, int start){
 		List<CsVO> articles = new ArrayList<>();
@@ -309,7 +336,7 @@ public class CsDAO {
 		return articles;
 	}
 	// 문의하기 - 유형별 글 가져오기 (cateType2)
-		public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2){
+		public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2, int start){
 			List<CsVO> articles = new ArrayList<>();
 			try {
 				logger.info("selectArticlesCateType2");
@@ -320,6 +347,7 @@ public class CsDAO {
 				psmt = con.prepareStatement(CsSql.SELECT_CATETYPE2);
 				psmt.setString(1, cateType1);
 				psmt.setString(2, cateType2);
+				psmt.setInt(3, start);
 				
 				ResultSet rs = psmt.executeQuery();
 				while(rs.next()) {
@@ -391,7 +419,7 @@ public class CsDAO {
 	}
 	
 	// 자주묻는질문 - 유형별 글 가져오기 (cateType2)
-			public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
+	public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
 				List<CsVO> articles = new ArrayList<>();
 				try {
 					logger.info("selectArticlesFaqCateType2");

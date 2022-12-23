@@ -646,7 +646,7 @@ button[type=submit] {
 #admin-faq > section > table  tr > td:nth-child(2) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(3) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(4) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left;}
+#admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left; padding-left: 32px;}
 #admin-faq > section > table  tr > td:nth-child(6) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(7) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(8) {width: 80px;}
