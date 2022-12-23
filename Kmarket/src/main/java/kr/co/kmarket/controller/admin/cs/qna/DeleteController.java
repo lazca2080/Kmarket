@@ -77,7 +77,7 @@ public class DeleteController extends HttpServlet{
 			
 		
 		
-		
+// 개별 다중 선택 시 게시글 삭제 방법 2 	
 //		for(int i=0; i<length; i++) {
 //			service.deleteArticle(chkList[i]);
 //		}

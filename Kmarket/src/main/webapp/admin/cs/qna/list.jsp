@@ -342,7 +342,7 @@
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
-	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no} // re: ${article.replyContent}</a></td>
+	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no} // cate:${article.cate}</a></td>
 	                            <td>${article.uid.substring(0,3)}**</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -364,21 +364,20 @@
                     </table>
                     <input type="button" class="delete" name="deleteButton" value="선택삭제">
                     <div class="paging">
-                    	<h2>page자리</h2>
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                             <!-- <a href="#" class="on">1</a> -->
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
 	                        </c:forEach>
                         </span>
                         <span class="next">
-                            <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+                            <c:if test="${pageGroupEnd lt lastPageNum}">
+	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
 	                        </c:if>
                         </span>
                     </div>
