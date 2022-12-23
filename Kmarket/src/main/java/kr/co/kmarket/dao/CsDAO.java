@@ -106,7 +106,7 @@ public class CsDAO {
 	public int selectCountTotal(String cate) {
 		int total = 0;
 		try {
-			logger.info("CsDAO-selectCountTotal...");
+			logger.info("selectCountTotal...");
 			
 			Connection con = DBCP.getConnection();
 			

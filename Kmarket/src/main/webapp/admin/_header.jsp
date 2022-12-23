@@ -86,7 +86,7 @@
                         <ol>
                             <li><a href="/Kmarket/admin/cs/notice/list.do?cate=notice">공지사항</a></li>
                             <li><a href="/Kmarket/admin/cs/faq/list.do?cate=faq">자주묻는 질문</a></li>
-                            <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
+                            <li><a href="/Kmarket/admin/cs/qna/list.do?cate=qna">문의하기</a></li>
                         </ol>
                     </li>
                     </c:if>
