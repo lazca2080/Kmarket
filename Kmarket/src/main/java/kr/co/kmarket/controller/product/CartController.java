@@ -42,9 +42,6 @@ public class CartController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String count = req.getParameter("count");
 		
-		logger.info(uid);
-		//logger.info(prodNo);
-		
 		List<ProductVO> cart =service.selectProductCart(uid);
 		req.setAttribute("cart", cart);
 		
@@ -63,11 +60,7 @@ public class CartController extends HttpServlet{
 		
 		String uid = req.getParameter("uid");
 		
-		logger.info("post uid : "+uid);
-		
 		ProductVO vo = service.selectTotalPrice(uid);
-		
-		logger.debug("vo : "+vo);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("totalCount", vo.getTotalcount());
@@ -76,8 +69,6 @@ public class CartController extends HttpServlet{
 		json.addProperty("totalDelivery", vo.getTotalDelivery());
 		json.addProperty("totalPoint", vo.getTotalPoint());
 		json.addProperty("totalPrice", vo.getTotalPrice());
-		
-		logger.debug("costprice : "+vo.getCostPrice());
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());

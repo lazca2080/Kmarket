@@ -30,19 +30,12 @@ public class LoginController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("LoginController_admin doGet...");
-		
-		//String success = req.getParameter("success");
-		//req.setAttribute(success, success);
-		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/login.jsp");
 		dispatcher.forward(req, resp);
 	
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		logger.info("LoginController_admin doPost...");
 		
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
