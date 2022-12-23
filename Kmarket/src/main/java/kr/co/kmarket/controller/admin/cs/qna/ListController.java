@@ -40,8 +40,9 @@ public class ListController extends HttpServlet{
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
-		// 전체 게시물 개수 
+		// 전체 게시물 개수 cateType1 == null 
 		int total = service.selectCountTotal(cate);
+		// 유형 선택시 개수 
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
 		// 현재 페이지 게시글 시작값 
@@ -53,9 +54,9 @@ public class ListController extends HttpServlet{
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
 		
-		// 페이지 글 가져오기
+		// 페이지 글 가져오기 cateType1 == null
 		List<CsVO> articles = service.selectArticlesQna(cate, cateType1, start);
-		
+		// != null +cateType2 유형선택시
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);

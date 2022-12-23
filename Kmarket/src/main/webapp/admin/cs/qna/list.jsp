@@ -248,6 +248,7 @@
 				console.log("cateType2: " + cateType2); 
 				
 				let jsonData = {
+						"pg" : "1",
 						"cate": "qna",
 						"cateType1":cateType1,
 						"cateType2":cateType2,
@@ -302,7 +303,10 @@
 						// paging - 이전 버튼
 						if(data.pageGroupStart > 1){
 							
-							let pgPrev = ""
+							
+							
+							
+							let pgPrev = "<a href='/Kmarket/admin/cs/qna/list.do?"+param1+param2+param3+param4+"' class='num'>"+i+"</a>";
 							
 						}
 						
@@ -310,12 +314,12 @@
 						for(let i=data.pageGroupStart; i<data.pageGroupEnd; i++){
 							
 							let param1 = "cate=qna&";
-							let param2 = "pg=1&";
+							let param2 = "pg="+i+"&";
 							let param3 = "cateType1="+cateType1+"&";
 							let param4 = "cateType2="+cateType2+"&";
 							
 							let pgNum = "<a href='/Kmarket/admin/cs/qna/list.do?"+param1+param2+param3+param4+"' class='num'>"+i+"</a>";
-							
+							//http://localhost:8080/Kmarket/admin/cs/qna/select.do?cate=qna&cateType1=회원&cateType2=가입
 							$('.paging > .num').append(pgNum);
 							
 						}

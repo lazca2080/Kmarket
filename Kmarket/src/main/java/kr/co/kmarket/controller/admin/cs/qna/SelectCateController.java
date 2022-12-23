@@ -47,29 +47,18 @@ public class SelectCateController extends HttpServlet {
 		
 		logger.debug("cateType1 : " + cateType1);
 		logger.debug("cateType2 : " + cateType2);
-		
-		
-		
-		
-//		if(cateType1 != null && cateType2 == null) {
-//			logger.debug("here1 controller");
-//			List<CsVO> vo = service.selectArticlesCateType(cateType1);
-//			jsonData = gson.toJson(vo);
-//			
-//		}else 
 	
-		logger.debug("here1 controller");
-		// *
+		// 
 		int currentPage = service.getCurrentPage(pg);
 		// 전체 게시물 개수 
 		int total = service.selectCountTotal(cate, cateType1, cateType2);
-		// 마지막 페이지 번호*
+		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
-		// 현재 페이지 게시글 시작값*
+		// 현재 페이지 게시글 시작값
 		int limitStart = service.getLimitStart(currentPage);
 		// 페이지 그룹* pageGroupStart, end
 		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
-		// 페이지 시작 번호*
+		// 페이지 시작 번호
 		int pageStartNum = service.getPageStartNum(total, limitStart);
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
