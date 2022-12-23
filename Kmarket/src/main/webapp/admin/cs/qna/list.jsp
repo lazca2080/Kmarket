@@ -74,12 +74,14 @@
 			});
 		}); 
 		*/
+		
+		// 단독삭제, 개별선택삭제, 전체삭제 통합
 		let chkNo = document.getElementsByName("articleNo");
 		let rowCnt = chkNo.length;
 		
 		console.log(chkNo.length);		// 페이지 내 게시글 개수 확인
 		
-		$('input[name=testbutton]').click(function(){
+		$('input[name=deleteButton]').click(function(){
 			
 			let list = $('input[name=articleNo]');
 			let checkbox = $('input[name=articleNo]:checked');
@@ -105,11 +107,10 @@
 				dataType:'json',
 				data: {"chkArr" : chkArr},
 				success:function(data){
-					alert('here1');	// 체크 개수가 2개 이상부터 실행 X
 					console.log("data : "+data.result);	
 					if(data.result == 1){
 						alert('삭제되었습니다.');
-						checkbox.parent().parent().remove(); // 수정해야 함 for문 사용?
+						checkbox.parent().parent().remove(); 
 						return true;
 					}else{
 						alert('실패하였습니다.');
@@ -357,7 +358,7 @@
 						</c:forEach>
                         
                     </table>
-                    <input type="button" class="delete" value="선택삭제">
+                    <input type="button" class="delete" name="deleteButton" value="선택삭제">
                     <div class="paging">
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
