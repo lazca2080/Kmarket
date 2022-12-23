@@ -44,8 +44,8 @@
                                 </article>
                             </td>
                             <td>${cart.price}원</td>
-                            <td>${cart.discount}원</td>
-                            <td>${cart.count}원</td>
+                            <td>${cart.discount}%</td>
+                            <td>${cart.count}</td>
                             <td>${cart.total}원</td>
                         </tr>
                         </c:forEach>

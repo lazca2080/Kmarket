@@ -90,12 +90,12 @@
                                 <td class="totalDelivery_span">0</td>
                             </tr>
                             <tr>
-                                <td>포인트</td>
-                                <td class="totalPoint_span">0</td>
-                            </tr>
-                            <tr>
                                 <td>전체주문금액</td>
                                 <td class="totalPrice_span">0</td>
+                            </tr>
+							<tr>
+                                <td>적립포인트</td>
+                                <td class="totalPoint_span">0</td>
                             </tr>
                         </table>
                         <input type="submit" class="submit" value="주문하기">
