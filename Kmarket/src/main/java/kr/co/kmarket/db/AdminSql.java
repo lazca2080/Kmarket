@@ -65,26 +65,6 @@ public class AdminSql {
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`prodNo`) FROM `km_product` "
 												  + "where `seller`=? ";
 	
-	public static final String select_count_total_for_search1 = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
-																+ "JOIN `km_member` AS b ON a.seller = b.uid "
-																+ "WHERE `seller`= ? AND  "
-																+ "(`prodName` LIKE ?) LIMIT ?,10";
-	
-	public static final String select_count_total_for_search2 = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
-																+ "JOIN `km_member` AS b ON a.seller = b.uid "
-																+ "WHERE `seller`= ? AND  "
-																+ "(`prodNo` LIKE ?) LIMIT ?,10";
-	
-	public static final String select_count_total_for_search3 = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
-																+ "JOIN `km_member` AS b ON a.seller = b.uid "
-																+ "WHERE `seller`= ? AND  "
-																+ "(a.company LIKE ?) LIMIT ?,10";
-	
-	public static final String select_count_total_for_search4 = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
-																+ "JOIN `km_member` AS b ON a.seller = b.uid "
-																+ "WHERE `seller`= ? AND  "
-																+ "(`seller` LIKE ?) LIMIT ?,10";
-	
 	public static final String select_count_total_search1 = "SELECT COUNT(`prodNo`) FROM `km_product` AS a "
 																+ "JOIN `km_member` AS b ON a.seller = b.uid "
 																+ "WHERE `seller`= ? AND  "

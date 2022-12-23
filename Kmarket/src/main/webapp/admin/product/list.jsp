@@ -4,42 +4,46 @@
 <script>
 	$(function(){
 		$('.btn').click(function(){
-			let prodNo = $('input:checkbox:checked').val();
-			let checkbox = $('input:checkbox:checked');
+			let isDelete = confirm('정말 삭제하시겠습니까?');
 			
-			console.log("prodNo : " + prodNo);
-			
-			if(prodNo == null){
-				alert('상품을 선택하지 않았습니다.')
-				return;
-			}
-			
-			$.ajax({
-				url : '/Kmarket/admin/product/deleteProduct.do',
-				method : 'get',
-				data : {"prodNo":prodNo},
-				dataType : 'json',
-				success : function(data){
-					console.log("data :"+ data.result);
-					if(data.result == 1){
-						alert('삭제되었습니다.');
-						checkbox.parent().parent().remove();
-						return true;
-					}else{
-						alert('실패하였습니다.');
-						return false;
-					}
+			if(isDelete){
+				let prodNo = $('input:checkbox:checked').val();
+				let checkbox = $('input:checkbox:checked');
+				
+				if(prodNo == null){
+					alert('상품을 선택하지 않았습니다.')
+					return;
 				}
-			});
+				
+				$.ajax({
+					url : '/Kmarket/admin/product/deleteProduct.do',
+					method : 'get',
+					data : {"prodNo":prodNo},
+					dataType : 'json',
+					success : function(data){
+						if(data.result == 1){
+							alert('삭제되었습니다.');
+							checkbox.parent().parent().remove();
+							return true;
+						}else{
+							alert('실패하였습니다.');
+							return false;
+						}
+					}
+				});
+				return true;
+			}else{
+				return false;
+			}
 		});
 		
 		$('input[type=submit]').click(function(){
-			
 			let search = $('select[name=search]').val();
 			let text = $('input[name=search]').val();
-			let level = $('input[type=hidden]').val();
+			let level = $('input[name=level]').val();
+			let uid = $('input[name=uid]').val();
 			
-			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level;
+			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level+"&uid="+uid;
 		});
 	});
 </script>
@@ -59,7 +63,8 @@
                             <option value="company">제조사</option>
                             <option value="seller">판매자</option>
                         </select>
-                       	<input type="hidden" value="${sessUser.level}" >
+                       	<input type="hidden" name="level" value="${sessUser.level}" >
+                       	<input type="hidden" name="uid" value="${sessUser.uid}" >
                         <input type="text" name="search" placeholder="검색할 단어">
                         <input type="submit" value="검색">
                     </div>
@@ -105,7 +110,7 @@
                         </c:otherwise>
                         </c:choose>
                     </table>
-                    	<input type="button" value="선택삭제" class="btn">
+                    	<input type="button" value="선택삭제" class="btn" />
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="${pageGroupStart > 1}">

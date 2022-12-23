@@ -53,7 +53,6 @@ public enum AdminService {
 		return dao.delectProduct(prodNo);
 		
 	}
-
 	// 서비스 로직
 	
 	//페이지 그룹 계산
@@ -103,11 +102,4 @@ public enum AdminService {
 		}
 		return lastPageNum;
 	}
-	
-	
-	/*
-	 * public List<ProductVO> selectProductKeyword(String uid,String keyword){
-		return dao.selectProductKeyword(uid, keyword);
-	}
-	*/
 }
