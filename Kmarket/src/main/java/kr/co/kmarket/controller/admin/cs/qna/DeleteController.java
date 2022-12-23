@@ -59,22 +59,22 @@ public class DeleteController extends HttpServlet{
 		
 		String[] chkList = req.getParameterValues("chkArr");	
 		int length = chkList.length;
+		int result = 0;
 		
 		for(int k=0; k<length; k++) {
 			logger.info("chkList: "+chkList[k]);
-			int result = service.deleteArticle(chkList[k]);
+			result = service.deleteArticle(chkList[k]);
 			
-			logger.debug("result : "+result);	// 몇 개를 삭제하든 삭제 시 result:1
-			resp.setCharacterEncoding("UTF-8");
-			
-			PrintWriter writer = resp.getWriter();
-			JsonObject json = new JsonObject();
-			json.addProperty("result", result);
-			writer.print(json.toString());
-			
+			logger.debug("result : "+result);	// 삭제 시 result:1
 		}
 		
+		resp.setCharacterEncoding("UTF-8");
 		
+		PrintWriter writer = resp.getWriter();
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		writer.print(json.toString());
+			
 		
 		
 		

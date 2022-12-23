@@ -74,17 +74,24 @@
 			});
 		}); 
 		*/
+		
+		// 단독삭제, 개별선택삭제, 전체삭제 통합
 		let chkNo = document.getElementsByName("articleNo");
 		let rowCnt = chkNo.length;
 		
 		console.log(chkNo.length);		// 페이지 내 게시글 개수 확인
 		
-		$('input[name=testbutton]').click(function(){
+		$('input[name=deleteButton]').click(function(){
 			
 			let list = $('input[name=articleNo]');
 			let checkbox = $('input[name=articleNo]:checked');
 			
 			console.log(checkbox.length);	// 선택된 게시글 개수 확인
+			
+			if(checkbox.length == 0){
+				alert('삭제할 게시글을 선택하십시오.');
+				return;
+			}
 			
 			let chkArr = new Array();
 			
@@ -105,11 +112,10 @@
 				dataType:'json',
 				data: {"chkArr" : chkArr},
 				success:function(data){
-					alert('here1');	// 체크 개수가 2개 이상부터 실행 X
 					console.log("data : "+data.result);	
 					if(data.result == 1){
 						alert('삭제되었습니다.');
-						checkbox.parent().parent().remove(); // 수정해야 함 for문 사용?
+						checkbox.parent().parent().remove(); 
 						return true;
 					}else{
 						alert('실패하였습니다.');
@@ -318,7 +324,6 @@
                             <option value="search1">2차 선택</option>
                         </select>
                          <input type="text" id="uid" value="${sessUser.uid}"/>
-                         <input type="button" name="testbutton" value="testbutton"/>
                     </div>
                     <table id="tb">
                     	<tr>
@@ -358,8 +363,9 @@
 						</c:forEach>
                         
                     </table>
-                    <input type="button" class="delete" value="선택삭제">
+                    <input type="button" class="delete" name="deleteButton" value="선택삭제">
                     <div class="paging">
+                    	<h2>page자리</h2>
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
 	                            <a href="/Kmarket/admin/cs/qna/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
