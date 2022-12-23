@@ -164,6 +164,52 @@ public class AdminDAO {
 				total = rs.getInt(1);
 			}
 			
+			logger.debug("total : "+total);
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public int selectCountTotalAll(String search) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			if(search == null){
+				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
+				psmt.setString(1, "%"+search+"%");
+			}else if(search.equals("prodNo")){
+				logger.debug("prodNo search");
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2All);
+				psmt.setString(1, "%"+search+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3All);
+				psmt.setString(1, "%"+search+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4All);
+				psmt.setString(1, "%"+search+"%");
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				logger.debug("rs.next()");
+				total = rs.getInt(1);
+			}
+			
+			logger.debug("total : "+total);
+			
 			rs.close();
 			psmt.close();
 			conn.close();
