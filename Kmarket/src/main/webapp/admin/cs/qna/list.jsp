@@ -241,7 +241,8 @@
 				
 				let jsonData = {
 						"cateType1":cateType1,
-						"cateType2":cateType2
+						"cateType2":cateType2,
+						"pg":pg
 				}
 				console.log("컨트롤러로 보내는 jsonData: "+ Object.values(jsonData));
 				

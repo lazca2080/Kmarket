@@ -119,7 +119,10 @@ public class MemberDAO {
 	
 	/*** register - RegisterController ***/
 	// 회원가입
-	public void insertMember(MemberVO vo) {
+	public int insertMember(MemberVO vo) {
+		
+		int result = 0;
+		
 		try {
 			logger.info("insertMember...");
 			
@@ -136,7 +139,7 @@ public class MemberDAO {
 			psmt.setString(9, vo.getAddr2());
 			psmt.setString(10, vo.getRegip());
 			
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			
 			psmt.close();
 			con.close();
@@ -144,6 +147,8 @@ public class MemberDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return result;
 	}
   
 	// 아이디 중복확인
@@ -233,7 +238,10 @@ public class MemberDAO {
 
 	/*** register - RegisterSellerController 
 	 * @return ***/
-	public void insertSellerMember(MemberVO vo) {
+	public int insertSellerMember(MemberVO vo) {
+		
+		int result = 0;
+		
 		try {
 			logger.info("insertSellerMember...");
 			
@@ -254,7 +262,8 @@ public class MemberDAO {
 			psmt.setString(13, vo.getManager());
 			psmt.setString(14, vo.getManagerHp());
 			psmt.setString(15, vo.getRegip());
-			psmt.executeUpdate();
+			
+			result = psmt.executeUpdate();
 			
 			psmt.close();
 			con.close();
@@ -262,6 +271,8 @@ public class MemberDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		return result;
 	}
 	
 
