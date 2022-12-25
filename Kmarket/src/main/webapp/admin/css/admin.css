@@ -711,6 +711,19 @@ button[type=submit] {
     color: #fe434c;
     font-weight: bold;
 }
+#admin-faq .ajaxNum > a {
+	display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
 
 
 /* notice 공통  */
@@ -810,6 +823,7 @@ button[type=submit] {
     box-sizing: border-box;
    
 }
+
 
 /*notice - 글보기*/
 #cs > .notice > .view {}

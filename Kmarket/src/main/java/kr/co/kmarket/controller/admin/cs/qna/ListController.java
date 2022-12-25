@@ -40,17 +40,14 @@ public class ListController extends HttpServlet{
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
-		// 전체 게시물 개수 cateType1 == null 
+		// 전체 게시물 개수 
 		int total = service.selectCountTotal(cate);
-		// 유형 선택시 개수 
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
-		// 현재 페이지 게시글 시작값 
-		int limitStart = service.getLimitStart(currentPage);
 		// 페이지 그룹
 		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
 		// 페이지 시작 번호 
-		int pageStartNum = service.getPageStartNum(total, limitStart);
+		int pageStartNum = service.getPageStartNum(total, currentPage);
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
 		
@@ -64,7 +61,6 @@ public class ListController extends HttpServlet{
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("total", total);
 		req.setAttribute("lastPageNum", lastPageNum);
-		req.setAttribute("limitStart", limitStart);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
