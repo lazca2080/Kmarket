@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/admin/_header.jsp"></jsp:include>
+<style>
+	#admin-faq > section > .paging .active {
+		background: #333;
+	  	color: #fff;
+	}
+	#admin-faq .off-screen {
+		display: none;
+	}
+</style>
 <script>
 	$(function() {
 		
@@ -146,7 +155,6 @@
 		
 		// 카테고리 1차 선택에 따른 2차 선택문 
 		$('select[id=selectBox]').change(function() {
-
 			let select = $(this).val();
 			
 			
@@ -230,11 +238,9 @@
 					
 				$('.choose').append(tags);
 			}
-			
 		});
 		
-		
-		// 카테고리 선택에 따른 테이블 출력
+		// 카테고리 선택에 따른 테이블 출력 
 		$('#selectBox').change(function(){
 			$('#selectBox2').change(function(){
 				
@@ -244,8 +250,6 @@
 				console.log("cateType2: " + cateType2); 
 				
 				let jsonData = {
-						"pg" : "1",
-						"cate": "qna",
 						"cateType1":cateType1,
 						"cateType2":cateType2,
 						"pg":pg
@@ -255,7 +259,7 @@
 				
 				$.ajax({
 					url: '/Kmarket/admin/cs/qna/select.do', 
-					method: 'get',
+					method: 'POST',
 					data:jsonData,
 					dataType:'json',
 					success: function(data){
@@ -263,12 +267,10 @@
 						$('.row').remove();	// 테이블 비우기 
 						let no = 1;
 						
-						console.log(data.articles.length);
+						console.log(data.length);
 						
-						for(let vo of data.articles){
+						for(let vo of data){
 							
-							/* console.log("here2"); */
-							console.log(vo.no);
 							let uid = vo.uid.substring(0,3);
 							let rdate = vo.rdate.substring(2,10);
 							
@@ -284,58 +286,53 @@
 							rows += "</tr>"; 
 							 
 							$('#tb').append(rows);
-							
 							no++;
-							/* console.log("no : " + no); */
-							
-							
 						} 
 						
-						// paging - 동적생성
-						$('.paging > prev').empty();
-						$('.paging > .num').empty();	
-						$('.paging > .next').empty();	
+						// paging - 동적생성 
+						$('.paging > .num').empty();	// 기존 목록 페이지 번호 지우기
 						
-						// paging - 이전 버튼
-						if(data.pageGroupStart > 1){
-							
-							
-							
-							
-							let pgPrev = "<a href='/Kmarket/admin/cs/qna/list.do?"+param1+param2+param3+param4+"' class='num'>"+i+"</a>";
-							
+						let rowTotals = $('.row').length;	// 게시글 총 개수 (33)
+						let rowPerPage = 10;				// 한 페이지당 게시글 개수
+						let pageTotal = Math.ceil(rowTotals/ rowPerPage); // 페이지 번호 (4)
+						let i = 0;
+						
+						for(i; i<pageTotal; i++){
+							$('<a href="#"></a>').attr('rel',i).html(i+1).appendTo('.num');
 						}
 						
-						// paing - 현재 페이지
-						for(let i=data.pageGroupStart; i<data.pageGroupEnd; i++){
+						$('.row').addClass('off-screen')
+								.slice(0, rowPerPage)
+								.removeClass('off-screen');
+						
+
+						// 페이지 번호 클릭 시 
+						let pagingLink = $('.num > a');
+						pagingLink.on('click', function(e){
+							e.preventDefault();
 							
-							let param1 = "cate=qna&";
-							let param2 = "pg="+i+"&";
-							let param3 = "cateType1="+cateType1+"&";
-							let param4 = "cateType2="+cateType2+"&";
+							$('.num > a').removeClass('active');
+							$(this).addClass('active');
+								
+							let currPage = $(this).attr('rel');
+							console.log("currPage: "+currPage);	// 페이지 번호가 1일 때 currPage=0
 							
-							let pgNum = "<a href='/Kmarket/admin/cs/qna/list.do?"+param1+param2+param3+param4+"' class='num'>"+i+"</a>";
-							//http://localhost:8080/Kmarket/admin/cs/qna/select.do?cate=qna&cateType1=회원&cateType2=가입
-							$('.paging > .num').append(pgNum);
+							let startItem = currPage * rowPerPage;	// 시작 행 = 페이지 번호 * 페이지당 행수
+							let endItem = startItem + rowPerPage;	// 끝 행 = 시작 행 + 페이지당 행수
 							
-						}
-						// paging - 다음 버튼
+							$('.row').css('opacity', '0.0')
+									.addClass('off-screen')
+									.slice(startItem, endItem)
+									.removeClass('off-screen')
+									.animate({opacity: 1}, 200);
+						}); 
 						
 						
-						/*
-						let paging = "<div>";
-							paging += "aaa";
-							paging +="</div>";
-						$('.paging').append(paging);
-						*/
-					}
-				}); 
+					} // success
+				}); //ajax
 				
 			});
 		});
-			
-		
-		
 	
 });
 </script>
@@ -379,7 +376,7 @@
 						<c:forEach var="article" items="${articles}">
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
-	                        	<td><input type="checkbox" name="articleNo" value="${article.no}">${article.no}</td>
+	                        	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
@@ -404,24 +401,23 @@
                         
                     </table>
                     <input type="button" class="delete" name="deleteButton" value="선택삭제">
-                    <div class="paging">
-                        <span class="prev">
-                            <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
-	                        </c:if>
-                        </span>
-                        <span class="num">
-                            <!-- <a href="#" class="on">1</a> -->
-                            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
-	                        </c:forEach>
-                        </span>
-                        <span class="next">
-                            <c:if test="${pageGroupEnd lt lastPageNum}">
-	                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
-	                        </c:if>
-                        </span>
-                    </div>
+                   		 <div class="paging">
+	                        <span class="prev">
+	                            <c:if test="${pageGroupStart > 1}">
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+		                        </c:if>
+	                        </span>
+	                        <span class="num">
+	                            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+		                        </c:forEach>
+	                        </span>
+	                        <span class="next">
+	                            <c:if test="${pageGroupEnd < lastPageNum}">
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+		                        </c:if>
+	                        </span>
+	                    </div>
                 </section>
             </section>
         </main>

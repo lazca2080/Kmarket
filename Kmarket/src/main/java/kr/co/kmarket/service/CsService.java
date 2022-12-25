@@ -42,13 +42,6 @@ public enum CsService {
 		}
 		return currentPage;
 	}
-	// 전체 게시물 개수
-	public int selectCountTotal(String cate) {
-		return dao.selectCountTotal(cate);
-	}
-	public int selectCountTotal(String cate, String cateType1, String cateType2) {
-		return dao.selectCountTotal(cate, cateType1, cateType2);
-	}
 	// 마지막 페이지 번호
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0; // 마지막 페이지
@@ -58,12 +51,6 @@ public enum CsService {
 			lastPageNum = (total/10)+1;
 		}
 		return lastPageNum;
-	}
-	// 현재 페이지 게시글 시작값 
-	public int getLimitStart(int currentPage) {
-		int limitStart = 0;
-		limitStart = (currentPage-1)*10;
-		return limitStart;
 	}
 	// 페이지 그룹 
 	public int[] getPageGroupNum(int currentPage, int lastPageNum) {
@@ -78,13 +65,28 @@ public enum CsService {
 		int[] result = {pageGroupStart,pageGroupEnd};
 		return result;
 	}
-	// 페이지 시작 번호
-	public int getPageStartNum(int total, int limitStart) {
-		int pageStartNum = 0;
-		pageStartNum = total - limitStart;
-		return pageStartNum;
+	// 전체 게시물 개수 
+	public int selectCountTotal(String cate) {
+		return dao.selectCountTotal(cate);
 	}
-	// 게시글 번호 정렬
+	public int selectCountTotal(String cateType1, String cateType2) {
+		return dao.selectCountTotal(cateType1, cateType2);
+	}
+	
+	/* 현재 페이지 게시글 시작값 
+	public int getLimitStart(int currentPage) {
+		int limitStart = 0;
+		limitStart = (currentPage-1)*10;
+		return limitStart;
+	}
+	*/
+	
+	// 페이지 시작 번호 
+	public int getPageStartNum(int total, int currentPage) {
+		int start = (currentPage - 1) * 10;
+		return total - start;
+	}
+	// 게시글 번호 정렬 (시작인덱스)
 	public int getStartNum(int currentPage) {
 		return (currentPage-1)*10;
 	}
@@ -120,11 +122,14 @@ public enum CsService {
 	}
 	
 	// 문의하기 - 유형별 글 가져오기 (cateType2)
-		public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
+	public List<CsVO> selectArticlesFaqCateType2(String cateType1, String cateType2, int start){
 			return dao.selectArticlesFaqCateType2(cateType1, cateType2, start);
-		}
+	}
 		
-		
+	// 문의하기 유형2 글 가져오기 
+	public List<CsVO> select_cateType_list(String cateType1, String cateType2){
+		return dao.select_cateType_list(cateType1, cateType2);
+}
 	
 //	public Map<String, Object> selectFaqArticles(String cateType1, int num){
 //	return dao.selectFaqArticles(cateType1, num);

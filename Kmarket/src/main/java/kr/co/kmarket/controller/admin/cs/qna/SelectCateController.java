@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,30 +37,23 @@ public class SelectCateController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("doGet");
-		
 		resp.setContentType("text/html;charset=UTF-8");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
-		
-		logger.debug("cateType1 : " + cateType1);
-		logger.debug("cateType2 : " + cateType2);
 	
-		// 
+		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		// 전체 게시물 개수 
-		int total = service.selectCountTotal(cate, cateType1, cateType2);
+		int total = service.selectCountTotal(cateType1, cateType2);
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
-		// 현재 페이지 게시글 시작값
-		int limitStart = service.getLimitStart(currentPage);
 		// 페이지 그룹* pageGroupStart, end
 		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
 		// 페이지 시작 번호
-		int pageStartNum = service.getPageStartNum(total, limitStart);
+		int pageStartNum = service.getPageStartNum(total, currentPage);
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
 		
@@ -68,7 +62,6 @@ public class SelectCateController extends HttpServlet {
 		AdminCsListVO vo = new AdminCsListVO();
 		vo.setCurrentPage(currentPage);
 		vo.setLastPageNum(lastPageNum);
-		vo.setLimitStart(limitStart);
 		vo.setPageGroupStart(result[0]);
 		vo.setPageGroupEnd(result[1]);
 		vo.setPageStartNum(pageStartNum);
@@ -77,7 +70,6 @@ public class SelectCateController extends HttpServlet {
 		Gson gson = new Gson();
 		String jsonData = gson.toJson(vo);			
 		
-		logger.debug("here3 controller: " + jsonData);
 		PrintWriter writer = resp.getWriter();
 		writer.print(jsonData);
 		
@@ -85,6 +77,22 @@ public class SelectCateController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doPost...SELECT CATE LIST...TEST");
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		String cate = req.getParameter("cate");
+		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
+		
+		List<CsVO> articles = service.select_cateType_list(cateType1, cateType2);
+		
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(articles);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData);
 		
 	}
 

@@ -128,7 +128,7 @@ public class CsDAO {
 		return total;
 	}
 	
-	public int selectCountTotal(String cate, String cateType1, String cateType2) {
+	public int selectCountTotal(String cateType1, String cateType2) {
 		int total = 0;
 		try {
 			logger.info("selectCountTotal...");
@@ -136,9 +136,8 @@ public class CsDAO {
 			Connection con = DBCP.getConnection();
 			
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_COUNT_TOTAL_WITH_CATE2);
-			psmt.setString(1, cate);
-			psmt.setString(2, cateType1);
-			psmt.setString(3, cateType2);
+			psmt.setString(1, cateType1);
+			psmt.setString(2, cateType2);
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -328,47 +327,91 @@ public class CsDAO {
 		return articles;
 	}
 	// 문의하기 - 유형별 글 가져오기 (cateType2)
-		public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2, int start){
-			List<CsVO> articles = new ArrayList<>();
-			try {
-				logger.info("selectArticlesCateType2");
+	public List<CsVO> selectArticlesCateType2(String cateType1, String cateType2, int start){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesCateType2");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			psmt = con.prepareStatement(CsSql.SELECT_CATETYPE2);
+			psmt.setString(1, cateType1);
+			psmt.setString(2, cateType2);
+			psmt.setInt(3, start);
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+				article.setReplyContent(rs.getString(12));
 				
-				Connection con = DBCP.getConnection();
-				PreparedStatement psmt = null;
+				articles.add(article);
 				
-				psmt = con.prepareStatement(CsSql.SELECT_CATETYPE2);
-				psmt.setString(1, cateType1);
-				psmt.setString(2, cateType2);
-				psmt.setInt(3, start);
-				
-				ResultSet rs = psmt.executeQuery();
-				while(rs.next()) {
-					CsVO article = new CsVO();
-					article.setNo(rs.getInt(1));
-					article.setParent(rs.getInt(2));
-					article.setCate(rs.getString(3));
-					article.setCateType1(rs.getString(4));
-					article.setCateType2(rs.getString(5));
-					article.setTitle(rs.getString(6));
-					article.setContent(rs.getString(7));
-					article.setUid(rs.getString(8));
-					article.setRegip(rs.getString(9));
-					article.setRdate(rs.getString(10));
-					article.setHit(rs.getString(11));
-					article.setReplyContent(rs.getString(12));
-					
-					articles.add(article);
-					
-				}
-				rs.close();
-				psmt.close();
-				con.close();
-				
-			} catch (Exception e) {
-				logger.error(e.getMessage());
 			}
-			return articles;
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
+		return articles;
+	}
+		
+	// 문의하기 유형2 글 가져오기 
+	public List<CsVO> select_cateType_list(String cateType1, String cateType2){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesCateType2");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			psmt = con.prepareStatement(CsSql.SELECT_CATETYPE_LIST);
+			psmt.setString(1, cateType1);
+			psmt.setString(2, cateType2);
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+				article.setReplyContent(rs.getString(12));
+				
+				articles.add(article);
+				
+			}
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}	
+		
+		
 	/*** cs::faq list ***/
 	// cate - cateType1
 	public List<CsVO> selectFaqArticles(String cate, String cateType1){
