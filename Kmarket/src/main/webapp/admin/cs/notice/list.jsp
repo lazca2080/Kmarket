@@ -203,7 +203,7 @@ $(function(){
 	                        	<td><input type="checkbox" name="articleNo" value="${article.no}">${article.no}</td>
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
-	                            <td><a href="/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
+	                            <td><a href="/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a></td>
 	                            <td>${article.hit}</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>

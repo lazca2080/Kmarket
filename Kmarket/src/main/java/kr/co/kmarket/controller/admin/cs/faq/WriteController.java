@@ -50,6 +50,7 @@ public class WriteController extends HttpServlet{
 		String cateType2 = req.getParameter("cateType2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		content = content.replace("\r\n", "<br>");
 		String uid = req.getParameter("uid");
 		String regip = req.getRemoteAddr();
 		
