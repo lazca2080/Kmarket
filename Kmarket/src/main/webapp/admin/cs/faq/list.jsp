@@ -242,7 +242,7 @@ $(function() {
 				success: function(data){
 					console.log(data);
 					$('.row').remove();	// 테이블 비우기
-					let no = 1;
+					let no = 10;
 					
 					console.log("data.length :" +data.length);
 
@@ -263,7 +263,7 @@ $(function() {
 							
 						$('#tb').append(rows);
 						
-						no++;
+						no--;
 					}
 				}
 			});
@@ -325,11 +325,12 @@ $(function() {
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
+                        <c:set var="num"  value="${11}"/>	
                         <c:forEach var="article" items="${articles}">
-                        <c:set var="i" value="${i+1}"/>
+                        <c:set var="num" value="${num-1}"/>
                         <tr class="row">
                         	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
-                            <td>${i}</td>
+                            <td>${num}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
                             <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
@@ -344,6 +345,7 @@ $(function() {
                             </td>
                         </tr>
                         </c:forEach>
+                       
                     </table>
                     <input type="button" class="delete" value="선택삭제">
                     <a href="/Kmarket/admin/cs/faq/write.do?cate=faq&cateType1=${cateType1}&cateType2=${cateType2}" class="write" id="write">작성하기</a>
