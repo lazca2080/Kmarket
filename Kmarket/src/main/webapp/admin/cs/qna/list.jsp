@@ -126,10 +126,6 @@
 			
 		});
 		
-		
-		
-		
-		
 		// 전체 체크박스 체크 여부에 따른 하위 체크박스 상태
 		$('input[name=all]').change(function(){
 			if($('input[name=all]').is(":checked")){

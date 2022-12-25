@@ -1,7 +1,10 @@
 package kr.co.kmarket.controller.admin.cs.notice;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,10 +20,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.CsService;
+import kr.co.kmarket.vo.AdminCsListVO;
 import kr.co.kmarket.vo.CsVO;
+import net.sf.json.JSONObject;
 
-@WebServlet("/admin/cs/notice/list.do")
-public class ListController extends HttpServlet{
+@WebServlet("/admin/cs/notice/select.do")
+public class SelectController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private CsService service = CsService.INSTANCE;
@@ -29,39 +34,34 @@ public class ListController extends HttpServlet{
 	@Override
 	public void init() throws ServletException {
 	}
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("doGet");
+		resp.setContentType("text/html;charset=UTF-8");
 		
-		String cate      = req.getParameter("cate");
+		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
-		String pg        = req.getParameter("pg");
-		String ajax      = req.getParameter("ajax");
-		
-		// 전체 게시물 개수
-		int total = service.selectCountTotal(cate);
-		
-		// 현재 페이지 번호
+		String pg = req.getParameter("pg");
+		String ajax = "ajax";
+	
+		// 
 		int currentPage = service.getCurrentPage(pg);
-		
+		// 전체 게시물 개수 
+		int total = service.selectCountTotalNotice(cate, cateType1);
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
-		// 현재 페이지 게시글 시작값 
+		// 현재 페이지 게시글 시작값
 		int limitStart = service.getLimitStart(currentPage);
-		// 페이지 그룹
+		// 페이지 그룹* pageGroupStart, end
 		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
-		// 페이지 시작 번호 
+		// 페이지 시작 번호
 		int pageStartNum = service.getPageStartNum(total, limitStart);
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
 		
-		// 페이지 글 가져오기
-		List<CsVO> articles = service.selectArticles(cate, cateType1, start);
+		List<CsVO> articles = service.selectArticlesNotice(cateType1, start);
 		req.setAttribute("articles", articles);
-		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);
@@ -76,11 +76,46 @@ public class ListController extends HttpServlet{
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
-		
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		String cate = req.getParameter("cate");
+		String cateType1 = req.getParameter("cateType1");
+		String cateType2 = req.getParameter("cateType2");
+		String pg = req.getParameter("pg");
+		
+		// 
+		int currentPage = service.getCurrentPage(pg);
+		// 전체 게시물 개수 
+		int total = service.selectCountTotalNotice(cate, cateType1);
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		// 현재 페이지 게시글 시작값
+		int limitStart = service.getLimitStart(currentPage);
+		// 페이지 그룹* pageGroupStart, end
+		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
+		// 페이지 시작 번호
+		int pageStartNum = service.getPageStartNum(total, limitStart);
+		// 게시글 번호 정렬
+		int start = service.getStartNum(currentPage);
+		
+		List<CsVO> articles = service.selectArticlesNotice(cateType1, start);
+		
+		AdminCsListVO vo = new AdminCsListVO();
+		vo.setCurrentPage(currentPage);
+		vo.setLastPageNum(lastPageNum);
+		vo.setLimitStart(limitStart);
+		vo.setPageGroupStart(result[0]);
+		vo.setPageGroupEnd(result[1]);
+		vo.setPageStartNum(pageStartNum);
+		vo.setArticles(articles);
+		
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(vo);			
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData);
 	}
-
 }

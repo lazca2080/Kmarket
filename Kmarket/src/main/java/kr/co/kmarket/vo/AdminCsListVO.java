@@ -57,4 +57,36 @@ public class AdminCsListVO {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private String cateType1;
+	
+	public String getCateType1() {
+		return cateType1;
+	}
+	
+	public void setCateType1(String cateType1) {
+		this.cateType1 = cateType1;
+	}
+	
+	
 }
