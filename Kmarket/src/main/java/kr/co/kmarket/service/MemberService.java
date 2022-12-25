@@ -33,8 +33,8 @@ public enum MemberService {
 	
 	/*** register - RegisterController ***/
 	// 회원가입
-	public void insertMember(MemberVO vo) {
-		dao.insertMember(vo);
+	public int insertMember(MemberVO vo) {
+		return dao.insertMember(vo);
 	}
   
   // 아이디 중복 확인
@@ -43,8 +43,8 @@ public enum MemberService {
 	}
 	
 	/*** register - RegisterSellerController ***/
-	public void insertSellerMember(MemberVO vo) {
-		dao.insertSellerMember(vo);
+	public int insertSellerMember(MemberVO vo) {
+		return dao.insertSellerMember(vo);
 	}
 	
 	//아이디 중복확인

@@ -31,7 +31,12 @@ public class DeleteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("delete faq ");
+		
 		String no = req.getParameter("no");
+		
+		logger.info(no);
 		
 		int result = service.deleteArticle(no);
 		
@@ -41,12 +46,35 @@ public class DeleteController extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 		
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?cate=faq");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+		
+		logger.info("do");
 
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		logger.info("dopost");
+		
+		String[] chkList = req.getParameterValues("chkArr");
+		logger.debug("chkList"+chkList);
+		
+		int length = chkList.length;
+		int result = 0;
+		
+		for(int k=0; k<length; k++) {
+			logger.info("chkList : "+chkList[k]);
+			result = service.deleteArticle(chkList[k]);
+			
+			logger.debug("result : "+result);
+		}
+		
+		resp.setCharacterEncoding("UTF-8");
+		
+		PrintWriter writer = resp.getWriter();
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		writer.print(json.toString());
 	}
 }

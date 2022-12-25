@@ -31,7 +31,6 @@ public class SignupController extends HttpServlet{
 		TermsVO vo = service.selectTerms();
 		req.setAttribute("vo",vo);
 		
-		
 		logger.info("SignupController doGet...");
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/signup.jsp");

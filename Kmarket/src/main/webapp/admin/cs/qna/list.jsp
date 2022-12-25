@@ -135,10 +135,6 @@
 			
 		});
 		
-		
-		
-		
-		
 		// 전체 체크박스 체크 여부에 따른 하위 체크박스 상태
 		$('input[name=all]').change(function(){
 			if($('input[name=all]').is(":checked")){
@@ -255,7 +251,8 @@
 				
 				let jsonData = {
 						"cateType1":cateType1,
-						"cateType2":cateType2
+						"cateType2":cateType2,
+						"pg":pg
 				}
 				console.log("컨트롤러로 보내는 jsonData: "+ Object.values(jsonData));
 				

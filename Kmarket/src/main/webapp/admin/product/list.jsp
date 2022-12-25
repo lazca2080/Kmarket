@@ -4,45 +4,47 @@
 <script>
 	$(function(){
 		$('.btn').click(function(){
-			let prodNo = $('input:checkbox:checked').val();
-			let checkbox = $('input:checkbox:checked');
+			let isDelete = confirm('정말 삭제하시겠습니까?');
 			
-			console.log("prodNo : " + prodNo);
-			
-			if(prodNo == null){
-				alert('상품을 선택하지 않았습니다.')
-				return;
-			}
-			
-			$.ajax({
-				url : '/Kmarket/admin/product/deleteProduct.do',
-				method : 'get',
-				data : {"prodNo":prodNo},
-				dataType : 'json',
-				success : function(data){
-					console.log("data :"+ data.result);
-					if(data.result == 1){
-						alert('삭제되었습니다.');
-						checkbox.parent().parent().remove();
-						return true;
-					}else{
-						alert('실패하였습니다.');
-						return false;
-					}
+			if(isDelete){
+				let prodNo = $('input:checkbox:checked').val();
+				let checkbox = $('input:checkbox:checked');
+				
+				if(prodNo == null){
+					alert('상품을 선택하지 않았습니다.')
+					return;
 				}
-			});
+				
+				$.ajax({
+					url : '/Kmarket/admin/product/deleteProduct.do',
+					method : 'get',
+					data : {"prodNo":prodNo},
+					dataType : 'json',
+					success : function(data){
+						if(data.result == 1){
+							alert('삭제되었습니다.');
+							checkbox.parent().parent().remove();
+							return true;
+						}else{
+							alert('실패하였습니다.');
+							return false;
+						}
+					}
+				});
+				return true;
+			}else{
+				return false;
+			}
 		});
 		
 		$('input[type=submit]').click(function(){
-			
 			let search = $('select[name=search]').val();
 			let text = $('input[name=search]').val();
-			let level = $('input[type=hidden]').val();
+			let level = $('input[name=level]').val();
+			let uid = $('input[name=uid]').val();
 			
-			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level;
-			
+			location.href = "/Kmarket/admin/product/list.do?search="+search+"&text="+text+"&level="+level+"&uid="+uid;
 		});
-		
 	});
 </script>
             <section id="admin-product-list">
@@ -61,7 +63,8 @@
                             <option value="company">제조사</option>
                             <option value="seller">판매자</option>
                         </select>
-                       	<input type="hidden" value="${sessUser.level}" >
+                       	<input type="hidden" name="level" value="${sessUser.level}" >
+                       	<input type="hidden" name="uid" value="${sessUser.uid}" >
                         <input type="text" name="search" placeholder="검색할 단어">
                         <input type="submit" value="검색">
                     </div>
@@ -79,7 +82,14 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <c:forEach var="Product" items="${Product}">
+                        <c:choose>
+                        <c:when test="${empty Product}">
+                        <tr>
+                        	<td colspan="11" style="color:red">등록된 상품이 없습니다.</td>
+                        </tr>
+                        </c:when>
+                        <c:otherwise>
+						<c:forEach var="Product" items="${Product}">
                         <tr>
                             <td><input type="checkbox" name="prodNo" id="prodNo" value="${Product.prodNo}"></td>
                             <td><img src="/home/prodImg/${Product.thumb1}" class="thumb"></td>
@@ -97,22 +107,24 @@
                             </td>
                         </tr>
                         </c:forEach>
+                        </c:otherwise>
+                        </c:choose>
                     </table>
-                    	<input type="button" value="선택삭제" class="btn">
+                    	<input type="button" value="선택삭제" class="btn" />
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="${pageGroupStart > 1}">
-	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 10}&level=${sessUser.level}"><&nbsp;이전</a>
+	                        	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupStart - 10}&level=${sessUser.level}&text=${text}&search=${search}"><&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}" class="on${currentPage eq i?'current':'off'}">${i}</a>
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="on${currentPage eq i?'current':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
                         	<c:if test="${pageGroupEnd < lastPageNum}">
-                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}&level=${sessUser.level}">다음&nbsp;></a>
+                            	<a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${pageGroupEnd + 1}&level=${sessUser.level}&text=${text}&search=${search}">다음&nbsp;></a>
                             </c:if>
                         </span>
                     </div>

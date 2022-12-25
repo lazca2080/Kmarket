@@ -1,11 +1,34 @@
 /* 상품목록 */
 
-#product > section {
+main > .mainsection {
+	padding: 0px;
+}
+
+#product > .view {
     padding: 16px;
     box-sizing: border-box;
 }
 
-#product > .list {}
+#product > .cart {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .list {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .complete {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#product > .order {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
 
 #product > section > nav {
     width: 100%;
@@ -630,11 +653,11 @@
 
 #product > .cart > form > .total > table { width: 100%; }
 
-#product > .cart > form > .total > table tr:nth-last-child(1) td {
+#product > .cart > form > .total > table tr:nth-last-child(2) td {
     font-size: 20px;
 }
 
-#product > .cart > form > .total > table tr:nth-last-child(1) td:last-child {
+#product > .cart > form > .total > table tr:nth-last-child(2) td:last-child {
     color: #ff006c;
     font-size: 20px;
     font-weight: bold;
@@ -760,11 +783,11 @@
 
 #product > .cart > form > .total > table { width: 100%; }
 
-#product > .cart > form > .total > table tr:nth-last-child(1) td {
+#product > .cart > form > .total > table tr:nth-last-child(2) td {
     font-size: 20px;
 }
 
-#product > .cart > form > .total > table tr:nth-last-child(1) td:last-child {
+#product > .cart > form > .total > table tr:nth-last-child(2) td:last-child {
     color: #ff006c;
     font-size: 20px;
     font-weight: bold;
@@ -1018,7 +1041,7 @@
 #product > .order > form > .final {
     float: right;
     width: 360px;
-    height: 412px;
+    height: 430px;
     padding: 20px;
     margin-top: 12px;
     background: #fff;
@@ -1039,11 +1062,11 @@
 
 #product > .order > form > .final > table { width: 100%; }
 
-#product > .order > form > .final > table tr:nth-last-child(1) td {
+#product > .order > form > .final > table tr:nth-last-child(2) td {
     font-size: 20px;
 }
 
-#product > .order > form > .final > table tr:nth-last-child(1) td:last-child {
+#product > .order > form > .final > table tr:nth-last-child(2) td:last-child {
     color: #ff006c;
     font-size: 20px;
     font-weight: bold;

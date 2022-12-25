@@ -160,17 +160,9 @@ public class CsDAO {
 			logger.info("CsDAO-selectArticles...");
 			
 			Connection con = DBCP.getConnection();
-			PreparedStatement psmt = null;
 			
-			if(cateType1 == null) {
-				 psmt = con.prepareStatement(CsSql.SELECT_WHOLE_ARTICLES);
-				 psmt.setInt(1, start);
-			}else {
-				psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
-				psmt.setString(1, cate);
-				psmt.setString(2, cateType1);
-				psmt.setInt(3, start);
-			}
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_WHOLE_ARTICLES); 
+			psmt.setInt(1, start);
 			
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {
@@ -592,7 +584,6 @@ public class CsDAO {
 	
 	}
 	
-	
 	/*** admin - index - main  ***/
 	public CsVO selectAdminMain() {
 		
@@ -782,5 +773,134 @@ public class CsDAO {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 공지사항 - 페이지 글 카테고리 별 개수 가져오기
+	public int selectCountTotalNotice(String cate, String cateType1) {
+		int total = 0;
+		try {
+			logger.info("selectCountTotal...");
+			
+			Connection con = DBCP.getConnection();
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.COUNT_NOTICE_ARTICLE);
+			psmt.setString(1, cateType1);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	// 공지사항 - 페이지 글 가져오기
+	public List<CsVO> selectArticlesNotice(String cateType1, int start){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("CsDAO-selectArticles...");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_NOTICE_ARTICLE);
+			psmt.setString(1, cateType1);
+			psmt.setInt(2, start);
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+				article.setReplyContent(rs.getString(12));
+				
+				articles.add(article);
+				
+			}
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}
 	
 }

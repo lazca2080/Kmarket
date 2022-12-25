@@ -29,25 +29,14 @@ public class UpdateCartController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("updateCart......");
-		
 		String prodNo = req.getParameter("prodNo");
 		String uid = req.getParameter("uid");
 		String count = req.getParameter("count");
 		
-		
-		logger.info("prodNo : " +prodNo);
-		logger.info("uid : " +uid);
-		logger.info("count : " +count);
-	
 		int result = service.updateCart(uid, count, prodNo);
-		
-		logger.debug("result : "+result);
 		
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
-		
-		logger.debug("result1 : " +result);
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());

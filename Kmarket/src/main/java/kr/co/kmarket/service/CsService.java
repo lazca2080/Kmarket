@@ -184,4 +184,32 @@ public enum CsService {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 공지사항 카데고리 별 글 개수
+	public int selectCountTotalNotice(String cate, String cateType1) {
+		return dao.selectCountTotalNotice(cate, cateType1);
+	}
+	
+	// 공지사항 카테고리 별 글 보기
+	public List<CsVO> selectArticlesNotice(String cateType1, int start){
+		return dao.selectArticlesNotice(cateType1, start);
+	}
+	
+	
 }

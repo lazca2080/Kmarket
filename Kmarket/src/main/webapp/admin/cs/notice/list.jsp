@@ -22,12 +22,13 @@ $(function(){
 	            }
 	        }
 	    } */
-
-  // 유형 선택에 따른 목록 출력 
-  $('#selectBox').change(function(){
+	
+	    /*
+	 // 유형 선택에 따른 목록 출력 
+	 $('#selectBox').change(function(){
 	  
- 		let selectOption = $("#selectBox option:selected").val();
- 		console.log("selectOption: " + selectOption);
+			let selectOption = $("#selectBox option:selected").val();
+			console.log("selectOption: " + selectOption);
 	  
 		 if(selectOption == 'option1'){
 			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=고객서비스'; 
@@ -41,8 +42,93 @@ $(function(){
 			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=이벤트당첨'; 
 		 } 
 		 
-  });
+	 });
+	    */
 		
+	 // 카테고리 선택에 따른 테이블 출력
+		$('#selectBox').change(function(){
+				
+			let cateType1 = $('#selectBox option:selected').val();
+			
+			let jsonData = {
+					"pg" : "1",
+					"cateType1":cateType1,
+					"ajax":"ajax"
+			}
+			
+			$.ajax({
+				url: '/Kmarket/admin/cs/notice/select.do', 
+				method: 'post',
+				data:jsonData,
+				dataType:'json',
+				success: function(data){
+					
+					$('.row').remove();	// 테이블 비우기 
+					let no = 1;
+					
+					for(let vo of data.articles){
+						
+						let rdate = vo.rdate.substring(2,10);
+						
+						let rows = "<tr class='row'>";
+						rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'>"+vo.no+"</td>";
+						rows += "<td>"+(data.pageStartNum-no)+"</td>";
+						rows += "<td>"+vo.cateType1+"</td>";
+						rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
+						rows += "<td>"+vo.hit+"</td>";
+						rows += "<td>"+rdate+"</td>";
+						rows += "<td>";
+						rows += "<a href='/Kmarket/admin/cs/notice/delete.do?no="+vo.no+"'>[삭제]</a><br>";
+						rows += "<a href='/Kmarket/admin/cs/notice/modify.do?cate=notice&cateType1="+vo.cateType1+"&no="+vo.no+"'>[삭제]</a><br>";
+						rows += "</td>";
+						rows += "</tr>"; 
+						
+						$('#tb').append(rows);
+						
+						no++;
+					} 
+					
+					// paging - 동적생성
+					$('.paging > .prev').empty();
+					$('.paging > .num').empty();	
+					$('.paging > .next').empty();	
+					
+					// paging - 이전 버튼
+					if(data.pageGroupStart > 1){
+						
+						let pgPrev = "<a href='/Kmarket/admin/cs/notice/select.do?&pg="+(data.pageGroupStart-1)+"&cateType1="+cateType1+"' class='num'>이전</a>";
+						
+						$('.paging > .prev').append(pgPrev);
+					}
+					
+					// paing - 현재 페이지
+					for(let i=data.pageGroupStart; i<=data.pageGroupEnd; i++){
+						
+						let param1 = "cate=notice&";
+						let param2 = "pg="+i+"&";
+						let param3 = "cateType1="+cateType1+"&";
+						
+						let currentPage = "off";
+						
+						if(data.currentPage == i){
+							currentPage = "current";
+						}
+						
+						let pgNum = "<a href='/Kmarket/admin/cs/notice/select.do?"+param1+param2+param3+"' class='num "+currentPage+"'>"+i+"</a>";
+						
+						$('.paging > .num').append(pgNum);
+					}
+					
+					// paging - 다음 버튼
+					if(data.pageGroupEnd < data.lastPageNum){
+						
+						let pgPrev = "<a href='/Kmarket/admin/cs/notice/select.do?&pg="+(data.pageGroupStart+1)+"&cateType1="+cateType1+"' class='num'>다음</a>";
+						
+						$('.paging > .next').append(pgPrev);
+					}
+				}
+			}); 
+		});
 	    
 	// [관리] - [삭제] 버튼 클릭 시 ( 개별 게시글 삭제 : ajax 수정 예정 )
 	$('#remove').click(function(e){
@@ -148,11 +234,6 @@ $(function(){
 					} */
 			   }
 		   }); 
-		   
-		   
-		   
-		   
-		   
 	  
 	   		return true;
 	   }else{
@@ -177,10 +258,10 @@ $(function(){
                         <select name="search" id="selectBox">
                             <option value="">유형선택</option>
                             <!-- <option value="option1">고객서비스</option> -->
-                            <option value="option1" <c:if test="${cateType1 eq '고객서비스'}">selected="selected"</c:if>>고객서비스</option>
-                            <option value="option2" <c:if test="${cateType1 eq '안전거래'}">selected="selected"</c:if>>안전거래</option>
-                            <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
-                            <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
+                            <option value="고객서비스" <c:if test="${cateType1 eq '고객서비스'}">selected="selected"</c:if>>고객서비스</option>
+                            <option value="안전거래" <c:if test="${cateType1 eq '안전거래'}">selected="selected"</c:if>>안전거래</option>
+                            <option value="위해상품" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
+                            <option value="이벤트당첨" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
                         <input type="text" value="${cate}"/>
                         <input type="text" value="${cateType1}" placeholder="cateType1"/>
@@ -201,7 +282,7 @@ $(function(){
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
 	                        	<td><input type="checkbox" name="articleNo" value="${article.no}">${article.no}</td>
-	                            <td>${i}</td>
+	                            <td>${pageStartNum - i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td><a href="/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title}</a></td>
 	                            <td>${article.hit}</td>
@@ -219,24 +300,48 @@ $(function(){
                     </table>
                     <input type="button" class="delete" value="선택삭제">
                     <a href="/Kmarket/admin/cs/notice/write.do?cate=notice" class="write">작성하기</a>
+                    <c:choose>
+                    <c:when test="${ajax eq null}">
                     <div class="paging">
                         <span class="prev">
                             <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?cate=notice&pg=${pageGroupStart-1}&cateType1=${cateType1}&cateType2=${cateType2}" class="prev">&nbsp;이전</a>
 	                        </c:if>
                         </span>
                         <span class="num">
                             <!-- <a href="#" class="on">1</a> -->
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}&cate=${cate}&cateType1=${cateType1}&cateType2=${cateType2}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
 	                        </c:forEach>
                         </span>
                         <span class="next">
-                            <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+                            <c:if test="${pageGroupEnd lt lastPageNum}">
+	                            <a href="/Kmarket/admin/cs/notice/list.do?cate=notice&pg=${pageGroupEnd+1}&cateType1=${cateType1}&cateType2=${cateType2}" class="next">다음&nbsp;</a>
 	                        </c:if>
                         </span>
                     </div>
+					</c:when>
+					<c:otherwise>
+					<div class="paging">
+                        <span class="prev">
+                            <c:if test="${pageGroupStart gt 1}">
+	                            <a href="/Kmarket/admin/cs/notice/select.do?cate=notice&pg=${pageGroupStart-1}&cateType1=${cateType1}" class="prev">&nbsp;이전</a>
+	                        </c:if>
+                        </span>
+                        <span class="num">
+                            <!-- <a href="#" class="on">1</a> -->
+                            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+	                            <a href="/Kmarket/admin/cs/notice/select.do?pg=${i}&cate=${cate}&cateType1=${cateType1}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                        </c:forEach>
+                        </span>
+                        <span class="next">
+                            <c:if test="${pageGroupEnd lt lastPageNum}">
+	                            <a href="/Kmarket/admin/cs/notice/select.do?cate=notice&pg=${pageGroupEnd+1}&cateType1=${cateType1}" class="next">다음&nbsp;</a>
+	                        </c:if>
+                        </span>
+                    </div>
+					</c:otherwise>
+                    </c:choose>
                 </section>
             </section>
         </main>

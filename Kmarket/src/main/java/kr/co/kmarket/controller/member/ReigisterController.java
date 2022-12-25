@@ -65,10 +65,15 @@ public class ReigisterController extends HttpServlet{
 		vo.setRegip(regip);
 		
 		// 데이터베이스 처리
-		service.insertMember(vo);
+		int result = service.insertMember(vo);
 		
-		// 리다이렉트
-		resp.sendRedirect("/Kmarket/member/login.do");
+		
+		if(result == 1) {
+			// 리다이렉트
+			resp.sendRedirect("/Kmarket/member/login.do?success=101");
+		}else if(result == 2) {
+			resp.sendRedirect("/Kmarket/member/login.do?success=102");
+		}
 		
 	}
 	
