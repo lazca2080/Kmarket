@@ -609,6 +609,10 @@ button[type=submit] {
     color: #fe434c;
     font-weight: bold;
 }
+#admin-product-list .paging > .num > .current {
+	border: 1px solid #454c5f;
+	font-weight: bold;
+}
 
 /* product-register */
 #admin-product-register {}
