@@ -152,9 +152,6 @@ $(function(){
 	    	let no = $('input:checkbox:checked').val();
 			let checkbox = $('input:checkbox:checked');
 			
-			console.log("uid : " + uid);
-			console.log("no : " + no);
-	    	
 			if(no == null){
 				alert('삭제할 게시물을 선택하십시오.')
 				return;
