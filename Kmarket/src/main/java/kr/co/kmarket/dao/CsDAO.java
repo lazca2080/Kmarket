@@ -244,7 +244,7 @@ public class CsDAO {
 		public List<CsVO> selectArticlesFaq(String cate, String cateType1, int start){
 			List<CsVO> articles = new ArrayList<>();
 			try {
-				logger.info("CsDAO-selectArticles...");
+				logger.info("CsDAO-selectfaqArticles...");
 				
 				Connection con = DBCP.getConnection();
 				PreparedStatement psmt = null;
@@ -397,6 +397,48 @@ public class CsDAO {
 				article.setRdate(rs.getString(10));
 				article.setHit(rs.getString(11));
 				article.setReplyContent(rs.getString(12));
+				
+				articles.add(article);
+				
+			}
+			rs.close();
+			psmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return articles;
+	}	
+	
+	//자주묻는질문 유형2 글 가져오기
+	public List<CsVO> SELECT_FAQ_CATETYPE_LIST(String cateType1, String cateType2){
+		List<CsVO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticlesFAQCateType2");
+			
+			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			psmt = con.prepareStatement(CsSql.SELECT_FAQ_CATETYPE_LIST);
+			psmt.setString(1, cateType1);
+			psmt.setString(2, cateType2);
+			
+			ResultSet rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO article = new CsVO();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setCate(rs.getString(3));
+				article.setCateType1(rs.getString(4));
+				article.setCateType2(rs.getString(5));
+				article.setTitle(rs.getString(6));
+				article.setContent(rs.getString(7));
+				article.setUid(rs.getString(8));
+				article.setRegip(rs.getString(9));
+				article.setRdate(rs.getString(10));
+				article.setHit(rs.getString(11));
+
 				
 				articles.add(article);
 				
@@ -780,7 +822,7 @@ public class CsDAO {
 	
 	
 	
-	
+	//faq 유형 선택 글 가져오기
 	
 	
 	

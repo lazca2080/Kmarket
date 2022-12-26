@@ -71,7 +71,7 @@ public class WriteController extends HttpServlet{
 		
 		service.insertArticle(vo);
 		
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?cate=faq");
 	}
 
 }
