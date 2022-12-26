@@ -72,7 +72,7 @@
                         
                         <article>
                         	<nav>
-                                <h1>cateType1: ${cateType1}</h1>
+                                <h1>${cateType1}</h1>
                                 <h2>가장 자주 묻는 질문입니다.</h2>
                             </nav>
 	                         <c:set var="i" value="0"/>
