@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
 <script>
 
@@ -72,6 +73,12 @@
 				location.href = "/Kmarket/product/order.do?prodNo="+prodNo+"&count="+count;	
 			}
 		});
+		
+		
+		$('#scrollReview').click(function(){
+			const offset = $(".review").offset();
+        	$('html, body').animate({scrollTop: offset.top}, 500);
+		});
 	});
 	
 </script>
@@ -102,7 +109,7 @@
                             <h3>${product.prodName}</h3>
                             <p>${product.descript}</p>
                             <h5 class="rating star4">
-                                <a href="#">상품평보기</a>
+                                <a href="#" id="scrollReview">상품평보기</a>
                             </h5>
                         </nav>
                         <nav>
@@ -113,7 +120,9 @@
                                 <span>${product.discount}%</span>
                             </div>
                             <div class="dis_price">
-                                <ins>${product.sellPrice}</ins>
+                                <ins>
+                                	${product.sellPrice}
+                                </ins>
                             </div>
                             </c:when>
                             <c:otherwise>
@@ -149,12 +158,13 @@
                         </nav>
                         <img src="../img/vip_plcc_banner.png" alt="적립!" class="banner">
                         <div class="count">
+                        	<span class="count_updown" style="font-size: 16px;">수량</span>
                             <button class="decrease">-</button>
                             <input type="text" name="num" value="1" readonly>
                             <button class="increase">+</button>
                         </div>
                         <div class="total">
-                            <span class="totalPrice">${product.sellPrice+product.delivery}</span>
+                            <span class="totalPrice">${product.sellPrice}</span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">
