@@ -77,7 +77,7 @@ public class WriteController extends HttpServlet{
 		service.insertArticle(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?cate=notice");
 		//http://localhost:8080/Kmarket/admin/cs/notice/list.do
 	
 	}

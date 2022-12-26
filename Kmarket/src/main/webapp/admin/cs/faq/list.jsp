@@ -333,7 +333,7 @@ $(function() {
                             <td>${num}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
-                            <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
+                            <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title}</a></td>
                             <td>${article.hit}</td>
                             <td>
 								<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
