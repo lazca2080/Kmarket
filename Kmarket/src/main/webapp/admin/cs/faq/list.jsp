@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/admin/_header.jsp"></jsp:include>
+<style>
+	#admin-faq > section > .paging .active {
+		background: #333;
+	  	color: #fff;
+	}
+	#admin-faq .off-screen {
+		display: none;
+	}
+</style>
 <script>
 $(function() {
 	
@@ -75,6 +84,10 @@ $(function() {
 	
 	$('.delete').click(function() {
 		
+		let isDelete = confirm('정말 삭제하시겠습니까?');
+		
+		if(isDelete){
+		
 		let list = $('input[name=articleNo]');
 		let checkbox = $('input[name=articleNo]:checked');
 		
@@ -119,7 +132,10 @@ $(function() {
 			
 			
 		});
-		
+			return true;
+		}else{
+			return false;
+		}
 		
 	});
 	
@@ -236,13 +252,13 @@ $(function() {
 			
 			$.ajax({
 				url: '/Kmarket/admin/cs/faq/select.do', 
-				method: 'get',
+				method: 'post',
 				data:{"cateType1":cateType1, "cateType2":cateType2},
 				dataType:'json',
 				success: function(data){
 					console.log(data);
 					$('.row').remove();	// 테이블 비우기
-					let no = 10;
+					let no = 1;
 					
 					console.log("data.length :" +data.length);
 
@@ -255,16 +271,55 @@ $(function() {
 						rows += "<td>"+no+"</td>";
 						rows += "<td>"+vo.cateType1+"</td>";
 						rows += "<td>"+vo.cateType2+"</td>";
-						rows += "<td><a href='/Kmarket/admin/cs/qna/view.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
+						rows += "<td><a href='/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>"+vo.title+"</a></td>";
 						rows += "<td>"+vo.hit+"</td>";
 						rows += "<td>"+rdate+"</td>";
-						rows += "<td><a href='/Kmarket/admin/cs/faq/delete.do?no="+vo.no+"class=remove'>[삭제]</a><br><a href='/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>[수정]</a></td>";
+						rows += "<td><a href='/Kmarket/admin/cs/faq/delete.do?no="+vo.no+" class='remove''>[삭제]</a><br><a href='/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>[수정]</a></td>";
 						rows += "</tr>";
 							
 						$('#tb').append(rows);
 						
-						no--;
+						no++;
 					}
+					
+					$('.paging > .prev').empty();
+					$('.paging > .num').empty();
+					$('.paging > .next').empty();
+					
+					let rowTotals = $('.row').length; // 게시판 총 개수
+					let rowPerPage = 10;			  // 한 페이지당 게시글 개수
+					let pageTotal = Math.ceil(rowTotals/rowPerPage);	//페이지 번호
+					let i = 0;
+					
+					for(i; i<pageTotal; i++){
+						$('<a href="#"></a>').attr('rel',i).html(i+1).appendTo('.num');
+					}
+					
+					$('.row').addClass('off-screen')
+							.slice(0, rowPerPage)
+							.removeClass('off-screen');
+					
+					//페이지 번호 클릭시					
+					let pagingLink = $('.num > a');
+					pagingLink.on('click', function(e) {
+						e.preventDefault();
+						
+						$('.num > a').removeClass('active');
+						$(this).addClass('active');
+						
+						let currPage = $(this).attr('rel');
+						console.log("currPage : "+currPage); // 페이지 번호가 1일때 currPage = 0
+						
+						let startItem = currPage * rowPerPage;	//시작 행 = 페이지 번호 * 페이지 당 행수
+						let endItem = startItem + rowPerPage;	// 끝 행  = 시작 행 + 페이지 당 행수
+						
+						$('.row').css('opacity', '0.0')
+								.addClass('off-screen')
+								.slice(startItem, endItem)
+								.removeClass('off-screen')
+								.animate({opacity: 1}, 200);
+						
+					});
 				}
 			});
 		});
@@ -283,6 +338,10 @@ $(function() {
 			return false;
 		}
 	});
+	
+	
+	
+	
 	
 });
 </script>
@@ -322,25 +381,25 @@ $(function() {
                             <th>2차 유형</th>
                             <th>제목</th>
                             <th>조회</th>
-                            <th>날짜시간</th>
+                            <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <c:set var="num"  value="${11}"/>	
+                        <c:set var="i"  value="${11}"/>	
                         <c:forEach var="article" items="${articles}">
-                        <c:set var="num" value="${num-1}"/>
+                        <c:set var="i" value="${i-1}"/>
                         <tr class="row">
                         	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
-                            <td>${num}</td>
+                            <td>${i}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
-                            <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
+                            <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">${article.title}</a></td>
                             <td>${article.hit}</td>
                             <td>
 								<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 					            <fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 							</td>
                             <td>
-                                <a href="/Kmarket/admin/cs/faq/delete.do?no=${article.no}" class="remove">[삭제]</a><br>
+                                <a href="/Kmarket/admin/cs/faq/delete.do?no=${article.no}" class='remove'>[삭제]</a><br>
                                 <a href="/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[수정]</a>
                             </td>
                         </tr>
@@ -349,7 +408,24 @@ $(function() {
                     </table>
                     <input type="button" class="delete" value="선택삭제">
                     <a href="/Kmarket/admin/cs/faq/write.do?cate=faq&cateType1=${cateType1}&cateType2=${cateType2}" class="write" id="write">작성하기</a>
-                   
+                    
+                   <div class="paging">
+                        <span class="prev">
+                       		<c:if test="${pageGroupStart > 1}">
+                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+                            </c:if>
+                        </span>
+                        <span class="num">
+                        	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+                            </c:forEach>
+                        </span>
+                        <span class="next">
+                        	<c:if test="${pageGroupEnd < lastPageNum}">
+                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${pageGroupEnd+1}" class="next">다음&nbsp;></a>
+                            </c:if>
+                        </span>
+                   </div>  
                   
                 </section>
             </section>

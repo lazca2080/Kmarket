@@ -125,6 +125,9 @@ public class CsSql {
 	//자주묻는 질문 유형2 글 가져오기 
 	public static final String SELECT_FAQ_CATETYPE2="SELECT * FROM `cs_article` WHERE `cate`='faq' and `cateType1`=? and `cateType2`=? ORDER BY `no` DESC LIMIT ?,10";
 	
+	//자주묻는 질문 유형2 글 가져오기
+	public static final String SELECT_FAQ_CATETYPE_LIST = "SELECT * FROM `cs_article` WHERE `cate`='faq' and `cateType1`=? and `cateType2`=? ORDER BY `no` DESC";
+	
 	
 	
 	

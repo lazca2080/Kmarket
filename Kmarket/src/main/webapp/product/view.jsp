@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <script>
 
 	$(function() {
@@ -72,6 +74,35 @@
 				location.href = "/Kmarket/product/order.do?prodNo="+prodNo+"&count="+count;	
 			}
 		});
+		
+		
+		let today = new Date();
+		
+		let month = today.getMonth()+1;
+		let date = today.getDate()+3;
+		let day = today.getDay();
+		let message;
+		console.log(day);
+		
+		if(day == 1){
+			message = '월';
+		}else if(day == 2){
+			message = '화';
+		}else if(day == 3){
+			message = '수';
+		}else if(day == 4){
+			message = '목';
+		}else if(day == 5){
+			message = '금';
+		}else if(day == 6){
+			message = '토';
+		}else if(day == 0){
+			message = '일';
+		}
+		
+		
+		$('.arrival').text('모레('+message+') '+month+'/'+date+" 도착예정");
+		
 	});
 	
 </script>
@@ -133,7 +164,9 @@
                             </c:otherwise>
                             </c:choose>
                             
-                            <span class="arrival">모레(금) 7/8 도착예정</span>
+                            <span class="arrival">
+                            <fmt:formatDate value="${now}"/>
+                            </span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
                         <nav>

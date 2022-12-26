@@ -46,7 +46,7 @@ public class DeleteController extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 		
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?cate=faq");
 		
 		logger.info("do");
 

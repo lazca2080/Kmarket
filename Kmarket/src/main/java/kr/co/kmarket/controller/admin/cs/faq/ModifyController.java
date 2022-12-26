@@ -84,6 +84,6 @@ public class ModifyController extends HttpServlet{
 		service.updateArticle(vo2);
 		
 		//리다이렉트
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?cate=faq");
 	}
 }

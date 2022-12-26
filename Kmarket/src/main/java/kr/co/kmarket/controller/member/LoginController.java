@@ -69,7 +69,7 @@ public class LoginController extends HttpServlet{
 			resp.setContentType("text/html;charset=UTF-8"); 
             PrintWriter out = resp.getWriter(); 
             out.println("<script>"); 
-            out.println("alert('The ID or password you entered is incorrect.');"); 
+            out.println("alert('로그인에 실패하였습니다. 아이디나 비밀번호를 확인해 주십시오.');"); 
             out.println("history.back();"); 
             out.println("</script>"); 
             out.close();
