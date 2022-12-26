@@ -322,7 +322,7 @@ $(function() {
                             <th>2차 유형</th>
                             <th>제목</th>
                             <th>조회</th>
-                            <th>날짜</th>
+                            <th>날짜시간</th>
                             <th>관리</th>
                         </tr>
                         <c:set var="num"  value="${11}"/>	
