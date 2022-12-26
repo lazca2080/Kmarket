@@ -116,7 +116,7 @@ $(function(){
     
    //  [선택삭제] 버튼 클릭 시 ( 선택 게시글 다중 삭제 ) 
     
-   $('.test2').click(function(){
+   $('.delete').click(function(){
 	   
 	   let chk_arr = [];	
 	   
@@ -182,10 +182,9 @@ $(function(){
                             <option value="option3" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="option4" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="text" value="${cate}"/>
-                        <input type="text" value="${cateType1}" placeholder="cateType1"/>
-                        <input type="text" id="uid" value="${sessUser.uid}"/>
-                        <input type="button" class="test2" value="기능X 테스트버튼">
+                        <input type="hidden" value="${cate}"/>
+                        <input type="hidden" value="${cateType1}" placeholder="cateType1"/>
+                        <input type="hidden" id="uid" value="${sessUser.uid}"/>
                     </div>
                     <table id="tb">
                         <tr>
