@@ -96,10 +96,10 @@ main > .mainsection {
     box-sizing: border-box;
 }
 
-#product > .list > table tr > td:nth-child(1) { width: 20%; padding: 0; }
+#product > .list > table tr > td:nth-child(1) { width: 12%; padding: 0; }
 #product > .list > table tr > td:nth-child(2) { width: 40%; }
-#product > .list > table tr > td:nth-child(3) { width: 20%; }
-#product > .list > table tr > td:nth-child(4) { width: 20%; }
+#product > .list > table tr > td:nth-child(3) { width: 15%; }
+#product > .list > table tr > td:nth-child(4) { width: 14%; }
 
 #product > .list > table .thumb {
     display: block;
@@ -112,6 +112,9 @@ main > .mainsection {
     font-weight: bold;
     color: #111;
     margin-bottom: 6px;
+}
+#product > .list > table .name:hover{
+	text-decoration: underline;
 }
 
 #product > .list > table .desc {
@@ -351,7 +354,7 @@ main > .mainsection {
 
 #product > .view > .info > .summary .count > input[name=num] {
     position: absolute;
-    left: 30px;
+    left: 64px;
     top: 0;
     width: 30px;
     height: 21px;
@@ -361,15 +364,17 @@ main > .mainsection {
 }
 
 #product > .view > .info > .summary .count > .decrease {
-    left: 0;
+    left: 36px;
     top: 0;
     background-position: 0px -74px;
+    cursor: pointer;
 }
 
 #product > .view > .info > .summary .count > .increase {
-    left: 70px;
+    left: 104px;
     top: 0;
     background-position: -48px -74px;
+    cursor: pointer;
 }
 
 

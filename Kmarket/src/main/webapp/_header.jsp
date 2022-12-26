@@ -21,6 +21,27 @@
             $(".slider > ul").bxSlider({
                 easing: "linear",
             });
+            
+            $('#scroll1').click(function(){
+            	const offset = $(".hit").offset();
+            	$('html, body').animate({scrollTop: offset.top}, 500);
+            });
+            $('#scroll2').click(function(){
+            	const offset = $(".recommend").offset();
+            	$('html, body').animate({scrollTop: offset.top}, 500);
+            });
+            $('#scroll3').click(function(){
+            	const offset = $(".new").offset();
+            	$('html, body').animate({scrollTop: offset.top}, 500);
+            });
+            $('#scroll5').click(function(){
+            	const offset = $(".discount").offset();
+            	$('html, body').animate({scrollTop: offset.top}, 500);
+            });
+            $('#top').click(function(){
+            	$( 'html, body' ).animate( { scrollTop : 0 }, 500 );
+            });
+            
         });
 
         $(function () {
@@ -39,6 +60,8 @@
                 }
             });
         });
+        
+       
     </script>
 </head>
 <body>
@@ -90,11 +113,11 @@
             <div class="menu">
                 <div>
                     <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
+                        <li><a href="#" id="scroll1">히트상품</a></li> 
+                        <li><a href="#" id="scroll2">추천상품</a></li>
+                        <li><a href="#" id="scroll3">최신상품</a></li>
+                        <li><a href="#" id="scroll4">인기상품</a></li>
+                        <li><a href="#" id="scroll5">할인상품</a></li>
                     </ul>
                     <ul>
                         <li><a href="/Kmarket/cs/notice/list.do">공지사항</a></li>

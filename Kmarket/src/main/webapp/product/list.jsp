@@ -47,7 +47,7 @@
                             <img src="/home/prodImg/${products.thumb1}" alt="상품이미지">
                         </a></td>
                         <td>
-                            <h3 class="name">${products.prodName}</h3>
+                            <a href="/Kmarket/product/view.do?prodNo=${products.prodNo}" ><h3 class="name">${products.prodName}</h3></a>
                             <a href="#" class="desc">${products.descript}</a>
                         </td>
                         <td>
