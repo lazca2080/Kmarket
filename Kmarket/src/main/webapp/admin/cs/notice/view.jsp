@@ -52,7 +52,7 @@
 	                        	<div>
 	                                <a href="/Kmarket/admin/cs/notice/delete.do?no=${no}" class="btnDelete" id="remove">삭제</a>
 	                                <a href="/Kmarket/admin/cs/notice/modify.do?cate=notice&cateType1=${article.cateType1}&no=${no}" class="btnModify">수정</a>
-	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">목록</a>
+	                                <a href="/Kmarket/admin/cs/notice/list.do?cate=notice" class="btnList">목록</a>
 	                            </div>
 	                        </form>
 	                    </article>

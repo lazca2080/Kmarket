@@ -40,14 +40,8 @@ public class DeleteController extends HttpServlet{
 		logger.info("no: " + no);
 		
 		int result = service.deleteArticle(no);
-		logger.info("result:" + result);
 		
-		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
-		
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
-		
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?cate=notice");
 		
 	}
 	@Override
