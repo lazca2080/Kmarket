@@ -55,25 +55,23 @@ public class DeleteController extends HttpServlet{
 		
 		logger.info("doPost");
 		
-		//JSON.stringify를 통해 받은 데이터 (문자 형태)
-		String chk = req.getParameter("chk_arr");
-		logger.info("chk: " + chk);
+		String[] chkList = req.getParameterValues("chkArr");	
+		int length = chkList.length;
+		int result = 0;
 		
-		// 문자열을 ,로 나눈 후 저장
-		String arrChks[] = chk.split(",");
-		
-		// 길이 구하기
-		int length = arrChks.length;
-		
-		// 한 번에 저장할 List 생성
-		List<String> chk_arr = new ArrayList<>();
-
-		for (int i=0; i<length; i++) {
-			System.out.println("arrChks: "+arrChks[i]);	//"[18","17]"
-			chk_arr.add(arrChks[i].replaceAll("[^\\d]", ""));						// 숫자를 제외한 문자를 없앤 후 저장
+		for(int k=0; k<length; k++) {
+			logger.info("chkList: "+chkList[k]);
+			result = service.deleteArticle(chkList[k]);
+			
+			logger.debug("result : "+result);	// 삭제 시 result:1
 		}
 		
-		System.out.println("list: "+chk_arr.get(0));
+		resp.setCharacterEncoding("UTF-8");
+		
+		PrintWriter writer = resp.getWriter();
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		writer.print(json.toString());
 		//진행 중
 		
 		

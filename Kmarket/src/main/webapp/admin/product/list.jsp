@@ -110,7 +110,9 @@
                         </c:otherwise>
                         </c:choose>
                     </table>
-                    	<input type="button" value="선택삭제" class="btn" />
+                    	<input type="button" value="선택삭제" class="btn" style="cursor:pointer; width:80px"/>
+                    	<a href="/Kmarket/admin/register.do"><input type="button" value="상품등록" 
+                    	style="float: right; width: 80px; cursor:pointer"/></a>
                     <div class="paging">
                         <span class="prev"> 
                         	<c:if test="${pageGroupStart > 1}">

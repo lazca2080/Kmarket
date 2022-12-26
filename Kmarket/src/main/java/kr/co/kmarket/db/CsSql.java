@@ -156,6 +156,6 @@ public class CsSql {
 	// 공지사항 카데고리 별 글 개수
 	public static final String COUNT_NOTICE_ARTICLE = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=?";
 	// 공지사항 카테고리 별 글 보기
-	public static final String SELECT_NOTICE_ARTICLE = "SELECT * FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
+	public static final String SELECT_NOTICE_ARTICLE = "SELECT * FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=? ORDER BY `no` DESC";
 	
 }

@@ -906,7 +906,7 @@ public class CsDAO {
 	}
 	
 	// 공지사항 - 페이지 글 가져오기
-	public List<CsVO> selectArticlesNotice(String cateType1, int start){
+	public List<CsVO> selectArticlesNotice(String cateType1){
 		List<CsVO> articles = new ArrayList<>();
 		try {
 			logger.info("CsDAO-selectArticles...");
@@ -914,7 +914,6 @@ public class CsDAO {
 			Connection con = DBCP.getConnection();
 			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_NOTICE_ARTICLE);
 			psmt.setString(1, cateType1);
-			psmt.setInt(2, start);
 			
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {

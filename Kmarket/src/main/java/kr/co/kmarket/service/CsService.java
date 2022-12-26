@@ -213,8 +213,8 @@ public enum CsService {
 	}
 	
 	// 공지사항 카테고리 별 글 보기
-	public List<CsVO> selectArticlesNotice(String cateType1, int start){
-		return dao.selectArticlesNotice(cateType1, start);
+	public List<CsVO> selectArticlesNotice(String cateType1){
+		return dao.selectArticlesNotice(cateType1);
 	}
 	
 	

@@ -11,7 +11,7 @@
 			}else{
 				return false;
 			}
-		});    
+		});
 	});
 </script>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>제목</td>
                                         <td>
-                                           <h2>[${vo.cateType2}] ${vo.title} // no: ${no} </h2>
+                                           <h2>[${vo.cateType2}] ${vo.title}</h2>
                                         </td>
                                     </tr>
                                     <tr>

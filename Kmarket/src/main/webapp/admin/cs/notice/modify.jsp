@@ -24,6 +24,9 @@ $(function(){
 		console.log("content: " + content);
 	});
 	
+	let p = $('textarea[name=content]').text();
+	let rn = p.replaceAll('<br>', '\n');
+	$('textarea[name=content]').text(rn);
 	
 });
 </script>
@@ -40,11 +43,11 @@ $(function(){
 	                <section class="modify">
 						<article>
 	                        <form action="/Kmarket/admin/cs/notice/modify.do" method="post">
-	                        <input type="text" name="uid" value="${sessUser.uid}"/>	
-	                        <input type="text" name="cate" value="${cate}"/>	<!-- 이후 hidden으로 수정 예정 -->
-	                        <input type="text" name="no" value="${no}"/>		<!-- 이후 hidden으로 수정 예정 -->	
-	                       	<input type="text" name="cateType1" value="${vo.cateType1}"/>		<!-- 이후 hidden으로 수정 예정 -->	
-                     		<input type="text" name="cateType2" value="${vo.cateType2}"/> 		<!-- 이후 hidden으로 수정 예정 -->	
+	                        <input type="hidden" name="uid" value="${sessUser.uid}"/>	
+	                        <input type="hidden" name="cate" value="${cate}"/>	
+	                        <input type="hidden" name="no" value="${no}"/>		
+	                       	<input type="hidden" name="cateType1" value="${vo.cateType1}"/>		
+                     		<input type="hidden" name="cateType2" value="${vo.cateType2}"/> 		
 	                            <table>
 	                                <tbody>
 	                                    <tr>
@@ -83,7 +86,7 @@ $(function(){
 	                                </tbody>
 	                            </table>
 	                             <div>
-	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">취소하기</a>
+	                                <a href="/Kmarket/admin/cs/notice/list.do?cate=notice" class="btnList">취소하기</a>
 	                                <input type="submit" class="btnModify" value="수정하기">
 	                            </div>
 	                        </form>

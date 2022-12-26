@@ -60,6 +60,7 @@ public class ModifyController extends HttpServlet{
 		String cateType2 = req.getParameter("cateType2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
+		content = content.replace("\r\n", "<br>");
 		int no = Integer.parseInt(req.getParameter("no"));
 		String uid = req.getParameter("uid");
 		String regip = req.getRemoteAddr();	//ip는 getRemoteAddr

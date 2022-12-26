@@ -108,9 +108,17 @@ main > aside {
 main > section {
     float: right;
     width: 1130px;
-    min-height: 600px;
+    min-height: 757px;
     padding: 20px;
     box-sizing: border-box;
+}
+
+main > #cs {
+	height: auto;
+}
+
+main > #admin-product-list {
+	height: 825px;
 }
 
 main > section > nav {
@@ -161,7 +169,7 @@ main table {
     width: 100%;
     border-collapse: collapse;
 }
-main table tr {}
+main table tr { height: 45px; }
 main table tr > td {
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
@@ -169,7 +177,6 @@ main table tr > td {
     text-align: left;
 }
 main table tr > td:nth-child(1) {
-    width: 160px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
     background: #f6f6f6;
@@ -236,6 +243,8 @@ main table span {
 
 /*  푸터 */
 footer {
+	position : relative;
+	transform: translatY(-100%);
     width: 100%;
     height: 60px;
     background: #0d3a46;
@@ -448,25 +457,19 @@ button[type=submit] {
     border-top: 2px solid #8798a3;
 }
 #admin-faq > section > table  tr > th{
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-faq > section > table  tr > td {
-    background: #fff;
-    text-align: center;
-    box-sizing: border-box;
-}
-#admin-faq > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-faq > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(4) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left;}
-#admin-faq > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-faq > section > table  tr > th:nth-child(1){ width: 5%; }
+#admin-faq > section > table  tr > th:nth-child(2){ width: 4%; }
+#admin-faq > section > table  tr > th:nth-child(3){ width: 8%; }
+#admin-faq > section > table  tr > th:nth-child(4){ width: 8%; }
+#admin-faq > section > table  tr > th:nth-child(5){ width: 55%; }
+
 
 #admin-faq > section > table img.thumb {width: 60px;}
 
@@ -529,13 +532,25 @@ button[type=submit] {
 }
 
 #admin-product-list > section > table  {
+	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
 #admin-product-list > section > table  tr > th{
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     padding: 10px 0;
     background: #f6f6f6;
 }
+#admin-product-list > section > table  tr > th:nth-child(1){ width: 5%; }
+#admin-product-list > section > table  tr > th:nth-child(2){ width: 4%; }
+#admin-product-list > section > table  tr > th:nth-child(3){ width: 8%; }
+#admin-product-list > section > table  tr > th:nth-child(4){ width: 55%; }
+
 #admin-product-list > section > table  tr > td {
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     background: #fff;
     text-align: center;
     box-sizing: border-box;
@@ -622,34 +637,39 @@ button[type=submit] {
 }
 
 /* product-register */
-#admin-faq {}
 #admin-faq input[type=submit] {
     float: right;
     width: 100px;
 }
 
 /* product-list */
-#admin-faq {}
 #admin-faq > section > div  {
     margin-bottom: 10px;
 }
 
+#admin-faq > section { height:825px; }
+
 #admin-faq > section > table  {
+	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
 #admin-faq > section > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
+
 #admin-faq > section > table  tr > td {
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-faq > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-faq > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(4) {width: 80px;}
+#admin-faq > section > table  tr > td:nth-child(1) {width: 5%;}
+#admin-faq > section > table  tr > td:nth-child(2) {width: 10%;}
+#admin-faq > section > table  tr > td:nth-child(3) {width: 10%;}
+#admin-faq > section > table  tr > td:nth-child(4) {width: 40%;}
 #admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left; padding-left: 32px;}
 #admin-faq > section > table  tr > td:nth-child(6) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(7) {width: 80px;}
@@ -783,7 +803,7 @@ button[type=submit] {
 
 #cs > .notice > section {
     position: relative;
-    width: 1200px;
+    width: 100%;
     height: auto;
     margin: 0 auto;
     overflow: hidden;
@@ -798,7 +818,7 @@ button[type=submit] {
     box-sizing: border-box;
 }
 #cs > .notice > section > article {
-    width: 980px;
+    width: 100%;
     min-height: 600px;
 }
 #cs > .notice > section > aside > h2 {
@@ -826,6 +846,15 @@ button[type=submit] {
     padding: 26px;
     box-sizing: border-box;
    
+}
+
+#cs > .notice > .modify > article > form > table tr > td:nth-child(1) {
+	width:75px;
+	font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    padding: 18px 0;
+    padding-left: 16px;
 }
 
 
@@ -865,29 +894,41 @@ button[type=submit] {
     left: 380px;
 }
 #cs > .notice > .view > article > form > table {
+	table-layout: fixed;
 	border-top: 2px solid #111;
 }
 #cs > .notice > .view > article > form > table tr > td:nth-child(1) {
+	width: 5%;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
     padding: 18px 0;
     padding-left: 16px;
 }
+
+#cs > .notice > .view > article > form > table tr > td:nth-child(2) {
+	width: 50%;
+}
  
 #cs > .notice > .view > article > form > table tr > td:nth-child(2) > h2 {
+	width: 100%;
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
 	font-size: 15px;
 }
 #cs > .notice > .view > article > form > table tr > td:nth-child(2) > p {
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
 	font-size: 15px;
 }
 #cs > .notice > .view > article > form {
+	width: 100%;
 	position: relative;
 }
 #cs > .notice > .view > article > form > div {
 	float: right;
-	position: absolute;
-    right: 0px;
     padding-top: 40px;
 }
 #cs > .notice > .view .btnDelete {
@@ -931,6 +972,7 @@ button[type=submit] {
 	border-top: 2px solid #111;
 }
 #cs > .notice > .write > article > form > table tr > td:nth-child(1) {
+	width:75px;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -954,10 +996,10 @@ button[type=submit] {
     padding-top: 40px;
 }
 #cs > .notice > .write > article > form > table input {
-    width: 600px;
+    width: 100%;
 }
 #cs > .notice > .write > article > form > table textarea {
-    width: 600px;
+    width: 100%;
     height: 300px;;
 }
 #cs > .notice > .write .btnList {
@@ -989,7 +1031,8 @@ button[type=submit] {
 #cs > .notice > .modify > article > form > table {
 	border-top: 2px solid #111;
 }
-#cs > .notice > .modify > article > form > table tr > td:nth-child(1) {
+#cs > .notice > .modfy > article > form > table tr > td:nth-child(1) {
+	width:75px;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -1013,10 +1056,10 @@ button[type=submit] {
     padding-top: 40px;
 }
 #cs > .notice > .modify > article > form > table input {
-    width: 600px;
+    width: 100%;
 }
 #cs > .notice > .modify > article > form > table textarea {
-    width: 600px;
+    width: 100%;
     height: 300px;;
 }
 #cs > .notice > .modify .btnList {
@@ -1064,19 +1107,20 @@ button[type=submit] {
 	font-size: 15px;
 }
 #cs > .qna > .reply > article > form {
+	width: 100%;
 	position: relative;
 }
 #cs > .qna > .reply > article > form > div {
 	float: right;
 	position: absolute;
-	right: 8%;
+	right: 0;
     padding-top: 40px;
 }
 #cs > .qna > .reply > article > form > table input {
     width: 600px;
 }
 #cs > .qna > .reply > article > form > table textarea {
-    width: 600px;
+    width: 100%;
     height: 150px;;
 }
 #cs > .qna > .reply .btnDelete {
@@ -1141,7 +1185,7 @@ button[type=submit] {
 } 
 #cs > .faq > section {
     position: relative;
-    width: 1200px;
+    width: 100%;
     height: auto;
     margin: 0 auto;
     overflow: hidden;
@@ -1178,8 +1222,7 @@ button[type=submit] {
     text-decoration: underline;
 }
 #cs > .faq > section > article {
- 
-    width: 980px;
+    width: 100%;
     min-height: 600px;
     padding: 26px;
     box-sizing: border-box;
@@ -1260,8 +1303,6 @@ button[type=submit] {
 }
 #cs > .faq > .view > article >  div {
 	float: right;
-	position: absolute;
-    right: 0px;
     padding-top: 40px;
 }
 #cs > .faq > .view .btnDelete {
@@ -1306,6 +1347,7 @@ button[type=submit] {
 	border-top: 2px solid #111;
 }
 #cs > .faq > .write > article > form > table tr > td:nth-child(1) {
+	width: 75px;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -1329,10 +1371,10 @@ button[type=submit] {
     padding-top: 40px;
 }
 #cs > .faq > .write > article > form > table input {
-    width: 600px;
+    width: 100%;
 }
 #cs > .faq > .write > article > form > table textarea {
-    width: 600px;
+    width: 100%;
     height: 300px;;
 }
 #cs > .faq > .write .btnList {
@@ -1367,6 +1409,7 @@ button[type=submit] {
 	border-top: 2px solid #111;
 }
 #cs > .faq > .modify > article > form > table tr > td:nth-child(1) {
+	width: 75px;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -1390,10 +1433,10 @@ button[type=submit] {
     padding-top: 40px;
 }
 #cs > .faq > .modify > article > form > table input {
-    width: 600px;
+    width: 100%;
 }
 #cs > .faq > .modify > article > form > table textarea {
-    width: 600px;
+    width: 100%;
     height: 300px;;
 }
 #cs > .faq > .modify .btnList {
@@ -1481,7 +1524,7 @@ button[type=submit] {
      text-decoration: underline;
  }
  #cs > .qna > section > article {
-     width: 910px;
+     width: 100%;
      min-height: 600px;
      padding: 26px;
      box-sizing: border-box;
