@@ -80,13 +80,9 @@ public class WriteController extends HttpServlet{
 		vo.setUid(uid);
 		vo.setRegip(regip);
 		
-		logger.info("WriteController doPost...data production");
-		
 		// 데이터베이스 처리
 		service.insertArticle(vo);
 		
-		logger.info("WriteController doPost...database");
-				
 		// 리다이렉트
 		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate="+cate+"&cateType1="+cateType1);
 	}

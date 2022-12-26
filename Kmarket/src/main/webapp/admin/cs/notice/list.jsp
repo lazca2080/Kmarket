@@ -4,48 +4,8 @@
 <jsp:include page="/admin/_header.jsp"></jsp:include>
 <script>
 $(function(){
-	
-	 // 30자 넘어가면 말 줄임표...
-	/*  var tr_length = $('#tb tr').length-1;	//맨위 테이블 행은 빼기
-	 var tab_td = $('#tb td');				//tb 테이블의 td들 불러오기
-	 var text = "...";						//말 줄임표
-	 for (var i = 0; i < tr_length; i++) {
-	        if(i==0){
-	            var td1 = tab_td.eq(i).text();
-	            if(td1.length>20){//35글자가 넘으면
-	                $("#tb td:eq("+i+")").html(td1.substr(0,20)+text);
-	            }
-	        }else{
-	            var td2 = tab_td.eq(i*2).text();//tr 안에 td 들이 2개라서 곱하기 2
-	            if(td2.length>20){//35글자가 넘으면
-	                $("#tb td:eq("+(i*2)+")").html(td2.substr(0,20)+text);
-	            }
-	        }
-	    } */
-	
-	    /*
-	 // 유형 선택에 따른 목록 출력 
-	 $('#selectBox').change(function(){
-	  
-			let selectOption = $("#selectBox option:selected").val();
-			console.log("selectOption: " + selectOption);
-	  
-		 if(selectOption == 'option1'){
-			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=고객서비스'; 
-			 // 참고: $('#selectBox option:eq(option1)').prop('selected', true).trigger('change'); 페이지 이동이라 해당 방법으로 option selected 고정 불가능
-			 // 참고: $("#selectBox").val("${param.search}").attr("selected","selected"); 페이지 이동이라 해당 방법으로 option selected 고정 불가능
-		 }else if(selectOption == 'option2'){
-			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=안전거래'; 
-		 }else if(selectOption == 'option3'){
-			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=위해상품'; 
-		 }else if(selectOption == 'option4'){
-			 location.href='/Kmarket/admin/cs/notice/list.do?cate=notice&cateType1=이벤트당첨'; 
-		 } 
-		 
-	 });
-	    */
-		
-	 // 카테고리 선택에 따른 테이블 출력
+
+	// 카테고리 선택에 따른 테이블 출력
 		$('#selectBox').change(function(){
 				
 			let cateType1 = $('#selectBox option:selected').val();
@@ -140,7 +100,7 @@ $(function(){
 			return false;
 		}
 	});    
-	
+	/*
     // [선택삭제] 버튼 클릭 시 ( 선택 게시글 단독 삭제 ) 
     $('.delete').click(function(e){
 
@@ -180,26 +140,11 @@ $(function(){
 		}
     	
     });
-    
-/* let tbl = $('#tb');
-	
-	// 테이블 헤더에 있는 checkbox 클릭시
-    $(":checkbox:first", tbl).click(function(){
-        // 클릭한 체크박스가 체크상태인지 체크해제상태인지 판단
-        if( $(this).is(":checked") ){
-            $(":checkbox", tbl).attr("checked", "checked");
-        }
-        else{
-            $(":checkbox", tbl).removeAttr("checked");
-        }
-
-    }); */
-     
-    
+   */ 
     
    //  [선택삭제] 버튼 클릭 시 ( 선택 게시글 다중 삭제 ) 
     
-   $('.test2').click(function(){
+   $('.delete').click(function(){
 	   
 	   let chk_arr = [];	
 	   
@@ -260,10 +205,9 @@ $(function(){
                             <option value="위해상품" <c:if test="${cateType1 eq '위해상품'}">selected="selected"</c:if>>위해상품</option>
                             <option value="이벤트당첨" <c:if test="${cateType1 eq '이벤트당첨'}">selected="selected"</c:if>>이벤트당첨</option>
                         </select>
-                        <input type="text" value="${cate}"/>
-                        <input type="text" value="${cateType1}" placeholder="cateType1"/>
-                        <input type="text" id="uid" value="${sessUser.uid}"/>
-                        <input type="button" class="test2" value="기능X 테스트버튼">
+                        <input type="hidden" value="${cate}"/>
+                        <input type="hidden" value="${cateType1}" placeholder="cateType1"/>
+                        <input type="hidden" id="uid" value="${sessUser.uid}"/>
                     </div>
                     <table id="tb">
                         <tr>
