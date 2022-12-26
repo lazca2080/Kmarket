@@ -103,6 +103,10 @@
 			
 		});
 		
+		let p = $('textarea[name=content]').text();
+		let rn = p.replaceAll('<br>', '\n');
+		$('textarea[name=content]').text(rn);
+		
 	});
 
 </script>

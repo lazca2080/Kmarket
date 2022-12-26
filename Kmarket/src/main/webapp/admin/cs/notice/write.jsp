@@ -82,7 +82,7 @@ $(function(){
 	                                </tbody>
 	                            </table>
 	                             <div>
-	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">취소하기</a>
+	                                <a href="/Kmarket/admin/cs/notice/list.do?cate=notice" class="btnList">취소하기</a>
 	                                <input type="submit" class="btnSubmit" value="등록하기">
 	                            </div>
 	                        </form>

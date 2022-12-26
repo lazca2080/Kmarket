@@ -24,6 +24,9 @@ $(function(){
 		console.log("content: " + content);
 	});
 	
+	let p = $('textarea[name=content]').text();
+	let rn = p.replaceAll('<br>', '\n');
+	$('textarea[name=content]').text(rn);
 	
 });
 </script>
@@ -83,7 +86,7 @@ $(function(){
 	                                </tbody>
 	                            </table>
 	                             <div>
-	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">취소하기</a>
+	                                <a href="/Kmarket/admin/cs/notice/list.do?cate=notice" class="btnList">취소하기</a>
 	                                <input type="submit" class="btnModify" value="수정하기">
 	                            </div>
 	                        </form>
