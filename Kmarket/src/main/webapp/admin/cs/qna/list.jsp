@@ -278,7 +278,7 @@
 							rows += "<td>"+no+"</td>";
 							rows += "<td>"+vo.cateType1+"</td>";
 							rows += "<td>"+vo.cateType2+"</td>";
-							rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
+							rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>"+vo.title+"</a></td>";
 							rows += "<td>"+uid+"**</td>";
 							rows += "<td>"+rdate+"</td>";
 							rows += "<td>"+(vo.replyContent != null? '<p style="color: #35A2EB;">답변완료</p>' : '검토중')+"</td>"; 
@@ -325,8 +325,6 @@
 									.removeClass('off-screen')
 									.animate({opacity: 1}, 200);
 						}); 
-						
-						
 					} 
 				});
 				
@@ -379,7 +377,7 @@
 	                            <td>${i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
-	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}"> ${article.title} </a></td>
+	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">${article.title} </a></td>
 	                            <td>${article.uid.substring(0,3)}**</td>
 	                            <td>
 	                            	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -408,7 +406,7 @@
 	                        </span>
 	                        <span class="num">
 	                            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${i}" class="num ${currentPage eq i? 'active':'off'}">${i}</a>
 		                        </c:forEach>
 	                        </span>
 	                        <span class="next">

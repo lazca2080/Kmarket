@@ -113,6 +113,14 @@ main > section {
     box-sizing: border-box;
 }
 
+main > #cs {
+	height: auto;
+}
+
+main > #admin-product-list {
+	height: 825px;
+}
+
 main > section > nav {
     position: relative;
     width: 100%;
@@ -161,7 +169,7 @@ main table {
     width: 100%;
     border-collapse: collapse;
 }
-main table tr {}
+main table tr { height: 45px; }
 main table tr > td {
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
@@ -169,7 +177,6 @@ main table tr > td {
     text-align: left;
 }
 main table tr > td:nth-child(1) {
-    width: 160px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
     background: #f6f6f6;
@@ -448,25 +455,19 @@ button[type=submit] {
     border-top: 2px solid #8798a3;
 }
 #admin-faq > section > table  tr > th{
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-faq > section > table  tr > td {
-    background: #fff;
-    text-align: center;
-    box-sizing: border-box;
-}
-#admin-faq > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-faq > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(4) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left;}
-#admin-faq > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-faq > section > table  tr > th:nth-child(1){ width: 5%; }
+#admin-faq > section > table  tr > th:nth-child(2){ width: 4%; }
+#admin-faq > section > table  tr > th:nth-child(3){ width: 8%; }
+#admin-faq > section > table  tr > th:nth-child(4){ width: 8%; }
+#admin-faq > section > table  tr > th:nth-child(5){ width: 55%; }
+
 
 #admin-faq > section > table img.thumb {width: 60px;}
 
@@ -529,13 +530,25 @@ button[type=submit] {
 }
 
 #admin-product-list > section > table  {
+	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
 #admin-product-list > section > table  tr > th{
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     padding: 10px 0;
     background: #f6f6f6;
 }
+#admin-product-list > section > table  tr > th:nth-child(1){ width: 5%; }
+#admin-product-list > section > table  tr > th:nth-child(2){ width: 4%; }
+#admin-product-list > section > table  tr > th:nth-child(3){ width: 8%; }
+#admin-product-list > section > table  tr > th:nth-child(4){ width: 55%; }
+
 #admin-product-list > section > table  tr > td {
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     background: #fff;
     text-align: center;
     box-sizing: border-box;
@@ -635,21 +648,26 @@ button[type=submit] {
 }
 
 #admin-faq > section > table  {
+	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
 #admin-faq > section > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
+
 #admin-faq > section > table  tr > td {
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-faq > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-faq > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-faq > section > table  tr > td:nth-child(4) {width: 103px;}
+#admin-faq > section > table  tr > td:nth-child(1) {width: 5%;}
+#admin-faq > section > table  tr > td:nth-child(2) {width: 10%;}
+#admin-faq > section > table  tr > td:nth-child(3) {width: 10%;}
+#admin-faq > section > table  tr > td:nth-child(4) {width: 40%;}
 #admin-faq > section > table  tr > td:nth-child(5) {width: auto; text-align: left; padding-left: 32px;}
 #admin-faq > section > table  tr > td:nth-child(6) {width: 80px;}
 #admin-faq > section > table  tr > td:nth-child(7) {width: 80px;}

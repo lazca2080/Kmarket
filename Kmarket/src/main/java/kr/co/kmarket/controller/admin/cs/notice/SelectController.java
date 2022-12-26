@@ -60,7 +60,7 @@ public class SelectController extends HttpServlet {
 		// 게시글 번호 정렬
 		int start = service.getStartNum(currentPage);
 		
-		List<CsVO> articles = service.selectArticlesNotice(cateType1, start);
+		List<CsVO> articles = service.selectArticlesNotice(cateType1);
 		req.setAttribute("articles", articles);
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
@@ -86,34 +86,10 @@ public class SelectController extends HttpServlet {
 		String cateType2 = req.getParameter("cateType2");
 		String pg = req.getParameter("pg");
 		
-		// 
-		int currentPage = service.getCurrentPage(pg);
-		// 전체 게시물 개수 
-		int total = service.selectCountTotalNotice(cate, cateType1);
-		// 마지막 페이지 번호
-		int lastPageNum = service.getLastPageNum(total);
-		// 현재 페이지 게시글 시작값
-		//int limitStart = service.getLimitStart(currentPage);
-		// 페이지 그룹* pageGroupStart, end
-		int [] result = service.getPageGroupNum(currentPage, lastPageNum);
-		// 페이지 시작 번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-		// 게시글 번호 정렬
-		int start = service.getStartNum(currentPage);
-		
-		List<CsVO> articles = service.selectArticlesNotice(cateType1, start);
-		
-		AdminCsListVO vo = new AdminCsListVO();
-		vo.setCurrentPage(currentPage);
-		vo.setLastPageNum(lastPageNum);
-		//vo.setLimitStart(limitStart);
-		vo.setPageGroupStart(result[0]);
-		vo.setPageGroupEnd(result[1]);
-		vo.setPageStartNum(pageStartNum);
-		vo.setArticles(articles);
+		List<CsVO> articles = service.selectArticlesNotice(cateType1);
 		
 		Gson gson = new Gson();
-		String jsonData = gson.toJson(vo);			
+		String jsonData = gson.toJson(articles);			
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(jsonData);
