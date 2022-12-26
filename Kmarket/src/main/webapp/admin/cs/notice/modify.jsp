@@ -40,11 +40,11 @@ $(function(){
 	                <section class="modify">
 						<article>
 	                        <form action="/Kmarket/admin/cs/notice/modify.do" method="post">
-	                        <input type="text" name="uid" value="${sessUser.uid}"/>	
-	                        <input type="text" name="cate" value="${cate}"/>	<!-- 이후 hidden으로 수정 예정 -->
-	                        <input type="text" name="no" value="${no}"/>		<!-- 이후 hidden으로 수정 예정 -->	
-	                       	<input type="text" name="cateType1" value="${vo.cateType1}"/>		<!-- 이후 hidden으로 수정 예정 -->	
-                     		<input type="text" name="cateType2" value="${vo.cateType2}"/> 		<!-- 이후 hidden으로 수정 예정 -->	
+	                        <input type="hidden" name="uid" value="${sessUser.uid}"/>	
+	                        <input type="hidden" name="cate" value="${cate}"/>	
+	                        <input type="hidden" name="no" value="${no}"/>		
+	                       	<input type="hidden" name="cateType1" value="${vo.cateType1}"/>		
+                     		<input type="hidden" name="cateType2" value="${vo.cateType2}"/> 		
 	                            <table>
 	                                <tbody>
 	                                    <tr>
