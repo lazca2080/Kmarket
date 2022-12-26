@@ -40,10 +40,10 @@ $(function(){
 	                <section class="write">
 						<article>
 	                        <form action="/Kmarket/admin/cs/notice/write.do" method="post">
-	                        <input type="text" name="uid" value="${sessUser.uid}"/>	
-	                        <input type="text" name="cate" value="${cate}"/>	<!-- 이후 hidden으로 수정 예정 -->
-	                       	<input type="text" name="cateType1" />		<!-- 이후 hidden으로 수정 예정 -->	
-                     		<input type="text" name="cateType2" /> 		<!-- 이후 hidden으로 수정 예정 -->	
+	                        <input type="hidden" name="uid" value="${sessUser.uid}"/>	
+	                        <input type="hidden" name="cate" value="${cate}"/>	
+	                       	<input type="hidden" name="cateType1" />		
+                     		<input type="hidden" name="cateType2" /> 		
 	                            <table>
 	                                <tbody>
 	                                    <tr>
