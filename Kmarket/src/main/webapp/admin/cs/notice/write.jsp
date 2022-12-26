@@ -25,6 +25,17 @@ $(function(){
 	});
 	
 	
+	$('.write > article > form').submit(function(){
+		
+		let cateType1 = $('select[name=type]').val();
+		let cateType2 = $('select[name=cateType2]').val();
+		
+		if(cateType1 == '1차 유형 선택' || cateType2 == '2차 유형 선택'){
+			alert('유형을 선택해주세요');
+			return false;
+		}
+	});
+	
 });
 </script>
 <!DOCTYPE html>
