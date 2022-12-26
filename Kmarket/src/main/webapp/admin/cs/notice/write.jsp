@@ -25,6 +25,17 @@ $(function(){
 	});
 	
 	
+	$('.write > article > form').submit(function(){
+		
+		let cateType1 = $('select[name=type]').val();
+		let cateType2 = $('select[name=cateType2]').val();
+		
+		if(cateType1 == '1차 유형 선택' || cateType2 == '2차 유형 선택'){
+			alert('유형을 선택해주세요');
+			return false;
+		}
+	});
+	
 });
 </script>
 <!DOCTYPE html>
@@ -82,7 +93,7 @@ $(function(){
 	                                </tbody>
 	                            </table>
 	                             <div>
-	                                <a href="/Kmarket/admin/cs/notice/list.do" class="btnList">취소하기</a>
+	                                <a href="/Kmarket/admin/cs/notice/list.do?cate=notice" class="btnList">취소하기</a>
 	                                <input type="submit" class="btnSubmit" value="등록하기">
 	                            </div>
 	                        </form>
