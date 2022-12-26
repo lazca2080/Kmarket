@@ -41,12 +41,16 @@ public class ListController extends HttpServlet{
 		String text = req.getParameter("text");
 		
 		//현재 페이지번호
+		int total = 0;
+		
+		if(level.equals("7")) {
+			total = service.selectTotal(search, text);
+		}else {
+			total = service.selectCountTotal(uid,search,text);
+		}
+		
 		int currentPage = service.getCureentPage(pg);
-		int total = service.selectCountTotal(uid,search);
 		int lastPageNum = service.getLastPageNum(total);
-		logger.info("total :" + total);
-		logger.info("search :" + search);
-		logger.info("text :" + text);
 		
 		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
 		int pageStartNum = service.getPageStartNum(total, currentPage);
@@ -61,10 +65,6 @@ public class ListController extends HttpServlet{
 			req.setAttribute("Product", Product);
 		}
 		
-		
-		logger.info("level : "+level);
-		logger.info("pageGroupStart :" +result[0]);
-		logger.info("pageGroupEnd :" +result[1]);
 		req.setAttribute("seller", seller);
 		req.setAttribute("pg", pg);
 		req.setAttribute("currentPage", currentPage);
@@ -82,6 +82,6 @@ public class ListController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 	}
 }

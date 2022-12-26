@@ -5,7 +5,11 @@
 <script>
 $(function() {
 	
-	$('.delete').click(function() {
+	let totalNo = new Array();
+	
+	//개별 선택 삭제
+	
+	$('.remove').click(function() {
 		
 		let isDelete = confirm('정말 삭제하시겠습니까?');
 		
@@ -15,11 +19,6 @@ $(function() {
 			let checkbox = $('input:checkbox:checked');
 			
 			console.log("no : "+no);
-			
-			if(no == null){
-				alert('선택된 사항이 없습니다.');
-				return;
-			}
 			
 			$.ajax({
 				url : '/Kmarket/admin/cs/faq/delete.do',
@@ -45,7 +44,87 @@ $(function() {
 		
 	});
 	
-	$('#remove').click(function() {
+	
+	//전체선택 체크박스
+	$(document).on('click','.chk',function(){
+		if($('input[name=all]').is(':checked')){
+			$('input[name=articleNo]').prop('checked', true);
+			
+		}else{
+			$('input[name=articleNo]').prop('checked', false);
+		}
+	});
+	
+	//하위 체크박스 체크 여부에 따른 전체 체크박스 상태
+	// 선택된 체크박스의 개수가 전체 체크박스 개수와 같다면 true
+	
+	$('input[name=articleNo]').change(function() {
+		if($('input[name=articleNo]:checked').length == $('input[name=articleNo]')){
+			$('input[name=all]').prop("checked", true);
+		}else{
+			$('input[name=all]').prop("checked", false);
+		}
+	});
+	
+	//단독 삭제, 개별선택삭제, 전체통합삭제 
+	let chkNo = document.getElementsByName("articleNo");
+	let rowCnt = chkNo.length;
+	
+	console.log(chkNo.length);  //페이지 내 게시글 개수 확인
+	
+	
+	$('.delete').click(function() {
+		
+		let list = $('input[name=articleNo]');
+		let checkbox = $('input[name=articleNo]:checked');
+		
+		console.log("checkbox.length : "+checkbox.length);  //선택된 게시글 개수 확인
+		
+		if(checkbox.length == 0){
+			alert('삭제할 게시물을 선택하십시오');
+			 return;
+		}
+		
+		let chkArr = new Array();
+		
+		console.log("list length :" +list.length);  //페이지 내 게시글 개수 확인
+		
+		for(let i=0; i<list.length; i++){     //페이지 내 게시글 개수동안 체크된 게시글 배열 생성
+			if(list[i].checked){
+				chkArr.push(list[i].value);
+			}
+		}
+		
+		console.log(chkArr);  //{'513','512'}
+		
+		$.ajax({
+			url : '/Kmarket/admin/cs/faq/delete.do',
+			method : 'Post',
+			traditional : true,
+			data : {"chkArr" : chkArr},
+			dataType:'json',
+			success: function(data) {
+				console.log("data : "+data.result);
+				if(data.result == 1){
+					alert('삭제되었습니다.');
+					//checkbox.parent().parent().remove();
+					location.reload();
+					return true;
+					
+				}else{
+					alert('실패하였습니다.');
+					return false;
+				}
+			}
+			
+			
+		});
+		
+		
+	});
+	
+	
+	$('.remove').click(function() {
 		
 		let isDelete = comfirm('정말 삭제 하시겠습니까?');
 		
@@ -163,7 +242,7 @@ $(function() {
 				success: function(data){
 					console.log(data);
 					$('.row').remove();	// 테이블 비우기
-					let no = 1;
+					let no = 10;
 					
 					console.log("data.length :" +data.length);
 
@@ -172,24 +251,37 @@ $(function() {
 						let rdate = vo.rdate.substring(2,10);
 						
 						let rows = "<tr class='row'>";
-						rows += "<td><input type='checkbox' name='all' value='"+vo.no+"'></td>";
+						rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'></td>";
 						rows += "<td>"+no+"</td>";
 						rows += "<td>"+vo.cateType1+"</td>";
 						rows += "<td>"+vo.cateType2+"</td>";
 						rows += "<td><a href='/Kmarket/admin/cs/qna/view.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
 						rows += "<td>"+vo.hit+"</td>";
 						rows += "<td>"+rdate+"</td>";
-						rows += "<td><a href='/Kmarket/admin/cs/faq/delete.do?no="+vo.no+"'>[삭제]</a><br><a href='/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>[수정]</a></td>";
+						rows += "<td><a href='/Kmarket/admin/cs/faq/delete.do?no="+vo.no+"class=remove'>[삭제]</a><br><a href='/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>[수정]</a></td>";
 						rows += "</tr>";
 							
 						$('#tb').append(rows);
 						
-						no++;
+						no--;
 					}
 				}
 			});
 		});
 	
+	});
+	
+	$('#admin-faq > section > .write').click(function() {
+		
+		console.log("write");
+		
+		let Uid = $('input[class=uid]').val();
+		
+		if(Uid == ''){
+			alert('다시 로그인해주세요.');
+			location.href = "/Kmarket/member/login.do";
+			return false;
+		}
 	});
 	
 });
@@ -221,20 +313,24 @@ $(function() {
                     </div>
                     <table id="tb">
                         <tr>
-                            <th><input type="checkbox" name="all"></th>
+                            <th>
+                            <input type="checkbox" name="all" class="chk">
+                            <input type="hidden" class="uid" value="${sessUser.uid}">
+                            </th>
                             <th>번호</th>
                             <th>1차 유형</th>
                             <th>2차 유형</th>
                             <th>제목</th>
                             <th>조회</th>
-                            <th>날짜</th>
+                            <th>날짜시간</th>
                             <th>관리</th>
                         </tr>
+                        <c:set var="num"  value="${11}"/>	
                         <c:forEach var="article" items="${articles}">
-                        <c:set var="i" value="${i+1}"/>
+                        <c:set var="num" value="${num-1}"/>
                         <tr class="row">
-                        	<td><input type="checkbox" name="all" value="${article.no}"></td>
-                            <td>${i}</td>
+                        	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
+                            <td>${num}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
                             <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[${article.cateType2}] ${article.title} // type1:${article.cateType1} // type2:${article.cateType2} // no:${article.no}</a></td>
@@ -244,15 +340,16 @@ $(function() {
 					            <fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
 							</td>
                             <td>
-                                <a href="/Kmarket/admin/cs/faq/delete.do?no=${article.no}" id="remove">[삭제]</a><br>
+                                <a href="/Kmarket/admin/cs/faq/delete.do?no=${article.no}" class="remove">[삭제]</a><br>
                                 <a href="/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">[수정]</a>
                             </td>
                         </tr>
                         </c:forEach>
+                       
                     </table>
                     <input type="button" class="delete" value="선택삭제">
-                    <a href="/Kmarket/admin/cs/faq/write.do?cate=faq&cateType1=${cateType1}&cateType2=${cateType2}" class="write">작성하기</a>
-                    
+                    <a href="/Kmarket/admin/cs/faq/write.do?cate=faq&cateType1=${cateType1}&cateType2=${cateType2}" class="write" id="write">작성하기</a>
+                   
                   
                 </section>
             </section>

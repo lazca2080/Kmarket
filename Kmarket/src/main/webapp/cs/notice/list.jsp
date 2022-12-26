@@ -64,41 +64,39 @@
                             			</c:when>
                             		</c:choose>
                             	</c:forEach>
-                            	<%-- <c:forEach var="article" items="${articles}">
-                            		<c:if test="${article.cateType1 eq cateType1}">
-                            			<tr id="articleList">
-		                                    <td>
-		                                        <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} //cateType1: ${article.cateType1} </a>
-		                                    </td>
-		                                    <td>
-		                                    	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-				                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
-		                                    </td>
-	                                	</tr>
-                            		</c:if>
-                            	</c:forEach>  --%>
-	                            <%-- <c:forEach var="article" items="${articles}">
-	                               <tr id="articleList">
-	                                    <td>
-	                                        <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${article.cateType1}&no=${article.no}">[${article.cateType2}] ${article.title} //cateType1: ${article.cateType1} </a>
-	                                    </td>
-	                                    <td>
-	                                    	<fmt:parseDate value="${article.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
-			                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>
-	                                    </td>
-	                                </tr>
-	                            </c:forEach>  --%>
                             </tbody>
                         </table>
+                        <!-- cateType1 이 없을때 -> 전체 리스트, 있을때 cateType1에 해당하는 리스트 출력 따라서 조건문 추가.  -->
                         <div class="page">
 	                        <c:if test="${pageGroupStart gt 1}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+	                        <c:choose>
+		                        <c:when test="${cateType1 eq null}">
+		                        <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${pageGroupStart-1}" class="prev">이전</a>
+		                        </c:when>
+		                        <c:otherwise>
+		                        <a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${pageGroupStart-1}" class="prev">이전</a>
+		                        </c:otherwise>
+	                        </c:choose>
 	                        </c:if>
 	                        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                        <c:choose>
+	                        	<c:when test="${cateType1 eq null}">
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            </c:when>
+	                            <c:otherwise>
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+	                            </c:otherwise>
+                            </c:choose>
 	                        </c:forEach>
-	                        <c:if test="${pageGroupStart lt lastPageNum}">
-	                            <a href="/Kmarket/cs/notice/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+	                        <c:if test="${pageGroupEnd lt lastPageNum}">
+	                        	<c:choose>
+	                        	<c:when test="${cateType1 eq null}">
+	                            <a href="/Kmarket/cs/notice/list.do?cate=notice&pg=${pageGroupStart+1}" class="next">다음</a>
+								</c:when>
+								<c:otherwise>
+								<a href="/Kmarket/cs/notice/list.do?cate=notice&cateType1=${cateType1}&pg=${pageGroupStart+1}" class="next">다음</a>
+								</c:otherwise>
+	                        	</c:choose>
 	                        </c:if>
                         </div>
                     </article>

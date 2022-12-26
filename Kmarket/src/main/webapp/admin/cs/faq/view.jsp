@@ -1,5 +1,43 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/admin/_header.jsp"></jsp:include>
+<script>
+	$(function() {
+		$('#remove').click(function() {
+			
+			let isDelete = confirm('정말 삭제하시겠습니까?');
+			
+			if(isDelete){
+				
+				let no = $('input:checkbox:checked').val();
+				let checkbox = $('input:checkbox:checked');
+				
+				console.log("no : "+no);
+				
+				$.ajax({
+					url : '/Kmarket/admin/cs/faq/delete.do',
+					method : 'get',
+					data : {"no":no},
+					dataType : 'json',
+					success : function(data) {
+						console.log("data : "+data.result);
+						if(data.result == 1){
+							alert('삭제되었습니다.');
+							checkbox.parent().parent().remove();
+							return true;
+						}else{
+							alert('실패하였습니다.');
+							return false;
+						}
+					}
+				});
+				return true;
+			}else{
+				return false;
+			}
+			
+		});
+	});
+</script>
 <!DOCTYPE html>
             <section id="cs">
             	<div class="faq">

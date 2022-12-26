@@ -24,7 +24,7 @@ public class AdminDAO {
 			logger.debug("selectProducts...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
-			if(search == null) {
+			if(search == "" || search == null) {
 				psmt = conn.prepareStatement(AdminSql.selectProduct);
 				psmt.setInt(1, start);
 			}else if(search.equals("prodName")) {
@@ -68,7 +68,6 @@ public class AdminDAO {
 			logger.error(e.getMessage());
 		}
 		
-		logger.debug("products size : " +products.size());
 		
 		return products;
 	}
@@ -81,24 +80,33 @@ public class AdminDAO {
 			logger.debug("selectProductss...");
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = null;
-			if(search == null){
+			if(search == "" || search == null){
 				psmt = conn.prepareStatement(AdminSql.selectProductss);
 				psmt.setString(1, uid);
+				psmt.setInt(2, limitestart);
 			}else if(search.equals("prodName")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss1);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, uid);
+				psmt.setString(2, "%"+text+"%");
+				psmt.setInt(3, limitestart);
 			}else if(search.equals("prodNo")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss2);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, uid);
+				psmt.setString(2, "%"+text+"%");
+				psmt.setInt(3, limitestart);
 			}else if(search.equals("company")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss3);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, uid);
+				psmt.setString(2, "%"+text+"%");
+				psmt.setInt(3, limitestart);
 			}else if(search.equals("seller")){
 				psmt = conn.prepareStatement(AdminSql.selectProductss4);
-				psmt.setString(1, "%"+text+"%");
+				psmt.setString(1, uid);
+				psmt.setString(2, "%"+text+"%");
+				psmt.setInt(3, limitestart);
 			}
 			
-			psmt.setInt(2, limitestart);
+			
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -124,12 +132,97 @@ public class AdminDAO {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("products size : " +products.size());
 		
 		return products;
 	}
 	
-	public int selectCountTotal(String seller,String search) {
+	public int selectTotal(String search, String text) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			if(search == "" || search == null) {
+				psmt = conn.prepareStatement(AdminSql.SELECT_TOTAL);
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("prodNo")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3All);
+				psmt.setString(1, "%"+text+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4All);
+				psmt.setString(1, "%"+text+"%");
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public int selectCountTotal(String seller,String search,String text) {
+		int total = 0;
+		
+		try {
+			logger.info("selectCountTotal...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = null;
+			
+			if(search == "" || search == null){
+				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
+				psmt.setString(1, seller);
+			}else if(search.equals("prodName")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search1);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+text+"%");
+			}else if(search.equals("prodNo")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search2);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+text+"%");
+			}else if(search.equals("company")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search3);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+text+"%");
+			}else if(search.equals("seller")){
+				psmt = conn.prepareStatement(AdminSql.select_count_total_search4);
+				psmt.setString(1, seller);
+				psmt.setString(2, "%"+text+"%");
+			}
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			
+			rs.close();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
+	
+	public int selectCountTotalAll(String search, String text) {
 		int total = 0;
 		
 		try {
@@ -139,23 +232,18 @@ public class AdminDAO {
 			
 			if(search == null){
 				psmt = conn.prepareStatement(AdminSql.SELECT_COUNT_TOTAL);
-				psmt.setString(1, seller);
 			}else if(search.equals("prodName")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1);
-				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search1All);
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("prodNo")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2);
-				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search2All);
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("company")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3);
-				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search3All);
+				psmt.setString(1, "%"+text+"%");
 			}else if(search.equals("seller")){
-				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4);
-				psmt.setString(1, seller);
-				psmt.setString(2, "%"+search+"%");
+				psmt = conn.prepareStatement(AdminSql.select_count_total_for_search4All);
+				psmt.setString(1, "%"+text+"%");
 			}
 			
 			ResultSet rs = psmt.executeQuery();
@@ -181,9 +269,7 @@ public class AdminDAO {
 			Connection conn = DBCP.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(AdminSql.SELECT_ADMIN_LIST);
 			psmt.setString(1, seller);
-			logger.info("seller : " +seller);
 			psmt.setInt(2, limiteStart);
-			logger.info("limiteStart : " +limiteStart);
 			
 			ResultSet rs = psmt.executeQuery();
 			
@@ -207,7 +293,6 @@ public class AdminDAO {
 		}catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("product size : " +products.size());
 		return products;
 	}
 	

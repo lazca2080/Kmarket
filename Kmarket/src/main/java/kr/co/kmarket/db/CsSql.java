@@ -61,6 +61,8 @@ public class CsSql {
 	/*** admin - cs - index - main  ***/
 	public static final String SELECT_ADMIN_MAIN = "SELECT COUNT(`ordNo`), SUM(`ordPrice`), (SELECT COUNT(`uid`) FROM `km_member`), (SELECT COUNT(`prodNo`) FROM `km_product`) FROM `km_product_order`";
 	
+	public static final String SELECT_ADMIN_MAIN_USER = "SELECT COUNT(`ordNo`), SUM(`ordPrice`) FROM `km_product_order_item` WHERE uid=``";
+	
 	
 	/*** admin - cs - index - qna, notice ***/
 	public static final String SELECT_QNA_NOTICE = "SELECT * FROM `cs_article` WHERE `cate`='notice' OR `cate`='qna'";
@@ -123,5 +125,34 @@ public class CsSql {
 	//자주묻는 질문 유형2 글 가져오기 
 	public static final String SELECT_FAQ_CATETYPE2="SELECT * FROM `cs_article` WHERE `cate`='faq' and `cateType1`=? and `cateType2`=? ORDER BY `no` DESC LIMIT ?,10";
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 공지사항 카데고리 별 글 개수
+	public static final String COUNT_NOTICE_ARTICLE = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=?";
+	// 공지사항 카테고리 별 글 보기
+	public static final String SELECT_NOTICE_ARTICLE = "SELECT * FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
 	
 }

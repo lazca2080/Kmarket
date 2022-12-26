@@ -39,8 +39,6 @@ public class DeleteCartController extends HttpServlet{
 		// JSON.stringify(totalNo) 를 통해 받은 데이터는 "문자" 로 넘어옴
 		String cartNo = req.getParameter("totalNo");
 		
-		System.out.println("cartNo : "+cartNo);
-		
 		// 문자를 "," 나눈후 저장
 		String cart[] = cartNo.split(",");
 		
@@ -52,14 +50,9 @@ public class DeleteCartController extends HttpServlet{
 		
 		// cart[] 길이만큼 반복
 		for(int i = 0; i<length; i++) {
-			// 이때 cart[]에는 ex) "[18", "17]" 이렇게 저장되어있다. sysout 참고
-			System.out.println("cart : "+cart[i]);
-			
 			// 숫자를 제외한 문자를 없애고 저장
 			totalNo.add(cart[i].replaceAll("[^\\d]", ""));
 		}
-		
-		System.out.println("list : "+totalNo.get(0));
 		
 		int result = service.deleteCart(totalNo);
 		

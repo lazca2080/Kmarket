@@ -38,6 +38,7 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		//test
 		List<CategoryVO> cate = inservice.selectCate1();
 		req.setAttribute("cate", cate);
 		

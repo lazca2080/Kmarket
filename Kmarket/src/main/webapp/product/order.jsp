@@ -4,199 +4,7 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Kmarket/product/js/zipcode.js"></script>
-<script>
-	$(function(){
-		
-		let oriPoint = 0;
-		let oriTotal = 0;
-		
-		$('input[class=addPoint]').click(function(){
-			
-			// 현재 uid가 가지고있는 point값 가져오기 // 259번째 줄 input hidden 추가
-			let currentPoint = $('input[name=currentPoint]').val();
-			
-			// 할인 받을 point값 가져오기
-			let point = $('input[name=point]').val();
-			
-			// 현재 가지고 있는 point보다 높게 입력시 alert, return;
-			if(parseInt(point) > parseInt(currentPoint)){
-				alert('가지고 계신 포인트 보다 많습니다.');
-				return;
-			}else if(parseInt(point) < 5000){
-				alert('5000점 이상부터 사용 가능합니다.');
-				return;
-			}
-			
-			// 최종결제 정보 포인트 할인에 가져온 point 값 집어넣기 // 140번째 줄 아래 input hidden 추가
-			$('.order > form > .final > table tr:eq(4) > td:eq(1)').text(point);
-			
-			// input에 사용한 point값을 가져온 point 값으로 변경하기
-			$('input[name=ordusedPoint]').attr('value', point);
-			
-			// total값 가져오기
-			let total = $('input[name=ordTotPrice]').val();
-			
-			// total에서 할인받은 point값 빼기
-			let finalTotal = parseInt(total)-parseInt(point);
-			
-			// form으로 보낼 total값 변경
-			$('input[name=ordTotPrice]').attr('value', finalTotal);
-			
-			// 최종결제 정보 전체주문금액 변경
-			$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
-			
-		});
-		
-		$('.order > form').submit(function(){
-			
-			if(f.keyCode == 13){
-				return false;
-			}
-			
-			let result = confirm('입력하신 정보가 맞습니까?');
-			
-			if(result){
-				return true;
-			}else{
-				return false;
-			}
-			
-		});
-	});
-</script>
-        <main id="product">
-			<aside>
-            	<ul class="category">
-                    <li>
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fas fa-shopping-bag" aria-hidden="true"></i>브랜드패션
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate10" items="${cate.cate10}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate10.cate1}&cate2=${cate10.cate2}">${cate10.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-tshirt" aria-hidden="true"></i>패션·의류·뷰티
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate11" items="${cate.cate11}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate11.cate1}&cate2=${cate11.cate2}">${cate11.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-  					<li>
-                        <a href="#">
-                            <i class="fas fa-baby-carriage" aria-hidden="true"></i>유아동
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate12" items="${cate.cate12}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate12.cate1}&cate2=${cate12.cate2}">${cate12.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-utensils" aria-hidden="true"></i>식품·생필품
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate13" items="${cate.cate13}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate13.cate1}&cate2=${cate13.cate2}">${cate13.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-home" aria-hidden="true"></i>홈데코·문구·취미·반려
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate14" items="${cate.cate14}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate14.cate1}&cate2=${cate14.cate2}">${cate14.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-tv" aria-hidden="true"></i>컴퓨터·디지털·가전
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate15" items="${cate.cate15}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate15.cate1}&cate2=${cate15.cate2}">${cate15.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-running" aria-hidden="true"></i>스포츠·건강·렌탈
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate16" items="${cate.cate16}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate16.cate1}&cate2=${cate16.cate2}">${cate16.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-car" aria-hidden="true"></i>자동차·공구
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate17" items="${cate.cate17}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate17.cate1}&cate2=${cate17.cate2}">${cate17.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-					<li>
-                        <a href="#">
-                            <i class="fas fa-book" aria-hidden="true"></i>여행·도서·티켓·e쿠폰
-                            <i class="fas fa-angle-right" aria-hidden="true">
-                            </i>
-                        </a>
-                        <ol>
-                        	<c:forEach var="cate18" items="${cate.cate18}">
-                            <li>
-                                <a href="/Kmarket/product/list.do?cate1=${cate18.cate1}&cate2=${cate18.cate2}">${cate18.c2Name}</a>
-                            </li>
-                            </c:forEach>
-                        </ol>
-                    </li>
-                </ul>
+<script src="/Kmarket/product/js/order.js"></script>
             </aside>
             <section class="order">
                 <nav>
@@ -225,6 +33,7 @@
                             <th>총수량</th>
                             <th>판매가</th>
                             <th>할인</th>
+                            <th>포인트</th>
                             <th>배송비</th>
                             <th>소계</th>
                         </tr>
@@ -249,6 +58,7 @@
                             <td>${cart.count}</td>
                             <td>${cart.price}</td>
                             <td>${cart.discount}%</td>
+                            <td>${cart.point}</td>
                             <td>${cart.delivery}</td>
                             <td>${cart.total}</td>
                         </tr>
@@ -282,6 +92,10 @@
                             <tr>
                                 <td>전체주문금액</td>
                                 <td>${vo.total}</td>
+                            </tr>
+							<tr>
+                                <td>적립 포인트</td>
+                                <td>${vo.point}</td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">
@@ -341,7 +155,6 @@
                             </label>
                             <span>
                             	포인트 5,000점 이상이면 현금처럼 사용 가능합니다.<br>
-                            	적립하신 포인트는 3일 뒤 사용 가능합니다.
                             </span>
                         </div>
                     </article>

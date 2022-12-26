@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.service.CsService;
 import kr.co.kmarket.vo.CsVO;
 
@@ -32,16 +35,18 @@ public class ListController extends HttpServlet{
 		
 		logger.info("doGet");
 		
-		String cate = req.getParameter("cate");
+		String cate      = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
 		String cateType2 = req.getParameter("cateType2");
-		String pg = req.getParameter("pg");
+		String pg        = req.getParameter("pg");
+		String ajax      = req.getParameter("ajax");
 		
+		// 전체 게시물 개수
+		int total = service.selectCountTotal(cate);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
-		// 전체 게시물 개수
-		int total = service.selectCountTotal(cate);
+		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
 		// 페이지 그룹
@@ -53,18 +58,18 @@ public class ListController extends HttpServlet{
 		
 		// 페이지 글 가져오기
 		List<CsVO> articles = service.selectArticles(cate, cateType1, start);
+		req.setAttribute("articles", articles);
 		
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);
-		req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("total", total);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-		
+		req.setAttribute("ajax", ajax);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/cs/notice/list.jsp");
 		dispatcher.forward(req, resp);
