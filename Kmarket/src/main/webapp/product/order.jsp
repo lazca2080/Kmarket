@@ -27,6 +27,8 @@
 					<input type="hidden" name="ordusedPoint" value="0">
 					<input type="hidden" name="ordTotPrice" value="${vo.total}">
 					<input type="hidden" name="currentPoint" value="${sessUser.point}">
+					<input type="hidden" name="name" value="${sessUser.name}">
+					<input type="hidden" name="name" value="${sessUser.hp}">
                     <table border="0">
                         <tr>
                             <th>상품명</th>
@@ -56,11 +58,11 @@
                                 </div>
                             </article></td>
                             <td>${cart.count}</td>
-                            <td>${cart.price}</td>
+                            <td><fmt:formatNumber value="${cart.price}" pattern="#,###" /></td>
                             <td>${cart.discount}%</td>
                             <td>${cart.point}</td>
-                            <td>${cart.delivery}</td>
-                            <td>${cart.total}</td>
+                            <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                            <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -75,15 +77,15 @@
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>${vo.price}</td>
+                                <td><fmt:formatNumber value="${vo.price}" pattern="#,###" /></td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>${vo.discount}</td>
+                                <td><fmt:formatNumber value="${vo.discount}" pattern="#,###" /></td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td class="point">${vo.delivery}</td>
+                                <td class="point"><fmt:formatNumber value="${vo.delivery}" pattern="#,###" /></td>
                             </tr>
                             <tr>
                                 <td>포인트 할인</td>
@@ -91,11 +93,11 @@
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>${vo.total}</td>
+                                <td><fmt:formatNumber value="${vo.total}" pattern="#,###" /></td>
                             </tr>
 							<tr>
                                 <td>적립 포인트</td>
-                                <td>${vo.point}</td>
+                                <td><fmt:formatNumber value="${vo.point}" pattern="#,###" /></td>
                             </tr>
                         </table>
                         <input type="submit" value="결제하기">
@@ -106,32 +108,32 @@
                         <table>
                             <tr>
                                 <td>주문자</td>
-                                <td><input type="text" name="orderer"></td>
+                                <td><input type="text" name="orderer" value="${sessUser.name}"></td>
                             </tr>
                             <tr>
                                 <td>휴대폰</td>
                                 <td>
-                                    <input type="text" name="hp">
+                                    <input type="text" name="hp" value="${sessUser.hp}">
                                     <span>- 포함 입력</span>
                                 </td>
                             </tr>
                             <tr>
                             	<td>수취인</td>
                             	<td>
-                            		<input type="text" name="receiver">
+                            		<input type="text" name="receiver" value="${sessUser.name}">
                             	</td>
                             </tr>
                             <tr>
                                 <td>우편번호</td>
                                 <td>
-                                    <input type="text" name="zip" id="zip" readonly="readonly">
-                                    <button type="button" onclick="zipcode()">우편번호 찾기</button>
+                                    <input type="text" name="zip" id="zip" readonly="readonly" value="${sessUser.zip}">
+                                    <button type="button" onclick="zipcode()">검색</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>기본주소</td>
                                 <td>
-                                    <input type="text" name="addr1" id="addr1">
+                                    <input type="text" name="addr1" id="addr1" value="${sessUser.addr1}">
                                 </td>
                             </tr>
                             <tr>
@@ -146,7 +148,7 @@
                         <div>
                             <p>
                                 현재 포인트 : 
-                                <span>${sessUser.point}</span>점
+                                <span><fmt:formatNumber value="${sessUser.point}" pattern="#,###" /></span>점
                             </p>
 
                             <label>

@@ -116,18 +116,20 @@
                         	<c:choose>
                         	<c:when test="${product.discount ne 0}">
                             <div class="org_price">
-                                <del>${product.price}</del>
+                                <del><fmt:formatNumber value="${product.price}" pattern="#,###" /></del>
                                 <span>${product.discount}%</span>
                             </div>
                             <div class="dis_price">
                                 <ins>
-                                	${product.sellPrice}
+                                	<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
                                 </ins>
                             </div>
                             </c:when>
                             <c:otherwise>
                             <div class="dis_price">
-                                <ins>${product.sellPrice}</ins>
+                                <ins>
+                               		<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
+                                </ins>
                             </div>
                             </c:otherwise>
                             </c:choose>
@@ -138,7 +140,7 @@
                             <span class="freeDelivery">무료배송</span>
                             </c:when>
                             <c:otherwise>
-                            <span class="delivery">배송비 ${product.delivery}원</span>
+                            <span class="delivery">배송비<fmt:formatNumber value="${product.delivery}" pattern="#,###" />원</span>
                             </c:otherwise>
                             </c:choose>
                             
@@ -164,7 +166,7 @@
                             <button class="increase">+</button>
                         </div>
                         <div class="total">
-                            <span class="totalPrice">${product.sellPrice}</span>
+                            <span class="totalPrice"><fmt:formatNumber value="${product.sellPrice}" pattern="#,###" /></span>
                             <em>총 상품금액</em>
                         </div>
                         <div class="button">

@@ -640,8 +640,10 @@ public class CsDAO {
 				vo.setCate(rs.getString(3));
 				vo.setCateType1(rs.getString(4));
 				vo.setCateType2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(7));
-				vo.setRdate(rs.getString(10).substring(2,16));
+				vo.setUid(rs.getString(8));
+				vo.setRdate(rs.getString(10));
 				
 				switch(cate) {
 				case "qna" :
