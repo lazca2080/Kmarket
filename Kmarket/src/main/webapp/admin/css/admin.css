@@ -930,10 +930,6 @@ button[type=submit] {
 }
  
 #cs > .notice > .view > article > form > table tr > td:nth-child(2) > h2 {
-	width: 100%;
-	text-overflow:ellipsis; 
-	overflow:hidden; 
-	white-space:nowrap;
 	font-size: 15px;
 }
 #cs > .notice > .view > article > form > table tr > td:nth-child(2) > p {
@@ -988,6 +984,7 @@ button[type=submit] {
 }
 /*** notice 글 쓰기 ***/
 #cs > .notice > .write > article > form > table {
+	width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .notice > .write > article > form > table tr > td:nth-child(1) {
@@ -1048,6 +1045,7 @@ button[type=submit] {
 }
 /*** notice 수정 ***/
 #cs > .notice > .modify > article > form > table {
+	width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .notice > .modfy > article > form > table tr > td:nth-child(1) {
@@ -1109,9 +1107,11 @@ button[type=submit] {
 
 /*** cs - qna 답변 ***/
 #cs > .qna > .reply > article > form > table {
+	width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .qna > .reply > article > form > table tr > td:nth-child(1) {
+	width: 60px;
 	font-size: 15px;
     font-weight: bold;
     background: #fff;
@@ -1301,6 +1301,7 @@ button[type=submit] {
     left: 380px;
 }
 #cs > .faq > .view > article > table {
+    width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .faq > .view > article > table tr > td:nth-child(1) {
@@ -1363,6 +1364,7 @@ button[type=submit] {
 
 /*** faq 글 쓰기 ***/
 #cs > .faq > .write > article > form > table {
+    width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .faq > .write > article > form > table tr > td:nth-child(1) {
@@ -1425,6 +1427,7 @@ button[type=submit] {
 /*** faq 수정 ***/
 
 #cs > .faq > .modify > article > form > table {
+	width: 100%;
 	border-top: 2px solid #111;
 }
 #cs > .faq > .modify > article > form > table tr > td:nth-child(1) {

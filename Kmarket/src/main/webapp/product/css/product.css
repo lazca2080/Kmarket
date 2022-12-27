@@ -185,10 +185,11 @@ main > .mainsection {
     background-size: auto 100%;
 }
 
-#product h5.rating.star1 { width: 55px; }
-#product h5.rating.star1 { width: 55px; }
-#product h5.rating.star1 { width: 55px; }
+#product h5.rating.star1 { background-position: 0 -40px; }
+#product h5.rating.star2 { background-position: 0 -80px; }
+#product h5.rating.star3 { background-position: 0 -120px; }
 #product h5.rating.star4 { background-position: 0 -160px; }
+#product h5.rating.star5 { background-position: 0 -200px; }
 
 #product h6.rating.star1 { width: 55px; }
 #product h6.rating.star2 { width: 70px; }
@@ -549,7 +550,6 @@ main > .mainsection {
     margin: 0 2px;
     padding: 8px 9px;
     border: 1px solid #c4c4c4;
-    color: #000;
     font-size: 12px;
     text-align: center;
     text-decoration: none;

@@ -1,3 +1,5 @@
+$.Commas = function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
 $(function(){
 		let Uid = $('input[class=uid]').val();
 		
@@ -73,8 +75,6 @@ $(function(){
 					$('.totalSale_span').text('0');
 					
 					
-					console.log(cartNo);
-					
 					if(cartNo == "on"){
 						
 						let table = "<tr>";
@@ -130,12 +130,12 @@ $(function(){
 						totalPoint = data.totalPoint;
 						totalPrice = data.totalPrice;
 						
-						$('.productCount_span').text(count);
-						$('.costPrice_span').text(costPrice);
-						$('.totalDelivery_span').text(totalDelivery);
-						$('.totalPoint_span').text(totalPoint);
-						$('.totalPrice_span').text(totalPrice);
-						$('.totalSale_span').text(totalSalePrice);
+						$('.productCount_span').text($.Commas(count));
+						$('.costPrice_span').text($.Commas(costPrice));
+						$('.totalDelivery_span').text($.Commas(totalDelivery));
+						$('.totalPoint_span').text($.Commas(totalPoint));
+						$('.totalPrice_span').text($.Commas(totalPrice));
+						$('.totalSale_span').text($.Commas(totalSalePrice));
 					}
 				});
 				
@@ -185,12 +185,12 @@ $(function(){
 				let total = $(this).next().next().next().next().next().val();
 				totalPrice += parseInt(total);
 				
-				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice);
-				$('.totalDelivery_span').text(totalDelivery);
-				$('.totalPoint_span').text(totalPoint);
-				$('.totalPrice_span').text(totalPrice);
-				$('.totalSale_span').text(totalSalePrice);
+				$('.productCount_span').text($.Commas(count));
+				$('.costPrice_span').text($.Commas(costPrice));
+				$('.totalDelivery_span').text($.Commas(totalDelivery));
+				$('.totalPoint_span').text($.Commas(totalPoint));
+				$('.totalPrice_span').text($.Commas(totalPrice));
+				$('.totalSale_span').text($.Commas(totalSalePrice));
 				
 				totalNo.push(cartNo);
 				console.log(totalNo);
@@ -214,12 +214,12 @@ $(function(){
 				let total = $(this).next().next().next().next().next().val();
 				totalPrice -= parseInt(total);
 				
-				$('.productCount_span').text(count);
-				$('.costPrice_span').text(costPrice);
-				$('.totalDelivery_span').text(totalDelivery);
-				$('.totalPoint_span').text(totalPoint);
-				$('.totalPrice_span').text(totalPrice);
-				$('.totalSale_span').text(totalSalePrice);
+				$('.productCount_span').text($.Commas(count));
+				$('.costPrice_span').text($.Commas(costPrice));
+				$('.totalDelivery_span').text($.Commas(totalDelivery));
+				$('.totalPoint_span').text($.Commas(totalPoint));
+				$('.totalPrice_span').text($.Commas(totalPrice));
+				$('.totalSale_span').text($.Commas(totalSalePrice));
 				
 				idx = totalNo.indexOf(cartNo);
 				
