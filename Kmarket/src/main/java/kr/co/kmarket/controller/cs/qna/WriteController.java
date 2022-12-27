@@ -69,6 +69,7 @@ public class WriteController extends HttpServlet{
 		logger.info("WriteController doPost...data received");
 		logger.info("title: " + title);
 		logger.info("content: " + content);
+		logger.info("cateType1 : " + cateType1);
 		
 		// VO 데이터 생성
 		CsVO vo =  new CsVO();
@@ -82,6 +83,7 @@ public class WriteController extends HttpServlet{
 		
 		// 데이터베이스 처리
 		service.insertArticle(vo);
+		
 		
 		// 리다이렉트
 		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate="+cate+"&cateType1="+cateType1);

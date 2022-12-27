@@ -61,6 +61,8 @@
             });
         });
         
+        
+        
        
     </script>
 </head>
@@ -111,6 +113,7 @@
                 </div>
             </div>
             <div class="menu">
+            <input type="text" value="${sessUser.uid}" id="sessUid"/>
                 <div>
                     <ul>
                         <li><a href="#" id="scroll1">히트상품</a></li> 
@@ -122,7 +125,7 @@
                     <ul>
                         <li><a href="/Kmarket/cs/notice/list.do">공지사항</a></li>
                         <li><a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">자주묻는질문</a></li>
-                        <li><a href="/Kmarket/cs/qna/write.do?cate=qna&cateType1=회원">문의하기</a></li>
+                        <li><a href="/Kmarket/cs/qna/write.do?cate=qna&cateType1=회원" class="btnWrite">문의하기</a></li>
                         <li><a href="/Kmarket/cs/index.do">고객센터</a></li>
                     </ul>
                 </div>

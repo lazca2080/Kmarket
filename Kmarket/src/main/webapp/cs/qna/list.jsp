@@ -2,6 +2,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		$('#cs > .qna > .list > article > .btnWrite').click(function() {
+			
+			console.log("btnWrite");
+			
+			// 로그인이 풀렸을 경우
+			let sessUid = $('#sessUid').val();
+			
+			console.log(sessUid);
+			
+			if(sessUid == ''){
+				alert('다시 로그인해주세요.');
+				location.href = "/Kmarket/member/login.do";
+				return false;
+			}
+			
+			
+			
+		});
+	});
+
+</script>
         <section id="cs">
             <div class="qna">
                 <nav>
@@ -44,6 +68,7 @@
                         <nav>
                             <h1>${cateType1}</h1>
                             <h2>${cateType1} 관련 문의 내용입니다.</h2>
+                            <input type="text" value="${sessUser.uid}" id="sessUid"/>
                         </nav>
                         <table>
                             <tbody>
