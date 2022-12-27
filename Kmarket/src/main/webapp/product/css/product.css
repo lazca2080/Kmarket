@@ -1097,6 +1097,7 @@ main > .mainsection {
     color: #fff;
     box-sizing: border-box;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 #product > .order > form > article > h1 {
@@ -1131,11 +1132,12 @@ main > .mainsection {
 
 #product > .order > form button {
 	position: absolute;
-    top: 138px;
-    left: 220px;
+    top: 128px;
+    left: 191px;
 	border: 1px solid #999;
-	width: 88px; 
-	height: 22px;
+	width: 58px; 
+	height: 21px;
+	cursor: pointer;
 }
 
 #product > .order > form > .delivery > table input[name=addr1] { width: 400px; }
@@ -1160,6 +1162,7 @@ main > .mainsection {
     border-color: #acc0e0;
     color: #3371c9;
     outline: none;
+    cursor: pointer;
 }
 #product > .order > form > .payment > div { margin-bottom: 10px; }
 #product > .order > form > .payment > div > span {
@@ -1171,6 +1174,7 @@ main > .mainsection {
 #product > .order > form > .payment > div input {
     vertical-align: bottom;
     margin-right: 4px;
+    cursor: pointer;
 }
 #product > .order > form > .alert {
     width: 560px;

@@ -441,7 +441,10 @@ button[type=submit] {
     text-align: left;
     overflow: hidden;
 }
-#admin-index > div > div > article > p > span:nth-child(2) {
+#admin-index > div > div > article > p > .noticeDate {
+    float: right;
+}
+#admin-index > div > div > article > p > span:nth-child(3) {
     float: right;
 }
 

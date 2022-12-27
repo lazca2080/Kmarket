@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
 <script>
 	$(function(){
@@ -52,11 +53,16 @@
                         </td>
                         <td>
                             <ul>
-                                <li><ins class="dis-price">${products.sellPrice}</ins></li>
+                                <li>
+                                	<ins class="dis-price">
+                                		<%-- ${products.sellPrice} --%>
+                                		<fmt:formatNumber value="${products.sellPrice}" pattern="#,###" />
+                                	</ins>
+                                </li>
                                 <c:choose>
                                 <c:when test="${products.discount ne 0}">
                                 <li>
-                                    <del class="org-price">${products.price}</del>
+                                    <del class="org-price"><fmt:formatNumber value="${products.price}" pattern="#,###" /></del>
                                     <span class="discount">${products.discount}%</span>
                                 </li>
                                 </c:when>
@@ -65,7 +71,7 @@
                                 <li><span class="free-delivery">배달비무료</span></li>
                                 </c:if>
                                 <c:if test="${products.delivery ne 0}">
-                                <li><span>배송비 ${products.delivery}원</span></li>
+                                <li><span>배송비<fmt:formatNumber value="${products.delivery}" pattern="#,###" />원</span></li>
                                 </c:if>
                             </ul>
                         </td>

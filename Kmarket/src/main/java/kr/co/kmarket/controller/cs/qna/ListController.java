@@ -55,8 +55,7 @@ public class ListController extends HttpServlet{
 		
 		
 		// 페이지 글 가져오기
-		List<CsVO> articles = service.selectArticles(cate, cateType1, start);
-		
+		List<CsVO> articles = service.selectArticlesQna(cate, cateType1, start);
 
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);
