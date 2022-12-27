@@ -417,7 +417,7 @@ $(function() {
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${i}" class="num ${currentPage eq i? 'active':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
