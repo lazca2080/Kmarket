@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="menu">
-            <input type="text" value="${sessUser.uid}" id="sessUid"/>
+            <input type="hidden" value="${sessUser.uid}" id="sessUid"/>
                 <div>
                     <ul>
                         <li><a href="#" id="scroll1">히트상품</a></li> 

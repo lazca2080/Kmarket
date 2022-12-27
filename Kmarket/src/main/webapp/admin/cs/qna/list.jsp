@@ -262,11 +262,10 @@
 					data:jsonData,
 					dataType:'json',
 					success: function(data){
-						console.log(data);
-						$('.row').remove();	// 테이블 비우기 
-						let no = 1;
 						
-						console.log(data.length);
+						$('.row').remove();	// 테이블 비우기 
+						
+						let no = 1;
 						
 						for(let vo of data){
 							
@@ -374,7 +373,7 @@
 						<c:set var="i" value="${i+1}"/>
 							<tr class="row">
 	                        	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
-	                            <td>${i}</td>
+	                            <td>${pageStartNum - i}</td>
 	                            <td>${article.cateType1}</td>
 	                            <td>${article.cateType2}</td>
 	                            <td><a href="/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">${article.title} </a></td>
