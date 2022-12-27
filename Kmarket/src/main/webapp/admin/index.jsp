@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"></jsp:include>
             <section id="admin-index">
                 <nav>
@@ -200,9 +201,12 @@
                             <p>
                                 <span>
                                     [${notice.cateType2}]
-                                    ${notice.content}
+                                    ${notice.title}
                                 </span>
-                                <span>${notice.rdate}</span>
+                                <span class="noticeDate">
+                                	<fmt:parseDate value="${notice.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/> 
+                                </span>
                             </p>
                             </c:forEach>
                         </article>
@@ -214,9 +218,13 @@
                             <p>
                                 <span>
                                     [${qna.cateType2}]
-                                    ${qna.content}
+                                    ${qna.title}
                                 </span>
-                                <span>${qna.rdate}</span>
+                                <span class="uid">${qna.uid.substring(0,3)}**</span>
+                                <span>
+                                	<fmt:parseDate value="${qna.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
+	                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/> 
+                                </span>
                             </p>
                             </c:forEach>
                         </article>

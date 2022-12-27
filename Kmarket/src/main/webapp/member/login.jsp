@@ -6,9 +6,19 @@
 		let success = $('input[name=success]').val();
 		
 		if(success == 101){
-			alert('회원가입이 완료되었습니다.');
+			//alert('회원가입이 완료되었습니다.');
+			Swal.fire({
+                icon: 'success',
+                title: '회원가입 성공',
+                text: '회원가입이 완료되었습니다.',
+            });
 		}else if(success == 102){
-			alert('회원가입에 실패했습니다. 다시 시도해주세요');
+			//alert('회원가입에 실패했습니다. 다시 시도해주세요');
+			Swal.fire({
+                icon: 'error',
+                title: '회원가입 실패',
+                text: '회원가입에 실패했습니다. 다시 시도해주세요.',
+            });
 		}
 		
 	});

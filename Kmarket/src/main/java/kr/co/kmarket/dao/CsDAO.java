@@ -12,6 +12,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
+
 import kr.co.kmarket.db.CsSql;
 import kr.co.kmarket.db.DBCP;
 import kr.co.kmarket.vo.CsVO;
@@ -160,9 +162,18 @@ public class CsDAO {
 			logger.info("CsDAO-selectArticles...");
 			
 			Connection con = DBCP.getConnection();
+			PreparedStatement psmt = null;
 			
-			PreparedStatement psmt = con.prepareStatement(CsSql.SELECT_WHOLE_ARTICLES); 
-			psmt.setInt(1, start);
+			if(cateType1 == null) {
+				psmt = con.prepareStatement(CsSql.SELECT_WHOLE_ARTICLES); 
+				psmt.setInt(1, start);
+			}else {
+				psmt = con.prepareStatement(CsSql.SELECT_ARTICLES);
+				psmt.setString(1, cate);
+				psmt.setString(2, cateType1);
+				psmt.setInt(3, start);
+			}
+			
 			
 			ResultSet rs = psmt.executeQuery();
 			while(rs.next()) {
@@ -682,8 +693,10 @@ public class CsDAO {
 				vo.setCate(rs.getString(3));
 				vo.setCateType1(rs.getString(4));
 				vo.setCateType2(rs.getString(5));
+				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(7));
-				vo.setRdate(rs.getString(10).substring(2,16));
+				vo.setUid(rs.getString(8));
+				vo.setRdate(rs.getString(10));
 				
 				switch(cate) {
 				case "qna" :
@@ -904,7 +917,30 @@ public class CsDAO {
 		}
 		return total;
 	}
-	
+	// 문의사항 - 페이지 글 카테고리 별 개수 가져오기
+	public int selectCountTotalQna(String cateType1) {
+		int total = 0;
+		try {
+			Connection con = DBCP.getConnection();
+			
+			PreparedStatement psmt = con.prepareStatement(CsSql.COUNT_QNA_ARTICLE);
+			psmt.setString(1, cateType1);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			rs.close();
+			psmt.close();
+			con.close();
+			
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return total;
+	}
 	// 공지사항 - 페이지 글 가져오기
 	public List<CsVO> selectArticlesNotice(String cateType1){
 		List<CsVO> articles = new ArrayList<>();

@@ -31,7 +31,8 @@ public class CsSql {
 	/*** cs - list ***/
 	// 전체 게시물 개수 
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`=?";
-	//  admin - cs - list 카테고리 유형별 게시글 개수 
+	
+	// 관리자 - 고객센터 카테고리 유형별 게시글 개수 
 	public static final String SELECT_COUNT_TOTAL_WITH_CATE2 = "select count(`no`) from `cs_article` where `cate`='qna' and `cateType1`=? and `cateType2`=?";
 	// 페이지 글 가져오기
 	public static final String SELECT_ARTICLES = "SELECT * FROM `cs_article` WHERE `parent`=0 AND `cate`=? AND `cateType1`=? ORDER BY `no` DESC LIMIT ?,10";
@@ -155,6 +156,8 @@ public class CsSql {
 	
 	// 공지사항 카데고리 별 글 개수
 	public static final String COUNT_NOTICE_ARTICLE = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=?";
+	// 문의사항 - 페이지 글 카테고리 별 개수 가져오기
+	public static final String COUNT_QNA_ARTICLE = "SELECT COUNT(`no`) FROM `cs_article` WHERE `cate`='qna' and `cateType1`=?";
 	// 공지사항 카테고리 별 글 보기
 	public static final String SELECT_NOTICE_ARTICLE = "SELECT * FROM `cs_article` WHERE `cate`='notice' AND `cateType1`=? ORDER BY `no` DESC";
 	

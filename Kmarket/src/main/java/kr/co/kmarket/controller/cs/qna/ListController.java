@@ -43,7 +43,7 @@ public class ListController extends HttpServlet{
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		// 전체 게시물 개수
-		int total = service.selectCountTotal(cate);
+		int total = service.selectCountTotalQna(cateType1);
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
 		// 페이지 그룹
@@ -55,8 +55,7 @@ public class ListController extends HttpServlet{
 		
 		
 		// 페이지 글 가져오기
-		List<CsVO> articles = service.selectArticles(cate, cateType1, start);
-		
+		List<CsVO> articles = service.selectArticlesQna(cate, cateType1, start);
 
 		req.setAttribute("cate", cate);
 		req.setAttribute("cateType1", cateType1);

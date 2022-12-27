@@ -12,7 +12,8 @@
 			if(isCheck1 && isCheck2 && isCheck3){
 				return true;
 			}else {
-				alert('동의 체크를 하셔야 합니다.');
+				swal('동의 체크를 하셔야 합니다.');
+				//alert('동의 체크를 하셔야 합니다.');
 				return false;
 			}
 		});

@@ -31,7 +31,6 @@ public class ListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		logger.info("doGet");
 		
 		String cate = req.getParameter("cate");
@@ -45,7 +44,7 @@ public class ListController extends HttpServlet{
 		req.setAttribute("cateType1", cateType1);
 		req.setAttribute("cateType2", cateType2);
 		req.setAttribute("articles", articles);
-		
+			
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");
 		dispatcher.forward(req, resp);
 	}

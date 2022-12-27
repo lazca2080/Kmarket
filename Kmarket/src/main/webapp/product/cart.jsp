@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
 <script src="/Kmarket/product/js/Cart.js"></script>
             </aside>
@@ -53,16 +54,16 @@
                                 </div>
                             </article></td>
                             <td>${cart.count}</td>
-                            <td>${cart.price}</td>
+                            <td><fmt:formatNumber value="${cart.price}" pattern="#,###" /></td>
                             <td>${cart.discount}%</td>
                             <td>${cart.point}p</td>
                             <c:if test="${cart.delivery eq 0}">
                             <td>무료배송</td>
                             </c:if>
                             <c:if test="${cart.delivery ne 0}">
-                            <td>${cart.delivery}원</td>
+                            <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" />원</td>
                             </c:if>
-                            <td>${cart.total}</td>
+                            <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>

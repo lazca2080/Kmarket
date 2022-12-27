@@ -14,7 +14,6 @@
                     		<c:if test="${latest.cate eq 'notice'}">
                     		<li>
 	                            <a href="/Kmarket/cs/notice/view.do?cate=notice&cateType1=${latest.cateType1}&no=${latest.no}" class="title">[${latest.cateType1}] ${latest.title}</a>
-	                            <%-- <span class="date">${latest.rdate}</span>  --%>
 	                            <span>
 	                            	<fmt:parseDate value="${latest.rdate}" var="time" pattern="yyyy-MM-dd HH:mm:ss"/>
 	                            	<fmt:formatDate value="${time}" pattern="yy.MM.dd"/>

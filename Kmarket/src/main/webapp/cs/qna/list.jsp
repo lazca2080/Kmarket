@@ -2,6 +2,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	$(function() {
+		$('#cs > .qna > .list > article > .btnWrite').click(function() {
+			
+			console.log("btnWrite");
+			
+			// 로그인이 풀렸을 경우
+			let sessUid = $('#sessUid').val();
+			
+			console.log(sessUid);
+			
+			if(sessUid == ''){
+				alert('다시 로그인해주세요.');
+				location.href = "/Kmarket/member/login.do";
+				return false;
+			}
+			
+			
+			
+		});
+	});
+
+</script>
         <section id="cs">
             <div class="qna">
                 <nav>
@@ -44,6 +68,7 @@
                         <nav>
                             <h1>${cateType1}</h1>
                             <h2>${cateType1} 관련 문의 내용입니다.</h2>
+                            <input type="text" value="${sessUser.uid}" id="sessUid"/>
                         </nav>
                         <table>
                             <tbody>
@@ -73,13 +98,13 @@
                         </table>
                         <div class="page">
                         	<c:if test="${pageGroupStart gt 1}">
-                        		 <a href="/Kmarket/cs/qna/list.do?pg=${pageGroupStart-1}" class="prev">이전</a>
+                    			<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${pageGroupStart-1}" class="prev">이전</a>
                         	</c:if>
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            	<a href="/Kmarket/cs/qna/list.do?pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
+                            	<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
                             </c:forEach>
                             <c:if test="${pageGroupStart lt lastPageNum}">
-                            	<a href="/Kmarket/cs/qna/list.do?pg=${pageGroupStart+1}" class="next">다음</a>
+                            	<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${pageGroupStart+1}" class="next">다음</a>
                             </c:if>
                         </div>
                         <a href="/Kmarket/cs/qna/write.do?cate=${cate}&cateType1=${cateType1}" class="btnWrite">문의하기</a>

@@ -7,6 +7,7 @@
     <title>케이마켓 고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
     <link rel="stylesheet" href="/Kmarket/cs/css/csstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
 </head>
 <body>
@@ -43,8 +44,8 @@
             </div>
             <div class="logo">
                 <div>
+                	<a href="/Kmarket/"><img src="/Kmarket/cs/img/logo.png" alt="로고"></a>
                     <a href="/Kmarket/cs/index.do">
-                        <img src="/Kmarket/cs/img/logo.png" alt="로고">
                         고객센터
                     </a>
                 </div>

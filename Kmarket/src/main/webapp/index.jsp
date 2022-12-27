@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"></jsp:include>
 
                 <article class="best">
@@ -20,21 +21,21 @@
 	                                <c:choose>
 	                                <c:when test="${best.discount ne 0}">
 	                                <div class="org_price">
-	                                    <del>${best.price}</del>
+	                                    <del><fmt:formatNumber value="${best.price}" pattern="#,###" /></del>
 	                                    <span>
 	                                        ${best.discount}%
 	                                    </span>
 	                                </div>
 	                                <div class="dis_price">
 	                                    <ins>
-	                                    	${best.sellPrice}
+	                                    	<fmt:formatNumber value="${best.sellPrice}" pattern="#,###" />
 	                                    </ins>
 	                                </div>
 	                                </c:when>
 	                                <c:otherwise>
 									<div class="dis_price">
 	                                    <ins>
-	                                    	${best.sellPrice}
+	                                    	<fmt:formatNumber value="${best.sellPrice}" pattern="#,###" />
 	                                    </ins>
 	                                </div>
 	                                </c:otherwise>
@@ -93,18 +94,18 @@
                             <c:choose>
                             <c:when test="${hit.discount ne 0}">
                             <div class="org_price">
-                                <del>${hit.price}</del>
+                                <del><fmt:formatNumber value="${hit.price}" pattern="#,###" /></del>
                                 <span>
                                     ${hit.discount}%
                                 </span>
                             </div>
                             <div class="dis_price">
                                 <ins>
-                                    ${hit.sellPrice}
+                                    <fmt:formatNumber value="${hit.sellPrice}" pattern="#,###" />
                                 </ins>
 								<c:choose>
                                 <c:when test="${hit.delivery ne 0}">
-                                <span>배송비 ${hit.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${hit.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -115,11 +116,11 @@
                             <c:otherwise>
 							<div class="dis_price">
                                 <ins>
-                                    ${hit.sellPrice}
+                                    <fmt:formatNumber value="${hit.sellPrice}" pattern="#,###" />
                                 </ins>
 								<c:choose>
                                 <c:when test="${hit.delivery ne 0}">
-                                <span>배송비 ${hit.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${hit.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -148,18 +149,18 @@
                             <c:choose>
                             <c:when test="${score.discount ne 0}">
                             <div class="org_price">
-                                <del>${score.price}</del>
+                                <del><fmt:formatNumber value="${score.price}" pattern="#,###" /></del>
                                 <span>
                                     ${score.discount}%
                                 </span>
                             </div>
                             <div class="dis_price">
                                 <ins>
-                                    ${score.sellPrice}
+                                    <fmt:formatNumber value="${score.sellPrice}" pattern="#,###" />
                                 </ins>
                                 <c:choose>
                                 <c:when test="${score.delivery ne 0}">
-                                <span>배송비 ${score.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${score.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -170,11 +171,11 @@
 							<c:otherwise>
 							<div class="dis_price">
                                 <ins>
-                                    ${score.sellPrice}
+                                    <fmt:formatNumber value="${score.sellPrice}" pattern="#,###" />
                                 </ins>
                                 <c:choose>
                                 <c:when test="${score.delivery ne 0}">
-                                <span>배송비 ${score.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${score.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -202,18 +203,18 @@
 							<c:choose>
                             <c:when test="${newProd.discount ne 0}">
                             <div class="org_price">
-                                <del>${newProd.price}</del>
+                                <del><fmt:formatNumber value="${newProd.price}" pattern="#,###" /></del>
                                 <span>
                                     ${newProd.discount}%
                                 </span>
                             </div>
                             <div class="dis_price">
                                 <ins>
-                                    ${newProd.sellPrice}
+                                   <fmt:formatNumber value="${newProd.sellPrice}" pattern="#,###" /> 
                                 </ins>
 								<c:choose>
                                 <c:when test="${newProd.delivery ne 0}">
-                                <span>배송비 ${newProd.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${newProd.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -224,11 +225,11 @@
 							<c:otherwise>
 							<div class="dis_price">
                                 <ins>
-                                    ${newProd.sellPrice}
+                                    <fmt:formatNumber value="${newProd.sellPrice}" pattern="#,###" /> 
                                 </ins>
 								<c:choose>
                                 <c:when test="${newProd.delivery ne 0}">
-                                <span>배송비 ${newProd.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${newProd.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -258,18 +259,18 @@
                             <c:choose>
                             <c:when test="${discount.discount ne 0}">
                             <div class="org_price">
-                                <del>${discount.price}</del>
+                                <del><fmt:formatNumber value="${discount.price}" pattern="#,###" /></del>
                                 <span>
                                     ${discount.discount}%
                                 </span>
                             </div>
                             <div class="dis_price">
                                 <ins>
-                                    ${discount.sellPrice}
+                                    <fmt:formatNumber value="${discount.sellPrice}" pattern="#,###" />
                                 </ins>
 								<c:choose>
                                 <c:when test="${discount.delivery ne 0}">
-                                <span>배송비 ${discount.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${discount.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
@@ -280,11 +281,11 @@
                             <c:otherwise>
 							<div class="dis_price">
                                 <ins>
-                                    ${discount.sellPrice}
+                                   <fmt:formatNumber value="${discount.sellPrice}" pattern="#,###" />
                                 </ins>
 								<c:choose>
                                 <c:when test="${discount.delivery ne 0}">
-                                <span>배송비 ${discount.delivery}원</span>
+                                <span>배송비<fmt:formatNumber value="${discount.delivery}" pattern="#,###" />원</span>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="free">무료배송</span>
