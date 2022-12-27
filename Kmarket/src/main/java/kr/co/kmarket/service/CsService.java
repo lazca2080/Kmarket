@@ -28,7 +28,6 @@ public enum CsService {
 	/*** cs - qna ***/
 	// 문의글 작성하기
 	public int insertArticle(CsVO article) {
-		logger.info("service-insertArticle...");
 		return dao.insertArticle(article);
 	}
 	
@@ -90,6 +89,39 @@ public enum CsService {
 	public int getStartNum(int currentPage) {
 		return (currentPage-1)*10;
 	}
+	
+	// cateType1 - 마지막 페이지 번호
+	public int getLastPageNum2(int total2) {
+			int lastPageNum2 = 0; // 마지막 페이지
+			if(total2 % 10 == 0) {
+				lastPageNum2 = (total2/10);
+			}else {
+				lastPageNum2 = (total2/10)+1;
+			}
+			return lastPageNum2;
+		}
+	// cateType1 - 페이지 그룹 
+	public int[] getPageGroupNum2(int currentPage, int lastPageNum2) {
+			int pageGroupCurrent2 = (int) Math.ceil(currentPage/10.0);
+			int pageGroupStart2 = (pageGroupCurrent2 - 1)*10+1;
+			int pageGroupEnd2 = pageGroupCurrent2 * 10;
+			
+			if(pageGroupEnd2 > lastPageNum2) {
+				pageGroupEnd2 = lastPageNum2;
+			}
+			
+			int[] result = {pageGroupStart2,pageGroupEnd2};
+			return result;
+		}
+	// cateType1 - 페이지 시작 번호 
+	public int getPageStartNum2(int total2, int currentPage) {
+		int start2 = (currentPage - 1) * 10;
+		return total2 - start2;
+	}
+	
+	
+	
+	
 	
 	// 공지사항 - 페이지 글 가져오기 (나누면 안 되는데 수정하러 되돌아 가기 힘들어 나눕니다,,, 죄송)
 	public List<CsVO> selectArticles(String cate, String cateType1, int start){
@@ -210,6 +242,10 @@ public enum CsService {
 	// 공지사항 카데고리 별 글 개수
 	public int selectCountTotalNotice(String cate, String cateType1) {
 		return dao.selectCountTotalNotice(cate, cateType1);
+	}
+	// 문의하기 카테고리 별 글 개수
+	public int selectCountTotalQna(String cateType1) {
+		return dao.selectCountTotalQna(cateType1);
 	}
 	
 	// 공지사항 카테고리 별 글 보기

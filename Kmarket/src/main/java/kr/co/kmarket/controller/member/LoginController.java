@@ -48,6 +48,7 @@ public class LoginController extends HttpServlet{
 		
 		String uid = req.getParameter("uid");
 		String pass = req.getParameter("pass");
+		String auto = req.getParameter("auto");
 		
 		MemberVO vo = service.selectMember(uid, pass);
 		
@@ -56,13 +57,23 @@ public class LoginController extends HttpServlet{
 			HttpSession sess = req.getSession();
 			sess.setAttribute("sessUser", vo);
 			
-			// 세션 유지시간 1시간 
-			sess.setMaxInactiveInterval(60*60) ;
-			
-			System.out.println("--- 로그인 성공 ---");
-			
-			
+			// 아이디 기억하기 체크 시
+			if(auto != null) {
+				String sessId = sess.getId();
+				
+				// 쿠키 생성
+				// cookie(생성자)를 만들어 name:sessID, value:sessId 데이터 넣기
+				Cookie cookie = new Cookie("SESSID", sessId);
+				cookie.setPath("/");
+				cookie.setMaxAge(60*60*24*3); // 3일 저장
+				resp.addCookie(cookie); // 쿠키 'cookie'를 담아 응답
+				
+				
+				// sessId 데이터베이스 저장
+				service.updateMemberForSession(uid, sessId);
+			}
 			resp.sendRedirect("/Kmarket/index.do");
+			
 		}else {
 			// 회원이 아닐 경우
 			System.out.println("LoginController - 로그인 실패");
