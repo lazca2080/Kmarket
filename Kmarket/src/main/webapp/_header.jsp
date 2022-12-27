@@ -61,7 +61,26 @@
             });
         });
         
-        
+        $(function() {
+    		$('#wrapper > header > .menu > div > ul:nth-child(2) > li > .btnWrite').click(function() {
+    			
+    			console.log("btnWrite");
+    			
+    			// 로그인이 풀렸을 경우
+    			let sessUid = $('#sessUid').val();
+    			
+    			console.log(sessUid);
+    			
+    			if(sessUid == ''){
+    				alert('로그인이 필요한 항목입니다.');
+    				location.href = "/Kmarket/member/login.do";
+    				return false;
+    			}
+    			
+    			
+    			
+    		});
+    	});
         
        
     </script>
@@ -113,7 +132,7 @@
                 </div>
             </div>
             <div class="menu">
-            <input type="text" value="${sessUser.uid}" id="sessUid"/>
+            <input type="hidden" value="${sessUser.uid}" id="sessUid"/>
                 <div>
                     <ul>
                         <li><a href="#" id="scroll1">히트상품</a></li> 

@@ -68,7 +68,7 @@
                         <nav>
                             <h1>${cateType1}</h1>
                             <h2>${cateType1} 관련 문의 내용입니다.</h2>
-                            <input type="text" value="${sessUser.uid}" id="sessUid"/>
+                            <input type="hidden" value="${sessUser.uid}" id="sessUid"/>
                         </nav>
                         <table>
                             <tbody>
