@@ -173,7 +173,7 @@ $(function() {
 			$('.choose').empty();
 			
 			let tags = "<option value='0'>2차 선택</option>";
-			 	tags += "<option value='쿠폰/할인혜택}'>쿠폰/할인혜택</option>";
+			 	tags += "<option value='쿠폰/할인혜택'}>쿠폰/할인혜택</option>";
 			 	tags += "<option value='포인트'>포인트</option>";
 				tags += "<option value='제휴'>제휴</option>";
 				tags += "<option value='이벤트'>이벤트</option>";
@@ -208,7 +208,7 @@ $(function() {
 			let tags = "<option value='0'>2차 선택</option>";
 			 	tags += "<option value='반품신청/철회'>반품신청/철회</option>";
 			 	tags += "<option value='반품정보확인/변경'>반품정보확인/변경</option>";
-				tags += "<option value='교환AS신청/철회'>교환AS신청/철회</option>";
+				tags += "<option value='교환 AS신청/철회'>교환 AS신청/철회</option>";
 				tags += "<option value='교환정보확인/변경'>교환정보확인/변경</option>";
 				tags += "<option value='취소신청/철회'>취소신청/철회</option>";
 				tags += "<option value='취소확인/환불정보'>취소확인/환불정보</option>";
