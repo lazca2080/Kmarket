@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.cs.qna;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,14 +49,14 @@ public class WriteController extends HttpServlet{
 		logger.info("doPost");
 		
 		// 비회원 글 작성시 (추후 구현)
-//		HttpSession session = req.getSession();
-//		String sessionID = (String) session.getAttribute("sessionID");
-//		if(sessionID == null) {
-//			sessionID = "비회원";
-//		}
+    //		HttpSession session = req.getSession();
+    //		String sessionID = (String) session.getAttribute("sessionID");
+    //		if(sessionID == null) {
+    //			sessionID = "비회원";
+    //		}
 		
 		// 데이터 수신
-		req.setCharacterEncoding("UTF-8");
+		//req.setCharacterEncoding("UTF-8");
 		
 		String cate = req.getParameter("cate");
 		String cateType1 = req.getParameter("cateType1");
@@ -65,11 +66,6 @@ public class WriteController extends HttpServlet{
 		content = content.replace("\r\n", "<br>");
 		String uid = req.getParameter("uid");
 		String regip = req.getRemoteAddr();	//ip는 getRemoteAddr
-		
-		logger.info("WriteController doPost...data received");
-		logger.info("title: " + title);
-		logger.info("content: " + content);
-		logger.info("cateType1 : " + cateType1);
 		
 		// VO 데이터 생성
 		CsVO vo =  new CsVO();
@@ -86,6 +82,7 @@ public class WriteController extends HttpServlet{
 		
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate="+cate+"&cateType1="+cateType1);
+		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate=qna&cateType1="+URLEncoder.encode(cateType1, "UTF-8"));
+		// parameter가 한글이어서 생긴 에러. 다음에는 영문으로 만듭시다...
 	}
 }
