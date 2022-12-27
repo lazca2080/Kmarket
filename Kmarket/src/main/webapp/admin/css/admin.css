@@ -117,10 +117,11 @@ main > #cs {
 	height: auto;
 }
 
+/*
 main > #admin-product-list {
 	height: 825px;
 }
-
+*/
 main > section > nav {
     position: relative;
     width: 100%;
@@ -166,7 +167,9 @@ main h4 {
 }
 
 main table {
+    /* 상품등록에 1차 2차 분류 크기가너무커서 잠시 비활성화
     width: 100%;
+    */
     border-collapse: collapse;
 }
 main table tr { height: 45px; }
@@ -543,9 +546,9 @@ button[type=submit] {
     background: #f6f6f6;
 }
 #admin-product-list > section > table  tr > th:nth-child(1){ width: 5%; }
-#admin-product-list > section > table  tr > th:nth-child(2){ width: 4%; }
+#admin-product-list > section > table  tr > th:nth-child(2){ width: 6%; }
 #admin-product-list > section > table  tr > th:nth-child(3){ width: 8%; }
-#admin-product-list > section > table  tr > th:nth-child(4){ width: 55%; }
+#admin-product-list > section > table  tr > th:nth-child(4){ width: 25%; }
 
 #admin-product-list > section > table  tr > td {
 	text-overflow:ellipsis; 
