@@ -49,11 +49,11 @@ public class WriteController extends HttpServlet{
 		logger.info("doPost");
 		
 		// 비회원 글 작성시 (추후 구현)
-//		HttpSession session = req.getSession();
-//		String sessionID = (String) session.getAttribute("sessionID");
-//		if(sessionID == null) {
-//			sessionID = "비회원";
-//		}
+    //		HttpSession session = req.getSession();
+    //		String sessionID = (String) session.getAttribute("sessionID");
+    //		if(sessionID == null) {
+    //			sessionID = "비회원";
+    //		}
 		
 		// 데이터 수신
 		//req.setCharacterEncoding("UTF-8");
@@ -79,6 +79,7 @@ public class WriteController extends HttpServlet{
 		
 		// 데이터베이스 처리
 		service.insertArticle(vo);
+		
 		
 		// 리다이렉트
 		resp.sendRedirect("/Kmarket/cs/qna/list.do?cate=qna&cateType1="+URLEncoder.encode(cateType1, "UTF-8"));
