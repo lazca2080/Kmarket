@@ -3,9 +3,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../_header.jsp"></jsp:include>
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+<style>
+	#product > .view > .review > .paging .active {
+		background: #333;
+	  	color: #fff;
+	}
+	#product .off-screen {
+		display: none;
+	}
+</style>
 <script>
 
+	$.Commas = function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
 	$(function() {
+		
 		
 		let num = 1;
 		
@@ -15,7 +27,7 @@
 			
 			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
 			
-			$('.totalPrice').text(totalPrice);
+			$('.totalPrice').text($.Commas(totalPrice));
 		});
 		
 		$('button[class=decrease]').click(function(){
@@ -80,7 +92,7 @@
 		
 		let month = today.getMonth()+1;
 		let date = today.getDate()+3;
-		let day = today.getDay();
+		let day = today.getDay()+3;
 		let message;
 		console.log(day);
 		
@@ -107,6 +119,92 @@
 			const offset = $(".review").offset();
         	$('html, body').animate({scrollTop: offset.top}, 500);
 		});
+		
+		// review 항목 ajax 처리
+		
+		
+		let prodNo = $('input[class=cart]').attr('data-no');
+		
+		console.log(prodNo);
+		
+		console.log('test1');
+		$.ajax({
+			url: '/Kmarket/product/view.do', 
+			method: 'post',
+			data: { "prodNo":prodNo },
+			dataType:'json',
+			success: function(data){
+				
+				if(data != ''){
+				
+					$('.review').empty();	// 테이블 비우기
+					
+					let rows = "<nav><h1>상품리뷰</h1></nav>";
+					
+					for(let vo of data){
+						
+						let rdate = vo.rdate.substring(2,10);
+						
+						rows += "<ul class='list'><li>";
+						rows += "<div>";
+						rows += "<h5 class='rating star"+vo.rating+"'>상품평</h5>";
+						rows += "<span>"+vo.uid.substring(0,3)+"***  "+rdate+"</span>";
+						rows += "</div>";
+						rows += "<h3>"+vo.prodName+"</h3>";
+						rows += "<p>"+vo.content+"</p>";
+						rows += "</li></ul>"; 
+					}
+					
+					rows += "<div class='paging'>";
+					rows += "<span class='prev'></span>";
+					rows += "<span class='num'></span>";
+					rows += "<span class='next'></span>";
+					rows += "</div>";
+					
+					$('.review').append(rows);
+					
+					// paging - 동적생성
+					$('.paging > .num').empty();	// 기존 목록 페이지 번호 지우기
+					
+					let rowTotals = $('.list').length;	// 게시글 총 개수 (33)
+					let rowPerPage = 5;				// 한 페이지당 게시글 개수
+					let pageTotal = Math.ceil(rowTotals/ rowPerPage); // 페이지 번호 (4)
+					let i = 0;
+					
+					for(i; i<pageTotal; i++){
+						$('<a href="#"></a>').attr('rel',i).html(i+1).appendTo('.num');
+					}
+					
+					$('.list').addClass('off-screen').slice(0, rowPerPage).removeClass('off-screen');
+					
+	
+					// 페이지 번호 클릭 시 
+					let pagingLink = $('.num > a');
+					pagingLink.on('click', function(e){
+						e.preventDefault();
+						
+						$('.num > a').removeClass('active');
+						$(this).addClass('active');
+							
+						let currPage = $(this).attr('rel');
+						console.log("currPage: "+currPage);	// 페이지 번호가 1일 때 currPage=0
+						
+						let startItem = currPage * rowPerPage;	// 시작 행 = 페이지 번호 * 페이지당 행수
+						let endItem = startItem + rowPerPage;	// 끝 행 = 시작 행 + 페이지당 행수
+						
+						$('.list').css('opacity', '0.0')
+								.addClass('off-screen')
+								.slice(startItem, endItem)
+								.removeClass('off-screen')
+								.animate({opacity: 1}, 200);
+					}); 
+				}else {
+					
+				}
+			}
+		}); 
+		
+		
 	});
 	
 </script>
@@ -304,80 +402,7 @@
                 </article>
                 <article class="review">
                     <nav><h1>상품리뷰</h1></nav>
-                    <ul>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p> 가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p> 가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p> 가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p> 가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p> 가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                    </ul>
-                    <div class="paging">
-                        <span class="prev">
-                            <a href="#">< 이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음 ></a>
-                        </span>
-                    </div>
+                    <h4 style="font-size: 19px; font-weight: bold; text-align: center; display: blocked; height: 100px; line-height: 100px;">등록된 리뷰가 없습니다.</h4>
                 </article>
             </section>
         </main>

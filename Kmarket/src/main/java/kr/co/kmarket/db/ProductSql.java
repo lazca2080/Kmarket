@@ -15,6 +15,10 @@ public class ProductSql {
 												+ "JOIN `km_product_cate2` AS C ON `prodCate2` = C.`cate2` AND `prodCate1` = C.`cate1` "
 												+ "WHERE `prodNo`=?";
 	
+	// 상품 번호에 해당하는 review 조회
+	public static final String SELECT_REVIEW = "SELECT a.*, b.`prodName` FROM `km_product_review` AS a "
+												+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo WHERE a.`prodNo`=? ORDER BY `rdate` DESC";
+	
 	// cate1, cate2에 해당하는 상품 조회
 	public static final String SELECT_PRODUCTS = "SELECT A.*, B.`level` FROM `km_product` AS A "
 												+ "JOIN	`km_member` AS B ON A.`seller` = B.`uid` "

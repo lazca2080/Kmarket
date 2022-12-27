@@ -1,3 +1,5 @@
+$.Commas = function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
 $(function(){
 			
 	let oriPoint = 0;
@@ -23,7 +25,7 @@ $(function(){
 		oriPoint = point;
 		
 		// 최종결제 정보 전체주문금액 변경
-		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
+		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text($.Commas(finalTotal));
 		
 		// 현재 uid가 가지고있는 point값 가져오기 // 259번째 줄 input hidden 추가
 		let currentPoint = $('input[name=currentPoint]').val();
@@ -38,7 +40,7 @@ $(function(){
 		}
 		
 		// 최종결제 정보 포인트 할인에 가져온 point 값 집어넣기 // 140번째 줄 아래 input hidden 추가
-		$('.order > form > .final > table tr:eq(4) > td:eq(1)').text(point);
+		$('.order > form > .final > table tr:eq(4) > td:eq(1)').text($.Commas(point));
 		
 		// input에 사용한 point값을 가져온 point 값으로 변경하기
 		$('input[name=ordusedPoint]').attr('value', point);
@@ -51,7 +53,7 @@ $(function(){
 		$('input[name=ordTotPrice]').attr('value', finalTotal);
 		
 		// 최종결제 정보 전체주문금액 변경
-		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text(finalTotal);
+		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text($.Commas(finalTotal));
 		
 	});
 	
