@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"></jsp:include>
 <script>
+history.replaceState({}, null, location.'/Kmarket/admin/product/list.do');
+</script>
+<script>
 	$(function(){
 		$('.btn').click(function(){
 			let isDelete = confirm('정말 삭제하시겠습니까?');
