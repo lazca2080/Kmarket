@@ -107,6 +107,31 @@
 		let rn = p.replaceAll('<br>', '\n');
 		$('textarea[name=content]').text(rn);
 		
+		$('#cs > .faq > .modify > article > form').submit(function() {
+			
+			let cateType1 = $('#selectBox option:selected').val();
+			let cateType2 = $('#selectBox2 option:selected').val();
+			console.log("cateType1: " + cateType1);
+			console.log("cateType2: " + cateType2);
+			
+			if(cateType1 == 0 || cateType2 == 0){
+				alert('카테고리를 선택하세요');
+				return false;
+			}
+			console.log("카테 오류");
+			
+			
+			// 로그인이 풀렸을 경우
+			if(Uid == ''){
+				alert('다시 로그인해주세요.');
+				location.href = "/Kmarket/member/login.do";
+				return false;
+			}
+			
+			
+			
+		});
+		
 	});
 
 </script>
