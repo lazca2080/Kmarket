@@ -186,7 +186,7 @@
 	                                </tbody>
 	                            </table>
 	                             <div>
-	                                <a href="/Kmarket/admin/cs/faq/list.do" class="btnList">취소하기</a>
+	                                <a href="/Kmarket/admin/cs/faq/list.do?cate=faq" class="btnList">취소하기</a>
 	                                <input type="submit" class="btnModify" value="등록하기">
 	                            </div>
 	                        </form>

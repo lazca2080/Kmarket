@@ -75,7 +75,7 @@
 							 <div>
 							   <a href="/Kmarket/admin/cs/faq/delete.do?no=${no}" class="btnDelete" id="remove">삭제</a>
 	                           <a href="/Kmarket/admin/cs/faq/modify.do?cate=faq&cateType1=${vo.cateType1}&cateType2=${vo.cateType2}&no=${no}" class="btnModify">수정</a>
-	                           <a href="/Kmarket/admin/cs/faq/list.do" class="btnList">목록</a>
+	                           <a href="/Kmarket/admin/cs/faq/list.do?cate=faq" class="btnList">목록</a>
 							</div>
 						</article>
 	                </section>

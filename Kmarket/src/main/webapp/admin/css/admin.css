@@ -474,8 +474,12 @@ button[type=submit] {
     overflow: hidden;
     white-space: nowrap;
     width: 600px;
-    display: inline-block;
+   
 }
+#admin-faq > section > table  tr > td a > .remove {
+	width: 100px;
+}
+
 #admin-faq > section > table  tr > th:nth-child(1){ width: 5%; }
 #admin-faq > section > table  tr > th:nth-child(2){ width: 4%; }
 #admin-faq > section > table  tr > th:nth-child(3){ width: 8%; }
@@ -669,6 +673,7 @@ button[type=submit] {
 #admin-faq > section { height:825px; }
 
 #admin-faq > section > table  {
+	width: 100%;
 	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
