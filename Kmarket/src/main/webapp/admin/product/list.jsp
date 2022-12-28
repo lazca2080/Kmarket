@@ -3,38 +3,62 @@
 <jsp:include page="./_header.jsp"></jsp:include>
 <script>
 	$(function(){
-		$('.btn').click(function(){
-			let isDelete = confirm('정말 삭제하시겠습니까?');
+		
+		let chkNo = document.getElementsByName("prodNo");
+		let rowCnt = chkNo.length;
+		
+		console.log(chkNo.length);
+		
+		$('input[name=deleteButton]').click(function(){
+			let list = $('input[name=prodNo]');
+			let checkbox = $('input[name=prodNo]:checked');
 			
-			if(isDelete){
-				let prodNo = $('input:checkbox:checked').val();
-				let checkbox = $('input:checkbox:checked');
-				
-				if(prodNo == null){
-					alert('상품을 선택하지 않았습니다.')
-					return;
+			if(checkbox.length == 0){
+				alert('삭제할 게시글을 선택하세요.');
+				return;
+			}
+			
+			let chkArr = new Array();
+			
+			for(let i=0; i<list.length; i++){
+				if(list[i].checked){
+					chkArr.push(list[i].value);
 				}
-				
-				$.ajax({
-					url : '/Kmarket/admin/product/deleteProduct.do',
-					method : 'get',
-					data : {"prodNo":prodNo},
-					dataType : 'json',
-					success : function(data){
-						location.reload();
-						if(data.result == 1){
-							alert('삭제되었습니다.');
-							checkbox.parent().parent().remove();
-							return true;
-						}else{
-							alert('실패하였습니다.');
-							return false;
-						}
+			}
+			
+			$.ajax({
+				url : '/Kmarket/admin/product/deleteProduct.do',
+				method: 'POST',
+				traditional: true,
+				dataType : 'json',
+				data : {"chkArr" : chkArr},
+				success:function(data){
+					location.reload();
+					if(data.result == 1){
+						alert('삭제되었습니다.');
+						checkbox.parent().parent().remove();
+						return true;
+					}else{
+						alert('실패하였습니다.');
+						return false;
 					}
-				});
-				return true;
+				}
+			});
+		});
+		
+		$('input[name=all]').change(function(){
+			if($('input[name=all]').is(":checked")){
+				$('input[name=prodNo]').prop("checked", true);
 			}else{
-				return false;
+				$('input[name=prodNo]').prop("checked", false);
+			}
+		});
+		
+		$('input[name=prodNo]').change(function(){
+			if($('input[name=prodNo]:checked').length == $('input[name=prodNo]')){
+				$('input[name=all]').prop("checked", true);
+			}else{
+				$('input[name=all]').prop("checked", false);
 			}
 		});
 		
@@ -71,7 +95,7 @@
                     </div>
                     <table>
                         <tr>
-                            <th><input type="checkbox" name="all"></th>
+                            <th><input type="checkbox" name="all" id="allCk"></th>
                             <th>이미지</th>
                             <th>상품코드</th>
                             <th>상품명</th>
@@ -111,7 +135,7 @@
                         </c:otherwise>
                         </c:choose>
                     </table>
-                    	<input type="button" value="선택삭제" class="btn" style="cursor:pointer; width:80px"/>
+                    	<input type="button" value="선택삭제" class="delete" name="deleteButton" style="cursor:pointer; width:80px"/>
                     	<a href="/Kmarket/admin/register.do"><input type="button" value="상품등록" 
                     	style="float: right; width: 80px; cursor:pointer"/></a>
                     <div class="paging">
@@ -122,7 +146,7 @@
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="num${currentPage eq i?'current':'off'}">${i}</a>
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
