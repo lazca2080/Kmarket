@@ -167,9 +167,9 @@ main h4 {
 }
 
 main table {
-    /* 상품등록에 1차 2차 분류 크기가너무커서 잠시 비활성화
+    /*상품등록에 1차 2차 분류 크기가너무커서 잠시 비활성화*/
     width: 100%;
-    */
+    
     border-collapse: collapse;
 }
 main table tr { height: 45px; }
