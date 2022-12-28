@@ -191,10 +191,10 @@ main > .mainsection {
 #product h5.rating.star4 { background-position: 0 -160px; }
 #product h5.rating.star5 { background-position: 0 -200px; }
 
-#product h6.rating.star1 { width: 55px; }
-#product h6.rating.star2 { width: 70px; }
-#product h6.rating.star3 { width: 85px; }
-#product h6.rating.star4 { width: 100px; }
+#product h6.rating.star1 { width: 52px; }
+#product h6.rating.star2 { width: 65px; }
+#product h6.rating.star3 { width: 79px; }
+#product h6.rating.star4 { width: 92px; }
 #product h6.rating.star5 { width: 120px; }
 
 #product > .list > .paging {
@@ -1132,7 +1132,7 @@ main > .mainsection {
 
 #product > .order > form button {
 	position: absolute;
-    top: 128px;
+    top: 131px;
     left: 191px;
 	border: 1px solid #999;
 	width: 58px; 
