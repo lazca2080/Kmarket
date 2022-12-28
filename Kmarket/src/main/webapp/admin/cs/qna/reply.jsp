@@ -96,7 +96,7 @@
 	                             <div>
 	                             	<a href="#" class="btnDelete" id="remove">삭제</a>
 	                                <input type="submit" class="btnSubmit" value="답변등록">
-	                                <a href="/Kmarket/admin/cs/qna/list.do" class="btnList">목록</a>
+	                                <a href="/Kmarket/admin/cs/qna/list.do?cate=qna" class="btnList">목록</a>
 	                            </div>
 	                        </form>
 	                    </article>
