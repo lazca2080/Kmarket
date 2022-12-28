@@ -265,7 +265,8 @@
 						
 						$('.row').remove();	// 테이블 비우기 
 						
-						let no = 1;
+						let totalCount = data.length;
+						console.log(totalCount);
 						
 						for(let vo of data){
 							
@@ -274,7 +275,7 @@
 							
 							let rows = "<tr class='row'>";
 							rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'></td>";
-							rows += "<td>"+no+"</td>";
+							rows += "<td>"+totalCount+"</td>";
 							rows += "<td>"+vo.cateType1+"</td>";
 							rows += "<td>"+vo.cateType2+"</td>";
 							rows += "<td><a href='/Kmarket/admin/cs/qna/reply.do?cate=qna&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>"+vo.title+"</a></td>";
@@ -284,7 +285,7 @@
 							rows += "</tr>"; 
 							 
 							$('#tb').append(rows);
-							no++;
+							totalCount--;
 						} 
 						
 						// paging - 동적생성 

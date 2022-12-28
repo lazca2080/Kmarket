@@ -55,13 +55,16 @@ $(function(){
 				$('.row').remove();	// 테이블 비우기 
 				let no = 1;
 				
+				let totalCount = data.length;
+				console.log(totalCount);
+				
 				for(let vo of data){
 					
 					let rdate = vo.rdate.substring(2,10);
 					
 					let rows = "<tr class='row'>";
 					rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'></td>";
-					rows += "<td>"+no+"</td>";
+					rows += "<td>"+totalCount+"</td>";
 					rows += "<td>"+vo.cateType1+"</td>";
 					rows += "<td><a href='/Kmarket/admin/cs/notice/view.do?cate=notice&cateType1="+vo.cateType1+"&no="+vo.no+"'>["+vo.cateType2+"]  "+vo.title+"</a></td>";
 					rows += "<td>"+vo.hit+"</td>";
@@ -75,6 +78,7 @@ $(function(){
 					$('#tb').append(rows);
 					
 					no++;
+					totalCount--;
 				} 
 				
 				// paging - 동적생성
