@@ -260,6 +260,9 @@ $(function() {
 					$('.row').remove();	// 테이블 비우기
 					let no = 1;
 					
+					let totalCount = data.length;
+					console.log(totalCount);
+					
 					console.log("data.length :" +data.length);
 
 					for(let vo of data){
@@ -268,7 +271,7 @@ $(function() {
 						
 						let rows = "<tr class='row'>";
 						rows += "<td><input type='checkbox' name='articleNo' value='"+vo.no+"'></td>";
-						rows += "<td>"+no+"</td>";
+						rows += "<td>"+totalCount+"</td>";
 						rows += "<td>"+vo.cateType1+"</td>";
 						rows += "<td>"+vo.cateType2+"</td>";
 						rows += "<td><a href='/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1="+vo.cateType1+"&cateType2="+vo.cateType2+"&no="+vo.no+"'>"+vo.title+"</a></td>";
@@ -280,6 +283,7 @@ $(function() {
 						$('#tb').append(rows);
 						
 						no++;
+						totalCount--;
 					}
 					
 					$('.paging > .prev').empty();
@@ -384,12 +388,12 @@ $(function() {
                             <th>날짜</th>
                             <th>관리</th>
                         </tr>
-                        <c:set var="i"  value="${11}"/>	
+                        
                         <c:forEach var="article" items="${articles}">
-                        <c:set var="i" value="${i-1}"/>
+                        <c:set var="i" value="${i+1}"/>
                         <tr class="row">
                         	<td><input type="checkbox" name="articleNo" value="${article.no}"></td>
-                            <td>${i}</td>
+                            <td>${pageStartNum - i}</td>
                             <td>${article.cateType1}</td>
                             <td>${article.cateType2}</td>
                             <td><a href="/Kmarket/admin/cs/faq/view.do?cate=faq&cateType1=${article.cateType1}&cateType2=${article.cateType2}&no=${article.no}">${article.title}</a></td>
@@ -412,7 +416,7 @@ $(function() {
                    <div class="paging">
                         <span class="prev">
                        		<c:if test="${pageGroupStart > 1}">
-                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+                            	<a href="/Kmarket/admin/cs/faq/list.do?cate=faq&pg=${pageGroupStart-1}" class="prev"><&nbsp;이전</a>
                             </c:if>
                         </span>
                         <span class="num">

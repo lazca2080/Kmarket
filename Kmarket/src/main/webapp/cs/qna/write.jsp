@@ -26,6 +26,37 @@ $(function(){
 		let content = $('textarea[name=content]').val();
 		console.log("content: " + content);
 	});
+
+	/*
+	$('#cs > .qna > .write > article > form').submit(function(e) {
+		
+		e.preventDefault();
+		
+		console.log("write");
+		
+		let cateType2 = $('input[class=cateType2]').val();
+		
+		//let cateType2 = $('#selectBox2 option:selected').text();
+		console.log("cateType2: " + cateType2);
+		
+		if(cateType2 == ''){
+			alert('문의유형을 선택하세요');
+			return false;
+		}
+		console.log("카테 오류");
+		
+		
+		// 로그인이 풀렸을 경우
+		if(Uid == ''){
+			alert('다시 로그인해주세요.');
+			location.href = "/Kmarket/member/login.do";
+			return false;
+		}
+		
+		
+		
+	});
+	*/
 	
 });
 </script>
@@ -69,10 +100,10 @@ $(function(){
                         </ul>
                     </aside>
                     <article>
-                        <form action="/Kmarket/cs/qna/write.do" method="post">
+                       	<form action="/Kmarket/cs/qna/write.do" method="post">
                         <input type="hidden" name="uid" value="${sessUser.uid}"/>		
                         <input type="hidden" name="cate" value="${cate}"/>			
-                        <input type="text" name="cateType1" value="${cateType1}"/>	
+                        <input type="hidden" name="cateType1" value="${cateType1}"/>
                             <table>
                                 <tbody>
                                     <tr>
