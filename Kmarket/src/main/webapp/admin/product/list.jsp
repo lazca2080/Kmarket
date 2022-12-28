@@ -33,7 +33,7 @@
 				dataType : 'json',
 				data : {"chkArr" : chkArr},
 				success:function(data){
-					console.log("data : "+data.result);
+					location.reload();
 					if(data.result == 1){
 						alert('삭제되었습니다.');
 						checkbox.parent().parent().remove();

@@ -47,7 +47,21 @@ public class DeleteController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String[] chkList = req.getParameterValues("chkArr");	
+		int length = chkList.length;
+		int result = 0;
 		
+		for(int k=0; k<length; k++) {
+			result = service.delectProduct(chkList[k]);
+			
+		}
+		
+		resp.setCharacterEncoding("UTF-8");
+		
+		PrintWriter writer = resp.getWriter();
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		writer.print(json.toString());
 	}
 
 }
