@@ -46,6 +46,11 @@ public enum ProductService {
 		return dao.selectOrderProduct(prodNo, count);
 	}
 	
+	//Product review 불러오기
+	public List<ProductVO> selectReview(String prodNo) {
+		return dao.selectReview(prodNo);
+	}
+	
 	//Product 상품 하나 계산
 	public ProductVO selectOrderTotal(String prodNo, int coun) {
 		return dao.selectOrderTotal(prodNo, coun);

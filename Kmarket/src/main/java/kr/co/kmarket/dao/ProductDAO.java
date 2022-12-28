@@ -215,6 +215,43 @@ public class ProductDAO {
 		return vo;
 	}
 	
+	//단일 상품 리뷰 조회
+	public List<ProductVO> selectReview(String prodNo) {
+		
+		List<ProductVO> products = new ArrayList<>();
+		
+		try {
+			logger.debug("selectReview...");
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.SELECT_REVIEW);
+			psmt.setString(1, prodNo);
+			
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(2));
+				vo.setContent(rs.getString(3));
+				vo.setUid(rs.getString(4));
+				vo.setRating(rs.getInt(5));
+				vo.setRdate(rs.getString(7));
+				vo.setProdName(rs.getString(8));
+				
+				products.add(vo);
+			}
+			
+			conn.close();
+			psmt.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("products : "+products);
+		
+		return products;
+	}
+	
 	// order 클릭 시 조회
 	public List<ProductVO> selectOrderProduct(String prodNo, int count) {
 		

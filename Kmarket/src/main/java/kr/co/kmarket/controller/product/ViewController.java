@@ -1,6 +1,8 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import kr.co.kmarket.service.IndexService;
 import kr.co.kmarket.service.ProductService;
@@ -44,6 +48,19 @@ public class ViewController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		String prodNo = req.getParameter("prodNo");
+		
+		List<ProductVO> products = service.selectReview(prodNo);
+		
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(products);			
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData);
+		
 	}
 
 }
