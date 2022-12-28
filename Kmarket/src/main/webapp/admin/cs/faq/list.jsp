@@ -36,6 +36,8 @@ $(function() {
 				dataType : 'json',
 				success : function(data) {
 					console.log("data : "+data.result);
+					// 삭제후 페이지 새로고침 추가
+					location.reload();
 					if(data.result == 1){
 						alert('삭제되었습니다.');
 						checkbox.parent().parent().remove();
@@ -64,7 +66,7 @@ $(function() {
 		}
 	});
 	
-	//하위 체크박스 체크 여부에 따른 전체 체크박스 상태
+	// 하위 체크박스 체크 여부에 따른 전체 체크박스 상태
 	// 선택된 체크박스의 개수가 전체 체크박스 개수와 같다면 true
 	
 	$('input[name=articleNo]').change(function() {

@@ -21,6 +21,7 @@
 					data : {"prodNo":prodNo},
 					dataType : 'json',
 					success : function(data){
+						location.reload();
 						if(data.result == 1){
 							alert('삭제되었습니다.');
 							checkbox.parent().parent().remove();
@@ -121,7 +122,7 @@
                         </span>
                         <span class="num">
                         	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="on${currentPage eq i?'current':'off'}">${i}</a>
+                            <a href="/Kmarket/admin/product/list.do?uid=${sessUser.uid}&pg=${i}&level=${sessUser.level}&text=${text}&search=${search}" class="num${currentPage eq i?'current':'off'}">${i}</a>
                             </c:forEach>
                         </span>
                         <span class="next">
