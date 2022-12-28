@@ -376,9 +376,18 @@ $(function(){
 	                        </c:if>
                         </span>
                         <span class="num">
+                        <c:choose>
+                        	<c:when test="${cateType1 eq null && cateType2 eq null}">
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
 	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}&cate=${cate}" class="num ${currentPage eq i? 'active':'off'}">${i}</a>
 	                        </c:forEach>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+	                            <a href="/Kmarket/admin/cs/notice/list.do?pg=${i}&cate=${cate}&cateType1=${cateType1}&cateType2=${cateType2}" class="num ${currentPage eq i? 'active':'off'}">${i}</a>
+	                       		 </c:forEach>
+                        	</c:otherwise>
+                        </c:choose>
                         </span>
                         <span class="next">
                             <c:if test="${pageGroupEnd lt lastPageNum}">

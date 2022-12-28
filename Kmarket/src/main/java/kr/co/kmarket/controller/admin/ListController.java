@@ -51,7 +51,6 @@ public class ListController extends HttpServlet{
 		
 		int currentPage = service.getCureentPage(pg);
 		int lastPageNum = service.getLastPageNum(total);
-		
 		int[] result = service.getpageGroupNum(currentPage, lastPageNum);
 		int pageStartNum = service.getPageStartNum(total, currentPage);
 		int start = service.getStartNum(currentPage);
