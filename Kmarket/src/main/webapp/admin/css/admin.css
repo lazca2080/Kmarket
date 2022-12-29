@@ -180,6 +180,7 @@ main table tr > td {
     text-align: left;
 }
 main table tr > td:nth-child(1) {
+	width: 160px;
     border-top: 1px solid #e6e6e6;
     border-bottom: 1px solid #e6e6e6;
     background: #f6f6f6;
@@ -548,7 +549,6 @@ button[type=submit] {
 }
 
 #admin-product-list > section > table  {
-	table-layout:fixed;
     border-top: 2px solid #8798a3;
 }
 #admin-product-list > section > table  tr > th{
