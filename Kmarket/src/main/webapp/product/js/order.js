@@ -25,7 +25,7 @@ $(function(){
 		oriPoint = point;
 		
 		// 최종결제 정보 전체주문금액 변경
-		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text($.Commas(finalTotal));
+		$('.order > form > .final > table tr:eq(5) > td:eq(1)').text($.Commas(total));
 		
 		// 현재 uid가 가지고있는 point값 가져오기 // 259번째 줄 input hidden 추가
 		let currentPoint = $('input[name=currentPoint]').val();
@@ -33,6 +33,7 @@ $(function(){
 		// 현재 가지고 있는 point보다 높게 입력시 alert, return;
 		if(parseInt(point) > parseInt(currentPoint)){
 			alert('가지고 계신 포인트 보다 많습니다.');
+			
 			return;
 		}else if(parseInt(point) < 5000 && parseInt(point) > 0){
 			alert('5000점 이상부터 사용 가능합니다.');
