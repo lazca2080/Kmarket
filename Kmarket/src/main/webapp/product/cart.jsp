@@ -49,7 +49,7 @@
                                     <img src="/home/prodImg/${cart.thumb1}" alt="1">
                                 </a>
                                 <div>
-                                    <h2><a href="#">${cart.prodName}</a></h2>
+                                    <h2><a href="/Kmarket/product/view.do?prodNo=${cart.prodNo}">${cart.prodName}</a></h2>
                                     <p>${cart.descript}</p>
                                 </div>
                             </article></td>
