@@ -2,6 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="./_header.jsp"></jsp:include>
+<script>
+	$(function() {
+		$('#cs > .main > .qna > .ask').click(function() {
+			
+			let Uid = $('input[name=uid]').val();
+			
+			console.log(Uid);
+			
+			// 로그인이 풀렸을 경우
+			if(Uid == ''){
+				alert('로그인이 필요한 항목입니다.');
+			      
+				location.href = "/Kmarket/member/login.do";
+				return false;
+			}
+			
+			
+			
+		});
+	});
+		
+</script>
         <section id="cs">
             <div class="main">
                 <h1 class="title">
@@ -69,6 +91,7 @@
                     </ol>
                 </section>
                 <section class="qna">
+                	<input type="hidden" name="uid" value="${sessUser.uid}">
                     <h1>문의하기<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=회원">전체보기</a></h1>
                     <ul>
                     	<c:forEach var="latest" items="${latests}">
