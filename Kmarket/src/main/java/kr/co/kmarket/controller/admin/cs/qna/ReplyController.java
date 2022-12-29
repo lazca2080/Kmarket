@@ -64,7 +64,7 @@ public class ReplyController extends HttpServlet{
 		
 		service.updateReply(cv);
 		
-		resp.sendRedirect("/Kmarket/admin/cs/qna/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/qna/list.do?cate=qna");
 	
 		
 		
