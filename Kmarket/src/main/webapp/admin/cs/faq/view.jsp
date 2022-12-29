@@ -67,7 +67,7 @@
 							            <td>
 							           		제목
 							            </td>
-							            <td>${vo.title} // no: ${no}</td>
+							            <td>${vo.title}</td>
 							        </tr>
 							        <tr>
 							            <td>
