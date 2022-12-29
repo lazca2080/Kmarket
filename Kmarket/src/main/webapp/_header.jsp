@@ -73,12 +73,14 @@
     			console.log(sessUid);
     			
     			if(sessUid == ''){
-    				//alert('로그인이 필요한 항목입니다.');
+    				alert('로그인이 필요한 항목입니다.');
+    				/*
     				swal(
 			        "Check!",
 			        "로그인이 필요한 항목입니다.",
 			        "warning"
 			      )
+			      */
     				location.href = "/Kmarket/member/login.do";
     				return false;
     			}
