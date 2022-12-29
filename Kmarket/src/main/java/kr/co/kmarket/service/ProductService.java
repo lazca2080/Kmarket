@@ -110,6 +110,11 @@ public enum ProductService {
 		dao.insertSelectDeleteCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
 	}
 	
+	//최종 order item 등록
+	public void insertOneSelectDeleteCartPoint(String prodNo, CompleteVO vo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
+		dao.insertOneSelectDeleteCartPoint(prodNo, vo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
+	}
+	
 	public List<CategoryVO> selectCate(int cate) {
 		return dao.selectCate(cate);
 	}

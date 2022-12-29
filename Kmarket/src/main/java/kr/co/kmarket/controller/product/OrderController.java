@@ -47,6 +47,7 @@ public class OrderController extends HttpServlet{
 			vo = service.selectOrderTotal(prodNo, coun);
 			session.setAttribute("prod", products);
 			session.setAttribute("vo", vo);
+			session.setAttribute("prodNo", prodNo);
 		}
 		
 		// aside 카테고리 영역 불러오기
