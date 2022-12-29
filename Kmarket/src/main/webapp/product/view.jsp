@@ -105,17 +105,37 @@
 		
 		let today = new Date();
 		
+		let year = today.getFullYear();
 		let month = today.getMonth()+1;
 		let date = today.getDate()+3;
 		let day = today.getDay()+3;
 		let message;
-		console.log(day);
+		let lastDay = new Date(2022, 12, 0);
 		
-		if(day == 1){
+		if(date > lastDay.getDate()){
+			
+			if(today.getMonth()+1 == 12){
+				
+				lastDay = new Date(today.getFullYear()+1, 1);
+				console.log(lastDay);
+				month = lastDay.getMonth();
+				date = lastDay.getDate();
+				day = lastDay.getDay()+4;
+				
+			}else {
+				
+				lastDay = new Date(today.getFullYear(), today.getMonth()+1, 1)
+				date = lastDay.getDate()+3;
+				console.log('test2');
+			}
+			
+		}
+		
+		if(day == 1 || day == 8){
 			message = '월';
-		}else if(day == 2){
+		}else if(day == 2 || day == 9){
 			message = '화';
-		}else if(day == 3){
+		}else if(day == 3 || day == 10){
 			message = '수';
 		}else if(day == 4){
 			message = '목';
@@ -123,7 +143,7 @@
 			message = '금';
 		}else if(day == 6){
 			message = '토';
-		}else if(day == 0){
+		}else if(day == 0 || day == 7){
 			message = '일';
 		}
 		
@@ -140,9 +160,6 @@
 		
 		let prodNo = $('input[class=cart]').attr('data-no');
 		
-		console.log(prodNo);
-		
-		console.log('test1');
 		$.ajax({
 			url: '/Kmarket/product/view.do', 
 			method: 'post',
