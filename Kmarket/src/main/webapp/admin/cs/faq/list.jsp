@@ -43,7 +43,12 @@ $(function() {
 						checkbox.parent().parent().remove();
 						return true;
 					}else{
-						alert('실패하였습니다.');
+						//alert('실패하였습니다.');
+						swal(
+					        "Check!",
+					        "동의 체크를 하셔야 합니다.",
+					        "warning"
+					      ) 
 						return false;
 					}
 				}
@@ -96,8 +101,13 @@ $(function() {
 		console.log("checkbox.length : "+checkbox.length);  //선택된 게시글 개수 확인
 		
 		if(checkbox.length == 0){
-			alert('삭제할 게시물을 선택하십시오');
-			 return;
+			//alert('삭제할 게시물을 선택하십시오');
+			swal(
+			        "Check!",
+			        "삭제할 게시물을 선택하십시오.",
+			        "warning"
+			      )  
+			return;
 		}
 		
 		let chkArr = new Array();
@@ -127,7 +137,12 @@ $(function() {
 					return true;
 					
 				}else{
-					alert('실패하였습니다.');
+					//alert('실패하였습니다.');
+					swal(
+				        "Check!",
+				        "실패하였습니다.",
+				        "warning"
+				      ) 
 					return false;
 				}
 			}
@@ -339,7 +354,12 @@ $(function() {
 		let Uid = $('input[class=uid]').val();
 		
 		if(Uid == ''){
-			alert('다시 로그인해주세요.');
+			//alert('다시 로그인해주세요.');
+			swal(
+			        "Check!",
+			        "다시 로그인해주세요.",
+			        "warning"
+			      ) 
 			location.href = "/Kmarket/member/login.do";
 			return false;
 		}

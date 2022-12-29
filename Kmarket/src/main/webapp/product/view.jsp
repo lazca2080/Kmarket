@@ -49,7 +49,12 @@
 			let count = $('input[name=num]').val();			
 			
 			if(uid == ''){
-				alert('비회원은 이용할 수 없습니다.');
+				//alert('비회원은 이용할 수 없습니다.');
+				swal(
+			        "Check!",
+			        "비회원은 이용할 수 없습니다.",
+			        "warning"
+			      )
 				return false;
 			}else {
 				$.ajax({
@@ -64,7 +69,12 @@
 								location.href = "/Kmarket/product/cart.do?uid="+uid;
 							}
 						}else{
-							alert('장바구니에 담지 못했습니다.');
+							//alert('장바구니에 담지 못했습니다.');
+							swal(
+						        "Check!",
+						        "장바구니에 담지 못했습니다.",
+						        "warning"
+						      )
 						}
 					}
 				});
@@ -76,7 +86,12 @@
 			let uid = $(this).attr('data-uid');
 			
 			if(uid == ''){
-				alert('비회원은 구입할 수 없습니다.');
+				//alert('비회원은 구입할 수 없습니다.');
+				swal(
+			        "Check!",
+			        "비회원은 구입할 수 없습니다.",
+			        "warning"
+			      )
 				return false;
 			}else {
 				let prodNo = $(this).attr('data-no');

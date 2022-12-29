@@ -111,7 +111,12 @@
 			console.log("cateType2: " + cateType2);
 			
 			if(cateType1 == 0 || cateType2 == 0){
-				alert('카테고리를 선택하세요');
+				//alert('카테고리를 선택하세요');
+				swal(
+			        "Check!",
+			        "카테고리를 선택하세요.",
+			        "warning"
+			      ) 
 				return false;
 			}
 			console.log("카테 오류");
@@ -119,7 +124,12 @@
 			
 			// 로그인이 풀렸을 경우
 			if(Uid == ''){
-				alert('다시 로그인해주세요.');
+				//alert('다시 로그인해주세요.');
+				swal(
+			        "Check!",
+			        "다시 로그인해주세요.",
+			        "warning"
+			      ) 
 				location.href = "/Kmarket/member/login.do";
 				return false;
 			}

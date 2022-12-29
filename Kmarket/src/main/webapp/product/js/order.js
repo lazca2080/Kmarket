@@ -32,10 +32,20 @@ $(function(){
 		
 		// 현재 가지고 있는 point보다 높게 입력시 alert, return;
 		if(parseInt(point) > parseInt(currentPoint)){
-			alert('가지고 계신 포인트 보다 많습니다.');
+			//alert('가지고 계신 포인트 보다 많습니다.');
+			swal(
+			        "Check!",
+			        "가지고 계신 포인트보다 많습니다.",
+			        "warning"
+			      )
 			return;
 		}else if(parseInt(point) < 5000 && parseInt(point) > 0){
-			alert('5000점 이상부터 사용 가능합니다.');
+			//alert('5000점 이상부터 사용 가능합니다.');
+			swal(
+			        "Check!",
+			        "5000점 이상부터 사용 가능합니다.",
+			        "warning"
+			      )
 			return;
 		}
 		
@@ -67,7 +77,12 @@ $(function(){
 		let addr2 = $('input[name=addr2]').val();
 		
 		if(orderer == '' || hp == '' || receiver == '' || zip == '' || addr1 == '' || addr2 == ''){
-			alert('배송정보를 입력하세요');
+			//alert('배송정보를 입력하세요');
+			swal(
+			        "Check!",
+			        "배송 정보를 입력하세요.",
+			        "warning"
+			      )
 			return false;
 		}
 		

@@ -15,7 +15,12 @@
 			console.log(sessUid);
 			
 			if(sessUid == ''){
-				alert('다시 로그인해주세요.');
+				//alert('다시 로그인해주세요.');
+				swal(
+			        "Check!",
+			        "다시 로그인해주세요.",
+			        "warning"
+			      )
 				location.href = "/Kmarket/member/login.do";
 				return false;
 			}
