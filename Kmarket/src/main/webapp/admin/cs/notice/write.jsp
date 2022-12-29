@@ -31,7 +31,12 @@ $(function(){
 		let cateType2 = $('select[name=cateType2]').val();
 		
 		if(cateType1 == '1차 유형 선택' || cateType2 == '2차 유형 선택'){
-			alert('유형을 선택해주세요');
+			//alert('유형을 선택해주세요');
+			swal(
+			        "Check!",
+			        "유형을 선택해주세요.",
+			        "warning"
+			      )
 			return false;
 		}
 	});

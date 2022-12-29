@@ -10,7 +10,12 @@
 		
 		
 		$('.btnSubmit').click(function(){
-			alert('답변이 작성되었습니다.');
+			//alert('답변이 작성되었습니다.');
+			swal(
+			        "Check!",
+			        "답변이 작성되었습니다.",
+			        "warning"
+			      )
 		});
 		
 		// 글 삭제하기
@@ -34,7 +39,12 @@
 							location.replace('/Kmarket/admin/cs/qna/list.do');
 							return true;
 						}else{
-							alert('실패하였습니다.');
+							//alert('실패하였습니다.');
+							swal(
+						        "Check!",
+						        "실패하였습니다.",
+						        "warning"
+						      )
 							return false;
 						}
 					}

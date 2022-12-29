@@ -14,7 +14,12 @@
 			let checkbox = $('input[name=prodNo]:checked');
 			
 			if(checkbox.length == 0){
-				alert('삭제할 게시글을 선택하세요.');
+				//alert('삭제할 게시글을 선택하세요.');
+				swal(
+			        "Check!",
+			        "삭제할 게시글을 선택하세요.",
+			        "warning"
+			      ) 
 				return;
 			}
 			
@@ -39,7 +44,12 @@
 						checkbox.parent().parent().remove();
 						return true;
 					}else{
-						alert('실패하였습니다.');
+						//alert('실패하였습니다.');
+						swal(
+					        "Check!",
+					        "실패하였습니다.",
+					        "warning"
+					      ) 
 						return false;
 					}
 				}

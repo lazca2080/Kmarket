@@ -25,7 +25,12 @@ $(function(){
 		let cartNo = $('input:checkbox:checked').val();
 		let checkbox = $('input:checkbox:checked');
 		if(cartNo == null){
-			alert('선택된 상품이 없습니다.');
+			//alert('선택된 상품이 없습니다.');
+			swal(
+			        "Check!",
+			        "선택된 강품이 없습니다.",
+			        "warning"
+			      )
 			return;
 		}
 		
@@ -95,7 +100,12 @@ $(function(){
 					totalNo = [];
 					return true;
 				}else {
-					alert('실패하였습니다.');
+					//alert('실패하였습니다.');
+					swal(
+			        "Check!",
+			        "실패하였습니다.",
+			        "warning"
+			      )
 					return false;
 				}
 			}
@@ -248,7 +258,12 @@ $(function(){
 			console.log(check);
 			
 			if(totalNo == 0){
-				alert('상품을 선택하세요');
+				//alert('상품을 선택하세요');
+				swal(
+			        "Check!",
+			        "상품을 선택하세요.",
+			        "warning"
+			      )
 				return false;
 			}
 			

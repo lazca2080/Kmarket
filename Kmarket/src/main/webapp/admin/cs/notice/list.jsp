@@ -176,7 +176,12 @@ $(function(){
 		console.log(checkbox.length);	// 선택된 게시글 개수 확인
 		
 		if(checkbox.length == 0){
-			alert('삭제할 게시글을 선택하십시오.');
+			//alert('삭제할 게시글을 선택하십시오.');
+			swal(
+			        "Check!",
+			        "삭제할 게시글을 선택하십시오.",
+			        "warning"
+			      )
 			return;
 		}
 		
@@ -205,7 +210,12 @@ $(function(){
 					checkbox.parent().parent().remove(); 
 					return true;
 				}else{
-					alert('실패하였습니다.');
+					//alert('실패하였습니다.');
+					swal(
+				        "Check!",
+				        "동의 체크를 하셔야 합니다.",
+				        "warning"
+				      )
 					return false;
 				}
 			}

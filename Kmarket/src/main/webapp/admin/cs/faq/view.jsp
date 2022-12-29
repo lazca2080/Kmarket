@@ -25,7 +25,12 @@
 							checkbox.parent().parent().remove();
 							return true;
 						}else{
-							alert('실패하였습니다.');
+							//alert('실패하였습니다.');
+							swal(
+						        "Check!",
+						        "실패하였습니다.",
+						        "warning"
+						      ) 
 							return false;
 						}
 					}
