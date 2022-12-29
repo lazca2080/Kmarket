@@ -4,46 +4,37 @@
 <script>
 $(function(){
 	let cateType1 = "${cateType1}"; // 페이지의 cateType1을 가져온다. (js 코드 엄격 쌍따옴표 쓰기!)
-	console.log("cateType1 : " + cateType1);
 	
 	$('select[name=type]').val(cateType1).prop("selected", true);	//1차 카테고리 셀렉트 박스를 cateType1과 동일한 값으로 선택시킨다.
 	$('select[name=type]').attr('disabled', 'disabled');			//선택된 셀렉트 박스의 값을 고정시킨다.
 	$('select[name=type]').trigger('change');						//고정된 셀렉트 박스의 값을 실행시킨 것처럼 trigger(이벤트 강제실행)한다. 
 
-	
 	$('select[name=cateType2]').change(function(){
 		let cateType2 = $('select[name=cateType2] option:selected').text();
-		console.log("cateType2: " + cateType2);
 	});
 	
 	// title 확인용 콘솔 로그 창 (삭제 가능)
 	$('input[name=title]').focusout(function(){
 		let title = $('input[name=title]').val();
-		console.log("title: " + title);
 	});
 	// content 확인용 콘솔 로그 창 (삭제 가능)
 	$('textarea[name=content]').focusout(function(){
 		let content = $('textarea[name=content]').val();
-		console.log("content: " + content);
 	});
 
-	/*
-	$('#cs > .qna > .write > article > form').submit(function(e) {
+	$('#cs > .qna > .write > article > form').submit(function() {
 		
-		e.preventDefault();
+		let cateType2 = $('select[name=cateType2] option:selected').text();
+		let Uid = $('input[name=uid]').val();
 		
-		console.log("write");
+		console.log(cateType2);
+		console.log(Uid);
 		
-		let cateType2 = $('input[class=cateType2]').val();
-		
-		//let cateType2 = $('#selectBox2 option:selected').text();
-		console.log("cateType2: " + cateType2);
-		
-		if(cateType2 == ''){
+		if(cateType2 == '선택'){
+			console.log('test');
 			alert('문의유형을 선택하세요');
 			return false;
 		}
-		console.log("카테 오류");
 		
 		
 		// 로그인이 풀렸을 경우
@@ -53,11 +44,7 @@ $(function(){
 			return false;
 		}
 		
-		
-		
 	});
-	*/
-	
 });
 </script>
 <jsp:include page="../_header.jsp"></jsp:include>
