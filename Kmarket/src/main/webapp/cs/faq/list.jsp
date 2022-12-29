@@ -19,10 +19,10 @@
            console.log('isVisible : ' + isVisible);
            
            if(isVisible && item.css('display') == 'none'){
-        	   item.show(300);
+        	   item.slideDown(300);
         	   $(this).find('> a').text('간단히보기');
            }else if(isVisible && item.css('display') == 'list-item'){
-        	   item.hide(300);
+        	   item.slideUp(300);
         	   $(this).find('> a').text('더보기');
    			}
            
