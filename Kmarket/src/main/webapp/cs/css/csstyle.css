@@ -754,6 +754,7 @@ footer  p > strong {
     border-bottom: 1px solid #e9e9e9;
     padding: 26px;
     box-sizing: border-box;
+    margin-bottom: 100px;
 }
 #cs > .faq > .view > article > .content * {
     font-size: 16px;
