@@ -825,6 +825,53 @@ public class ProductDAO {
 		}
 	}
 	
+	//장바구니 선택항목 order_item insert
+	public void insertOneSelectDeleteCartPoint(String prodNo, CompleteVO vo, int ordNo, String uid, String ordsavePoint, String currentPoint, String ordusedPoint) {
+		
+		try {
+			logger.debug("public void insertSelectCartPoint...");
+			Connection conn = DBCP.getConnection();
+			
+			conn.setAutoCommit(false);
+			PreparedStatement psmt = conn.prepareStatement(ProductSql.INSERT_ORDER_ITEM);
+			psmt.setInt(1, vo.getOrdNo());
+			psmt.setString(2, prodNo);
+			psmt.setInt(3, vo.getOrdCount());
+			psmt.setInt(4, vo.getOrdPrice());
+			psmt.setInt(5, vo.getOrdDiscount());
+			psmt.setInt(6, vo.getOrdSavePoint());
+			psmt.setInt(7, vo.getOrdDelivery());
+			psmt.setInt(8, vo.getOrdTotPrice());
+			
+			PreparedStatement psmt2 = conn.prepareStatement(ProductSql.INSERT_POINT);
+			psmt2.setString(1, uid);
+			psmt2.setInt(2, ordNo);
+			psmt2.setString(3, ordsavePoint);
+			
+			PreparedStatement psmt3 = conn.prepareStatement(ProductSql.UPDATE_POINT);
+			psmt3.setInt(1, Integer.parseInt(currentPoint)-Integer.parseInt(ordusedPoint)+Integer.parseInt(ordsavePoint));
+			psmt3.setString(2, uid);
+			
+			PreparedStatement psmt4 = conn.prepareStatement(ProductSql.DELETE_CART);
+			psmt4.setString(1, uid);
+			
+			psmt.executeUpdate();
+			psmt4.executeUpdate();
+			psmt2.executeUpdate();
+			psmt3.executeUpdate();
+			conn.commit();
+			
+			conn.close();
+			psmt.close();
+			psmt2.close();
+			psmt3.close();
+			psmt4.close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public List<CategoryVO> selectCate(int cate) {
 		
 		List<CategoryVO> category = new ArrayList<>();

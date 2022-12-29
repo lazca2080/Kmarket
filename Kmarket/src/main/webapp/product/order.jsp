@@ -19,6 +19,7 @@
                 <!-- form 전송시 데이터가 필요해서 input hidden을 과하게 집어넣음... -->
                 <form action="/Kmarket/product/complete.do" method="post">
                 	<input type="hidden" name="uid" value="${sessUser.uid}">
+                	<input type="hidden" name="prodNo" value="${prodNo}">
 					<input type="hidden" name="ordCount" value="${vo.count}">
 					<input type="hidden" name="ordPrice" value="${vo.price}">
 					<input type="hidden" name="ordDiscount" value="${vo.discount}">

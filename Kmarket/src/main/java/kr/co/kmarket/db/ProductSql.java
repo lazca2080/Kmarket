@@ -106,6 +106,16 @@ public class ProductSql {
 			+ "`ordDate`=NOW(), "
 			+ "`recipReceiver`=?";
 	
+	public static final String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` SET "
+			+ "`orderNo`=?, "
+			+ "`prodNo`=?, "
+			+ "`count`=?, "
+			+ "`price`=?, "
+			+ "`discount`=?, "
+			+ "`point`=?, "
+			+ "`delivery`=?, "
+			+ "`total`=?";
+	
 	//order 항목 조회
 	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordNo`=?";
 	

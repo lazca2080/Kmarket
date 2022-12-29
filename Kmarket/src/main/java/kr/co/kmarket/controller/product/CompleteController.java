@@ -64,6 +64,7 @@ public class CompleteController extends HttpServlet{
 		String payment 		= req.getParameter("payment");
 		String receiver     = req.getParameter("receiver");
 		String currentPoint = req.getParameter("currentPoint");
+		String prodNo       = req.getParameter("prodNo");
 		
 		CompleteVO vo = new CompleteVO();
 		vo.setOrdNo(ordNo);
@@ -91,7 +92,11 @@ public class CompleteController extends HttpServlet{
 		
 		String[] cartNo = (String[]) session.getAttribute("cartNo");
 		
-		service.insertSelectDeleteCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
+		if(cartNo != null) {
+			service.insertSelectDeleteCartPoint(cartNo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
+		}else {
+			service.insertOneSelectDeleteCartPoint(prodNo, vo, ordNo, uid, ordsavePoint, currentPoint, ordusedPoint);
+		}
 		
 		resp.sendRedirect("/Kmarket/product/complete.do");
 	}
