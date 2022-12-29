@@ -1,6 +1,14 @@
 $.Commas = function (x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
 
 $(function(){
+	let Uid = $('input[name=uid]').val();
+		
+	if(Uid == ''){
+		alert('먼저 로그인 하세요');
+		location.href = "/Kmarket/member/login.do";
+		return false;
+	}		
+			
 			
 	let oriPoint = 0;
 	let oriTotal = 0;

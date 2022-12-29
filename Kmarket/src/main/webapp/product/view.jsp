@@ -102,31 +102,41 @@
 			}
 		});
 		
+		// 수정 중
 		
+		// 현재날짜
 		let today = new Date();
 		
+		// 현재 년도
 		let year = today.getFullYear();
+		
+		// 현재 달
 		let month = today.getMonth()+1;
+		
+		// 3일 뒤 날짜 
 		let date = today.getDate()+3;
+		
+		// 3일 뒤 요일
 		let day = today.getDay()+3;
 		let message;
-		let lastDay = new Date(2022, 12, 0);
 		
+		// 현재 달의 마지막 일
+		let lastDay = new Date(today.getFullYear(), today.getMonth()+1, 0);
+		
+		// 3일 뒤 날짜가 현재 달 마지막 일보다 크면
 		if(date > lastDay.getDate()){
-			
+			// 현재 달이 12월이면
 			if(today.getMonth()+1 == 12){
-				
-				lastDay = new Date(today.getFullYear()+1, 1);
-				console.log(lastDay);
-				month = lastDay.getMonth();
-				date = lastDay.getDate();
-				day = lastDay.getDay()+4;
-				
-			}else {
-				
-				lastDay = new Date(today.getFullYear(), today.getMonth()+1, 1)
-				date = lastDay.getDate()+3;
-				console.log('test2');
+				let newDay = new Date(2023, 0);
+				month = newDay.getMonth()+1;
+				date = newDay.getDate();
+				day = newDay.getDay();
+			// 12월이 아닌 달이면 ex)1월->2월, 2월->3월
+			}else{
+				let newDay = new Date(today.getFullYear(), today.getMonth()+2);
+				month = newDay.getMonth()+1;
+				date = newDay.getDate();
+				day = newDay.getDay();
 			}
 			
 		}
