@@ -41,11 +41,11 @@ public class CompleteController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmm");
+		SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmmss");
 		String now = sdf.format(new Date());
 		
 		Random random = new Random();
-		int rand = random.nextInt(100);
+		int rand = random.nextInt(1000);
 		
 		int ordNo           = rand+Integer.parseInt(now);
 		String uid          = req.getParameter("uid");
