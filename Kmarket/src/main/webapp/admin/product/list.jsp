@@ -38,9 +38,15 @@
 				dataType : 'json',
 				data : {"chkArr" : chkArr},
 				success:function(data){
-					location.reload();
 					if(data.result == 1){
-						alert('삭제되었습니다.');
+						swal(
+							"Check!",	
+							"삭제되었습니다.",	
+							"success"
+						).then(function(){
+							location.reload();
+						});
+						//alert('삭제되었습니다.');
 						checkbox.parent().parent().remove();
 						return true;
 					}else{
