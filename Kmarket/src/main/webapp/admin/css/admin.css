@@ -1136,7 +1136,6 @@ button[type=submit] {
 }
 #cs > .qna > .reply > article > form > div {
 	float: right;
-	position: absolute;
 	right: 0;
     padding-top: 40px;
 }
