@@ -273,7 +273,6 @@ main > .mainsection {
 
 #product > .view > .info > .summary > nav:nth-child(2) > .rating > a {
     color: #346aff;
-    text-decoration: underline;
 }
 
 #product > .view > .info > .summary .org_price > del {

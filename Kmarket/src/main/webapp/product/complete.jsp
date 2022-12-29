@@ -1,8 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../_header.jsp"></jsp:include>
+<script>
+	$(function(){
+		let Uid = $('input[name=uid]').val();
+		
+		if(Uid == ''){
+			alert('먼저 로그인 하세요');
+			location.href = "/Kmarket/member/login.do";
+			return false;
+		}
+	});
+
+</script>
             </aside>
             <section class="complete">
+            <input type="hidden" name="uid" value="${sessUser.uid}">
                 <nav>
                     <h1>주문완료</h1>
                     <p>
