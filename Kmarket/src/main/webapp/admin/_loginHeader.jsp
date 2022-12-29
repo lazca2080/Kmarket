@@ -13,6 +13,24 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/Kmarket/admin/css/admin.css">
 </head>
+<script>
+	$(function(){
+		
+		let uid = $('input[name=uid]').val();
+		let type = $('input[name=type]').val();
+		let level = $('input[name=level]').val();
+		
+		if(uid == ''){
+			alert('판매자 혹은 관리자만 이용할 수 있습니다.');
+			location.href = "/Kmarket/member/login.do";
+			return;
+		}else if(type != 2){
+			alert('판매자 혹은 관리자만 이용할 수 있습니다.');
+			location.href = "/Kmarket/";
+			return;
+		}
+	});
+</script>
 <body>
     <div id="wrapper">
         <header>

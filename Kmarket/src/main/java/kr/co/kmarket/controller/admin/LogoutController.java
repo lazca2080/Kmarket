@@ -50,8 +50,7 @@ public class LogoutController extends HttpServlet{
 			System.out.println("logout session invalidate...");
 		}
 		
-		resp.sendRedirect("/Kmarket/admin/login.do?success=200");
-		
+		resp.sendRedirect("/Kmarket/member/login.do?success=200");
 		
 	}
 	@Override
