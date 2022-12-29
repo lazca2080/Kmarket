@@ -73,7 +73,12 @@
     			console.log(sessUid);
     			
     			if(sessUid == ''){
-    				alert('로그인이 필요한 항목입니다.');
+    				//alert('로그인이 필요한 항목입니다.');
+    				swal(
+			        "Check!",
+			        "로그인이 필요한 항목입니다.",
+			        "warning"
+			      )
     				location.href = "/Kmarket/member/login.do";
     				return false;
     			}
@@ -143,7 +148,7 @@
                         <li><a href="#" id="scroll5">할인상품</a></li>
                     </ul>
                     <ul>
-                        <li><a href="/Kmarket/cs/notice/list.do">공지사항</a></li>
+                        <li><a href="/Kmarket/cs/notice/list.do?cate=notice">공지사항</a></li>
                         <li><a href="/Kmarket/cs/faq/list.do?cate=faq&cateType1=회원">자주묻는질문</a></li>
                         <li><a href="/Kmarket/cs/qna/write.do?cate=qna&cateType1=회원" class="btnWrite">문의하기</a></li>
                         <li><a href="/Kmarket/cs/index.do">고객센터</a></li>

@@ -32,7 +32,12 @@ $(function(){
 		
 		if(cateType2 == '선택'){
 			console.log('test');
-			alert('문의유형을 선택하세요');
+			//alert('문의유형을 선택하세요');
+			swal(
+			        "Check!",
+			        "문의유형을 선택하세요.",
+			        "warning"
+			      )
 			return false;
 		}
 		

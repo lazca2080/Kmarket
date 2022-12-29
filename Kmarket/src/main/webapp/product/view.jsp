@@ -39,7 +39,7 @@
 			
 			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
 			
-			$('.totalPrice').text(totalPrice);
+			$('.totalPrice').text($.Commas(totalPrice));
 		});
 		
 		$('.cart').click(function() {
