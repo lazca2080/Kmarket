@@ -88,6 +88,9 @@ $(function(){
 		let zip = $('input[name=zip]').val();
 		let addr1 = $('input[name=addr1]').val();
 		let addr2 = $('input[name=addr2]').val();
+		let payment = $('input[name=payment]:checked').val();
+		
+		console.log(payment);
 		
 		if(orderer == '' || hp == '' || receiver == '' || zip == '' || addr1 == '' || addr2 == ''){
 			//alert('배송정보를 입력하세요');
@@ -97,6 +100,13 @@ $(function(){
 			        "warning"
 			      )
 			return false;
+		}else if(payment == null) {
+			swal(
+			        "Check!",
+			        "결제 방법을 선택하세요.",
+			        "warning"
+			      )
+			return false;			
 		}
 		
 		let result = confirm('입력하신 정보가 맞습니까?');
