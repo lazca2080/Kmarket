@@ -22,7 +22,7 @@
 						
 						$(data).each(function(){
 							
-						    tags += "<option value='"+this.cate2+"'>"+this.c2Name+"</option>";
+							tags += "<option value='"+this.cate2+"'>"+this.c2Name+"</option>";
 						    
 						});
 						
@@ -31,6 +31,9 @@
 				}
 			});	
 		});
+		
+		
+		
 	});
 </script>
             <section id="admin-product-register">

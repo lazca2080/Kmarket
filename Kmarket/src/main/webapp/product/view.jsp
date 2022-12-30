@@ -102,8 +102,6 @@
 			}
 		});
 		
-		// 수정 중
-		
 		// 현재날짜
 		let today = new Date();
 		
@@ -125,20 +123,25 @@
 		
 		// 3일 뒤 날짜가 현재 달 마지막 일보다 크면
 		if(date > lastDay.getDate()){
+			
+			// 넘어가는 달 날짜는 = 3일 뒤 날짜 - 현재 달의 마지막 날짜
+			// ex) 12월 -> 1월   =   33 - 31 = 2 => 1월 2일
+			let nextDate = date-lastDay.getDate();
+			
+			// day는 연속성을 가짐으로 따로 건드리지않음. date는 30, 31, 28 불연속성이라 보정해줘야함
+			
 			// 현재 달이 12월이면
 			if(today.getMonth()+1 == 12){
 				let newDay = new Date(2023, 0);
 				month = newDay.getMonth()+1;
-				date = newDay.getDate()+1;
-				day = newDay.getDay()+1;
+				date = nextDate;
+				
 			// 12월이 아닌 달이면 ex)1월->2월, 2월->3월
 			}else{
 				let newDay = new Date(today.getFullYear(), today.getMonth()+2);
 				month = newDay.getMonth()+1;
-				date = newDay.getDate();
-				day = newDay.getDay();
+				date = nextDate;
 			}
-			
 		}
 		
 		if(day == 1 || day == 8){
