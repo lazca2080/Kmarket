@@ -24,11 +24,12 @@ $(function(){
 			
 		let cartNo = $('input:checkbox:checked').val();
 		let checkbox = $('input:checkbox:checked');
-		if(cartNo == null){
+		
+		if(cartNo == null || totalNo.length == 0){
 			//alert('선택된 상품이 없습니다.');
 			swal(
 			        "Check!",
-			        "선택된 강품이 없습니다.",
+			        "선택된 상품이 없습니다.",
 			        "warning"
 			      )
 			return;
