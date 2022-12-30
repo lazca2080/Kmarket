@@ -54,11 +54,7 @@ public class RegisterController extends HttpServlet{
 		String path = ctx.getRealPath("/home/prodImg");
 		File Dir = new File(path);
 		
-		/* 톰캣 프로젝트 외부에 img 폴더 생성
-		 * 프로젝트 내부에 img 폴더가 있을 시 매번 war로 내보낼때 번거로움 
-		 * 이렇게 외부로 만들고 난 뒤 외부에서 이미지 파일을 불러오는 설정을 해줘야하는데
-		 * AWS 톰캣 설치 폴더 - conf - server.xml 설정을 만져줘야함.
-		 
+		/*
 		String path = "/home/prodImg";
 		File Dir = new File(path);
 		*/
@@ -67,6 +63,7 @@ public class RegisterController extends HttpServlet{
 		if(!Dir.exists()) {
 			Dir.mkdirs();
 		}
+		
 		MultipartRequest mr = service.fileUpload(req, path);
 		
 		req.setCharacterEncoding("UTF-8");
