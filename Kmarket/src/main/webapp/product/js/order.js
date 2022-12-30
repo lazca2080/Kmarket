@@ -15,6 +15,11 @@ $(function(){
 	
 	$('input[class=addPoint]').click(function(){
 		
+		if($('input[name=point]').val() == ''){
+			alert('포인트를 입력하세요');
+			return;
+		}
+		
 		let finalTotal = 0;
 		
 		// point 수정 시 정상 적용시키기
