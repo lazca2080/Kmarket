@@ -108,8 +108,8 @@
                             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
                             	<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${i}" class="num ${currentPage eq i? 'current':'off'}">${i}</a>
                             </c:forEach>
-                            <c:if test="${pageGroupStart lt lastPageNum}">
-                            	<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${pageGroupStart+1}" class="next">다음</a>
+                            <c:if test="${pageGroupEnd lt lastPageNum}">
+                            	<a href="/Kmarket/cs/qna/list.do?cate=qna&cateType1=${cateType1}&pg=${pageGroupEnd+1}" class="next">다음</a>
                             </c:if>
                         </div>
                         <a href="/Kmarket/cs/qna/write.do?cate=${cate}&cateType1=${cateType1}" class="btnWrite">문의하기</a>
