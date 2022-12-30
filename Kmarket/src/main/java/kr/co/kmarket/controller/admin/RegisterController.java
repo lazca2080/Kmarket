@@ -49,19 +49,14 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		/*
 		// 로컬 경로 저장
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/home/prodImg");
 		File Dir = new File(path);
-		
-		/* 톰캣 프로젝트 외부에 img 폴더 생성
-		 * 프로젝트 내부에 img 폴더가 있을 시 매번 war로 내보낼때 번거로움 
-		 * 이렇게 외부로 만들고 난 뒤 외부에서 이미지 파일을 불러오는 설정을 해줘야하는데
-		 * AWS 톰캣 설치 폴더 - conf - server.xml 설정을 만져줘야함.
-		 
+		*/
 		String path = "/home/prodImg";
 		File Dir = new File(path);
-		*/
 		
 		// 폴더가 없으면~ 생성 이게 없으면 직접 생성하고 서버리스트에서 빼고 다시 서버 재시작 해야함.
 		if(!Dir.exists()) {

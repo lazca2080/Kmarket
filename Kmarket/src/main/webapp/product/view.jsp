@@ -25,7 +25,7 @@
 			num++;
 			$('input[name=num]').val(num);
 			
-			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
+			let totalPrice = ${product.sellPrice}*(num);
 			
 			$('.totalPrice').text($.Commas(totalPrice));
 		});
@@ -37,7 +37,7 @@
 			num--;
 			$('input[name=num]').val(num);
 			
-			let totalPrice = ${product.sellPrice}*(num)+${product.delivery};
+			let totalPrice = ${product.sellPrice}*(num);
 			
 			$('.totalPrice').text($.Commas(totalPrice));
 		});
