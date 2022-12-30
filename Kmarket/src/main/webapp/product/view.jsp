@@ -129,8 +129,8 @@
 			if(today.getMonth()+1 == 12){
 				let newDay = new Date(2023, 0);
 				month = newDay.getMonth()+1;
-				date = newDay.getDate();
-				day = newDay.getDay();
+				date = newDay.getDate()+1;
+				day = newDay.getDay()+1;
 			// 12월이 아닌 달이면 ex)1월->2월, 2월->3월
 			}else{
 				let newDay = new Date(today.getFullYear(), today.getMonth()+2);
