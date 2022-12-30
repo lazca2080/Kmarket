@@ -308,21 +308,42 @@
 						let rowTotals = $('.row').length;	// 게시글 총 개수 (33)
 						let rowPerPage = 10;				// 한 페이지당 게시글 개수
 						let pageTotal = Math.ceil(rowTotals/ rowPerPage); // 페이지 번호 (4)
+						let pageGroupStart = (pageTotal-1)*10+1; //해당 페이지 첫 번째 글 번호 
+						let pageGroupEnd = pageTotal *10;	// 해당 페이지 마지막 글 번호 
+						
+						console.log("rowTotals:"+rowTotals);
+						console.log("rowPerPage:"+rowPerPage);
+						console.log("pageTotal:"+pageTotal);
+						
+						
 						let i = 0;
 						
+						if(pageGroupEnd > pageTotal){
+							pageGroupEnd = pageTotal;
+						}
+						
+						// 현재 페이지 버튼 
 						for(i; i<pageTotal; i++){
 							$('<a href="#"></a>').attr('rel',i).html(i+1).appendTo('.num');
 						}
 						
+						
+						
 						$('.row').addClass('off-screen')
 								.slice(0, rowPerPage)
 								.removeClass('off-screen');
+						$('.num > a:nth-of-type(1)').addClass('active');
+						
+						// 다음 버튼 
 						
 
 						// 페이지 번호 클릭 시 
 						let pagingLink = $('.num > a');
 						pagingLink.on('click', function(e){
 							e.preventDefault();
+							
+							console.log("pageGroupStart:"+pageGroupStart);
+							console.log("pageGroupEnd:"+pageGroupEnd);
 							
 							$('.num > a').removeClass('active');
 							$(this).addClass('active');
@@ -415,7 +436,7 @@
                    		 <div class="paging">
 	                        <span class="prev">
 	                            <c:if test="${pageGroupStart > 1}">
-		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-1}" class="prev">&nbsp;이전</a>
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-10}" class="prev">&nbsp;이전</a>
 		                        </c:if>
 	                        </span>
 	                        <span class="num">
@@ -425,7 +446,7 @@
 	                        </span>
 	                        <span class="next">
 	                            <c:if test="${pageGroupEnd < lastPageNum}">
-		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+1}" class="next">다음&nbsp;</a>
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+10}" class="next">다음&nbsp;</a>
 		                        </c:if>
 	                        </span>
 	                    </div>
