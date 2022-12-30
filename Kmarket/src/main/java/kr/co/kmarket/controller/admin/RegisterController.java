@@ -49,19 +49,21 @@ public class RegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		/*
 		// 로컬 경로 저장
 		ServletContext ctx = req.getServletContext();
 		String path = ctx.getRealPath("/home/prodImg");
 		File Dir = new File(path);
-		*/
+		
+		/*
 		String path = "/home/prodImg";
 		File Dir = new File(path);
+		*/
 		
 		// 폴더가 없으면~ 생성 이게 없으면 직접 생성하고 서버리스트에서 빼고 다시 서버 재시작 해야함.
 		if(!Dir.exists()) {
 			Dir.mkdirs();
 		}
+		
 		MultipartRequest mr = service.fileUpload(req, path);
 		
 		req.setCharacterEncoding("UTF-8");
