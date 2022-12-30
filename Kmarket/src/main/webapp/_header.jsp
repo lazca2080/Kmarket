@@ -146,7 +146,6 @@
                         <li><a href="#" id="scroll1">히트상품</a></li> 
                         <li><a href="#" id="scroll2">추천상품</a></li>
                         <li><a href="#" id="scroll3">최신상품</a></li>
-                        <li><a href="#" id="scroll4">인기상품</a></li>
                         <li><a href="#" id="scroll5">할인상품</a></li>
                     </ul>
                     <ul>
