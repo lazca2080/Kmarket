@@ -305,11 +305,11 @@
 						// paging - 동적생성 
 						$('.paging > .num').empty();	// 기존 목록 페이지 번호 지우기
 						
-						let rowTotals = $('.row').length;	// 게시글 총 개수 (33)
+						let rowTotals = $('.row').length;	// 게시글 총 개수 (111)
 						let rowPerPage = 10;				// 한 페이지당 게시글 개수
-						let pageTotal = Math.ceil(rowTotals/ rowPerPage); // 페이지 번호 (4)
-						let pageGroupStart = (pageTotal-1)*10+1; //해당 페이지 첫 번째 글 번호 
-						let pageGroupEnd = pageTotal *10;	// 해당 페이지 마지막 글 번호 
+						let pageTotal = Math.ceil(rowTotals/ rowPerPage); // 페이지 번호 (12)
+						let pageGroupStart = (pageTotal-1)*10+1; //해당 페이지 첫 번째 글 번호 (111)
+						let pageGroupEnd = pageTotal *10;	// 해당 페이지 마지막 글 번호 (12)
 						
 						console.log("rowTotals:"+rowTotals);
 						console.log("rowPerPage:"+rowPerPage);
@@ -322,20 +322,16 @@
 							pageGroupEnd = pageTotal;
 						}
 						
-						// 현재 페이지 버튼 
+						// 페이지 버튼 모두 나타내기 
 						for(i; i<pageTotal; i++){
 							$('<a href="#"></a>').attr('rel',i).html(i+1).appendTo('.num');
 						}
-						
 						
 						
 						$('.row').addClass('off-screen')
 								.slice(0, rowPerPage)
 								.removeClass('off-screen');
 						$('.num > a:nth-of-type(1)').addClass('active');
-						
-						// 다음 버튼 
-						
 
 						// 페이지 번호 클릭 시 
 						let pagingLink = $('.num > a');
@@ -360,7 +356,61 @@
 									.removeClass('off-screen')
 									.animate({opacity: 1}, 200);
 						}); 
-					} 
+						
+						// '첫' 화면 상 페이지 버튼 10개만 나타내기 
+						if(pageTotal > 10){
+							$('.paging > .num > a').hide().slice(0,10).show();	// 전체 페이지 수가 10개를 넘음 > 페이지 버튼 개수 10개 제한
+							$('.next').empty();									// 기존 next 버튼 속성 비우기
+							
+							// 현재 display인 페이지 개수가 10개면 다음 버튼 보이기
+							let visiblePg = $('.paging > .num > a:visible').length;	//10
+							console.log('visiblePg: '+visiblePg);
+							if(visiblePg==10){
+								$('<a href="#" class="nextBtnInCate">@@@??!!</a>').appendTo('.next');	// 새롭게 next 버튼 속성 추가하기
+							
+								// 다음 버튼 클릭 시 
+								$('.nextBtnInCate').click(function(){
+									let curPageInCate = $('.paging > .num > .active').attr('rel');	// 다음 버튼 누를 당시, active 버튼 rel 값 가져오기
+									let lastOfVisiblePg = $('.paging > .num > a:visible:last').attr('rel') // 10개의 visible 페이지 버튼 중 마지막 rel 값 가져오기
+									
+									curPageInCate = parseInt(curPageInCate);
+									lastOfVisiblePg = parseInt(lastOfVisiblePg);
+									
+									// 조건문 안에 표현식 맞게 수정하기
+									if(curPageInCate+10 >= pageTotal){	
+										alert('lastOfVisiblePg+1: '+(lastOfVisiblePg+1));
+										$('.paging > .num > a').hide().slice(lastOfVisiblePg).show(); 
+										$('.paging > .num > a:visible:last').addClass('active');
+										
+									}else {
+										alert('넘김 +10가능');
+										$('.paging > .num > a').hide().slice(lastOfVisiblePg+1, lastOfVisiblePg+11).show();
+										
+										// rel 값이 curPageInCate+10인 버튼에 active 클래스 추가하기
+										jumpPg = curPageInCate+10;
+										
+										console.log('jumpPg : ' + jumpPg)
+										$('.paging > .num > a').eq(jumpPg).addClass('active');
+									}
+									
+									//$('.paging > .num > a').hide().slice(lastOfVisiblePg+1).show();
+									
+									// 다음 버튼 클릭 > 남은 페이지 버튼 수가 10개 미만 > 다음 버튼 안 보이기
+									let visiblePg2 = $('.paging > .num > a:visible').length;
+									if(visiblePg2<10){
+										$('.nextBtnInCate').empty();
+										
+									}
+									
+									
+								});
+							}
+						
+						// 만약 총 페이지 수가 10개 이하라면 다음 버튼 비우기 
+						}else if(pageTotal <= 10){
+							$('.next').empty();		
+						}
+					}
 				});
 				
 			});
@@ -436,7 +486,7 @@
                    		 <div class="paging">
 	                        <span class="prev">
 	                            <c:if test="${pageGroupStart > 1}">
-		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-10}" class="prev">&nbsp;이전</a>
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart-10}" class="prev">&nbsp;이전&nbsp;</a>
 		                        </c:if>
 	                        </span>
 	                        <span class="num">
@@ -446,7 +496,7 @@
 	                        </span>
 	                        <span class="next">
 	                            <c:if test="${pageGroupEnd < lastPageNum}">
-		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+10}" class="next">다음&nbsp;</a>
+		                            <a href="/Kmarket/admin/cs/qna/list.do?cate=qna&pg=${pageGroupStart+10}" class="next">&nbsp;다음&nbsp;</a>
 		                        </c:if>
 	                        </span>
 	                    </div>
